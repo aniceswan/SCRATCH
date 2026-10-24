@@ -4,7 +4,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getPoems, formatDate, readingTime, type Poem } from '../../lib/poems';
+import { getPoems, formatDate, type Poem } from '../../lib/poems';
 
 export async function getStaticPaths() {
   const poems = await getPoems();
@@ -22,7 +22,6 @@ interface Props {
 const { poem } = Astro.props;
 const { Content } = await render(poem);
 const titleWords = poem.data.title.split(/\s+/);
-const minutes = readingTime(poem.body);
 ---
 
 <Base title={poem.data.title} description={poem.data.excerpt} bodyClass="page-poem">
@@ -57,11 +56,7 @@ const minutes = readingTime(poem.body);
           ))}
         </h1>
 
-        <p class="poem__meta">
-          {formatDate(poem.data.date, 'long')}
-          <span aria-hidden="true">·</span>
-          {minutes} MENIT BACA
-        </p>
+        <p class="poem__meta">{formatDate(poem.data.date, 'long')}</p>
 
         <div class="poem__body">
           <Content />

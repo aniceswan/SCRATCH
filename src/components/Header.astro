@@ -7,9 +7,14 @@ const { home = false } = Astro.props;
 ---
 
 <header class="topbar">
-  <a class="brand" href={home ? '#arsip' : '/'} aria-label="SCRATCH — arsip puisi">
-    <span class="brand__glyph" aria-hidden="true"></span>
-    <span class="brand__word">SCRATCH</span>
+  <a class="brand" href={home ? '#arsip' : '/'} aria-label="scratch — arsip puisi">
+    <svg class="brand__ink" viewBox="0 0 84 26" fill="none" aria-hidden="true" focusable="false">
+      <path
+        class="brand__ink-line"
+        pathLength="1"
+        d="M3 15.5C14 3.5 24 21.5 39 13.5C53 6 63 21.5 79 11"
+      ></path>
+    </svg>
   </a>
 
   {
@@ -18,7 +23,9 @@ const { home = false } = Astro.props;
         INTRO <span aria-hidden="true">↺</span>
       </button>
     ) : (
-      <a class="topbar__link" href="/">ARSIP <span aria-hidden="true">↗</span></a>
+      <a class="topbar__link" href="/">
+        ARSIP <span aria-hidden="true">↗</span>
+      </a>
     )
   }
 </header>

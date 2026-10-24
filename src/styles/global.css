@@ -5,13 +5,14 @@
 :root {
   --paper: #e8e2d5;
   --paper-light: #f3ede1;
+  --paper-grad: linear-gradient(158deg, #f3ecdf 0%, #e9e3d5 44%, #e0d6c5 100%);
   --ink: #171512;
   --ink-soft: #5c564a;
   --line: rgba(23, 21, 18, 0.22);
   --line-soft: rgba(23, 21, 18, 0.11);
   --red: #a23d27;
 
-  --display: 'Fraunces Variable', 'Times New Roman', serif;
+  --display: 'Fredoka Variable', 'Trebuchet MS', system-ui, sans-serif;
   --serif: 'Newsreader Variable', Georgia, serif;
   --sans: 'DM Sans Variable', system-ui, sans-serif;
 
@@ -42,7 +43,7 @@ html {
 body {
   margin: 0;
   min-width: 300px;
-  background: var(--paper);
+  background: var(--paper-grad);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -150,41 +151,26 @@ main:focus {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 13px;
   color: var(--ink);
   text-decoration: none;
 }
 
-.brand__glyph {
-  position: relative;
-  width: 15px;
-  height: 15px;
-  border: 1px solid currentColor;
-  flex: none;
+.brand__ink {
+  width: clamp(52px, 4.4vw, 66px);
+  height: auto;
+  overflow: visible;
+  transition: transform 0.5s var(--ease);
 }
 
-.brand__glyph::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 25px;
-  height: 1.5px;
-  background: var(--red);
-  transform: translate(-50%, -50%) rotate(-40deg);
-  transition: transform 0.45s var(--ease);
+.brand__ink-line {
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.brand:hover .brand__glyph::after {
-  transform: translate(-50%, -50%) rotate(-20deg) scaleX(1.15);
-}
-
-.brand__word {
-  font-family: var(--display);
-  font-size: 1.45rem;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  line-height: 1;
+.brand:hover .brand__ink {
+  transform: rotate(-2.5deg) translateY(-1px);
 }
 
 .intro-replay,
@@ -239,18 +225,16 @@ main:focus {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-top: 1px solid var(--line-soft);
   font-family: var(--sans);
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--ink-soft);
 }
 
 .footer__mark {
   font-family: var(--display);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   line-height: 1;
   color: var(--red);
 }
@@ -271,14 +255,13 @@ main:focus {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   overflow: hidden;
-  background: var(--paper);
+  background: var(--paper-grad);
 }
 
 .home {
   display: grid;
   grid-template-columns: minmax(0, 43%) minmax(0, 57%);
   min-height: 0;
-  border-top: 1px solid var(--line-soft);
 }
 
 /* ---------- kolom kiri ---------- */
@@ -300,9 +283,10 @@ main:focus {
   max-width: 10ch;
   font-family: var(--display);
   font-size: clamp(3.3rem, 7.1vw, 7.2rem);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.012em;
+  text-transform: lowercase;
   text-wrap: balance;
 }
 
@@ -323,8 +307,6 @@ main:focus {
 .feature__excerpt {
   max-width: 30ch;
   margin-top: clamp(26px, 4vh, 38px);
-  padding-left: 18px;
-  border-left: 1px solid var(--red);
   font-family: var(--serif);
   font-size: clamp(1.02rem, 1.2vw, 1.22rem);
   font-style: italic;
@@ -355,15 +337,27 @@ main:focus {
 .archive {
   position: relative;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
-  border-left: 1px solid var(--line-soft);
-  background:
-    radial-gradient(115% 90% at 52% 44%, rgba(255, 251, 242, 0.5), transparent 62%),
-    linear-gradient(180deg, rgba(23, 21, 18, 0.015), transparent 48%);
+  container-type: size;
+}
+
+/* Cahaya lembut di belakang kartu. Dibuat sebagai lapisan sendiri supaya
+   tepinya bisa memudar, tidak berhenti mendadak di batas area arsip. */
+.archive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(112% 88% at 52% 44%, rgba(255, 251, 242, 0.55), transparent 64%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 100%);
+  pointer-events: none;
 }
 
 .stage {
-  --card-w: clamp(280px, 27.5vw, 390px);
+  /* Ukuran kartu selalu ikut tinggi area arsip supaya seluruh tumpukan muat tanpa scroll. */
+  --card-w: min(clamp(190px, 62cqw, 390px), calc((86cqh - 18px) / 1.25));
 
   position: absolute;
   inset: 0;
@@ -437,7 +431,6 @@ main:focus {
   display: block;
   padding: 10px;
   background: var(--paper-light);
-  border: 1px solid rgba(23, 21, 18, 0.08);
   box-shadow:
     0 2px 3px -2px rgba(23, 21, 18, 0.3),
     0 38px 70px -38px rgba(23, 21, 18, 0.62);
@@ -494,9 +487,7 @@ main:focus {
 .poem-card__shade {
   position: absolute;
   inset: 0;
-  box-shadow:
-    inset 0 0 0 1px rgba(23, 21, 18, 0.12),
-    inset 0 -50px 60px -50px rgba(23, 21, 18, 0.3);
+  box-shadow: inset 0 -50px 60px -50px rgba(23, 21, 18, 0.3);
   pointer-events: none;
 }
 
@@ -512,10 +503,10 @@ main:focus {
   display: flex;
   gap: 18px;
   padding: 16px 0;
-  border-top: 1px solid var(--line-soft);
   text-decoration: none;
   font-family: var(--display);
   font-size: 1.4rem;
+  text-transform: lowercase;
 }
 
 .nojs-list a span {
@@ -534,7 +525,7 @@ main:focus {
   z-index: 100;
   display: flex;
   overflow: hidden;
-  background: var(--paper);
+  background: var(--paper-grad);
   will-change: transform;
 }
 
@@ -569,10 +560,10 @@ main:focus {
   align-items: flex-start;
   margin: 0;
   font-family: var(--display);
-  font-size: clamp(4rem, 19.5vw, 22rem);
-  font-weight: 400;
-  line-height: 0.78;
-  letter-spacing: -0.055em;
+  font-size: clamp(4.6rem, 21vw, 23rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.018em;
   white-space: nowrap;
   perspective: 1100px;
 }
@@ -580,7 +571,7 @@ main:focus {
 .intro__char {
   display: inline-block;
   overflow: hidden;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.1em;
 }
 
 .intro__char > span {
@@ -593,9 +584,9 @@ main:focus {
 }
 
 .intro__star {
-  margin-top: 0.06em;
-  margin-left: 0.06em;
-  font-size: 0.12em;
+  margin-top: 0.04em;
+  margin-left: 0.05em;
+  font-size: 0.11em;
   color: var(--red);
   opacity: 0;
   animation: soft-in 0.9s var(--ease) 1.15s forwards;
@@ -675,26 +666,15 @@ main:focus {
 }
 
 .intro__note {
-  margin-top: clamp(26px, 4vh, 42px);
+  margin-top: clamp(28px, 4.5vh, 46px);
   font-family: var(--serif);
-  font-size: clamp(1.02rem, 1.15vw, 1.2rem);
+  font-size: clamp(1.08rem, 1.35vw, 1.42rem);
   font-style: italic;
   line-height: 1.5;
   color: var(--ink-soft);
   opacity: 0;
   transform: translateY(14px);
   animation: note-in 1s var(--ease-out) 1.35s forwards;
-}
-
-.intro__note-top {
-  display: block;
-  margin-bottom: 9px;
-  font-family: var(--sans);
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
 }
 
 .intro.is-leaving {
@@ -824,12 +804,13 @@ main:focus {
 }
 
 .poem__title {
-  max-width: 12ch;
+  max-width: 13ch;
   font-family: var(--display);
-  font-size: clamp(2.9rem, 4.8vw, 5rem);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  font-size: clamp(3rem, 5vw, 5.2rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.012em;
+  text-transform: lowercase;
   text-wrap: balance;
 }
 
@@ -840,19 +821,12 @@ main:focus {
 }
 
 .poem__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 24px;
+  margin-top: 22px;
   font-family: var(--sans);
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.15em;
   color: var(--ink-soft);
-}
-
-.poem__meta span {
-  color: var(--red);
 }
 
 .poem__body {
@@ -910,7 +884,6 @@ main:focus {
   align-items: center;
   overflow: hidden;
   padding: clamp(52px, 10vh, 120px) var(--gutter);
-  border-top: 1px solid var(--line-soft);
 }
 
 .notfound__ghost {
@@ -919,8 +892,9 @@ main:focus {
   bottom: -0.16em;
   font-family: var(--display);
   font-size: clamp(15rem, 35vw, 32rem);
-  line-height: 0.7;
-  letter-spacing: -0.07em;
+  font-weight: 500;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
   color: var(--ink);
   opacity: 0.035;
   pointer-events: none;
@@ -936,9 +910,9 @@ main:focus {
   max-width: 12ch;
   font-family: var(--display);
   font-size: clamp(3.1rem, 8vw, 7.6rem);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
@@ -1093,49 +1067,26 @@ main:focus {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --topbar-h: clamp(58px, 8vh, 72px);
+  }
+
   .intro__title {
     font-size: clamp(3.5rem, 18vw, 11rem);
   }
 
-  .page-home {
-    height: auto;
-    overflow: auto;
-  }
-
-  .site-shell {
-    height: auto;
-    min-height: 100svh;
-    overflow: visible;
-  }
-
-  .home {
-    display: block;
-  }
-
-  .feature {
-    min-height: auto;
-    padding: 18px var(--gutter) 46px;
-  }
-
   .feature__title {
-    max-width: 12ch;
-    font-size: clamp(3rem, 9.2vw, 5rem);
+    max-width: 15ch;
+    font-size: clamp(2.8rem, 9.6vw, 4.6rem);
   }
 
   .feature__excerpt {
-    max-width: 38ch;
-    margin-top: 28px;
+    max-width: 44ch;
+    margin-top: clamp(12px, 2.4vh, 26px);
   }
 
   .archive {
-    height: 66svh;
-    min-height: 450px;
-    border-left: 0;
-    border-top: 1px solid var(--line-soft);
-  }
-
-  .stage {
-    --card-w: clamp(230px, 64vw, 340px);
+    border: 0;
   }
 
   .poem-layout {
@@ -1167,7 +1118,7 @@ main:focus {
   }
 
   .page-poem .topbar {
-    background: color-mix(in srgb, var(--paper) 96%, transparent);
+    background: linear-gradient(180deg, rgba(243, 236, 223, 0.9), rgba(243, 236, 223, 0));
   }
 }
 
@@ -1178,14 +1129,6 @@ main:focus {
 
   .topbar {
     gap: 16px;
-  }
-
-  .brand {
-    gap: 10px;
-  }
-
-  .brand__word {
-    font-size: 1.28rem;
   }
 
   .intro-replay,
@@ -1227,31 +1170,18 @@ main:focus {
     font-size: 0.98rem;
   }
 
-  .intro__note-top {
-    font-size: 8px;
-    letter-spacing: 0.15em;
-  }
-
   .feature {
-    padding: 12px var(--gutter) 38px;
+    padding: clamp(8px, 2vh, 18px) var(--gutter) clamp(12px, 2.6vh, 26px);
   }
 
   .feature__title {
-    font-size: clamp(2.7rem, 12.6vw, 4.1rem);
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 11.6vw, 3.9rem);
   }
 
   .feature__excerpt {
-    margin-top: 24px;
-    font-size: 1rem;
-  }
-
-  .archive {
-    height: 62svh;
-    min-height: 430px;
-  }
-
-  .stage {
-    --card-w: clamp(220px, 64vw, 280px);
+    margin-top: clamp(10px, 2vh, 20px);
+    font-size: 0.96rem;
   }
 
   .poem-card__frame {
@@ -1294,9 +1224,54 @@ main:focus {
   }
 }
 
+/* Ponsel tegak: judul di atas, tumpukan kartu di bawah dengan porsi tetap
+   supaya gambar tidak naik-turun saat judul berganti. */
+@media (max-width: 900px) and (min-height: 561px) {
+  .home {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 38%) minmax(0, 1fr);
+  }
+
+  .feature {
+    padding: clamp(10px, 2.2vh, 24px) var(--gutter) clamp(12px, 2.8vh, 30px);
+    overflow: hidden;
+  }
+
+  .feature__title {
+    max-width: 16ch;
+    font-size: clamp(2.3rem, 10.4vw, 3.4rem);
+  }
+
+  .feature__excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
 @media (max-width: 360px) {
   .intro__main {
     gap: 10px;
+  }
+}
+
+/* Layar pendek (HP landscape, jendela pendek): tetap dua kolom, teks dikecilkan. */
+@media (max-width: 900px) and (max-height: 560px) {
+  .feature {
+    padding: clamp(10px, 2vh, 22px) var(--gutter) clamp(12px, 2.6vh, 26px);
+  }
+
+  .feature__title {
+    max-width: 12ch;
+    font-size: clamp(1.8rem, 4.6vw, 2.7rem);
+  }
+
+  .feature__excerpt {
+    max-width: 32ch;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 }
 
@@ -1307,10 +1282,6 @@ main:focus {
 
   .feature__excerpt {
     margin-top: 22px;
-  }
-
-  .stage {
-    --card-w: clamp(250px, 24vw, 330px);
   }
 
   .intro__title {

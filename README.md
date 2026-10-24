@@ -35,7 +35,8 @@ Buka `http://localhost:4321`.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
 - **Klik gambar paling depan** untuk membuka puisinya. Tidak ada tombol baca terpisah.
-- Di ponsel, halaman bisa digulir seperti biasa dan kartu digeser dengan jari.
+- Di ponsel, judul dan tumpukan kartu sudah diatur agar **muat dalam satu layar tanpa digulir**;
+  kartu digeser dengan jari.
 - Untuk memutar ulang pembuka, klik **INTRO ↺** di kanan atas atau buka `/?intro=1`.
 
 ---
@@ -97,7 +98,6 @@ Catatan menulis:
 - Beri **satu baris kosong** antarbait.
 - Urutan arsip selalu dari tanggal terbaru. Puisi terbaru otomatis menjadi puisi unggulan di
   halaman utama.
-- Jumlah lembar di pembuka ikut menyesuaikan otomatis.
 - Kalau path gambar salah, build akan gagal dan menunjukkan nama file yang bermasalah.
 
 ### 3. Ganti isi contoh
@@ -121,7 +121,7 @@ src/
 ├─ components/            Header, Footer, Intro, Archive
 ├─ content/puisi/         isi puisi (.md)
 ├─ layouts/Base.astro     <head>, font, meta, skip intro
-├─ lib/poems.ts           urutan, format tanggal, waktu baca
+├─ lib/poems.ts           urutan dan format tanggal
 ├─ pages/
 │  ├─ index.astro         halaman utama + tumpukan kartu 3D
 │  ├─ puisi/[id].astro    halaman detail per puisi
@@ -136,17 +136,23 @@ Hal kecil yang mungkin ingin diubah:
 
 - Teks pembuka: `src/components/Intro.astro`
 - Teks footer: `src/components/Footer.astro`
+- Goresan logo di kanan atas: `src/components/Header.astro` (satu garis SVG)
 - Warna, ukuran kartu, dan kedalaman tumpukan: bagian atas `src/styles/global.css` serta
   perhitungan `render()` di `src/pages/index.astro`
 - Deskripsi situs dan meta: `src/layouts/Base.astro`
 
 ### Tipografi
 
-- **Fraunces** untuk judul dan angka besar.
+- **Fredoka** (500) untuk tulisan "scratch", judul puisi, dan angka besar. Semuanya ditampilkan
+  dalam huruf kecil supaya terasa bulat dan lembut.
 - **DM Sans** untuk label, meta, dan navigasi.
 - **Newsreader** khusus untuk larik puisi dan kutipan.
 
 Ketiganya dimuat lokal lewat paket Fontsource, jadi tidak ada permintaan ke Google Fonts.
+
+Latar halaman memakai gradasi tipis (`--paper-grad` di `src/styles/global.css`). Ukuran kartu di
+tumpukan mengikuti tinggi area arsip, jadi seluruh tumpukan selalu muat tanpa scroll di semua
+ukuran layar.
 
 ### Tentang animasi pembuka
 

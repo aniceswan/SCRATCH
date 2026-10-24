@@ -1,16 +1,11 @@
 ---
-interface Props {
-  count: number;
-}
-
-const { count } = Astro.props;
-const letters = [...'SCRATCH'];
+const letters = [...'scratch'];
 ---
 
 <section class="intro" id="intro" data-intro aria-labelledby="intro-title">
   <div class="intro__inner">
     <div class="intro__main">
-      <h1 class="intro__title" id="intro-title" aria-label="SCRATCH">
+      <h1 class="intro__title" id="intro-title" aria-label="scratch">
         {
           letters.map((letter, index) => (
             <span class="intro__char" aria-hidden="true" style={`--i:${index}`}>
@@ -40,9 +35,6 @@ const letters = [...'SCRATCH'];
       ></path>
     </svg>
 
-    <p class="intro__note">
-      <span class="intro__note-top">ARSIP PUISI PRIBADI — {String(count).padStart(2, '0')} LEMBAR</span>
-      Puisi, gambar, dan yang tersisa.
-    </p>
+    <p class="intro__note">thought, regrets, and whatever remains</p>
   </div>
 </section>

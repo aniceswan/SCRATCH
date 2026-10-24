@@ -1,5 +1,5 @@
 ---
-import '@fontsource-variable/fraunces/full.css';
+import '@fontsource-variable/fredoka/wght.css';
 import '@fontsource-variable/dm-sans/wght.css';
 import '@fontsource-variable/newsreader/opsz.css';
 import '@fontsource-variable/newsreader/opsz-italic.css';
@@ -30,7 +30,7 @@ const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#e8e2d5" />
+    <meta name="theme-color" content="#ece5d7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {canonical && <link rel="canonical" href={canonical} />}
 
@@ -63,7 +63,7 @@ const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
         .page-home { height: auto !important; overflow: visible !important; }
         .site-shell { height: auto !important; min-height: 100svh !important; overflow: visible !important; }
         .home { display: block !important; }
-        .archive { height: auto !important; min-height: 0 !important; overflow: visible !important; }
+        .archive { height: auto !important; min-height: 0 !important; overflow: visible !important; container-type: normal !important; }
         .stage { display: none !important; }
         .nojs-list { display: grid !important; }
         .intro-replay { display: none !important; }

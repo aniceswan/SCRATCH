@@ -8,12 +8,11 @@ import { getPoems } from '../lib/poems';
 
 const poems = await getPoems();
 const featured = poems[0];
-const count = poems.length;
 const titleWords = featured?.data.title.split(/\s+/) ?? [];
 ---
 
-<Base bodyClass="page-home" description="SCRATCH — arsip puisi pribadi. Kumpulan puisi dan gambar, disimpan pelan-pelan.">
-  <Intro count={count} />
+<Base bodyClass="page-home" description="scratch — arsip puisi pribadi. Kumpulan puisi dan gambar, disimpan pelan-pelan.">
+  <Intro />
 
   <div class="site-shell" data-site-shell>
     <Header home />
@@ -80,6 +79,7 @@ const titleWords = featured?.data.title.split(/\s+/) ?? [];
     let pointerMoved = 0;
     let suppressClick = false;
     let leaving = false;
+    let pageScrolls = false;
 
     function setWords(element: HTMLElement, text: string) {
       element.replaceChildren();
@@ -294,14 +294,19 @@ const titleWords = featured?.data.title.split(/\s+/) ?? [];
 
     // --- Arsip 3D ----------------------------------------------------------
     if (stage && cards.length > 0) {
+      const updateScrollState = () => {
+        pageScrolls = document.documentElement.scrollHeight > window.innerHeight + 4;
+      };
+
+      updateScrollState();
       render();
 
       stage.addEventListener(
         'wheel',
         (event) => {
           if (event.ctrlKey) return;
-          // Di layar kecil halaman ikut bergulir; jangan rebut wheel dari scroll.
-          if (window.innerWidth <= 900) return;
+          // Kalau halaman memang bisa digulir, jangan rebut wheel dari scroll.
+          if (pageScrolls) return;
           event.preventDefault();
           const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
           target += delta * 0.0032;
@@ -359,21 +364,32 @@ const titleWords = featured?.data.title.split(/\s+/) ?? [];
         true,
       );
 
-      stage.addEventListener('keydown', (event) => {
+      const handleArrowKey = (event: KeyboardEvent) => {
+        if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+        const el = event.target;
+        if (el instanceof HTMLElement && el.closest('input, textarea, select, [contenteditable="true"]')) return;
+        if (intro && !root.classList.contains('has-entered')) return;
+
         const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
         if (direction === 0) return;
         event.preventDefault();
         target = Math.round(target) + direction;
         start();
-      });
+      };
+
+      window.addEventListener('keydown', handleArrowKey);
 
       const resizeObserver = new ResizeObserver(() => {
+        updateScrollState();
         render();
         start();
       });
       resizeObserver.observe(stage);
 
-      window.addEventListener('resize', render);
+      window.addEventListener('resize', () => {
+        updateScrollState();
+        render();
+      });
     }
   </script>
 </Base>

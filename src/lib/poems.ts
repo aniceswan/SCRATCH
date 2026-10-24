@@ -25,9 +25,3 @@ export function formatDate(date: Date, style: 'short' | 'long' = 'long'): string
     .replace('.', '')
     .toUpperCase();
 }
-
-/** Perkiraan waktu baca, dibulatkan ke bawah, minimal 1 menit. */
-export function readingTime(body: string | undefined): number {
-  const words = (body ?? '').trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(words / 120));
-}
