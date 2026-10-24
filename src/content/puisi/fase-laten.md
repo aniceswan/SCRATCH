@@ -1,0 +1,27 @@
+---
+title: "FASE LATEN"
+date: "2026-10-25"
+order: 17
+lang: "id"
+image: "../../assets/puisi/fase-laten.webp"
+imageAlt: "Panci enamel berisi air yang mulai bergelembung dan termometer kaca."
+excerpt: "Di panci tua, air memikul panas hingga permukaannya gemetar."
+draft: false
+---
+
+Di panci tua, air memikul panas
+hingga permukaannya gemetar.
+Aku menunggu angka bergerak,
+namun termometer memilih diam.
+
+Panas terus masuk.
+Tak ada derajat baru.
+Hanya gelembung-gelembung kecil
+yang lahir dan pecah
+sebelum sempat disebut badai.
+
+Di luar, orang-orang mengira
+segala sesuatu telah kembali seperti biasa.
+
+Di dalam, suatu wujud
+sedang diam-diam berganti nama.

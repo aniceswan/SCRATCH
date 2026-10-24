@@ -58,7 +58,7 @@ const titleWords = poem.data.title.split(/\s+/);
 
         <p class="poem__meta">{formatDate(poem.data.date, 'long')}</p>
 
-        <div class="poem__body">
+        <div class="poem__body" lang={poem.data.lang}>
           <Content />
         </div>
 

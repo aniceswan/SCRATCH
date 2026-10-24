@@ -8,7 +8,7 @@ export async function getPoems(): Promise<Poem[]> {
     return import.meta.env.DEV || !data.draft;
   });
 
-  return poems.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return poems.sort((a, b) => (b.data.date.valueOf() - a.data.date.valueOf()) || (a.data.order - b.data.order));
 }
 
 export function padIndex(index: number): string {

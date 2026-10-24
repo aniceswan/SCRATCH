@@ -1,0 +1,26 @@
+---
+title: "SELA"
+date: "2026-10-25"
+order: 6
+lang: "id"
+image: "../../assets/puisi/sela.webp"
+imageAlt: "Buku terbuka, jam tua, dan kursi kosong di bawah lampu malam."
+excerpt: "Sebuah buku terbuka pada halaman ujian. Malam-malam menumpuk di bawah kelopak,"
+draft: false
+---
+
+Sebuah buku terbuka pada halaman ujian.
+Malam-malam menumpuk di bawah kelopak,
+jam bergerak seperti jarum yang aus.
+
+Aku menyisakan kursi di dalam kepalaku,
+meski tak selalu sempat membuka pintu.
+
+Di antara dua pesan yang tak terkirim,
+sebuah musim mungkin telah berpindah.
+Tidak terdengar gesek daunnya;
+tidak pula bunyi engselnya.
+
+Baru kemudian kusadari,
+ada jenis kepergian
+yang tidak memerlukan langkah kaki.

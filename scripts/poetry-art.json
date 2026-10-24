@@ -1,0 +1,218 @@
+[
+  {
+    "order": 1,
+    "slug": "grafit",
+    "alt": "Pensil grafit patah dan serbuk hitam di bawah lampu meja malam.",
+    "prompt": "Snapped graphite pencil, graphite dust, blank exercise paper and a moth under a warm desk lamp at night; intimate cinematic analog 35mm still life, sepia and charcoal, portrait 4:5, no people, lettering, border or watermark.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 2,
+    "slug": "kambium",
+    "alt": "Penampang batang pohon dengan lingkaran pertumbuhan dan lumut lembap.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'kambium'. Scene: A freshly cut tree trunk cross-section in a damp quiet forest, delicate concentric growth rings, bark and fine moss, a few raindrops catching soft morning light. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 3,
+    "slug": "co-op",
+    "alt": "Dua pengendali permainan di depan televisi dengan cahaya biru.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'co-op'. Scene: Two unoccupied game controllers on a worn wooden table before an old television, its soft blue glow suggesting a doorway in a distant empty pixel universe; screen content atmospheric, no words, no brands. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 4,
+    "slug": "kontur",
+    "alt": "Peta kota terlipat dengan bidang kosong di dekat jendela berhujan.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'kontur'. Scene: An old folded city map on a wooden desk beside a rain-streaked window; delicate abstract map lines without letters, a conspicuously blank patch by its deepest fold, green tropical trees blurred outside. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 5,
+    "slug": "postulat",
+    "alt": "Jangka dan penggaris di atas kertas dengan dua titik grafit.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'postulat'. Scene: A brass drawing compass and a wooden ruler resting on ivory paper bearing only two tiny graphite dots and one fine line, late afternoon slanting amber light, unfinished geometry. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 6,
+    "slug": "sela",
+    "alt": "Buku terbuka, jam tua, dan kursi kosong di bawah lampu malam.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'sela'. Scene: An open blank study book on a desk after midnight, a worn analog clock blurred behind it, an empty wooden chair gently angled away, moonlit blue shadows mixed with a fading amber desk lamp. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 7,
+    "slug": "anotasi",
+    "alt": "Tepi buku menguning dengan bintang kecil, tanda kurung, dan pena.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'anotasi'. Scene: Close detail of the outer margin of an old yellowing book, a tiny hand-drawn star and a single unfinished parenthesis in faded ink, otherwise unlettered paper, an uncapped fountain pen lies far from the last page. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 8,
+    "slug": "paralaks",
+    "alt": "Dua jendela kayu menghadap pohon dan bulan dari sudut berbeda.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'paralaks'. Scene: Two adjacent old wooden windows opening onto the same dark garden, a leafy tree partly hiding the moon, subtle different alignments through each window, a draft lifting one corner of paper on the sill. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 9,
+    "slug": "blueshift",
+    "alt": "Teleskop kecil di dekat jendela di bawah langit biru berbintang.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'blueshift'. Scene: A solitary small telescope near an open attic window at blue hour, cool blue distant stars above a softly indistinct horizon, an empty chair, poetic astronomy without technical diagrams. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 10,
+    "slug": "tanda-baca",
+    "alt": "Kertas dengan titik dan koma yang tersebar di dekat mesin tik.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'tanda-baca'. Scene: A page filled with sparse little ink dots and comma-shaped marks that never form writing, a typewriter edge outside focus, soft afternoon light, unspoken language as a tactile still life. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 11,
+    "slug": "fosfor",
+    "alt": "Ponsel gelap dengan sisa cahaya kehijauan di kamar malam.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'fosfor'. Scene: A dark silent bedroom and a smartphone face-up on a bedside table, its glass nearly black, one small green phosphorescent afterglow reflected on nearby wall, moonlight at the shutter. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 12,
+    "slug": "lagu-titipan",
+    "alt": "Radio tua di samping pintu setengah terbuka dengan cahaya di ambang.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'lagu-titipan'. Scene: An old compact radio standing beside a half-open wooden door, amber light passing across the threshold into an empty room, dust in a sunbeam, no labels on radio, suggestion of an arriving song. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 13,
+    "slug": "negative-space",
+    "alt": "Bingkai foto dan kursi yang hanya tampak sebagian di ruang kosong.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'negative-space'. Scene: A small unlettered photographic frame on a mantel, photograph showing only a sunlit wall, beyond it an empty chair half cut off by the composition, deliberate eloquent negative space. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 14,
+    "slug": "enumerasi",
+    "alt": "Uang logam menyentuh air sumur batu dan membentuk lingkaran riak.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'enumerasi'. Scene: Looking down into an old stone well at nightfall, one bronze coin just touching dark water, concentric ripples fragment a soft reflection of the sky, tactile wet stone rim. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 15,
+    "slug": "anamorfosis",
+    "alt": "Lukisan bunga dan vas terlihat miring dari ambang sebuah galeri.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'anamorfosis'. Scene: A quiet old gallery seen obliquely through a doorway, one framed painting of a slender flower and tilted vase appears stretched by perspective, gentle window light on plaster, no people, no labels. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 16,
+    "slug": "histeresis",
+    "alt": "Jarum kompas di atas besi tua dengan magnet jauh di belakangnya.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'histeresis'. Scene: A bare small compass needle balanced on aged dark iron on an empty workshop bench, a horseshoe magnet far away softly out of focus, directional tension, low raking copper light, no letters or numeric labels. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 17,
+    "slug": "fase-laten",
+    "alt": "Panci enamel berisi air yang mulai bergelembung dan termometer kaca.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'fase-laten'. Scene: An old small enamel saucepan of water just beginning to simmer on a simple stove, tiny bubbles and a wisp of steam, a plain glass laboratory thermometer without readable marks, still quiet kitchen at dusk. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 18,
+    "slug": "indeks-bias",
+    "alt": "Pensil tampak membengkok pada batas air dalam gelas bening.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'indeks-bias'. Scene: One graphite pencil standing at a slant in a clear drinking glass half full of water on a dark table, clearly optically bent at the waterline, a narrow ray of evening light, realistic glass caustics. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 19,
+    "slug": "unsent-letter-to-a-season",
+    "alt": "Amplop tanpa alamat di laci kayu dengan satu sudut terangkat.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'unsent-letter-to-a-season'. Scene: An open shallow wooden drawer with a single small cream envelope, no address or writing, a passing breeze lifts just one corner, warm late afternoon light, soft shadow from nearby white sheets. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 20,
+    "slug": "palimsest",
+    "alt": "Perkamen dengan bekas tekanan pena terlihat oleh cahaya lampu miring.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'palimpsest'. Scene: Close-up of scraped parchment on a worn desk, nearly erased illegible indented lines visible only under a low tilted oil lamp, scattered fine paper dust, layered time and memory in the fibers. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 21,
+    "slug": "albedo",
+    "alt": "Bulan hampir penuh di balik jendela dengan cahaya pucat di ambang.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'albedo'. Scene: A nearly full moon with subtle visible craters framed by the open window of a quiet modest room, no people, deep indigo night and a pale ivory moonlight wash on the sill. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 22,
+    "slug": "pintu-selatan",
+    "alt": "Gerbang batu dan jalan kampus basah dinaungi pepohonan rimbun.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'pintu-selatan'. Scene: A quiet rain-wet tropical campus gateway on Ganesha street in Bandung, old stone gate, arching mature rain trees, a small unlettered directional arrow, empty path and soft overcast morning light, no signs or lettering. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 23,
+    "slug": "last-coordinates",
+    "alt": "Dua garis rute bertemu pada titik tinta di peta kota terlipat.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'last-coordinates'. Scene: A city map folded along its oldest crease, two delicately hand-drawn routes cross at a single ink dot whose ink has bled slightly, no words or readable labels, low late afternoon sunlight. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 24,
+    "slug": "katalog-benda-yang-tak-jadi",
+    "alt": "Buku inventaris terbuka di museum senja dengan lemari pajang kosong.",
+    "prompt": "Use case: illustration-story. Create ONE finished vertical 4:5 fine-art photographic image for poetry collection 'Arsip Cahaya yang Salah Arah', poem 'katalog-benda-yang-tak-jadi'. Scene: A museum closing at dusk, one open blank inventory ledger on a wooden attendant desk, empty glass display cases beyond, a folded wet umbrella near the doorway, the last small lamp still glowing. Style: intimate cinematic analog 35mm film photograph with subtle grain, authentic tactile materials, restrained muted colors, deep soft shadows, poetic absence, gallery-quality visual storytelling. Cohesive series with warm ivory, sepia, charcoal, subtle moss and occasional blue moonlight. Compose with breathing room for portrait crop. This must be a distinct detailed atmospheric scene specific to the poem. No people, hands, faces, legible writing, typography, logos, border or watermark. Do not create a collage.",
+    "tool": "built-in ImageGen",
+    "width": 1200,
+    "height": 1500
+  }
+]

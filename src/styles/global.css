@@ -1357,3 +1357,49 @@ main:focus {
     opacity: 0;
   }
 }
+
+/* Clothesline: a shared cord with independently suspended, spring-driven prints. */
+.topbar__actions { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); }
+.sound-toggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 0; border: 0; background: transparent; color: var(--ink-soft);
+  font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: .13em;
+  cursor: pointer;
+}
+.sound-toggle__icon { color: var(--red); font-size: 17px; line-height: 1; }
+.sound-toggle[aria-pressed="false"] .sound-toggle__icon { opacity: .4; }
+.sound-toggle:focus-visible { outline: 1px solid var(--red); outline-offset: 6px; }
+.stage { --card-w: min(clamp(190px, 62cqw, 390px), calc((76cqh - 18px) / 1.25)); }
+.stage__clothesline {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
+  overflow: visible; fill: none; stroke: #87775f; stroke-width: .85; pointer-events: none;
+}
+.stage__clothesline .clothesline__rope {
+  stroke: #8b785c; stroke-width: 1.7;
+  filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .18));
+}
+.hang { transform-style: preserve-3d; }
+.hang__swing { position: relative; transform-origin: 50% -38px; will-change: transform; }
+.poem-card__clip {
+  position: absolute; top: -15px; width: 9px; height: 27px; z-index: 3;
+  border-radius: 2px 2px 1px 1px;
+  background: linear-gradient(90deg, #a17b4d, #dbb98a 28%, #bc9462 50%, #dfbf92 57%, #ac8050);
+  box-shadow: 1px 2px 2px rgba(40, 29, 15, .22);
+  transform: translateX(-50%) rotate(-2deg); pointer-events: none;
+}
+.poem-card__clip::after {
+  content: ''; position: absolute; top: 10px; left: -1px; width: 11px; height: 3px;
+  border-top: 1px solid #655e50; border-bottom: 1px solid #655e50;
+}
+.poem-card__clip--left { left: 25%; }
+.poem-card__clip--right { left: 75%; transform: translateX(-50%) rotate(2deg); }
+.stage.is-ready .poem-card__frame { animation: none; }
+.poem-card:hover .poem-card__frame { transform: none; }
+@media (max-width: 640px) {
+  .sound-toggle { font-size: 8px; gap: 5px; letter-spacing: .09em; }
+  .topbar__actions { gap: 18px; }
+  .poem-card__clip { width: 8px; height: 23px; top: -13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hang__swing { transform: none !important; will-change: auto; }
+}

@@ -25,6 +25,7 @@ Buka `http://localhost:4321`.
 | `npm run dev` | Server pengembangan dengan hot reload |
 | `npm run build` | Membuat situs statis ke folder `dist/` |
 | `npm run check` | Memeriksa TypeScript dan file Astro |
+| `npm test` | Memeriksa impor naskah, koleksi, pembungkusan kartu, dan ayunan |
 | `npm run preview` | Melihat hasil build lokal |
 
 ---
@@ -35,6 +36,12 @@ Buka `http://localhost:4321`.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
 - **Klik gambar paling depan** untuk membuka puisinya. Tidak ada tombol baca terpisah.
+- Kartu tergantung pada tali bersama dengan penjepit kayu dan berayun mengikuti gerakan.
+  Ayunan mereda lalu berhenti; pengaturan reduced motion dihormati.
+- **SUARA ON / OFF** mengatur efek gesekan kertas saat puisi berganti. Pilihan tersimpan
+  di browser; audio mulai tersedia setelah interaksi pengguna.
+- Hanya **maksimal sembilan kartu** yang dibuat di halaman. Slot dipakai ulang saat menjelajah,
+  sehingga jumlah kartu yang dianimasikan tidak bertambah bersama koleksi.
 - Di ponsel, judul dan tumpukan kartu sudah diatur agar **muat dalam satu layar tanpa digulir**;
   kartu digeser dengan jari.
 - Untuk memutar ulang pembuka, klik **INTRO ↺** di kanan atas atau buka `/?intro=1`.
@@ -86,6 +93,8 @@ belajar basah.
 | --- | --- | --- |
 | `title` | ya | Judul puisi, maksimal 100 karakter |
 | `date` | ya | Tanggal `YYYY-MM-DD`; dipakai untuk urutan arsip |
+| `order` | tidak | Urutan di dalam tanggal yang sama, default `0` |
+| `lang` | tidak | Bahasa larik `id` atau `en`, default `id` |
 | `image` | ya | Path relatif dari file Markdown ke gambar |
 | `imageAlt` | ya | Deskripsi gambar untuk pembaca layar |
 | `excerpt` | ya | Kutipan singkat, maksimal 260 karakter |
@@ -100,16 +109,26 @@ Catatan menulis:
   halaman utama.
 - Kalau path gambar salah, build akan gagal dan menunjukkan nama file yang bermasalah.
 
-### 3. Ganti isi contoh
+### 3. Koleksi saat ini
 
-Enam puisi dan gambar di repo ini hanyalah contoh. Hapus atau ganti file di:
+**Arsip Cahaya yang Salah Arah** terdiri dari 24 puisi. Sumber lengkap tersimpan di
+`content-source/arsip-cahaya-yang-salah-arah.txt`; halaman hanya memuat sajak, tanpa
+judul bagian atau catatan redaksi. Urutan mengikuti nomor naskah.
 
+Setiap puisi mendapat ilustrasi original dari built-in ImageGen, disimpan sebagai
+WebP 1200 × 1500 di `src/assets/puisi/`. Prompt dan deskripsi tiap gambar tercatat di
+`scripts/poetry-art.json`. Gambar kartu memakai versi responsif 320–800 px; gambar
+besar tersedia pada halaman puisi.
+
+Untuk mengimpor ulang edisi naskah ini setelah memperbarui sumber dan gambarnya:
+
+```bash
+node scripts/import-poems.mjs
 ```
-src/content/puisi/*.md
-src/assets/puisi/*.jpg
-```
 
-Lalu tambahkan puisi sendiri. Tidak ada daftar lain yang perlu diperbarui.
+Importer memvalidasi 24 nomor dan pasangan gambar lebih dahulu, mencadangkan koleksi
+lama ke direktori sementara, lalu mengganti berkas puisi. Untuk menambah puisi satu
+per satu, cukup ikuti langkah 1–2 di atas; tidak perlu menjalankan importer.
 
 ---
 
@@ -121,7 +140,8 @@ src/
 ├─ components/            Header, Footer, Intro, Archive
 ├─ content/puisi/         isi puisi (.md)
 ├─ layouts/Base.astro     <head>, font, meta, skip intro
-├─ lib/poems.ts           urutan dan format tanggal
+├─ lib/                  urutan, jendela kartu, pegas, dan audio
+├─ scripts/gallery.ts    interaksi browser dan animasi jemuran
 ├─ pages/
 │  ├─ index.astro         halaman utama + tumpukan kartu 3D
 │  ├─ puisi/[id].astro    halaman detail per puisi
@@ -227,3 +247,18 @@ push.
   simpan draf pribadi di repo; gunakan `draft: true` atau simpan di luar folder `src/content`.
 
 Selamat menulis.
+
+### Uji browser opsional
+
+Setelah build, jalankan `npm run preview` di terminal pertama. Uji interaksi membutuhkan
+Playwright yang tersedia di lingkungan pengembangan (`npm install --no-save playwright`,
+lalu `npx playwright install chromium`). Di terminal lain:
+
+```bash
+npm run test:browser
+# Jika preview memakai port berbeda atau Chrome sistem:
+BASE_URL=http://127.0.0.1:4323 CHROME_PATH=/usr/bin/google-chrome npm run test:browser
+```
+
+Uji ini mencakup navigasi berulang, tautan/gambar aktif, suara dan mute, berhentinya
+animasi, swipe sentuh, replay intro, reduced motion, tampilan ponsel, dan fallback tanpa JS.

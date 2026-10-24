@@ -19,9 +19,12 @@ const { home = false } = Astro.props;
 
   {
     home ? (
+      <div class="topbar__actions">
+      <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="true" aria-label="Matikan suara perpindahan kartu"><span class="sound-toggle__icon" aria-hidden="true">♪</span> <span data-sound-label>SUARA ON</span></button>
       <button class="intro-replay" type="button" data-replay-intro aria-label="Putar ulang animasi pembuka">
         INTRO <span aria-hidden="true">↺</span>
       </button>
+      </div>
     ) : (
       <a class="topbar__link" href="/">
         ARSIP <span aria-hidden="true">↗</span>
