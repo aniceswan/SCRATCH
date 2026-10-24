@@ -1338,12 +1338,14 @@ main:focus {
   stroke: #806647; stroke-width: 2;
   filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .18));
 }
-.clothesline__anchor {
-  fill: var(--paper-light);
-  stroke: #806647;
-  stroke-width: 1.7;
-  filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .2));
-}
+.clothesline__post { stroke: none; filter: drop-shadow(2px 3px 3px rgba(54, 36, 19, .16)); }
+.post__face { fill: url(#post-wood); }
+.post__side { fill: #785333; }
+.post__cap { fill: #d0ad80; }
+.post__grain { fill: none; stroke: #735034; stroke-width: .7; opacity: .4; }
+.post__knot { fill: none; stroke: #795033; stroke-width: .7; opacity: .45; }
+.post__shadow { fill: #53402d; opacity: .13; }
+.clothesline__binding { fill: none; stroke: #6d563a; stroke-width: 1.6; stroke-linecap: round; }
 .hang { transform-style: preserve-3d; }
 .hang__swing { position: relative; transform-origin: 50% -9px; will-change: transform; }
 .poem-card__clip {

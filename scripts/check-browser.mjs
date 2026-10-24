@@ -31,16 +31,17 @@ assert.ok(depth.near.x<depth.far.x&&depth.near.y>depth.far.y,'rope recedes diago
 const continuity=await page.evaluate(()=>{
  const svg=document.querySelector('[data-clothesline]');
   const track=document.querySelector('[data-track]');
- const rope=document.querySelector('[data-rope]'),anchor=document.querySelector('[data-rope-anchor]');
- const first=rope.getPointAtLength(0);
+ const rope=document.querySelector('[data-rope]'),anchor=document.querySelector('[data-rope-post]');
+ const first=rope.getPointAtLength(0),mount=anchor.transform.baseVal.consolidate().matrix;
  return {foreground:Number(getComputedStyle(svg).zIndex)>Number(getComputedStyle(track).zIndex),
-  mounted:Math.hypot(first.x-Number(anchor.getAttribute('cx')),first.y-Number(anchor.getAttribute('cy')))<.1,
+  mounted:Math.hypot(first.x-mount.e,first.y-mount.f)<.1,
   copyright:document.querySelector('.copyright')?.textContent,
   footerCount:document.querySelectorAll('footer').length,
   back:document.querySelector('[data-replay-intro]')?.textContent};
 });
 assert.ok(continuity.foreground,'cords draw over the card plane');
-assert.ok(continuity.mounted,'clothesline begins at its visible mounting eyelet');
+assert.ok(continuity.mounted,'clothesline is tied to its wooden post');
+assert.ok((await page.locator('[data-post-face]').boundingBox()).height>100,'wooden post reaches toward the ground');
 assert.equal(await page.locator('[data-hang] .poem-card__clip').count(),9,'one clip connects each print directly to the rope');
 assert.match(continuity.copyright,/© 2026 scratch/);
 assert.equal(continuity.footerCount,0);

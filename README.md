@@ -271,5 +271,5 @@ Uji ini mencakup navigasi berulang, tautan/gambar aktif, rekaman suara yang sela
 animasi, swipe sentuh, replay intro, reduced motion, tampilan ponsel, dan fallback tanpa JS.
 
 Header halaman puisi ikut bergulir bersama isi dan memakai latar transparan, sehingga
-tidak membentuk bilah warna/blur di atas gradasi. Satu tali galeri memiliki mata kait
-yang terlihat di depan, tanpa tali gantungan tambahan di antara tali utama dan penjepit.
+tidak membentuk bilah warna/blur di atas gradasi. Satu tali galeri diikat pada tiang kayu
+di depan, tanpa tali gantungan tambahan di antara tali utama dan penjepit.

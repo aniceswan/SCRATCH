@@ -23,8 +23,24 @@ const data = JSON.stringify(catalog).replace(/</g, '\\u003c');
 <section class="archive" aria-label="Arsip puisi">
   <div class="stage" data-stage tabindex="0" role="region" aria-label="Arsip puisi. Gulir, seret, atau gunakan tombol panah untuk berpindah. Klik gambar paling depan untuk membaca.">
     <svg class="stage__clothesline" data-clothesline aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="post-wood" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#93643e" />
+          <stop offset=".23" stop-color="#c49a6b" />
+          <stop offset=".68" stop-color="#b28555" />
+          <stop offset="1" stop-color="#986b43" />
+        </linearGradient>
+      </defs>
+      <g class="clothesline__post" data-rope-post>
+        <ellipse class="post__shadow" data-post-shadow rx="27" ry="5" />
+        <path class="post__side" data-post-side />
+        <rect class="post__face" data-post-face x="-10" y="-34" width="20" rx="1" />
+        <path class="post__cap" d="M-10-34-5-39 15-39 10-34Z" />
+        <path class="post__grain" data-post-grain />
+        <ellipse class="post__knot" data-post-knot cx="2" rx="2.5" ry="10" />
+      </g>
       <path class="clothesline__rope" data-rope />
-      <circle class="clothesline__anchor" data-rope-anchor r="5" />
+      <path class="clothesline__binding" data-rope-binding d="M-11-4Q0-7 11-4M-11 1Q0-2 11 1M-11 6Q0 3 11 6M10 1q7 6 2 15" />
     </svg>
     <div class="stage__track" data-track>
       {initial.map(({slot, index}) => {

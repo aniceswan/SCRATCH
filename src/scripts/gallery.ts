@@ -45,7 +45,13 @@ const swings = hangs.map(hang => hang.querySelector<HTMLElement>('[data-swing]')
 const images = cards.map(card => card.querySelector<HTMLImageElement>('img')!);
 const clothesline = document.querySelector<SVGSVGElement>('[data-clothesline]');
 const rope = document.querySelector<SVGPathElement>('[data-rope]');
-const anchor = document.querySelector<SVGCircleElement>('[data-rope-anchor]');
+const post = document.querySelector<SVGGElement>('[data-rope-post]');
+const postFace = document.querySelector<SVGRectElement>('[data-post-face]');
+const postSide = document.querySelector<SVGPathElement>('[data-post-side]');
+const postGrain = document.querySelector<SVGPathElement>('[data-post-grain]');
+const postKnot = document.querySelector<SVGEllipseElement>('[data-post-knot]');
+const postShadow = document.querySelector<SVGEllipseElement>('[data-post-shadow]');
+const ropeBinding = document.querySelector<SVGPathElement>('[data-rope-binding]');
 let dimensions = {width: 0, height: 0, cardWidth: 0, cardHeight: 0};
 
 function measureStage() {
@@ -55,8 +61,15 @@ function measureStage() {
   clothesline?.setAttribute('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
   const geometry = clotheslineGeometry(dimensions);
   rope?.setAttribute('d', geometry.points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
-  anchor?.setAttribute('cx', geometry.anchor.x.toFixed(2));
-  anchor?.setAttribute('cy', geometry.anchor.y.toFixed(2));
+  const mounting = `translate(${geometry.anchor.x.toFixed(2)} ${geometry.anchor.y.toFixed(2)})`;
+  const bottom = Math.max(40, dimensions.height - geometry.anchor.y - 10);
+  post?.setAttribute('transform', mounting);
+  ropeBinding?.setAttribute('transform', mounting);
+  postFace?.setAttribute('height', String(bottom + 34));
+  postSide?.setAttribute('d', `M10 -34 15 -39 15 ${bottom - 5} 10 ${bottom}Z`);
+  postGrain?.setAttribute('d', `M-6 -26 Q-3 ${bottom * .2} -6 ${bottom * .48}T-5 ${bottom - 5} M5 -27 Q2 ${bottom * .15} 5 ${bottom * .37}T6 ${bottom - 9} M-1 -20 Q2 18 -1 46`);
+  postKnot?.setAttribute('cy', String(bottom * .58));
+  postShadow?.setAttribute('cy', String(bottom + 2));
 }
 
 motionPreference.addEventListener('change', () => {
