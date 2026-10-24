@@ -84,3 +84,19 @@ test('one anchored clothesline passes directly through every clip pivot in depth
     assert.ok(rope.points.some(p => Math.hypot(p.x - pivot.x, p.y - pivot.y) < .01), 'clip must sit on the rope at '+distance);
   }
 });
+
+test('mobile rope reaches the viewport edge without moving any clip pivots', () => {
+  const size = {width: 390, height: 450, cardWidth: 242, cardHeight: 319};
+  const rope = gallery.clotheslineGeometry(size, false);
+  assert.equal(rope.points[0].x, 0, 'rope extends all the way to the left edge');
+  const landscape = gallery.clotheslineGeometry(size, false, 160);
+  assert.equal(landscape.points[0].x, -160, 'landscape rope reaches beyond the stage to the viewport edge');
+  const short = {width: 481, height: 286, cardWidth: 160, cardHeight: 220};
+  assert.ok(gallery.clotheslineGeometry(short, false, 362).anchor.y <= short.height - 24, 'foreground rope stays above the copyright on short landscape screens');
+  const desktop = gallery.clotheslineGeometry(size, true);
+  assert.ok(desktop.points[0].x > 0, 'desktop retains a mounting point for the post');
+  for (let distance = 0; distance <= 4; distance += .5) {
+    const pivot = gallery.projectPoint(gallery.clotheslinePoint(distance, size), size);
+    assert.ok(rope.points.some(p => Math.hypot(p.x - pivot.x, p.y - pivot.y) < .01));
+  }
+});

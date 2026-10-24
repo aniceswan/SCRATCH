@@ -271,5 +271,7 @@ Uji ini mencakup navigasi berulang, tautan/gambar aktif, rekaman suara yang sela
 animasi, swipe sentuh, replay intro, reduced motion, tampilan ponsel, dan fallback tanpa JS.
 
 Header halaman puisi ikut bergulir bersama isi dan memakai latar transparan, sehingga
-tidak membentuk bilah warna/blur di atas gradasi. Satu tali galeri diikat pada tiang kayu
-di depan, tanpa tali gantungan tambahan di antara tali utama dan penjepit.
+tidak membentuk bilah warna/blur di atas gradasi. Satu tali galeri diikat pada tiang kayu bertekstur fotorealistis
+di desktop. Di layar sampai 900 px, tiang dan lilitan disembunyikan; tali berlanjut
+langsung sampai tepi layar. Aset kayu transparan disimpan di `src/assets/decor/wooden-post.webp`
+dan hanya dimuat pada desktop. Prompt ImageGen ada di `scripts/wooden-post-art.json`.

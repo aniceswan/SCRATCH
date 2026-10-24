@@ -76,8 +76,8 @@ export function clotheslinePoint(distance, size) {
 }
 
 /** Begin at a visible eyelet, then recede through all of the card pivots. */
-export function clotheslineGeometry(size) {
-  const edge = Math.max(18, size.width * 0.04);
+export function clotheslineGeometry(size, showPost = true, stageOffset = 0) {
+  const edge = showPost ? Math.max(18, size.width * 0.04) : 0 - stageOffset;
   const projected = Array.from({length: 169}, (_, i) =>
     projectPoint(clotheslinePoint(-7 + i * 0.125, size), size));
   const first = projected.findIndex(point => point.x >= edge);
@@ -85,5 +85,13 @@ export function clotheslineGeometry(size) {
   const after = projected[Math.max(0, first)];
   const fraction = (edge - before.x) / (after.x - before.x || 1);
   const anchor = {x: edge, y: before.y + (after.y - before.y) * fraction};
-  return {anchor, points: [anchor, ...projected.slice(Math.max(0, first))]};
+  let points = [anchor, ...projected.slice(Math.max(0, first))];
+  if (!showPost && stageOffset > 0) {
+    const lift = Math.max(0, anchor.y - (size.height - 24));
+    points = points.map(point => {
+      const t = Math.max(0, Math.min(1, -point.x / stageOffset));
+      return {...point, y: point.y - lift * t * t * (3 - 2 * t)};
+    });
+  }
+  return {anchor: points[0], points};
 }

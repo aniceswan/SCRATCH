@@ -46,10 +46,7 @@ const images = cards.map(card => card.querySelector<HTMLImageElement>('img')!);
 const clothesline = document.querySelector<SVGSVGElement>('[data-clothesline]');
 const rope = document.querySelector<SVGPathElement>('[data-rope]');
 const post = document.querySelector<SVGGElement>('[data-rope-post]');
-const postFace = document.querySelector<SVGRectElement>('[data-post-face]');
-const postSide = document.querySelector<SVGPathElement>('[data-post-side]');
-const postGrain = document.querySelector<SVGPathElement>('[data-post-grain]');
-const postKnot = document.querySelector<SVGEllipseElement>('[data-post-knot]');
+const postFace = document.querySelector<SVGImageElement>('[data-post-face]');
 const postShadow = document.querySelector<SVGEllipseElement>('[data-post-shadow]');
 const ropeBinding = document.querySelector<SVGPathElement>('[data-rope-binding]');
 let dimensions = {width: 0, height: 0, cardWidth: 0, cardHeight: 0};
@@ -59,16 +56,21 @@ function measureStage() {
   dimensions = {width: stage.clientWidth, height: stage.clientHeight,
     cardWidth: hangs[0].offsetWidth, cardHeight: hangs[0].offsetHeight};
   clothesline?.setAttribute('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
-  const geometry = clotheslineGeometry(dimensions);
+  const showPost = window.matchMedia('(min-width: 901px)').matches;
+  const geometry = clotheslineGeometry(dimensions, showPost, stage.getBoundingClientRect().left);
   rope?.setAttribute('d', geometry.points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
   const mounting = `translate(${geometry.anchor.x.toFixed(2)} ${geometry.anchor.y.toFixed(2)})`;
   const bottom = Math.max(40, dimensions.height - geometry.anchor.y - 10);
   post?.setAttribute('transform', mounting);
   ropeBinding?.setAttribute('transform', mounting);
+  const postWidth = Math.max(26, Math.min(48, (bottom + 34) * .087));
   postFace?.setAttribute('height', String(bottom + 34));
-  postSide?.setAttribute('d', `M10 -34 15 -39 15 ${bottom - 5} 10 ${bottom}Z`);
-  postGrain?.setAttribute('d', `M-6 -26 Q-3 ${bottom * .2} -6 ${bottom * .48}T-5 ${bottom - 5} M5 -27 Q2 ${bottom * .15} 5 ${bottom * .37}T6 ${bottom - 9} M-1 -20 Q2 18 -1 46`);
-  postKnot?.setAttribute('cy', String(bottom * .58));
+  postFace?.setAttribute('width', String(postWidth));
+  postFace?.setAttribute('x', String(-postWidth / 2));
+  if (showPost) postFace?.setAttribute('href', postFace.dataset.postSrc ?? '');
+  else postFace?.removeAttribute('href');
+  const half = postWidth / 2;
+  ropeBinding?.setAttribute('d', `M${-half - 1} -4Q0 -8 ${half + 1} -4 M${-half - 1} 1Q0 -3 ${half + 1} 1 M${-half - 1} 6Q0 2 ${half + 1} 6 M${half} 1q7 6 2 15`);
   postShadow?.setAttribute('cy', String(bottom + 2));
 }
 

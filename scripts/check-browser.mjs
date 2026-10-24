@@ -140,6 +140,15 @@ console.log('PASS desktop: bounded pool, wrapping, images, keyboard, drag, wheel
 const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
 const phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));
 await phone.goto(base+'/#arsip');await phone.waitForSelector('.stage.is-ready');await phone.waitForTimeout(300);
+assert.ok(!(await phone.locator('[data-rope-post]').isVisible()),'no wooden post on mobile');
+assert.ok(!(await phone.locator('[data-rope-binding]').isVisible()),'no floating rope binding on mobile');
+const mobileRopeEdge=await phone.locator('[data-rope]').evaluate(path=>{
+ const point=path.getPointAtLength(0),svg=path.ownerSVGElement.getBoundingClientRect();
+ return {x:point.x+svg.x,loadedPost:document.querySelector('[data-post-face]').hasAttribute('href')};
+});
+assert.ok(Math.abs(mobileRopeEdge.x)<1,'mobile rope reaches the exact viewport boundary');
+assert.equal(mobileRopeEdge.loadedPost,false,'mobile does not load the desktop wood texture');
+
 const layout=await phone.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:innerHeight,scrollHeight:document.documentElement.scrollHeight}));
 assert.ok(layout.scrollHeight<=layout.height+1,JSON.stringify(layout));assert.ok(layout.scrollWidth<=layout.width+1,JSON.stringify(layout));
 await phone.screenshot({path:'/tmp/scratch-mobile.png',fullPage:true});
@@ -171,6 +180,9 @@ console.log('PASS reading: opening sound, ARCHIVE, titled previous/next links, c
 const reduced=await browser.newContext({viewport:{width:844,height:390},reducedMotion:'reduce'});
 const quiet=await reduced.newPage();quiet.on('pageerror',e=>errors.push(e.message));
 await quiet.goto(base+'/#arsip');await quiet.waitForSelector('.stage.is-ready');await quiet.keyboard.press('ArrowRight');
+assert.ok(!(await quiet.locator('[data-rope-post]').isVisible()),'no post on mobile landscape');
+const landscapeEdge=await quiet.locator('[data-rope]').evaluate(path=>path.getPointAtLength(0).x+path.ownerSVGElement.getBoundingClientRect().x);
+assert.ok(Math.abs(landscapeEdge)<1,'landscape rope reaches the full viewport edge');
 await quiet.waitForFunction(()=>document.querySelector('[aria-current="true"]')?.getAttribute('data-index')==='1');
 assert.ok(await quiet.locator('[data-swing]').evaluateAll(nodes=>nodes.every(n=>getComputedStyle(n).transform==='none')));
 await quiet.screenshot({path:'/tmp/scratch-landscape.png',fullPage:true});

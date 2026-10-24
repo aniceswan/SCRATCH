@@ -1,0 +1,6 @@
+{
+  "tool": "built-in ImageGen",
+  "prompt": "Use case: photorealistic-natural. Asset type: transparent cutout for a poetry website clothesline post. Generate one isolated very tall slender rectangular weathered wooden clothesline support post, full length upright vertical, viewed nearly front-on with a narrow visible right side and a slightly chipped flat top. Real rough-sawn aged teak or pine in muted warm brown, distinctive irregular vertical grain, a few small knots, hairline splits, natural worn edges and fine splinters. Matte wood, not polished or varnished, not a cartoon or 3D illustration. Soft warm daylight from upper left, subtly darker right side, authentic photographic material detail. The post itself is about 12 to 16 times as tall as it is wide; centered in a portrait image with generous TRANSPARENT space around it. No rope, metal, ground, scenery, ground shadow, text, watermark or border. Keep the entire top and base visible. This will be a slender upright timber prop in a warm ivory and sepia photographic poetry gallery.",
+  "asset": "src/assets/decor/wooden-post.webp",
+  "transparent": true
+}
