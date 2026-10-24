@@ -10,7 +10,7 @@ await context.addInitScript(()=>{
   window.__createdContexts=[]; window.__soundDurations=[]; window.__soundStarts=0; window.__rafCallbacks=0;
   window.AudioContext=class extends Native { constructor(...args) {super(...args);window.__createdContexts.push(this);} };
   const start=AudioBufferSourceNode.prototype.start;
-  AudioBufferSourceNode.prototype.start=function(...args){window.__soundStarts++;window.__soundDurations.push(this.buffer?.duration ?? 0);return start.apply(this,args);};
+  AudioBufferSourceNode.prototype.start=function(...args){window.__soundStarts++;sessionStorage.setItem('__testSoundStarts',String(Number(sessionStorage.getItem('__testSoundStarts')||0)+1));window.__soundDurations.push(this.buffer?.duration ?? 0);return start.apply(this,args);};
   const raf=window.requestAnimationFrame.bind(window);
   window.requestAnimationFrame=callback=>raf(t=>{window.__rafCallbacks++;callback(t);});
 });
@@ -23,24 +23,25 @@ await page.waitForSelector('.stage.is-ready');
 assert.equal(await page.title(),'SCRATCH | Poetry');
 assert.equal(await page.locator('[data-hang]').count(),9);
 assert.ok((await page.locator('.brand__ink').boundingBox()).width<=42,'shorter ink logo');
-const depth=await page.locator('[data-rope-left]').evaluate(rope=>{
+const depth=await page.locator('[data-rope]').evaluate(rope=>{
  const length=rope.getTotalLength(), near=rope.getPointAtLength(0), far=rope.getPointAtLength(length);
  return {near:{x:near.x,y:near.y},far:{x:far.x,y:far.y}};
 });
 assert.ok(depth.near.x<depth.far.x&&depth.near.y>depth.far.y,'rope recedes diagonally toward the right background');
 const continuity=await page.evaluate(()=>{
  const svg=document.querySelector('[data-clothesline]');
- const box=svg.getBoundingClientRect();
- const track=document.querySelector('[data-track]');
- const left=document.querySelector('[data-rope-left]'),right=document.querySelector('[data-rope-right]');
+  const track=document.querySelector('[data-track]');
+ const rope=document.querySelector('[data-rope]'),anchor=document.querySelector('[data-rope-anchor]');
+ const first=rope.getPointAtLength(0);
  return {foreground:Number(getComputedStyle(svg).zIndex)>Number(getComputedStyle(track).zIndex),
-  extendsOffScreen:[left,right].every(path=>path.getPointAtLength(0).x+box.x<0),
+  mounted:Math.hypot(first.x-Number(anchor.getAttribute('cx')),first.y-Number(anchor.getAttribute('cy')))<.1,
   copyright:document.querySelector('.copyright')?.textContent,
   footerCount:document.querySelectorAll('footer').length,
   back:document.querySelector('[data-replay-intro]')?.textContent};
 });
 assert.ok(continuity.foreground,'cords draw over the card plane');
-assert.ok(continuity.extendsOffScreen,'both foreground cords continue past the screen edge');
+assert.ok(continuity.mounted,'clothesline begins at its visible mounting eyelet');
+assert.equal(await page.locator('[data-hang] .poem-card__clip').count(),9,'one clip connects each print directly to the rope');
 assert.match(continuity.copyright,/© 2026 scratch/);
 assert.equal(continuity.footerCount,0);
 assert.match(continuity.back,/BACK/);
@@ -60,6 +61,7 @@ assert.equal(titleCrossing,false,'continuous foreground cords leave the poem tit
 
 
 assert.equal(await index(),'0');
+assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 24');
 assert.equal(await page.evaluate(()=>window.__createdContexts.length),0,'no audio on initial load');
 await page.keyboard.press('ArrowLeft'); await waitIndex(23);
 assert.equal(await page.locator('[data-poem-card][aria-current="true"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
@@ -92,14 +94,47 @@ assert.equal(new URL(page.url()).pathname,'/','drag does not open a poem');
 const stage=await page.locator('[data-stage]').boundingBox();
 await page.mouse.move(stage.x+stage.width/2,stage.y+stage.height/2);await page.mouse.wheel(0,500);
 await waitIndex(4);
+assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'05 / 24');
 await page.waitForTimeout(4500);
 const frames=await page.evaluate(()=>window.__rafCallbacks);await page.waitForTimeout(250);
 assert.equal(await page.evaluate(()=>window.__rafCallbacks),frames,'animation stops when settled');
 await page.screenshot({path:'/tmp/scratch-desktop.png',fullPage:true});
+const beforeOpening=await page.evaluate(()=>Number(sessionStorage.getItem('__testSoundStarts')||0));
 await page.locator('[data-poem-card][aria-current="true"]').click();
 await page.waitForURL('**/puisi/postulat/');
 assert.equal(await page.locator('.poem__body').getAttribute('lang'),'id');
 assert.match(await page.locator('.poem__body').innerText(),/Mula-mula kita menerima sesuatu/);
+assert.ok(await page.evaluate(()=>Number(sessionStorage.getItem('__testSoundStarts')||0))>beforeOpening,'opening a poem plays a sound before navigation');
+assert.equal(await page.locator('[data-poem-nav]').count(),2,'previous and next poem links are provided');
+assert.match(await page.locator('[data-poem-nav="previous"]').innerText(),/KONTUR/i);
+assert.match(await page.locator('[data-poem-nav="next"]').innerText(),/SELA/i);
+assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/kontur/');
+assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/sela/');
+assert.match(await page.locator('.topbar__link').innerText(),/ARCHIVE/);
+await page.locator('[data-poem-nav="next"]').click();
+await page.waitForURL('**/puisi/sela/');
+assert.match(await page.locator('h1').innerText(),/SELA/i);
+
+await page.goto(base+'/puisi/indeks-bias/');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'18 / 24');
+await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));
+await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,240);});
+await page.waitForTimeout(150);
+const scrolledHeader=await page.locator('.topbar').evaluate(el=>({bottom:el.getBoundingClientRect().bottom,background:getComputedStyle(el).backgroundColor,blur:getComputedStyle(el).backdropFilter}));
+assert.ok(scrolledHeader.bottom<0,'poem header scrolls away with the page');
+assert.equal(scrolledHeader.background,'rgba(0, 0, 0, 0)');
+assert.equal(scrolledHeader.blur,'none');
+await page.screenshot({path:'/tmp/scratch-poem-scrolled-desktop.png'});
+await page.goto(base+'/puisi/grafit/');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'01 / 24');
+assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
+assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/kambium/');
+await page.goto(base+'/puisi/katalog-benda-yang-tak-jadi/');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'24 / 24');
+assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/grafit/');
+assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/last-coordinates/');
+
+
 console.log('PASS desktop: bounded pool, wrapping, images, keyboard, drag, wheel, physical swing, stopped RAF, recorded hanger slides, poem link');
 const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
 const phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));
@@ -119,6 +154,19 @@ await phone.locator('[data-replay-intro]').click();
 await phone.locator('[data-enter]').click();
 await phone.waitForFunction(()=>document.documentElement.classList.contains('has-entered'),null,{timeout:5000});
 console.log('PASS mobile: 390×844 without overflow, real touch swipe, intro replay');
+await phone.goto(base+'/puisi/indeks-bias/');
+await phone.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));
+await phone.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,240);});
+await phone.waitForTimeout(150);
+assert.ok((await phone.locator('.topbar').boundingBox()).y+(await phone.locator('.topbar').boundingBox()).height<0,'mobile poem header scrolls away');
+await phone.screenshot({path:'/tmp/scratch-poem-scrolled-mobile.png'});
+await phone.locator('.poem-nav').scrollIntoViewIfNeeded();
+assert.equal(await phone.locator('[data-poem-nav]').count(),2);
+const readingLayout=await phone.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth}));
+assert.ok(readingLayout.scrollWidth<=readingLayout.width,'reading links stay within mobile viewport');
+await phone.screenshot({path:'/tmp/scratch-poem-links-mobile.png'});
+console.log('PASS reading: opening sound, ARCHIVE, titled previous/next links, collection wrap, desktop/mobile scroll header');
+
 const reduced=await browser.newContext({viewport:{width:844,height:390},reducedMotion:'reduce'});
 const quiet=await reduced.newPage();quiet.on('pageerror',e=>errors.push(e.message));
 await quiet.goto(base+'/#arsip');await quiet.waitForSelector('.stage.is-ready');await quiet.keyboard.press('ArrowRight');

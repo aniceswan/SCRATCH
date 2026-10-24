@@ -74,5 +74,8 @@ const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
   </head>
   <body class={bodyClass}>
     <slot />
+    <script>
+      import '../scripts/poem-links';
+    </script>
   </body>
 </html>

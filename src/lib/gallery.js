@@ -69,31 +69,21 @@ export function projectPoint(point, size) {
   };
 }
 
-/** Two longitudinal cords run above their respective rows of clothespins. */
-export function clotheslinePoint(distance, side, size) {
+/** Every print hangs directly from this single line at its central clip. */
+export function clotheslinePoint(distance, size) {
   const pose = cardPose(distance, size);
-  const radians = pose.rotateY * Math.PI / 180;
-  const pinX = side * size.cardWidth * 0.25;
-  return {
-    x: pose.x + size.cardWidth / 2 + pinX * Math.cos(radians),
-    // Lift the offscreen foreground anchor into a shallow arc, above the title.
-    y: pose.y - Math.min(70, Math.max(30, size.height * 0.12))
-      + (distance < 0 ? 20 * (distance + 0.5 * (1 - Math.exp(2 * distance))) : 0),
-    z: pose.z - pinX * Math.sin(radians),
-  };
+  return {x: pose.x + size.cardWidth / 2, y: pose.y - 9, z: pose.z};
 }
 
-/** Exact CSS rotations at the point where a thread meets a swinging clip. */
-export function clothespinPoint(distance, side, angle, size) {
-  const pose = cardPose(distance, size);
-  const swing = angle * Math.PI / 180;
-  const turn = pose.rotateY * Math.PI / 180;
-  const pinX = side * size.cardWidth * 0.25;
-  const localX = Math.cos(swing) * pinX - Math.sin(swing) * 24;
-  const localY = Math.sin(swing) * pinX + Math.cos(swing) * 24 - 38;
-  return {
-    x: pose.x + size.cardWidth / 2 + localX * Math.cos(turn),
-    y: pose.y + localY,
-    z: pose.z - localX * Math.sin(turn),
-  };
+/** Begin at a visible eyelet, then recede through all of the card pivots. */
+export function clotheslineGeometry(size) {
+  const edge = Math.max(18, size.width * 0.04);
+  const projected = Array.from({length: 169}, (_, i) =>
+    projectPoint(clotheslinePoint(-7 + i * 0.125, size), size));
+  const first = projected.findIndex(point => point.x >= edge);
+  const before = projected[Math.max(0, first - 1)];
+  const after = projected[Math.max(0, first)];
+  const fraction = (edge - before.x) / (after.x - before.x || 1);
+  const anchor = {x: edge, y: before.y + (after.y - before.y) * fraction};
+  return {anchor, points: [anchor, ...projected.slice(Math.max(0, first))]};
 }

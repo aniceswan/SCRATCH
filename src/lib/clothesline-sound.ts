@@ -32,20 +32,22 @@ export class ClotheslineSound {
     } catch { this.loading = undefined; }
   }
 
-  play(direction: number) {
+  play(direction: number, opening = false) {
     const context = this.context;
     if (!context || !this.buffers.length || context.state !== 'running' || document.hidden) return;
-    if (performance.now() - this.lastPlayed < 110) return;
+    if (!opening && performance.now() - this.lastPlayed < 110) return;
     this.lastPlayed = performance.now();
     try {
       const source = context.createBufferSource();
       const gain = context.createGain();
-      source.buffer = this.buffers[this.take++ % this.buffers.length];
-      source.playbackRate.value = direction >= 0 ? 1 : 0.96;
-      gain.gain.value = 0.55;
+      source.buffer = this.buffers[opening ? 1 : this.take++ % this.buffers.length];
+      source.playbackRate.value = opening ? 0.88 : direction >= 0 ? 1 : 0.96;
+      gain.gain.value = opening ? 0.65 : 0.55;
       source.connect(gain).connect(context.destination);
       source.onended = () => { source.disconnect(); gain.disconnect(); };
-      source.start();
+      source.start(0, opening ? 0.06 : 0);
     } catch { /* Audio may be unavailable while changing browser tabs. */ }
   }
 }
+
+export const clotheslineSound = new ClotheslineSound();

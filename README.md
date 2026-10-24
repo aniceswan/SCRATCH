@@ -35,9 +35,12 @@ Buka `http://localhost:4321`.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
-- **Klik gambar paling depan** untuk membuka puisinya. Tidak ada tombol baca terpisah.
-- Kartu tergantung dengan penjepit kayu pada dua tali yang memanjang dari kiri depan
-  ke kanan belakang dalam perspektif, dan berayun mengikuti gerakan.
+- Setiap puisi bernomor **01–24**; nomor terlihat di archive dan di atas judul halaman bacaan.
+- **Klik gambar paling depan** untuk membuka puisinya, diiringi bunyi lepas penjepit.
+  Di bawah setiap puisi tersedia tautan **PUISI SEBELUMNYA / SELANJUTNYA** beserta judul,
+  mengikuti urutan naskah dan berputar pada ujung koleksi. **ARCHIVE ↗** kembali ke galeri.
+- Setiap kartu dijepit langsung pada satu tali yang memanjang dari kiri depan
+  ke kanan belakang dalam perspektif, lalu berayun pada titik penjepitnya.
   Ayunan mereda lalu berhenti; pengaturan reduced motion dihormati.
 - Perpindahan kartu diiringi **rekaman asli hanger yang digeser**, diambil sebagai dua
   potongan pendek dan ringan. Sumber serta lisensi CC0 tercatat di `src/assets/audio/SOURCES.md`.
@@ -266,3 +269,7 @@ BASE_URL=http://127.0.0.1:4323 CHROME_PATH=/usr/bin/google-chrome npm run test:b
 
 Uji ini mencakup navigasi berulang, tautan/gambar aktif, rekaman suara yang selalu aktif, berhentinya
 animasi, swipe sentuh, replay intro, reduced motion, tampilan ponsel, dan fallback tanpa JS.
+
+Header halaman puisi ikut bergulir bersama isi dan memakai latar transparan, sehingga
+tidak membentuk bilah warna/blur di atas gradasi. Satu tali galeri memiliki mata kait
+yang terlihat di depan, tanpa tali gantungan tambahan di antara tali utama dan penjepit.

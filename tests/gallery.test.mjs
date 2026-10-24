@@ -69,18 +69,18 @@ test('scroll accelerates gently, settles at its target, and stays consistent acr
   assert.ok(Math.abs(run(60).position - run(120).position) < 0.0001);
 });
 
-test('clothesline recedes from the left foreground to the right background with perspective', () => {
-  assert.equal(typeof gallery.clotheslinePoint, 'function');
-  assert.equal(typeof gallery.projectPoint, 'function');
+test('one anchored clothesline passes directly through every clip pivot in depth', () => {
+  assert.equal(typeof gallery.clotheslineGeometry, 'function');
   const size = {width: 800, height: 700, cardWidth: 360, cardHeight: 470};
-  const front = gallery.clotheslinePoint(-2, -1, size);
-  const rear = gallery.clotheslinePoint(5, -1, size);
-  assert.ok(front.z > rear.z);
-  const a = gallery.projectPoint(front, size);
-  const b = gallery.projectPoint(rear, size);
-  assert.ok(a.x < b.x, 'cord runs along archive depth instead of horizontally across its width');
-  assert.ok(a.y > b.y, 'front anchor is lower than the vanishing end');
-  const frontRight = gallery.projectPoint(gallery.clotheslinePoint(-2, 1, size), size);
-  const rearRight = gallery.projectPoint(gallery.clotheslinePoint(5, 1, size), size);
-  assert.ok(frontRight.x - a.x > rearRight.x - b.x, 'parallel cords converge in perspective');
+  const rope = gallery.clotheslineGeometry(size);
+  assert.ok(rope.points.length > 30);
+  assert.equal(rope.points[0].x, rope.anchor.x);
+  assert.equal(rope.points[0].y, rope.anchor.y);
+  assert.ok(rope.anchor.x > 0 && rope.anchor.x < 50, 'visible mounting point in the foreground');
+  const tail = rope.points.at(-1);
+  assert.ok(rope.anchor.x < tail.x && rope.anchor.y > tail.y, 'recedes up and right');
+  for (let distance = 0; distance <= 4; distance += .5) {
+    const pivot = gallery.projectPoint(gallery.clotheslinePoint(distance, size), size);
+    assert.ok(rope.points.some(p => Math.hypot(p.x - pivot.x, p.y - pivot.y) < .01), 'clip must sit on the rope at '+distance);
+  }
 });

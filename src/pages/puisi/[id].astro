@@ -3,22 +3,32 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
-import { getPoems, formatDate, type Poem } from '../../lib/poems';
+import { getPoems, formatDate, padIndex, type Poem } from '../../lib/poems';
 
 export async function getStaticPaths() {
   const poems = await getPoems();
 
-  return poems.map((poem) => ({
+  return poems.map((poem, index) => ({
     params: { id: poem.id },
-    props: { poem },
+    props: {
+      poem,
+      number: poem.data.order || index + 1,
+      total: poems.length,
+      previous: {id: poems[(index - 1 + poems.length) % poems.length].id, title: poems[(index - 1 + poems.length) % poems.length].data.title},
+      next: {id: poems[(index + 1) % poems.length].id, title: poems[(index + 1) % poems.length].data.title},
+    },
   }));
 }
 
 interface Props {
   poem: Poem;
+  number: number;
+  total: number;
+  previous: {id: string; title: string};
+  next: {id: string; title: string};
 }
 
-const { poem } = Astro.props;
+const { poem, previous, next, number, total } = Astro.props;
 const { Content } = await render(poem);
 const titleWords = poem.data.title.split(/\s+/);
 ---
@@ -46,6 +56,7 @@ const titleWords = poem.data.title.split(/\s+/);
       </aside>
 
       <article class="poem__article">
+        <p class="poem__number" aria-label={`Puisi ${number} dari ${total}`}>{padIndex(number)} / {padIndex(total)}</p>
         <h1 class="poem__title">
           {titleWords.map((word, wordIndex) => (
             <Fragment>
@@ -62,6 +73,17 @@ const titleWords = poem.data.title.split(/\s+/);
         </div>
 
         <div class="poem__end" aria-hidden="true">*</div>
+
+        <nav class="poem-nav" aria-label="Baca puisi lainnya">
+          <a class="poem-nav__link" data-poem-nav="previous" href={`/puisi/${previous.id}/`}>
+            <span class="poem-nav__label">← PUISI SEBELUMNYA</span>
+            <span class="poem-nav__title">{previous.title}</span>
+          </a>
+          <a class="poem-nav__link poem-nav__link--next" data-poem-nav="next" href={`/puisi/${next.id}/`}>
+            <span class="poem-nav__label">PUISI SELANJUTNYA →</span>
+            <span class="poem-nav__title">{next.title}</span>
+          </a>
+        </nav>
       </article>
     </main>
 

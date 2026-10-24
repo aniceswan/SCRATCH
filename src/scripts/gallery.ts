@@ -1,9 +1,8 @@
-import { cardWindow, stepSpring, wrapIndex, wheelTravel, followPosition, cardPose, projectPoint, clotheslinePoint, clothespinPoint } from '../lib/gallery.js';
-import { ClotheslineSound } from '../lib/clothesline-sound';
+import { cardWindow, stepSpring, wrapIndex, wheelTravel, followPosition, cardPose, clotheslineGeometry } from '../lib/gallery.js';
+import { clotheslineSound as sound } from '../lib/clothesline-sound';
 
-interface GalleryPoem { title: string; excerpt: string; url: string; alt: string; src: string; srcset: string; }
+interface GalleryPoem { number: string; title: string; excerpt: string; url: string; alt: string; src: string; srcset: string; }
 const catalog: GalleryPoem[] = JSON.parse(document.querySelector('[data-poems]')?.textContent ?? '[]');
-const sound = new ClotheslineSound();
 window.addEventListener('pointerdown', () => { void sound.unlock(); }, {passive: true});
 window.addEventListener('keydown', () => { void sound.unlock(); });
 
@@ -17,6 +16,7 @@ const replayButton = document.querySelector<HTMLButtonElement>('[data-replay-int
 const hangs = Array.from(document.querySelectorAll<HTMLElement>('[data-hang]'));
 const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-poem-card]'));
 const featureTitle = document.querySelector<HTMLElement>('[data-feature-title]');
+const featureNumber = document.querySelector<HTMLElement>('[data-feature-number]');
 const featureExcerpt = document.querySelector<HTMLElement>('[data-feature-excerpt]');
 
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -44,12 +44,8 @@ const springs = hangs.map(() => ({angle: 0, velocity: 0}));
 const swings = hangs.map(hang => hang.querySelector<HTMLElement>('[data-swing]')!);
 const images = cards.map(card => card.querySelector<HTMLImageElement>('img')!);
 const clothesline = document.querySelector<SVGSVGElement>('[data-clothesline]');
-const ropes = [document.querySelector<SVGPathElement>('[data-rope-left]')!, document.querySelector<SVGPathElement>('[data-rope-right]')!];
-const tethers = hangs.map((_, slot) => ({
-  group: document.querySelector<SVGGElement>(`[data-tether-slot="${slot}"]`)!,
-  left: document.querySelector<SVGPathElement>(`[data-tether-slot="${slot}"] [data-tether-left]`)!,
-  right: document.querySelector<SVGPathElement>(`[data-tether-slot="${slot}"] [data-tether-right]`)!,
-}));
+const rope = document.querySelector<SVGPathElement>('[data-rope]');
+const anchor = document.querySelector<SVGCircleElement>('[data-rope-anchor]');
 let dimensions = {width: 0, height: 0, cardWidth: 0, cardHeight: 0};
 
 function measureStage() {
@@ -57,10 +53,10 @@ function measureStage() {
   dimensions = {width: stage.clientWidth, height: stage.clientHeight,
     cardWidth: hangs[0].offsetWidth, cardHeight: hangs[0].offsetHeight};
   clothesline?.setAttribute('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
-  for (const [rail, side] of [[0, -1], [1, 1]]) {
-    const points = Array.from({length: 85}, (_, i) => projectPoint(clotheslinePoint(-7 + i * 0.25, side, dimensions), dimensions));
-    ropes[rail]?.setAttribute('d', points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
-  }
+  const geometry = clotheslineGeometry(dimensions);
+  rope?.setAttribute('d', geometry.points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
+  anchor?.setAttribute('cx', geometry.anchor.x.toFixed(2));
+  anchor?.setAttribute('cy', geometry.anchor.y.toFixed(2));
 }
 
 motionPreference.addEventListener('change', () => {
@@ -92,6 +88,10 @@ function updateFeature(index: number) {
   const poem = catalog[index];
   if (!poem) return;
   if (previous !== -1) sound.play(travelDirection);
+  if (featureNumber) {
+    featureNumber.textContent = `${poem.number} / ${String(catalog.length).padStart(2, '0')}`;
+    featureNumber.setAttribute('aria-label', `Puisi ${Number(poem.number)} dari ${catalog.length}`);
+  }
   if (featureTitle) {
     setWords(featureTitle, poem.title);
     featureTitle.setAttribute('aria-label', poem.title);
@@ -149,13 +149,7 @@ function render(dt = 0, movement = 0) {
     swings[slot].style.transform = `rotateZ(${angle.toFixed(3)}deg)`;
     swinging ||= springs[slot].angle !== 0 || springs[slot].velocity !== 0;
 
-    // Match the rope and moving clips to the same 3D camera as the cards.
-    for (const [side, thread] of [[-1, tethers[slot].left], [1, tethers[slot].right]] as const) {
-      const anchor = projectPoint(clotheslinePoint(distance, side, dimensions), dimensions);
-      const pin = projectPoint(clothespinPoint(distance, side, angle, dimensions), dimensions);
-      thread.setAttribute('d', `M ${anchor.x.toFixed(2)} ${anchor.y.toFixed(2)} Q ${((anchor.x + pin.x) / 2 + Math.sin(angle * Math.PI / 180) * 6).toFixed(2)} ${((anchor.y + pin.y) / 2).toFixed(2)} ${pin.x.toFixed(2)} ${pin.y.toFixed(2)}`);
-    }
-    tethers[slot].group.style.opacity = opacity > 0.02 ? '1' : '0';
+
   }
   updateFeature(active);
   return swinging;

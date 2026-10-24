@@ -6,9 +6,10 @@ import { cardWindow } from '../lib/gallery.js';
 
 interface Props { poems: Poem[]; }
 const { poems } = Astro.props;
-const catalog = await Promise.all(poems.map(async (poem) => {
+const catalog = await Promise.all(poems.map(async (poem, index) => {
   const variants = await Promise.all([320, 480, 640, 800].map(width => getImage({src: poem.data.image, width, format: 'webp', quality: 80})));
   return {
+    number: padIndex(poem.data.order || index + 1),
     title: poem.data.title, excerpt: poem.data.excerpt,
     url: `/puisi/${poem.id}/`, alt: poem.data.imageAlt,
     src: variants[1].src,
@@ -22,9 +23,8 @@ const data = JSON.stringify(catalog).replace(/</g, '\\u003c');
 <section class="archive" aria-label="Arsip puisi">
   <div class="stage" data-stage tabindex="0" role="region" aria-label="Arsip puisi. Gulir, seret, atau gunakan tombol panah untuk berpindah. Klik gambar paling depan untuk membaca.">
     <svg class="stage__clothesline" data-clothesline aria-hidden="true" focusable="false">
-      <path class="clothesline__rope" data-rope-left />
-      <path class="clothesline__rope" data-rope-right />
-      {initial.map(({slot}) => <g data-tether-slot={slot}><path data-tether-left /><path data-tether-right /></g>)}
+      <path class="clothesline__rope" data-rope />
+      <circle class="clothesline__anchor" data-rope-anchor r="5" />
     </svg>
     <div class="stage__track" data-track>
       {initial.map(({slot, index}) => {
@@ -33,8 +33,7 @@ const data = JSON.stringify(catalog).replace(/</g, '\\u003c');
           <div class="hang" data-hang data-slot={slot} data-poem-index={index} style={`--i:${Math.min(index, 6)}`}>
             <div class="hang__swing" data-swing>
               <a class="poem-card" href={poem.url} data-poem-card data-index={index} aria-label={`Baca puisi ${poem.title}`} draggable="false" tabindex={index === 0 ? 0 : -1}>
-                <span class="poem-card__clip poem-card__clip--left" aria-hidden="true"></span>
-                <span class="poem-card__clip poem-card__clip--right" aria-hidden="true"></span>
+                <span class="poem-card__clip" aria-hidden="true"></span>
                 <span class="poem-card__frame">
                   <span class="poem-card__photo">
                     <img src={poem.src} srcset={poem.srcset} sizes="(max-width: 900px) 64vw, 390px" width="480" height="600" alt={poem.alt} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" draggable="false" />

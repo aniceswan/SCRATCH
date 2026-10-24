@@ -726,13 +726,6 @@ main:focus {
   min-height: 100svh;
 }
 
-.page-poem .topbar {
-  position: sticky;
-  top: 0;
-  background: color-mix(in srgb, var(--paper) 93%, transparent);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-}
 
 .progress {
   position: fixed;
@@ -760,8 +753,8 @@ main:focus {
 
 .poem__visual {
   position: sticky;
-  top: var(--topbar-h);
-  height: calc(100svh - var(--topbar-h));
+  top: 0;
+  height: 100svh;
   padding: clamp(24px, 4vh, 56px) var(--gutter);
   display: flex;
   align-items: center;
@@ -1111,9 +1104,6 @@ main:focus {
     max-width: 36rem;
   }
 
-  .page-poem .topbar {
-    background: linear-gradient(180deg, rgba(243, 236, 223, 0.9), rgba(243, 236, 223, 0));
-  }
 }
 
 @media (max-width: 640px) {
@@ -1360,21 +1350,25 @@ main:focus {
   stroke: #806647; stroke-width: 2;
   filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .18));
 }
+.clothesline__anchor {
+  fill: var(--paper-light);
+  stroke: #806647;
+  stroke-width: 1.7;
+  filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .2));
+}
 .hang { transform-style: preserve-3d; }
-.hang__swing { position: relative; transform-origin: 50% -38px; will-change: transform; }
+.hang__swing { position: relative; transform-origin: 50% -9px; will-change: transform; }
 .poem-card__clip {
-  position: absolute; top: -15px; width: 9px; height: 27px; z-index: 3;
+  position: absolute; top: -15px; left: 50%; width: 9px; height: 27px; z-index: 3;
   border-radius: 2px 2px 1px 1px;
   background: linear-gradient(90deg, #a17b4d, #dbb98a 28%, #bc9462 50%, #dfbf92 57%, #ac8050);
   box-shadow: 1px 2px 2px rgba(40, 29, 15, .22);
-  transform: translateX(-50%) rotate(-2deg); pointer-events: none;
+  transform: translateX(-50%); pointer-events: none;
 }
 .poem-card__clip::after {
   content: ''; position: absolute; top: 10px; left: -1px; width: 11px; height: 3px;
   border-top: 1px solid #655e50; border-bottom: 1px solid #655e50;
 }
-.poem-card__clip--left { left: 25%; }
-.poem-card__clip--right { left: 75%; transform: translateX(-50%) rotate(2deg); }
 .stage.is-ready .poem-card__frame { animation: none; }
 .poem-card:hover .poem-card__frame { transform: none; }
 @media (max-width: 640px) {
@@ -1382,4 +1376,33 @@ main:focus {
 }
 @media (prefers-reduced-motion: reduce) {
   .hang__swing { transform: none !important; will-change: auto; }
+}
+
+/* Reading links stay on the same uninterrupted page background. */
+.poem-nav {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+.poem-nav__link { display: flex; flex-direction: column; gap: 14px; padding: 12px 0; text-decoration: none; }
+.poem-nav__link--next { text-align: right; }
+.poem-nav__label { font-family: var(--sans); font-size: 8px; letter-spacing: .13em; color: var(--ink-soft); }
+.poem-nav__title { font-family: var(--display); font-size: clamp(1.35rem, 1.7vw, 1.8rem); font-weight: 500; line-height: 1.15; text-transform: lowercase; color: var(--ink); transition: color .2s ease; }
+.poem-nav__link:hover .poem-nav__title { color: var(--red); }
+@media (max-width: 480px) {
+  .poem-nav { gap: 24px; }
+  .poem-nav__label { font-size: 7px; letter-spacing: .08em; }
+}
+
+.feature__number, .poem__number {
+  margin: 0 0 18px;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  color: var(--ink-soft);
+}
+@media (max-width: 640px) {
+  .feature__number, .poem__number { margin-bottom: 14px; font-size: 8px; }
 }

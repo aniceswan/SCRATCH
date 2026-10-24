@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Intro from '../components/Intro.astro';
 import Archive from '../components/Archive.astro';
-import { getPoems } from '../lib/poems';
+import { getPoems, padIndex } from '../lib/poems';
 
 const poems = await getPoems();
 const featured = poems[0];
@@ -22,6 +22,7 @@ const titleWords = featured?.data.title.split(/\s+/) ?? [];
           <>
             <section class="feature" aria-labelledby="feature-title" data-feature>
               <div class="feature__main">
+                <p class="feature__number" aria-label={`Puisi ${featured.data.order || 1} dari ${poems.length}`} data-feature-number>{padIndex(featured.data.order || 1)} / {padIndex(poems.length)}</p>
                 <h1 class="feature__title" id="feature-title" data-feature-title>
                   {titleWords.map((word, index) => (
                     <Fragment>
