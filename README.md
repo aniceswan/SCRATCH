@@ -39,7 +39,8 @@ Buka `http://localhost:4321`.
 - Kartu tergantung dengan penjepit kayu pada dua tali yang memanjang dari kiri depan
   ke kanan belakang dalam perspektif, dan berayun mengikuti gerakan.
   Ayunan mereda lalu berhenti; pengaturan reduced motion dihormati.
-- Perpindahan kartu diiringi ketukan pendek **ctak-ctak** seperti penjepit jemuran.
+- Perpindahan kartu diiringi **rekaman asli hanger yang digeser**, diambil sebagai dua
+  potongan pendek dan ringan. Sumber serta lisensi CC0 tercatat di `src/assets/audio/SOURCES.md`.
   Suara selalu aktif setelah browser menerima klik, sentuhan, atau tombol pertama.
 - Scroll dan seret memakai gerak dengan percepatan serta perlambatan halus; satu
   gerakan wheel menempuh sekitar 2,25 kali jarak versi awal.
@@ -47,7 +48,7 @@ Buka `http://localhost:4321`.
   sehingga jumlah kartu yang dianimasikan tidak bertambah bersama koleksi.
 - Di ponsel, judul dan tumpukan kartu sudah diatur agar **muat dalam satu layar tanpa digulir**;
   kartu digeser dengan jari.
-- Untuk memutar ulang pembuka, klik **INTRO ↺** di kanan atas atau buka `/?intro=1`.
+- Untuk kembali ke pembuka, klik **BACK ←** di kanan atas atau buka `/?intro=1`.
 
 ---
 
@@ -140,7 +141,7 @@ per satu, cukup ikuti langkah 1–2 di atas; tidak perlu menjalankan importer.
 ```
 src/
 ├─ assets/puisi/          gambar asli (4:5)
-├─ components/            Header, Footer, Intro, Archive
+├─ components/            Header, Intro, Archive
 ├─ content/puisi/         isi puisi (.md)
 ├─ layouts/Base.astro     <head>, font, meta, skip intro
 ├─ lib/                  urutan, jendela kartu, pegas, dan audio
@@ -158,7 +159,7 @@ scripts/                  pembuat gambar contoh & OG cadangan
 Hal kecil yang mungkin ingin diubah:
 
 - Teks pembuka: `src/components/Intro.astro`
-- Teks footer: `src/components/Footer.astro`
+- Copyright: paragraf `.copyright` langsung di setiap halaman, tanpa komponen footer
 - Goresan logo di kanan atas: `src/components/Header.astro` (satu garis SVG)
 - Warna, ukuran kartu, dan kedalaman tumpukan: bagian atas `src/styles/global.css` serta
   perhitungan `render()` di `src/pages/index.astro`
@@ -173,14 +174,14 @@ Hal kecil yang mungkin ingin diubah:
 
 Ketiganya dimuat lokal lewat paket Fontsource, jadi tidak ada permintaan ke Google Fonts.
 
-Latar halaman memakai gradasi tipis (`--paper-grad` di `src/styles/global.css`). Ukuran kartu di
+Latar halaman memakai satu gradasi menyatu (`--paper-grad` di `src/styles/global.css`). Ukuran kartu di
 tumpukan mengikuti tinggi area arsip, jadi seluruh tumpukan selalu muat tanpa scroll di semua
 ukuran layar.
 
 ### Tentang animasi pembuka
 
 Intro muncul sekali per sesi browser. Setelah masuk, intro tidak diulang saat berpindah halaman.
-Untuk memutar ulang, klik **INTRO ↺** di kanan atas, atau buka `/?intro=1`. Kalau JavaScript
+Untuk memutar ulang, klik **BACK ←** di kanan atas, atau buka `/?intro=1`. Kalau JavaScript
 dimatikan, intro dilewati dan daftar puisi tetap bisa dibaca.
 
 ---
@@ -263,5 +264,5 @@ npm run test:browser
 BASE_URL=http://127.0.0.1:4323 CHROME_PATH=/usr/bin/google-chrome npm run test:browser
 ```
 
-Uji ini mencakup navigasi berulang, tautan/gambar aktif, ketukan suara yang selalu aktif, berhentinya
+Uji ini mencakup navigasi berulang, tautan/gambar aktif, rekaman suara yang selalu aktif, berhentinya
 animasi, swipe sentuh, replay intro, reduced motion, tampilan ponsel, dan fallback tanpa JS.

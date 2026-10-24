@@ -5,7 +5,11 @@
 :root {
   --paper: #e8e2d5;
   --paper-light: #f3ede1;
-  --paper-grad: linear-gradient(158deg, #f3ecdf 0%, #e9e3d5 44%, #e0d6c5 100%);
+  --paper-grad:
+    radial-gradient(ellipse at 10% 12%, rgba(255, 249, 225, .92), transparent 55%),
+    radial-gradient(ellipse at 96% 28%, rgba(199, 155, 123, .4), transparent 62%),
+    radial-gradient(ellipse at 36% 100%, rgba(159, 160, 132, .38), transparent 65%),
+    linear-gradient(145deg, #f3ead6 0%, #e8d7bf 48%, #c7b29a 100%);
   --ink: #171512;
   --ink-soft: #5c564a;
   --line: rgba(23, 21, 18, 0.22);
@@ -44,6 +48,7 @@ body {
   margin: 0;
   min-width: 300px;
   background: var(--paper-grad);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -216,29 +221,25 @@ main:focus {
 }
 
 .intro-replay:hover span {
-  transform: rotate(-160deg);
+  transform: translateX(-4px);
 }
 
-.footer {
-  flex: 0 0 var(--footer-h);
-  height: var(--footer-h);
-  padding: 0 var(--gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+.copyright {
+  margin: 0;
+  padding: 18px var(--gutter);
   font-family: var(--sans);
   font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: .12em;
   color: var(--ink-soft);
 }
 
-.footer__mark {
-  font-family: var(--display);
-  font-size: 1.1rem;
-  line-height: 1;
-  color: var(--red);
+.page-home .copyright {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 22px;
+  z-index: 30;
+  padding: 0;
 }
 
 /* =========================================================
@@ -255,9 +256,10 @@ main:focus {
   z-index: 1;
   height: 100svh;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding-bottom: var(--footer-h);
   overflow: hidden;
-  background: var(--paper-grad);
+  background: transparent;
 }
 
 .home {
@@ -340,21 +342,8 @@ main:focus {
   position: relative;
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
   container-type: size;
-}
-
-/* Cahaya lembut di belakang kartu. Dibuat sebagai lapisan sendiri supaya
-   tepinya bisa memudar, tidak berhenti mendadak di batas area arsip. */
-.archive::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(112% 88% at 52% 44%, rgba(255, 251, 242, 0.55), transparent 64%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 100%);
-  pointer-events: none;
 }
 
 .stage {
@@ -382,18 +371,6 @@ main:focus {
 .stage:focus-visible .hang.is-active .poem-card__frame {
   outline: 2px solid var(--red);
   outline-offset: 7px;
-}
-
-.stage__glow {
-  position: absolute;
-  z-index: 0;
-  top: 4%;
-  right: -10%;
-  width: 85%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 249, 236, 0.85), transparent 64%);
-  pointer-events: none;
 }
 
 .stage__track {
@@ -602,9 +579,11 @@ main:focus {
   margin-top: 0.2em;
   display: grid;
   place-items: center;
-  border: 1px solid var(--ink);
+  border: 1px solid rgba(255, 239, 211, .65);
   border-radius: 50%;
-  color: var(--ink);
+  background: linear-gradient(145deg, #c0754d, #9c492e 56%, #793722);
+  box-shadow: inset 0 1px 0 rgba(255, 245, 223, .45), 0 12px 32px -13px rgba(104, 51, 29, .6);
+  color: #fff5df;
   text-decoration: none;
   opacity: 0;
   transform: scale(0.6) rotate(-40deg);
@@ -619,28 +598,41 @@ main:focus {
 .enter__ring {
   position: absolute;
   inset: -8px;
-  border: 1px dashed var(--line);
+  border: 1px solid rgba(148, 76, 43, .4);
   border-radius: 50%;
-  animation: spin 26s linear infinite;
+  box-shadow: 0 0 0 5px rgba(255, 251, 239, .15);
   pointer-events: none;
 }
 
 .enter__arrow {
-  font-family: var(--display);
-  font-size: clamp(1.8rem, 2.2vw, 2.4rem);
-  line-height: 1;
-  transition: transform 0.5s var(--ease);
+  width: 38%;
+  height: 38%;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .5s var(--ease);
+}
+
+.enter__label {
+  position: absolute;
+  left: 50%;
+  bottom: -32px;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .23em;
+  color: var(--ink-soft);
 }
 
 .enter:hover {
-  background: var(--red);
-  border-color: var(--red);
-  color: var(--paper-light);
+  background: linear-gradient(145deg, #d08a60, #a95535 56%, #874029);
+  box-shadow: inset 0 1px 0 rgba(255, 245, 223, .6), 0 16px 38px -12px rgba(104, 51, 29, .65);
 }
 
-.enter:hover .enter__arrow {
-  transform: translate(4px, -4px);
-}
+.enter:hover .enter__arrow { transform: translate(3px, -3px); }
+.enter:focus-visible { outline: 2px solid var(--red); outline-offset: 13px; }
 
 .intro__scratch {
   width: min(78%, 84rem);
@@ -1151,20 +1143,18 @@ main:focus {
   }
 
   .enter {
-    width: clamp(44px, 13vw, 60px);
+    width: clamp(54px, 14vw, 64px);
   }
 
   .enter__ring {
     inset: -5px;
   }
 
-  .enter__arrow {
-    font-size: 1.45rem;
-  }
+  .enter__label { bottom: -28px; font-size: 8px; }
 
   .intro__scratch {
     width: 90%;
-    margin-top: 0.02em;
+    margin-top: 22px;
   }
 
   .intro__note {
@@ -1190,7 +1180,7 @@ main:focus {
     padding: 8px;
   }
 
-  .footer {
+  .copyright {
     font-size: 7px;
     letter-spacing: 0.12em;
   }
@@ -1363,11 +1353,11 @@ main:focus {
 /* Clothesline: a shared cord with independently suspended, spring-driven prints. */
 .stage { --card-w: min(clamp(190px, 62cqw, 390px), calc((76cqh - 18px) / 1.25)); }
 .stage__clothesline {
-  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
-  overflow: visible; fill: none; stroke: #87775f; stroke-width: .85; pointer-events: none;
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5;
+  overflow: visible; fill: none; stroke: #786041; stroke-width: 1.15; stroke-linecap: round; pointer-events: none;
 }
 .stage__clothesline .clothesline__rope {
-  stroke: url(#cord-depth); stroke-width: 1.6;
+  stroke: #806647; stroke-width: 2;
   filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .18));
 }
 .hang { transform-style: preserve-3d; }

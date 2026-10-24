@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import { getPoems, formatDate, type Poem } from '../../lib/poems';
 
 export async function getStaticPaths() {
@@ -66,7 +65,7 @@ const titleWords = poem.data.title.split(/\s+/);
       </article>
     </main>
 
-    <Footer />
+    <p class="copyright">© 2026 scratch</p>
   </div>
 
   <script>

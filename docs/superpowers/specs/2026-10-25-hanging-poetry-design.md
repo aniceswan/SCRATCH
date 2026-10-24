@@ -17,3 +17,13 @@ The user replaced the original paper-brush sound and mute preference with an alw
 Run two parallel cords along the archive depth, from left foreground to right background, projecting the cords and moving clothespins through the same camera as the cards. Shorten the ink logo while retaining a usable touch target. Increase normalized wheel travel by 2.25× and use critically damped position following for continuous acceleration/deceleration; increase drag travel while preserving one-card arrow navigation.
 
 Verification for these refinements: 11 Node tests, Astro diagnostics and production build, plus real Chrome checks of sound with a stale stored mute value, diagonal projected cord direction, increased wheel travel, drag, wrapping, bounded slots, stopped animation, touch/replay, reduced motion and no-JS poem links. Desktop, mobile and landscape screenshots visually inspected.
+
+## Unified background, foreground cords and recorded audio
+
+The next user revision asks for a stronger continuous gradient, removal of visible panel seams, complete opaque cords above the prints, copyright text without a Footer component, BACK instead of INTRO, and a more finished opening button.
+
+The archive's clipped local light layers are removed. One page-wide warm gradient now provides the background, with no separate footer surface. All pages include the copyright paragraph directly. Opaque SVG cords render above the card plane, extend beyond both viewport sides, and curve above the title area. Visible rear prints retain full opacity. The opening control has a shaded terracotta disc, SVG arrow, solid outer ring, label and keyboard focus state.
+
+The synthesized clicks are replaced by two short excerpts from dynamique's CC0 recording of moving clothes hangers. Source and transformations are recorded in src/assets/audio/SOURCES.md. Combined audio download is roughly 10 KB and loads once after interaction; no audio control is exposed.
+
+Verification: 10 Node tests, zero Astro errors/warnings/hints, 26 generated pages, and real desktop/mobile browser checks. The browser suite verifies recorded sample duration, foreground cord ordering, continuation beyond the viewport, title clearance, BACK text and direct copyright markup, as well as existing gallery behavior. Opening and gallery screenshots inspected on desktop, mobile and short landscape layouts.

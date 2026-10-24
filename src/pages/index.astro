@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import Intro from '../components/Intro.astro';
 import Archive from '../components/Archive.astro';
 import { getPoems } from '../lib/poems';
@@ -47,7 +46,7 @@ const titleWords = featured?.data.title.split(/\s+/) ?? [];
       }
     </main>
 
-    <Footer />
+    <p class="copyright">© 2026 scratch</p>
   </div>
 
   <script>

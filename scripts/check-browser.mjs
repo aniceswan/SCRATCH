@@ -7,10 +7,10 @@ const context=await browser.newContext({viewport:{width:1440,height:900}});
 await context.addInitScript(()=>{
   localStorage.setItem('scratch:sound', 'off');
   const Native=window.AudioContext;
-  window.__createdContexts=[]; window.__soundStarts=0; window.__rafCallbacks=0;
+  window.__createdContexts=[]; window.__soundDurations=[]; window.__soundStarts=0; window.__rafCallbacks=0;
   window.AudioContext=class extends Native { constructor(...args) {super(...args);window.__createdContexts.push(this);} };
   const start=AudioBufferSourceNode.prototype.start;
-  AudioBufferSourceNode.prototype.start=function(...args){window.__soundStarts++;return start.apply(this,args);};
+  AudioBufferSourceNode.prototype.start=function(...args){window.__soundStarts++;window.__soundDurations.push(this.buffer?.duration ?? 0);return start.apply(this,args);};
   const raf=window.requestAnimationFrame.bind(window);
   window.requestAnimationFrame=callback=>raf(t=>{window.__rafCallbacks++;callback(t);});
 });
@@ -28,6 +28,36 @@ const depth=await page.locator('[data-rope-left]').evaluate(rope=>{
  return {near:{x:near.x,y:near.y},far:{x:far.x,y:far.y}};
 });
 assert.ok(depth.near.x<depth.far.x&&depth.near.y>depth.far.y,'rope recedes diagonally toward the right background');
+const continuity=await page.evaluate(()=>{
+ const svg=document.querySelector('[data-clothesline]');
+ const box=svg.getBoundingClientRect();
+ const track=document.querySelector('[data-track]');
+ const left=document.querySelector('[data-rope-left]'),right=document.querySelector('[data-rope-right]');
+ return {foreground:Number(getComputedStyle(svg).zIndex)>Number(getComputedStyle(track).zIndex),
+  extendsOffScreen:[left,right].every(path=>path.getPointAtLength(0).x+box.x<0),
+  copyright:document.querySelector('.copyright')?.textContent,
+  footerCount:document.querySelectorAll('footer').length,
+  back:document.querySelector('[data-replay-intro]')?.textContent};
+});
+assert.ok(continuity.foreground,'cords draw over the card plane');
+assert.ok(continuity.extendsOffScreen,'both foreground cords continue past the screen edge');
+assert.match(continuity.copyright,/© 2026 scratch/);
+assert.equal(continuity.footerCount,0);
+assert.match(continuity.back,/BACK/);
+const titleCrossing=await page.evaluate(()=>{
+ const title=document.querySelector('[data-feature-title]').getBoundingClientRect();
+ const svg=document.querySelector('[data-clothesline]').getBoundingClientRect();
+ return [...document.querySelectorAll('.clothesline__rope')].some(path=>{
+  const length=path.getTotalLength();
+  return Array.from({length:300},(_,i)=>path.getPointAtLength(length*i/299)).some(p=>{
+   const x=p.x+svg.x,y=p.y+svg.y;
+   return x>title.left&&x<title.right&&y>title.top&&y<title.bottom;
+  });
+ });
+});
+assert.equal(titleCrossing,false,'continuous foreground cords leave the poem title readable');
+
+
 
 assert.equal(await index(),'0');
 assert.equal(await page.evaluate(()=>window.__createdContexts.length),0,'no audio on initial load');
@@ -39,6 +69,7 @@ await page.keyboard.press('ArrowRight');await waitIndex(0);
 await page.keyboard.press('ArrowRight');await waitIndex(1);
 assert.match(await page.locator('[data-feature-title]').getAttribute('aria-label'),/KAMBIUM/);
 assert.ok(await page.evaluate(()=>window.__soundStarts)>0,'real Web Audio sources start after a gesture');
+assert.ok(await page.evaluate(()=>window.__soundDurations.every(duration=>duration>.25&&duration<.5)),'uses the real recorded hanger excerpts');
 assert.ok(await page.locator('[data-swing]').evaluateAll(nodes=>nodes.some(n=>Math.abs(Number(n.style.transform.match(/[-\d.]+/)?.[0]))>.001)),'cards swing during movement');
 for(let i=0;i<26;i++) await page.keyboard.press('ArrowRight');
 await waitIndex(3);
@@ -69,7 +100,7 @@ await page.locator('[data-poem-card][aria-current="true"]').click();
 await page.waitForURL('**/puisi/postulat/');
 assert.equal(await page.locator('.poem__body').getAttribute('lang'),'id');
 assert.match(await page.locator('.poem__body').innerText(),/Mula-mula kita menerima sesuatu/);
-console.log('PASS desktop: bounded pool, wrapping, images, keyboard, drag, wheel, physical swing, stopped RAF, always-on wooden clacks, poem link');
+console.log('PASS desktop: bounded pool, wrapping, images, keyboard, drag, wheel, physical swing, stopped RAF, recorded hanger slides, poem link');
 const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
 const phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));
 await phone.goto(base+'/#arsip');await phone.waitForSelector('.stage.is-ready');await phone.waitForTimeout(300);

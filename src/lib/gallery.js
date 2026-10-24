@@ -76,7 +76,9 @@ export function clotheslinePoint(distance, side, size) {
   const pinX = side * size.cardWidth * 0.25;
   return {
     x: pose.x + size.cardWidth / 2 + pinX * Math.cos(radians),
-    y: pose.y - Math.min(70, Math.max(30, size.height * 0.12)),
+    // Lift the offscreen foreground anchor into a shallow arc, above the title.
+    y: pose.y - Math.min(70, Math.max(30, size.height * 0.12))
+      + (distance < 0 ? 20 * (distance + 0.5 * (1 - Math.exp(2 * distance))) : 0),
     z: pose.z - pinX * Math.sin(radians),
   };
 }

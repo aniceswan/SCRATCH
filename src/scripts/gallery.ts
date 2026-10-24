@@ -58,7 +58,7 @@ function measureStage() {
     cardWidth: hangs[0].offsetWidth, cardHeight: hangs[0].offsetHeight};
   clothesline?.setAttribute('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
   for (const [rail, side] of [[0, -1], [1, 1]]) {
-    const points = Array.from({length: 73}, (_, i) => projectPoint(clotheslinePoint(-4 + i * 0.25, side, dimensions), dimensions));
+    const points = Array.from({length: 85}, (_, i) => projectPoint(clotheslinePoint(-7 + i * 0.25, side, dimensions), dimensions));
     ropes[rail]?.setAttribute('d', points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
   }
 }
@@ -135,7 +135,7 @@ function render(dt = 0, movement = 0) {
     const behind = distance >= 0;
     const depth = Math.abs(distance);
     const {x, y, z, rotateY} = cardPose(distance, dimensions);
-    const opacity = behind ? clamp((4.2 - distance) * 0.8, 0, 1) * clamp(1 - distance * 0.075, 0, 1) : clamp(1 + distance * 1.2, 0, 1);
+    const opacity = behind ? clamp((4.6 - distance) * 2, 0, 1) : clamp(1 + distance * 1.2, 0, 1);
     hang.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${z.toFixed(2)}px) rotateY(${rotateY.toFixed(2)}deg)`;
     hang.style.opacity = String(opacity);
     hang.style.zIndex = String(distance < 0 ? 1300 + Math.round(depth * 10) : 1200 - Math.round(distance * 10));
@@ -155,7 +155,7 @@ function render(dt = 0, movement = 0) {
       const pin = projectPoint(clothespinPoint(distance, side, angle, dimensions), dimensions);
       thread.setAttribute('d', `M ${anchor.x.toFixed(2)} ${anchor.y.toFixed(2)} Q ${((anchor.x + pin.x) / 2 + Math.sin(angle * Math.PI / 180) * 6).toFixed(2)} ${((anchor.y + pin.y) / 2).toFixed(2)} ${pin.x.toFixed(2)} ${pin.y.toFixed(2)}`);
     }
-    tethers[slot].group.style.opacity = String(opacity * 0.75);
+    tethers[slot].group.style.opacity = opacity > 0.02 ? '1' : '0';
   }
   updateFeature(active);
   return swinging;
