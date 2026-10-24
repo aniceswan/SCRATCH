@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import type { Poem } from '../lib/poems';
+import { padIndex } from '../lib/poems';
+
+interface Props {
+  poems: Poem[];
+}
+
+const { poems } = Astro.props;
+---
+
+<section class="archive" aria-label="Arsip puisi">
+  <div
+    class="stage"
+    data-stage
+    tabindex="0"
+    role="region"
+    aria-label="Arsip puisi. Gulir, seret, atau gunakan tombol panah untuk berpindah. Klik gambar paling depan untuk membaca."
+  >
+    <div class="stage__glow" aria-hidden="true"></div>
+
+    <div class="stage__track" data-track>
+      {
+        poems.map((poem, index) => (
+          <div class="hang" data-hang style={`--i:${index}`}>
+            <a
+              class="poem-card"
+              href={`/puisi/${poem.id}/`}
+              data-poem-card
+              data-index={index}
+              data-title={poem.data.title}
+              data-excerpt={poem.data.excerpt}
+              data-url={`/puisi/${poem.id}/`}
+              aria-label={`Baca puisi ${poem.data.title}`}
+              draggable="false"
+            >
+              <span class="poem-card__frame">
+                <span class="poem-card__photo">
+                  <Image
+                    src={poem.data.image}
+                    alt=""
+                    widths={[320, 480, 640, 800]}
+                    sizes="(max-width: 900px) 64vw, 390px"
+                    loading={index < 3 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                  <span class="poem-card__shade" aria-hidden="true"></span>
+                </span>
+              </span>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <noscript>
+    <ul class="nojs-list">
+      {
+        poems.map((poem, index) => (
+          <li>
+            <a href={`/puisi/${poem.id}/`}>
+              <span>{padIndex(index + 1)}</span>
+              {poem.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </noscript>
+</section>

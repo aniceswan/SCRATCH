@@ -1,0 +1,48 @@
+---
+interface Props {
+  count: number;
+}
+
+const { count } = Astro.props;
+const letters = [...'SCRATCH'];
+---
+
+<section class="intro" id="intro" data-intro aria-labelledby="intro-title">
+  <div class="intro__inner">
+    <div class="intro__main">
+      <h1 class="intro__title" id="intro-title" aria-label="SCRATCH">
+        {
+          letters.map((letter, index) => (
+            <span class="intro__char" aria-hidden="true" style={`--i:${index}`}>
+              <span>{letter}</span>
+            </span>
+          ))
+        }
+        <span class="intro__star" aria-hidden="true">*</span>
+      </h1>
+
+      <a class="enter" href="#arsip" id="enter" data-enter aria-label="Masuk ke arsip puisi">
+        <span class="enter__ring" aria-hidden="true"></span>
+        <span class="enter__arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <svg class="intro__scratch" viewBox="0 0 1000 74" fill="none" aria-hidden="true">
+      <path
+        class="intro__scratch-line"
+        pathLength="1"
+        d="M8 46C132 39 228 43 338 47C451 51 548 55 656 48C762 41 866 35 992 40"
+      ></path>
+      <path
+        class="intro__scratch-line intro__scratch-line--thin"
+        pathLength="1"
+        d="M60 56C188 50 288 52 404 56C540 61 718 60 944 51"
+      ></path>
+    </svg>
+
+    <p class="intro__note">
+      <span class="intro__note-top">ARSIP PUISI PRIBADI — {String(count).padStart(2, '0')} LEMBAR</span>
+      Puisi, gambar, dan yang tersisa.
+    </p>
+  </div>
+</section>

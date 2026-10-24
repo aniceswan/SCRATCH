@@ -1,0 +1,78 @@
+---
+import '@fontsource-variable/fraunces/full.css';
+import '@fontsource-variable/dm-sans/wght.css';
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/newsreader/opsz-italic.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description = 'SCRATCH — arsip puisi pribadi. Kumpulan puisi dan gambar, disimpan pelan-pelan.',
+  bodyClass = '',
+} = Astro.props;
+
+const pageTitle = title ? `${title} — SCRATCH` : 'SCRATCH — arsip puisi';
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e8e2d5" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SCRATCH" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      // Pembuka hanya tampil sekali per sesi. Skip juga kalau sudah di #arsip
+      // atau saat pengunjung minta memutar ulang (?intro=1).
+      (() => {
+        try {
+          const forceIntro = new URLSearchParams(location.search).has('intro');
+          const entered = sessionStorage.getItem('scratch:entered') === '1';
+          if (!forceIntro && (entered || location.hash === '#arsip')) {
+            document.documentElement.classList.add('intro-skip');
+          }
+        } catch {
+          /* sessionStorage bisa diblokir; biarkan intro tampil. */
+        }
+      })();
+    </script>
+
+    <noscript>
+      <style>
+        .intro { display: none !important; }
+        .page-home { height: auto !important; overflow: visible !important; }
+        .site-shell { height: auto !important; min-height: 100svh !important; overflow: visible !important; }
+        .home { display: block !important; }
+        .archive { height: auto !important; min-height: 0 !important; overflow: visible !important; }
+        .stage { display: none !important; }
+        .nojs-list { display: grid !important; }
+        .intro-replay { display: none !important; }
+      </style>
+    </noscript>
+
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

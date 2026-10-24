@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getPoems, formatDate, readingTime, type Poem } from '../../lib/poems';
+
+export async function getStaticPaths() {
+  const poems = await getPoems();
+
+  return poems.map((poem) => ({
+    params: { id: poem.id },
+    props: { poem },
+  }));
+}
+
+interface Props {
+  poem: Poem;
+}
+
+const { poem } = Astro.props;
+const { Content } = await render(poem);
+const titleWords = poem.data.title.split(/\s+/);
+const minutes = readingTime(poem.body);
+---
+
+<Base title={poem.data.title} description={poem.data.excerpt} bodyClass="page-poem">
+  <div class="progress" aria-hidden="true"><span data-progress></span></div>
+
+  <div class="poem-page" id="top">
+    <Header />
+
+    <main class="poem-layout">
+      <aside class="poem__visual">
+        <figure class="poem__figure">
+          <div class="poem__image">
+            <Image
+              src={poem.data.image}
+              alt={poem.data.imageAlt}
+              widths={[460, 640, 900, 1200]}
+              sizes="(max-width: 900px) 90vw, 500px"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </figure>
+      </aside>
+
+      <article class="poem__article">
+        <h1 class="poem__title">
+          {titleWords.map((word, wordIndex) => (
+            <Fragment>
+              <span class="word" style={`--i:${wordIndex}`}><span>{word}</span></span>
+              {wordIndex < titleWords.length - 1 ? ' ' : ''}
+            </Fragment>
+          ))}
+        </h1>
+
+        <p class="poem__meta">
+          {formatDate(poem.data.date, 'long')}
+          <span aria-hidden="true">·</span>
+          {minutes} MENIT BACA
+        </p>
+
+        <div class="poem__body">
+          <Content />
+        </div>
+
+        <div class="poem__end" aria-hidden="true">*</div>
+      </article>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    const progress = document.querySelector<HTMLElement>('[data-progress]');
+
+    function updateProgress() {
+      if (!progress) return;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      progress.style.transform = `scaleX(${value})`;
+    }
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+  </script>
+</Base>

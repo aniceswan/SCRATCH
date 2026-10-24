@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Halaman tidak ditemukan" description="Lembar ini tidak ada di arsip SCRATCH." bodyClass="page-404">
+  <Header />
+
+  <main class="notfound">
+    <span class="notfound__ghost" aria-hidden="true">404</span>
+
+    <div class="notfound__inner">
+      <h1 class="notfound__title">Halaman ini <em>tidak tersimpan.</em></h1>
+      <a class="notfound__back" href="/">
+        <span aria-hidden="true">←</span>
+        KEMBALI KE ARSIP
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
