@@ -23,7 +23,14 @@ const data = JSON.stringify(catalog).replace(/</g, '\\u003c');
   <div class="stage" data-stage tabindex="0" role="region" aria-label="Arsip puisi. Gulir, seret, atau gunakan tombol panah untuk berpindah. Klik gambar paling depan untuk membaca.">
     <div class="stage__glow" aria-hidden="true"></div>
     <svg class="stage__clothesline" data-clothesline aria-hidden="true" focusable="false">
-      <path class="clothesline__rope" data-rope />
+      <defs>
+        <linearGradient id="cord-depth" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#756044" />
+          <stop offset="1" stop-color="#a39379" stop-opacity=".35" />
+        </linearGradient>
+      </defs>
+      <path class="clothesline__rope" data-rope-left />
+      <path class="clothesline__rope" data-rope-right />
       {initial.map(({slot}) => <g data-tether-slot={slot}><path data-tether-left /><path data-tether-right /></g>)}
     </svg>
     <div class="stage__track" data-track>

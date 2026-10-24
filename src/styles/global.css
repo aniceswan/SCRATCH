@@ -149,6 +149,8 @@ main:focus {
 }
 
 .brand {
+  min-width: 44px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   color: var(--ink);
@@ -156,7 +158,7 @@ main:focus {
 }
 
 .brand__ink {
-  width: clamp(52px, 4.4vw, 66px);
+  width: clamp(32px, 3.3vw, 42px);
   height: auto;
   overflow: visible;
   transition: transform 0.5s var(--ease);
@@ -363,7 +365,7 @@ main:focus {
   inset: 0;
   z-index: 2;
   perspective: 1600px;
-  perspective-origin: 50% 47%;
+  perspective-origin: 76% 12%;
   touch-action: pan-y;
   cursor: grab;
   outline: none;
@@ -1359,23 +1361,13 @@ main:focus {
 }
 
 /* Clothesline: a shared cord with independently suspended, spring-driven prints. */
-.topbar__actions { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); }
-.sound-toggle {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 6px 0; border: 0; background: transparent; color: var(--ink-soft);
-  font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: .13em;
-  cursor: pointer;
-}
-.sound-toggle__icon { color: var(--red); font-size: 17px; line-height: 1; }
-.sound-toggle[aria-pressed="false"] .sound-toggle__icon { opacity: .4; }
-.sound-toggle:focus-visible { outline: 1px solid var(--red); outline-offset: 6px; }
 .stage { --card-w: min(clamp(190px, 62cqw, 390px), calc((76cqh - 18px) / 1.25)); }
 .stage__clothesline {
   position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
   overflow: visible; fill: none; stroke: #87775f; stroke-width: .85; pointer-events: none;
 }
 .stage__clothesline .clothesline__rope {
-  stroke: #8b785c; stroke-width: 1.7;
+  stroke: url(#cord-depth); stroke-width: 1.6;
   filter: drop-shadow(0 1px 1px rgba(45, 34, 21, .18));
 }
 .hang { transform-style: preserve-3d; }
@@ -1396,8 +1388,6 @@ main:focus {
 .stage.is-ready .poem-card__frame { animation: none; }
 .poem-card:hover .poem-card__frame { transform: none; }
 @media (max-width: 640px) {
-  .sound-toggle { font-size: 8px; gap: 5px; letter-spacing: .09em; }
-  .topbar__actions { gap: 18px; }
   .poem-card__clip { width: 8px; height: 23px; top: -13px; }
 }
 @media (prefers-reduced-motion: reduce) {

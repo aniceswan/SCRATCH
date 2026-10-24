@@ -1,9 +1,9 @@
-import { cardWindow, stepSpring, wrapIndex } from '../lib/gallery.js';
-import { PaperSound } from '../lib/paper-sound';
+import { cardWindow, stepSpring, wrapIndex, wheelTravel, followPosition, cardPose, projectPoint, clotheslinePoint, clothespinPoint } from '../lib/gallery.js';
+import { ClotheslineSound } from '../lib/clothesline-sound';
 
 interface GalleryPoem { title: string; excerpt: string; url: string; alt: string; src: string; srcset: string; }
 const catalog: GalleryPoem[] = JSON.parse(document.querySelector('[data-poems]')?.textContent ?? '[]');
-const sound = new PaperSound(document.querySelector<HTMLButtonElement>('[data-sound-toggle]'));
+const sound = new ClotheslineSound();
 window.addEventListener('pointerdown', () => { void sound.unlock(); }, {passive: true});
 window.addEventListener('keydown', () => { void sound.unlock(); });
 
@@ -26,6 +26,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
 
 let pos = 0;
 let target = 0;
+let scrollVelocity = 0;
 let current = -1;
 let raf = 0;
 let running = false;
@@ -43,7 +44,7 @@ const springs = hangs.map(() => ({angle: 0, velocity: 0}));
 const swings = hangs.map(hang => hang.querySelector<HTMLElement>('[data-swing]')!);
 const images = cards.map(card => card.querySelector<HTMLImageElement>('img')!);
 const clothesline = document.querySelector<SVGSVGElement>('[data-clothesline]');
-const rope = document.querySelector<SVGPathElement>('[data-rope]');
+const ropes = [document.querySelector<SVGPathElement>('[data-rope-left]')!, document.querySelector<SVGPathElement>('[data-rope-right]')!];
 const tethers = hangs.map((_, slot) => ({
   group: document.querySelector<SVGGElement>(`[data-tether-slot="${slot}"]`)!,
   left: document.querySelector<SVGPathElement>(`[data-tether-slot="${slot}"] [data-tether-left]`)!,
@@ -56,6 +57,10 @@ function measureStage() {
   dimensions = {width: stage.clientWidth, height: stage.clientHeight,
     cardWidth: hangs[0].offsetWidth, cardHeight: hangs[0].offsetHeight};
   clothesline?.setAttribute('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
+  for (const [rail, side] of [[0, -1], [1, 1]]) {
+    const points = Array.from({length: 73}, (_, i) => projectPoint(clotheslinePoint(-4 + i * 0.25, side, dimensions), dimensions));
+    ropes[rail]?.setAttribute('d', points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
+  }
 }
 
 motionPreference.addEventListener('change', () => {
@@ -103,12 +108,6 @@ function updateFeature(index: number) {
 function render(dt = 0, movement = 0) {
   if (!stage || !catalog.length || !hangs.length) return false;
   if (!dimensions.width) measureStage();
-  const {width, height, cardWidth, cardHeight} = dimensions;
-  const baseX = width / 2 - cardWidth / 2;
-  const baseY = height / 2 - cardHeight / 2 + 12;
-  const ropeY = Math.max(12, height * 0.045);
-  const ropeDip = Math.min(24, height * 0.045);
-  rope?.setAttribute('d', `M -10 ${ropeY} Q ${width / 2} ${ropeY + ropeDip * 2} ${width + 10} ${ropeY}`);
   const active = wrapIndex(Math.round(pos), catalog.length);
   let swinging = false;
 
@@ -135,10 +134,7 @@ function render(dt = 0, movement = 0) {
 
     const behind = distance >= 0;
     const depth = Math.abs(distance);
-    const x = baseX + distance * cardWidth * (behind ? 0.16 : 0.18);
-    const y = baseY + (behind ? -distance * 22 : -distance * 30);
-    const z = behind ? -distance * 175 : -distance * 460;
-    const rotateY = behind ? clamp(distance * 4.4, -14, 14) : clamp(-distance * 7, -18, 18);
+    const {x, y, z, rotateY} = cardPose(distance, dimensions);
     const opacity = behind ? clamp((4.2 - distance) * 0.8, 0, 1) * clamp(1 - distance * 0.075, 0, 1) : clamp(1 + distance * 1.2, 0, 1);
     hang.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${z.toFixed(2)}px) rotateY(${rotateY.toFixed(2)}deg)`;
     hang.style.opacity = String(opacity);
@@ -153,22 +149,11 @@ function render(dt = 0, movement = 0) {
     swings[slot].style.transform = `rotateZ(${angle.toFixed(3)}deg)`;
     swinging ||= springs[slot].angle !== 0 || springs[slot].velocity !== 0;
 
-    // Project each peg into the same screen plane as the shared SVG rope.
-    const scale = 1600 / (1600 - z);
-    const rad = angle * Math.PI / 180;
-    const ropeHeight = (screenX: number) => {
-      const t = clamp(screenX / width, 0, 1);
-      return ropeY + 4 * ropeDip * t * (1 - t);
-    };
+    // Match the rope and moving clips to the same 3D camera as the cards.
     for (const [side, thread] of [[-1, tethers[slot].left], [1, tethers[slot].right]] as const) {
-      const pinX = side * cardWidth * 0.25;
-      const localX = Math.cos(rad) * pinX - Math.sin(rad) * 31;
-      const localY = Math.sin(rad) * pinX + Math.cos(rad) * 31 - 38;
-      const endX = width / 2 + (x + cardWidth / 2 + localX - width / 2) * scale;
-      const endY = height * 0.47 + (y + localY - height * 0.47) * scale;
-      const startX = clamp(endX - Math.sin(rad) * 20, 4, width - 4);
-      const startY = ropeHeight(startX);
-      thread.setAttribute('d', `M ${startX.toFixed(2)} ${startY.toFixed(2)} Q ${(endX + Math.sin(rad) * 12).toFixed(2)} ${((startY + endY) / 2).toFixed(2)} ${endX.toFixed(2)} ${endY.toFixed(2)}`);
+      const anchor = projectPoint(clotheslinePoint(distance, side, dimensions), dimensions);
+      const pin = projectPoint(clothespinPoint(distance, side, angle, dimensions), dimensions);
+      thread.setAttribute('d', `M ${anchor.x.toFixed(2)} ${anchor.y.toFixed(2)} Q ${((anchor.x + pin.x) / 2 + Math.sin(angle * Math.PI / 180) * 6).toFixed(2)} ${((anchor.y + pin.y) / 2).toFixed(2)} ${pin.x.toFixed(2)} ${pin.y.toFixed(2)}`);
     }
     tethers[slot].group.style.opacity = String(opacity * 0.75);
   }
@@ -179,11 +164,12 @@ function render(dt = 0, movement = 0) {
 function tick(now: number) {
   const dt = Math.min(Math.max((now - lastTime) / 1000, 1 / 120), 1 / 30);
   lastTime = now;
-  const difference = target - pos;
   const previous = pos;
-  pos = Math.abs(difference) < 0.001 ? target : pos + difference * (reduceMotion ? 1 : 1 - Math.pow(0.86, dt * 60));
+  const motion = reduceMotion ? {position: target, velocity: 0} : followPosition({position: pos, velocity: scrollVelocity}, target, dt);
+  pos = motion.position;
+  scrollVelocity = motion.velocity;
   const swinging = render(dt, pos - previous);
-  if (Math.abs(target - pos) < 0.001 && !swinging) {
+  if (pos === target && scrollVelocity === 0 && !swinging) {
     running = false;
     return;
   }
@@ -309,9 +295,9 @@ if (stage && cards.length > 0) {
       const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
       void sound.unlock();
       travelDirection = Math.sign(delta) || travelDirection;
-      target += clamp(delta * 0.0032, -2.5, 2.5);
+      target += wheelTravel(delta, event.deltaMode, dimensions.height);
       start();
-      snap(320);
+      snap(400);
     },
     { passive: false },
   );
@@ -320,6 +306,7 @@ if (stage && cards.length > 0) {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     if (catalog.length < 2) return;
     void sound.unlock();
+    window.clearTimeout(snapTimer);
     dragging = true;
     pointerStartX = event.clientX;
     pointerStartTarget = target;
@@ -334,7 +321,7 @@ if (stage && cards.length > 0) {
     if (pointerMoved < 4) return;
 
     const cardWidth = hangs[0]?.offsetWidth || 360;
-    const nextTarget = pointerStartTarget - dx / (cardWidth * 0.86);
+    const nextTarget = pointerStartTarget - dx / (cardWidth * 0.62);
     travelDirection = Math.sign(nextTarget - target) || travelDirection;
     target = nextTarget;
     start();

@@ -36,10 +36,13 @@ Buka `http://localhost:4321`.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
 - **Klik gambar paling depan** untuk membuka puisinya. Tidak ada tombol baca terpisah.
-- Kartu tergantung pada tali bersama dengan penjepit kayu dan berayun mengikuti gerakan.
+- Kartu tergantung dengan penjepit kayu pada dua tali yang memanjang dari kiri depan
+  ke kanan belakang dalam perspektif, dan berayun mengikuti gerakan.
   Ayunan mereda lalu berhenti; pengaturan reduced motion dihormati.
-- **SUARA ON / OFF** mengatur efek gesekan kertas saat puisi berganti. Pilihan tersimpan
-  di browser; audio mulai tersedia setelah interaksi pengguna.
+- Perpindahan kartu diiringi ketukan pendek **ctak-ctak** seperti penjepit jemuran.
+  Suara selalu aktif setelah browser menerima klik, sentuhan, atau tombol pertama.
+- Scroll dan seret memakai gerak dengan percepatan serta perlambatan halus; satu
+  gerakan wheel menempuh sekitar 2,25 kali jarak versi awal.
 - Hanya **maksimal sembilan kartu** yang dibuat di halaman. Slot dipakai ulang saat menjelajah,
   sehingga jumlah kartu yang dianimasikan tidak bertambah bersama koleksi.
 - Di ponsel, judul dan tumpukan kartu sudah diatur agar **muat dalam satu layar tanpa digulir**;
@@ -260,5 +263,5 @@ npm run test:browser
 BASE_URL=http://127.0.0.1:4323 CHROME_PATH=/usr/bin/google-chrome npm run test:browser
 ```
 
-Uji ini mencakup navigasi berulang, tautan/gambar aktif, suara dan mute, berhentinya
+Uji ini mencakup navigasi berulang, tautan/gambar aktif, ketukan suara yang selalu aktif, berhentinya
 animasi, swipe sentuh, replay intro, reduced motion, tampilan ponsel, dan fallback tanpa JS.

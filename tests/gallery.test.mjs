@@ -41,3 +41,46 @@ test('a disturbed hanging card swings and settles without a permanent animation'
   assert.ok(Math.abs(state.angle) < 0.01);
   assert.ok(Math.abs(state.velocity) < 0.01);
 });
+
+test('identical wheel travel advances farther and handles line and page units consistently', () => {
+  assert.equal(typeof gallery.wheelTravel, 'function');
+  assert.ok(gallery.wheelTravel(500, 0, 800) >= 3.5);
+  assert.equal(gallery.wheelTravel(3, 1, 800), gallery.wheelTravel(48, 0, 800));
+  assert.equal(gallery.wheelTravel(1, 2, 800), gallery.wheelTravel(800, 0, 800));
+  assert.equal(gallery.wheelTravel(-500, 0, 800), -gallery.wheelTravel(500, 0, 800));
+  assert.ok(gallery.wheelTravel(999999, 0, 800) <= 8);
+});
+
+test('scroll accelerates gently, settles at its target, and stays consistent across refresh rates', () => {
+  assert.equal(typeof gallery.followPosition, 'function');
+  const first = gallery.followPosition({position: 0, velocity: 0}, 4, 1 / 60);
+  assert.ok(first.position > 0 && first.position < 0.12, 'no abrupt initial jump');
+  const next = gallery.followPosition(first, 4, 1 / 60);
+  assert.ok(next.position - first.position > first.position, 'speed builds continuously');
+  const run = hz => {
+    let state = {position: 0, velocity: 0};
+    for (let i = 0; i < hz * 2; i++) {
+      state = gallery.followPosition(state, 4, 1 / hz);
+      assert.ok(state.position <= 4, 'no overshoot at the final card');
+    }
+    return state;
+  };
+  assert.ok(Math.abs(run(60).position - 4) < 0.001);
+  assert.ok(Math.abs(run(60).position - run(120).position) < 0.0001);
+});
+
+test('clothesline recedes from the left foreground to the right background with perspective', () => {
+  assert.equal(typeof gallery.clotheslinePoint, 'function');
+  assert.equal(typeof gallery.projectPoint, 'function');
+  const size = {width: 800, height: 700, cardWidth: 360, cardHeight: 470};
+  const front = gallery.clotheslinePoint(-2, -1, size);
+  const rear = gallery.clotheslinePoint(5, -1, size);
+  assert.ok(front.z > rear.z);
+  const a = gallery.projectPoint(front, size);
+  const b = gallery.projectPoint(rear, size);
+  assert.ok(a.x < b.x, 'cord runs along archive depth instead of horizontally across its width');
+  assert.ok(a.y > b.y, 'front anchor is lower than the vanishing end');
+  const frontRight = gallery.projectPoint(gallery.clotheslinePoint(-2, 1, size), size);
+  const rearRight = gallery.projectPoint(gallery.clotheslinePoint(5, 1, size), size);
+  assert.ok(frontRight.x - a.x > rearRight.x - b.x, 'parallel cords converge in perspective');
+});
