@@ -614,17 +614,6 @@ main:focus {
   transition: transform .5s var(--ease);
 }
 
-.enter__label {
-  position: absolute;
-  left: 50%;
-  bottom: -32px;
-  transform: translateX(-50%);
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: .23em;
-  color: var(--ink-soft);
-}
 
 .enter:hover {
   background: linear-gradient(145deg, #d08a60, #a95535 56%, #874029);
@@ -1140,7 +1129,6 @@ main:focus {
     inset: -5px;
   }
 
-  .enter__label { bottom: -28px; font-size: 8px; }
 
   .intro__scratch {
     width: 90%;
