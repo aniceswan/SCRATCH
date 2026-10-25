@@ -1,7 +1,7 @@
 ---
 title: "ANOTASI"
 date: "2026-10-25"
-order: 5
+order: 6
 lang: "id"
 image: "../../assets/puisi/anotasi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ANOTASI"

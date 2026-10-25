@@ -1,7 +1,7 @@
 ---
 title: "JALAN YANG BAIK"
 date: "2026-10-25"
-order: 22
+order: 23
 lang: "id"
 image: "../../assets/puisi/jalan-yang-baik.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi JALAN YANG BAIK"

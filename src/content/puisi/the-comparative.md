@@ -1,7 +1,7 @@
 ---
 title: "THE COMPARATIVE"
 date: "2026-10-25"
-order: 17
+order: 18
 lang: "en"
 image: "../../assets/puisi/the-comparative.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi THE COMPARATIVE"

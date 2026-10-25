@@ -1,7 +1,7 @@
 ---
 title: "ALBEDO"
 date: "2026-10-25"
-order: 35
+order: 36
 lang: "id"
 image: "../../assets/puisi/albedo.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ALBEDO"

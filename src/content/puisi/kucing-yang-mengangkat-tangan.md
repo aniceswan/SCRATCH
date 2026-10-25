@@ -1,7 +1,7 @@
 ---
 title: "KUCING YANG MENGANGKAT TANGAN"
 date: "2026-10-25"
-order: 21
+order: 22
 lang: "id"
 image: "../../assets/puisi/kucing-yang-mengangkat-tangan.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KUCING YANG MENGANGKAT TANGAN"

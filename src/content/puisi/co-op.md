@@ -1,7 +1,7 @@
 ---
 title: "CO-OP"
 date: "2026-10-25"
-order: 3
+order: 4
 lang: "en"
 image: "../../assets/puisi/co-op.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi CO-OP"

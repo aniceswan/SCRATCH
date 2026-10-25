@@ -1,7 +1,7 @@
 ---
 title: "PARALAKS"
 date: "2026-10-25"
-order: 10
+order: 11
 lang: "id"
 image: "../../assets/puisi/paralaks.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi PARALAKS"

@@ -1,7 +1,7 @@
 ---
 title: "POSTULAT"
 date: "2026-10-25"
-order: 4
+order: 5
 lang: "id"
 image: "../../assets/puisi/postulat.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi POSTULAT"

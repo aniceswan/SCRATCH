@@ -1,7 +1,7 @@
 ---
 title: "AMBANG"
 date: "2026-10-25"
-order: 20
+order: 21
 lang: "id"
 image: "../../assets/puisi/ambang.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi AMBANG"

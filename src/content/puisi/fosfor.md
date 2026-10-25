@@ -1,7 +1,7 @@
 ---
 title: "FOSFOR"
 date: "2026-10-25"
-order: 11
+order: 12
 lang: "id"
 image: "../../assets/puisi/fosfor.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi FOSFOR"

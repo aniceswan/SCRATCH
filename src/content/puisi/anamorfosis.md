@@ -1,7 +1,7 @@
 ---
 title: "ANAMORFOSIS"
 date: "2026-10-25"
-order: 14
+order: 15
 lang: "id"
 image: "../../assets/puisi/anamorfosis.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ANAMORFOSIS"

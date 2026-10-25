@@ -1,7 +1,7 @@
 ---
 title: "GRAFIT"
 date: "2026-10-25"
-order: 1
+order: 2
 lang: "id"
 image: "../../assets/puisi/grafit.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi GRAFIT"

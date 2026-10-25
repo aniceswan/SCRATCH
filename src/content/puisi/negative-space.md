@@ -1,7 +1,7 @@
 ---
 title: "NEGATIVE SPACE"
 date: "2026-10-25"
-order: 13
+order: 14
 lang: "en"
 image: "../../assets/puisi/negative-space.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi NEGATIVE SPACE"

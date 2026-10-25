@@ -1,7 +1,7 @@
 ---
 title: "SELA"
 date: "2026-10-25"
-order: 9
+order: 10
 lang: "id"
 image: "../../assets/puisi/sela.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi SELA"

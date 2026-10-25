@@ -1,7 +1,7 @@
 ---
 title: "INDEKS BIAS"
 date: "2026-10-25"
-order: 15
+order: 16
 lang: "id"
 image: "../../assets/puisi/indeks-bias.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi INDEKS BIAS"

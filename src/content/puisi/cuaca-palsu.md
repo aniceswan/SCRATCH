@@ -1,7 +1,7 @@
 ---
 title: "CUACA PALSU"
 date: "2026-10-25"
-order: 18
+order: 19
 lang: "id"
 image: "../../assets/puisi/cuaca-palsu.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi CUACA PALSU"

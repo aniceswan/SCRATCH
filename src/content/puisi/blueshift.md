@@ -1,7 +1,7 @@
 ---
 title: "BLUESHIFT"
 date: "2026-10-25"
-order: 8
+order: 9
 lang: "en"
 image: "../../assets/puisi/blueshift.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi BLUESHIFT"

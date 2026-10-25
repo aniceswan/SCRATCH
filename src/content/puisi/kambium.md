@@ -1,7 +1,7 @@
 ---
 title: "KAMBIUM"
 date: "2026-10-25"
-order: 2
+order: 3
 lang: "id"
 image: "../../assets/puisi/kambium.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KAMBIUM"

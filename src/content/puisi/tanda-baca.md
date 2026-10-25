@@ -1,7 +1,7 @@
 ---
 title: "TANDA BACA"
 date: "2026-10-25"
-order: 6
+order: 7
 lang: "id"
 image: "../../assets/puisi/tanda-baca.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi TANDA BACA"

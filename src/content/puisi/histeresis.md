@@ -1,7 +1,7 @@
 ---
 title: "HISTERESIS"
 date: "2026-10-25"
-order: 32
+order: 33
 lang: "id"
 image: "../../assets/puisi/histeresis.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi HISTERESIS"

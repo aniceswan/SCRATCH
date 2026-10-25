@@ -1,7 +1,7 @@
 ---
 title: "TANGAN YANG BELUM PERGI"
 date: "2026-10-25"
-order: 27
+order: 28
 lang: "id"
 image: "../../assets/puisi/tangan-yang-belum-pergi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi TANGAN YANG BELUM PERGI"

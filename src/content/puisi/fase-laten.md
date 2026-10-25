@@ -1,7 +1,7 @@
 ---
 title: "FASE LATEN"
 date: "2026-10-25"
-order: 19
+order: 20
 lang: "id"
 image: "../../assets/puisi/fase-laten.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi FASE LATEN"

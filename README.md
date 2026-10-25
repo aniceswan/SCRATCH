@@ -35,7 +35,7 @@ Buka `http://localhost:4321`.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
-- Setiap puisi bernomor **01–38**; nomor terlihat di archive dan di atas judul halaman bacaan.
+- Setiap puisi bernomor **01–39**; nomor terlihat di archive dan di atas judul halaman bacaan.
 - **Klik gambar paling depan** untuk membuka puisinya, diiringi bunyi lepas penjepit.
   Di bawah setiap puisi tersedia tautan **PUISI SEBELUMNYA / SELANJUTNYA** beserta judul,
   mengikuti urutan naskah dan berputar pada ujung koleksi. **ARCHIVE ↗** kembali ke galeri.
@@ -118,7 +118,7 @@ Catatan menulis:
 
 ### 3. Koleksi saat ini
 
-**Arsip Cahaya yang Salah Arah** (edisi terpadu) terdiri dari 38 puisi. Sumber lengkap tersimpan di
+**Arsip Cahaya yang Salah Arah** (edisi terpadu) terdiri dari 39 puisi. Sumber lengkap tersimpan di
 `content-source/arsip-cahaya-yang-salah-arah.txt`; halaman hanya memuat sajak, tanpa
 judul bagian atau catatan redaksi. Urutan mengikuti nomor naskah.
 
@@ -133,7 +133,7 @@ Untuk mengimpor ulang edisi naskah ini setelah memperbarui sumber dan gambarnya:
 node scripts/import-poems.mjs
 ```
 
-Importer memvalidasi 38 nomor dan pasangan gambar lebih dahulu, mencadangkan koleksi
+Importer memvalidasi 39 nomor dan pasangan gambar lebih dahulu, mencadangkan koleksi
 lama ke direktori sementara, lalu mengganti berkas puisi. Untuk menambah puisi satu
 per satu, cukup ikuti langkah 1–2 di atas; tidak perlu menjalankan importer.
 

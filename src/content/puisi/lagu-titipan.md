@@ -1,7 +1,7 @@
 ---
 title: "LAGU TITIPAN"
 date: "2026-10-25"
-order: 12
+order: 13
 lang: "id"
 image: "../../assets/puisi/lagu-titipan.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi LAGU TITIPAN"

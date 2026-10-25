@@ -1,7 +1,7 @@
 ---
 title: "KONTUR"
 date: "2026-10-25"
-order: 7
+order: 8
 lang: "id"
 image: "../../assets/puisi/kontur.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KONTUR"

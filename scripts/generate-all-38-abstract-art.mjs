@@ -50,6 +50,29 @@ const aiImages = {
 
 // Procedural abstract designs tailored to each poem
 const proceduralSvgs = {
+  'halaman-nol': `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f2ebe0"/><stop offset="50%" stop-color="#e4d9c7"/><stop offset="100%" stop-color="#c5b69f"/>
+        </linearGradient>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="35"/></filter>
+        ${vignette}
+      </defs>
+      <rect width="${W}" height="${H}" fill="url(#bg)"/>
+      <g opacity=".85">
+        <path d="M 280 920 L 280 620 L 440 620 L 440 920 M 280 750 L 440 750" fill="none" stroke="#2a241d" stroke-width="4" stroke-linecap="round"/>
+        <path d="M 920 920 L 920 620 L 760 620 L 760 920 M 920 750 L 760 750" fill="none" stroke="#2a241d" stroke-width="4" stroke-linecap="round"/>
+        <rect x="470" y="520" width="260" height="380" rx="4" fill="#fdfbf7" stroke="#e0d5c1" stroke-width="2"/>
+        <line x1="520" y1="710" x2="680" y2="710" stroke="#b08745" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="680" cy="710" r="5" fill="#2a241d"/>
+        <ellipse cx="600" cy="1180" rx="420" ry="140" fill="#a89a84" opacity=".3" filter="url(#soft)"/>
+        <path d="M 600 1320 C 600 1150 480 1060 360 1020" fill="none" stroke="#873c2a" stroke-width="2" stroke-dasharray="8 8" opacity=".6"/>
+        <path d="M 600 1320 C 600 1150 720 1060 840 1020" fill="none" stroke="#873c2a" stroke-width="2" stroke-dasharray="8 8" opacity=".6"/>
+      </g>
+      <rect width="${W}" height="${H}" fill="url(#vig)"/>
+    </svg>
+  `,
   'postulat': `
     <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
       <defs>

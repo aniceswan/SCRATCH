@@ -25,7 +25,7 @@ export function parseManuscript(source) {
 async function main() {
   const sourcePath = process.argv[2] ?? 'content-source/arsip-cahaya-yang-salah-arah.txt';
   const poems = parseManuscript(await readFile(sourcePath, 'utf8'));
-  if (poems.length !== 38) throw new Error(`Expected 38 poems, found ${poems.length}`);
+  if (poems.length !== 39) throw new Error(`Expected 39 poems, found ${poems.length}`);
   const art = JSON.parse(await readFile('scripts/poetry-art.json', 'utf8'));
   for (const poem of poems) {
     if (!art.some(a => a.slug === poem.slug)) throw new Error(`Ilustrasi belum tersedia: ${poem.slug}`);
@@ -41,7 +41,7 @@ async function main() {
   for (const name of await readdir('src/assets/puisi')) {
     if (/\.(jpg|png|webp|jpeg)$/i.test(name) && !keep.has(name)) await unlink(path.join('src/assets/puisi', name));
   }
-  const english = new Set([3, 8, 13, 17, 24, 31, 33, 37]);
+  const english = new Set([4, 9, 14, 18, 25, 32, 34, 38]);
   for (const poem of poems) {
     const image = art.find(a => a.slug === poem.slug);
     const excerpt = poem.body.split('\n').filter(Boolean).slice(0, 2).join(' ');
