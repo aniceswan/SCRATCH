@@ -34,8 +34,8 @@
 **Files:** `src/components/Header.astro`, `src/components/PoemReader.astro`, `src/pages/series/index.astro`, `src/pages/series/[series]/index.astro`, `src/pages/series/[series]/puisi/[id].astro`, `src/pages/puisi/[id].astro`, `src/styles/global.css`, `src/styles/series.css`, `src/scripts/poem-links.ts`, `scripts/check-series-browser.mjs`, `README.md`.
 **Interfaces:** consumes `getSeries()` and `readingProps`; contextual URLs `/series/<series>/puisi/<poem>/`, return link `/series/<series>/`; archive URLs remain `/puisi/<poem>/`.
 - [x] Write browser flow for archive SERIES entry, minimal one-card catalog, forty grid cards with correct excerpts, 3/2/1 layout, contextual first/last navigation, direct URL and no-JS access. Run before UI and observe RED.
-- [ ] Implement header chest, pages, reusable reader, and existing opening sound for grid links.
-- [ ] Run `npm test`, `npm run check`, `npm run build`, existing browser suite and series browser suite. Inspect desktop/mobile screenshots and new cover.
+- [x] Implement header chest, pages, reusable reader, and existing opening sound for grid links.
+- [x] Run `npm test`, `npm run check`, `npm run build`, existing browser suite and series browser suite. Inspect desktop/mobile screenshots and new cover.
 - [ ] Fresh independent review; fix significant findings with regression coverage. Commit and integrate by fast-forward, push as previously authorized; confirm clean/synced status.
 
 ## Progress
@@ -44,3 +44,6 @@
 
 - Task 1 complete: helper RED (module absent) → GREEN, 15/15 Node tests, Astro check 0 diagnostics, build 42 pages.
 - Task 2 RED: browser asserts missing archive SERIES link (0 != 1), as expected.
+
+- Task 2 implementation verified: UI RED (missing SERIES entry) → GREEN; 15/15 unit tests, Astro check 0 diagnostics, build 84 pages. Both browser suites pass, including grid audio, 3/2/1 columns, 320px and landscape, no-JS and contextual first/last reader links.
+- Visual QA: inspected cover, desktop/mobile archive header, catalog and grid; checked actual desktop bottom scroll separately from full-page screenshot capture.

@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import { getSeries } from '../../lib/series';
+import '../../styles/series.css';
+
+const entries = await getSeries();
+---
+
+<Base title="Series" bodyClass="page-series">
+  <div class="catalog-page">
+    <Header />
+    <main class="catalog" id="main">
+      <header class="catalog__heading">
+        <h1 class="catalog__title">series<span aria-hidden="true">*</span></h1>
+      </header>
+      <div class="series-grid">
+        {entries.map(entry => (
+          <a class="series-card" data-series-card href={`/series/${entry.id}/`}>
+            <div class="series-card__cover">
+              <Image src={entry.data.cover} alt={entry.data.coverAlt} widths={[360, 640, 900]} sizes="(max-width: 600px) 90vw, (max-width: 1000px) 43vw, 360px" loading="eager" />
+              <span class="series-card__open" aria-hidden="true">↗</span>
+            </div>
+            <div class="series-card__meta">
+              <h2 data-series-title>{entry.data.title}</h2>
+              <p data-series-count>{entry.poems.length} puisi</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
+    <p class="copyright">© 2026 scratch</p>
+  </div>
+</Base>

@@ -32,6 +32,10 @@ Buka `http://localhost:4321`.
 
 ## Cara menjelajah
 
+- **SERIES ↗** di samping BACK membuka koleksi puisi, dengan cover abstrak, nama, dan jumlah puisi.
+  Pilih series untuk melihat gambar, nomor, judul, dan cuplikan puisi dalam grid biasa:
+  tiga kolom di desktop, dua di tablet, satu di ponsel. Tautan sebelumnya/selanjutnya
+  pada halaman baca mengikuti urutan series dan tetap berfungsi tanpa JavaScript.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
@@ -275,3 +279,32 @@ tidak membentuk bilah warna/blur di atas gradasi. Satu tali galeri diikat pada t
 di desktop. Di layar sampai 900 px, tiang dan lilitan disembunyikan; tali berlanjut
 langsung sampai tepi layar. Aset kayu transparan disimpan di `src/assets/decor/wooden-post.webp`
 dan hanya dimuat pada desktop. Prompt ImageGen ada di `scripts/wooden-post-art.json`.
+
+## Mengelola series
+
+Setiap series disimpan di `src/content/series/<slug>.md`. Cover ada di `src/assets/series/`.
+Daftar `poems` berisi ID file puisi dalam urutan baca yang diinginkan. Untuk menambahkan
+series kedua, buat satu file baru beserta cover; kartu dan halaman series dibuat otomatis.
+Puisi boleh menjadi anggota beberapa series. Puisi draft dikecualikan pada build produksi;
+series kosong atau draft tidak ditampilkan. Referensi puisi yang hilang dan anggota duplikat
+akan menggagalkan build agar tidak menghasilkan koleksi yang tidak lengkap.
+
+```yaml
+---
+title: "Nama Series"
+order: 2
+cover: "../../assets/series/nama-series.webp"
+coverAlt: "Deskripsi cover"
+poems:
+  - halaman-nol
+  - grafit
+draft: false
+---
+```
+
+Cover pertama dibuat memakai built-in ImageGen; prompt ada di `scripts/series-art.json`.
+Semua 40 puisi saat ini masuk **Arsip Cahaya yang Salah Arah**. Teks dan gambar puisi
+menggunakan berkas yang sama dengan archive, tanpa salinan isi atau database.
+
+Uji alur series setelah build dan preview memakai `npm run test:series`, dengan variabel
+`BASE_URL`, `CHROME_PATH`, dan `PLAYWRIGHT_MODULE` seperti uji browser archive.

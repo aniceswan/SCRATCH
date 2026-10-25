@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import { getSeries, type PoetrySeries } from '../../../lib/series';
+import { padIndex } from '../../../lib/poems';
+import '../../../styles/series.css';
+
+export async function getStaticPaths() {
+  return (await getSeries()).map(entry => ({params: {series: entry.id}, props: {entry}}));
+}
+
+interface Props { entry: PoetrySeries; }
+const { entry } = Astro.props;
+---
+
+<Base title={entry.data.title} bodyClass="page-series">
+  <div class="catalog-page">
+    <Header />
+    <main class="catalog" id="main">
+      <header class="catalog__heading catalog__heading--collection">
+        <a class="catalog__back" href="/series/">← SERIES</a>
+        <h1 class="catalog__title catalog__title--collection">{entry.data.title}</h1>
+        <p class="catalog__count">{entry.poems.length} puisi</p>
+      </header>
+      <div class="series-poems">
+        {entry.poems.map((poem, index) => (
+          <a class="series-poem" data-series-poem href={`/series/${entry.id}/puisi/${poem.id}/`}>
+            <div class="series-poem__image">
+              <Image src={poem.data.image} alt={poem.data.imageAlt} widths={[360, 640, 900]} sizes="(max-width: 600px) 90vw, (max-width: 1000px) 43vw, 30vw" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
+              <span class="series-poem__open" aria-hidden="true">↗</span>
+            </div>
+            <div class="series-poem__meta">
+              <span class="series-poem__number" data-poem-number>{padIndex(index + 1)}</span>
+              <h2>{poem.data.title}</h2>
+              <p class="series-poem__excerpt" data-poem-excerpt>{poem.data.excerpt}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
+    <p class="copyright">© 2026 scratch</p>
+  </div>
+</Base>

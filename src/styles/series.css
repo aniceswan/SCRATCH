@@ -1,0 +1,158 @@
+.catalog-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.catalog {
+  flex: 1;
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding: clamp(40px, 7vw, 100px) var(--gutter) clamp(72px, 10vw, 140px);
+}
+
+.catalog__heading { margin-bottom: clamp(40px, 5vw, 72px); }
+.catalog__title {
+  font-family: var(--display);
+  font-size: clamp(4rem, 9vw, 8rem);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.025em;
+  text-transform: lowercase;
+}
+.catalog__title > span {
+  display: inline-block;
+  margin-left: .2em;
+  font-size: .3em;
+  vertical-align: top;
+  color: var(--red);
+}
+.catalog__title--collection {
+  max-width: 15ch;
+  font-size: clamp(2.8rem, 6.5vw, 6rem);
+  text-wrap: balance;
+}
+.catalog__back {
+  display: inline-block;
+  margin-bottom: 28px;
+  padding-block: 8px;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.catalog__back:hover { color: var(--red); }
+.catalog__count {
+  margin-top: 22px;
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink-soft);
+}
+.series-grid, .series-poems {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(48px, 6vw, 80px) clamp(22px, 4vw, 56px);
+  align-items: start;
+}
+.series-card, .series-poem {
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+}
+.series-card { max-width: 380px; }
+.series-card__cover, .series-poem__image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  padding: 9px;
+  background: #f3ede1;
+  box-shadow: 0 2px 5px -3px rgba(35, 28, 18, .3), 0 24px 48px -30px rgba(47, 33, 17, .5);
+  transition: transform .55s var(--ease-out), box-shadow .55s var(--ease-out);
+}
+.series-card__cover { padding: 11px; transform: rotate(-1deg); }
+.series-card__cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(49, 32, 15, .07), transparent 4%, rgba(255, 255, 255, .12) 5%, transparent 7%);
+}
+.series-card__cover img, .series-poem__image img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.series-card:hover .series-card__cover, .series-card:focus-visible .series-card__cover {
+  transform: rotate(0) translateY(-6px);
+  box-shadow: 0 3px 6px -3px rgba(35, 28, 18, .3), 0 34px 52px -30px rgba(47, 33, 17, .5);
+}
+.series-poem:hover .series-poem__image, .series-poem:focus-visible .series-poem__image { transform: translateY(-5px); }
+.series-card__open, .series-poem__open {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f7efdf;
+  color: #624b2e;
+  box-shadow: 0 2px 8px rgba(32, 24, 12, .1);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity .3s ease, transform .4s var(--ease);
+}
+.series-card:hover .series-card__open, .series-card:focus-visible .series-card__open,
+.series-poem:hover .series-poem__open, .series-poem:focus-visible .series-poem__open { opacity: 1; transform: none; }
+.series-card__meta { padding: 27px 2px 0; }
+.series-card__meta h2, .series-poem__meta h2 {
+  font-family: var(--display);
+  font-size: clamp(1.65rem, 2.4vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  text-transform: lowercase;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.series-card__meta p {
+  margin-top: 14px;
+  font-size: 9px;
+  letter-spacing: .13em;
+  color: var(--ink-soft);
+}
+.series-poem__meta { padding-top: 24px; }
+.series-poem__number {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: var(--ink-soft);
+}
+.series-poem__excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-top: 14px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+@media (max-width: 1000px) {
+  .series-grid, .series-poems { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .catalog { padding-top: 34px; }
+  .catalog__heading { margin-bottom: 38px; }
+  .catalog__title--collection { font-size: clamp(2.7rem, 11vw, 4rem); }
+  .series-grid, .series-poems { grid-template-columns: minmax(0, 1fr); row-gap: 48px; }
+  .series-card { max-width: none; }
+  .series-card__cover { margin-inline: 3px; }
+  .series-card__meta h2, .series-poem__meta h2 { font-size: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .series-card__cover, .series-poem__image { transform: none !important; }
+}

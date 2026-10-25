@@ -1,105 +1,17 @@
 ---
-import { Image } from 'astro:assets';
-import { render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import Header from '../../components/Header.astro';
-import { getPoems, padIndex, type Poem } from '../../lib/poems';
+import PoemReader from '../../components/PoemReader.astro';
+import { getPoems } from '../../lib/poems';
+import { readingProps } from '../../lib/series-sequence.js';
 
 export async function getStaticPaths() {
   const poems = await getPoems();
-
   return poems.map((poem, index) => ({
     params: { id: poem.id },
-    props: {
-      poem,
-      number: poem.data.order || index + 1,
-      total: poems.length,
-      previous: {id: poems[(index - 1 + poems.length) % poems.length].id, title: poems[(index - 1 + poems.length) % poems.length].data.title},
-      next: {id: poems[(index + 1) % poems.length].id, title: poems[(index + 1) % poems.length].data.title},
-    },
+    props: { ...readingProps(poems, index), number: poem.data.order || index + 1 },
   }));
 }
 
-interface Props {
-  poem: Poem;
-  number: number;
-  total: number;
-  previous: {id: string; title: string};
-  next: {id: string; title: string};
-}
-
-const { poem, previous, next, number, total } = Astro.props;
-const { Content } = await render(poem);
-const titleWords = poem.data.title.split(/\s+/);
+const props = Astro.props;
 ---
 
-<Base title={poem.data.title} description={poem.data.excerpt} bodyClass="page-poem">
-  <div class="progress" aria-hidden="true"><span data-progress></span></div>
-
-  <div class="poem-page" id="top">
-    <Header />
-
-    <main class="poem-layout">
-      <aside class="poem__visual">
-        <figure class="poem__figure">
-          <div class="poem__image">
-            <Image
-              src={poem.data.image}
-              alt={poem.data.imageAlt}
-              widths={[460, 640, 900, 1200]}
-              sizes="(max-width: 900px) 90vw, 500px"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-        </figure>
-      </aside>
-
-      <article class="poem__article">
-        <p class="poem__number" aria-label={`Puisi ${number} dari ${total}`}>{padIndex(number)} / {padIndex(total)}</p>
-        <h1 class="poem__title">
-          {titleWords.map((word, wordIndex) => (
-            <Fragment>
-              <span class="word" style={`--i:${wordIndex}`}><span>{word}</span></span>
-              {wordIndex < titleWords.length - 1 ? ' ' : ''}
-            </Fragment>
-          ))}
-        </h1>
-
-        <div class="poem__body" lang={poem.data.lang}>
-          <Content />
-        </div>
-
-        <div class="poem__end" aria-hidden="true">*</div>
-
-        <nav class="poem-nav" aria-label="Baca puisi lainnya">
-          <a class="poem-nav__link" data-poem-nav="previous" href={`/puisi/${previous.id}/`}>
-            <span class="poem-nav__label">← PUISI SEBELUMNYA</span>
-            <span class="poem-nav__title">{previous.title}</span>
-          </a>
-          <a class="poem-nav__link poem-nav__link--next" data-poem-nav="next" href={`/puisi/${next.id}/`}>
-            <span class="poem-nav__label">PUISI SELANJUTNYA →</span>
-            <span class="poem-nav__title">{next.title}</span>
-          </a>
-        </nav>
-      </article>
-    </main>
-
-    <p class="copyright">© 2026 scratch</p>
-  </div>
-
-  <script>
-    const progress = document.querySelector<HTMLElement>('[data-progress]');
-
-    function updateProgress() {
-      if (!progress) return;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-      progress.style.transform = `scaleX(${value})`;
-    }
-
-    updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
-  </script>
-</Base>
+<PoemReader {...props} />
