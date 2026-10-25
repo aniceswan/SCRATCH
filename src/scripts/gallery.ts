@@ -150,7 +150,7 @@ function render(dt = 0, movement = 0) {
     const behind = distance >= 0;
     const depth = Math.abs(distance);
     const {x, y, z, rotateY} = cardPose(distance, dimensions);
-    const opacity = behind ? clamp((4.6 - distance) * 2, 0, 1) : clamp(1 + distance * 1.2, 0, 1);
+    const opacity = behind ? clamp((3.6 - distance) * 2, 0, 1) : clamp(1 + distance * 1.2, 0, 1);
     hang.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${z.toFixed(2)}px) rotateY(${rotateY.toFixed(2)}deg)`;
     hang.style.opacity = String(opacity);
     hang.style.zIndex = String(distance < 0 ? 1300 + Math.round(depth * 10) : 1200 - Math.round(distance * 10));
@@ -294,19 +294,42 @@ if (stage && cards.length > 0) {
   updateScrollState();
   render();
 
-  stage.addEventListener(
+  window.addEventListener(
     'wheel',
     (event) => {
       if (event.ctrlKey || catalog.length < 2) return;
-      // Kalau halaman memang bisa digulir, jangan rebut wheel dari scroll.
-      if (pageScrolls) return;
+      if (intro && !root.classList.contains('has-entered')) return;
+      const targetEl = event.target as HTMLElement | null;
+      if (targetEl?.closest('input, textarea, select')) return;
+
+      const isDesktop = window.matchMedia('(min-width: 901px)').matches;
+      // Di mobile kalau halaman memang bisa digulir vertikal, jangan intersep jika di luar stage
+      if (!isDesktop && pageScrolls && !stage.contains(targetEl)) return;
+
       event.preventDefault();
       const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (!delta) return;
       void sound.unlock();
-      travelDirection = Math.sign(delta) || travelDirection;
-      target += wheelTravel(delta, event.deltaMode, dimensions.height);
-      start();
-      snap(400);
+
+      const dir = Math.sign(delta);
+      travelDirection = dir || travelDirection;
+
+      // Deteksi discrete mouse wheel (line mode, page mode, atau pixel delta integer khas mouse notch)
+      const isDiscreteWheel = event.deltaMode !== 0 || (Math.abs(delta) >= 40 && Number.isInteger(delta));
+
+      if (isDiscreteWheel) {
+        window.clearTimeout(snapTimer);
+        const travel = wheelTravel(delta, event.deltaMode, dimensions.height);
+        // Untuk 1 notch biasa, melangkah 1 kartu; untuk putaran cepat, ikuti travel terdekat
+        const steps = Math.abs(travel) >= 1.5 ? Math.round(travel) : dir;
+        target = Math.round(target) + steps;
+        start();
+      } else {
+        // Trackpad dengan pergerakan kontinu
+        target += wheelTravel(delta, event.deltaMode, dimensions.height);
+        start();
+        snap(150);
+      }
     },
     { passive: false },
   );
