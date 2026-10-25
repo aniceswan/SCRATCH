@@ -1,6 +1,6 @@
 # SCRATCH
 
-Arsip puisi pribadi: satu pembuka sinematik, tumpukan gambar 3D yang bisa diputar tanpa henti,
+Arsip puisi pribadi: satu pembuka sinematik, carousel gambar yang bisa digeser tanpa henti,
 dan satu halaman untuk setiap puisi. Semua isi disimpan di dalam repo — tanpa database, tanpa CMS,
 tanpa panel admin. Setiap `git push` ke `main` akan membangun ulang situs secara otomatis.
 
@@ -25,7 +25,7 @@ Buka `http://localhost:4321`.
 | `npm run dev` | Server pengembangan dengan hot reload |
 | `npm run build` | Membuat situs statis ke folder `dist/` |
 | `npm run check` | Memeriksa TypeScript dan file Astro |
-| `npm test` | Memeriksa impor naskah, koleksi, pembungkusan kartu, dan ayunan |
+| `npm test` | Memeriksa impor naskah, koleksi, pembungkusan kartu, dan geometri carousel |
 | `npm run preview` | Melihat hasil build lokal |
 
 ---
@@ -38,14 +38,13 @@ Buka `http://localhost:4321`.
   pada halaman baca mengikuti urutan series dan tetap berfungsi tanpa JavaScript.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
-  kiri/kanan untuk memutar tumpukan kartu. Kartu berputar terus dan kembali dari belakang.
+  kiri/kanan untuk menggeser carousel. Kartu aktif besar di tengah, dengan tetangga lebih kecil di kedua sisi.
 - Setiap puisi bernomor **01–40**; nomor terlihat di archive dan di atas judul halaman bacaan.
-- **Klik gambar paling depan** untuk membuka puisinya, diiringi bunyi lepas penjepit.
+- **Klik gambar di tengah** untuk membuka puisinya, diiringi bunyi singkat. Klik kartu samping untuk membawanya ke tengah.
   Di bawah setiap puisi tersedia tautan **PUISI SEBELUMNYA / SELANJUTNYA** beserta judul,
   mengikuti urutan naskah dan berputar pada ujung koleksi. **ARCHIVE ↗** kembali ke galeri.
-- Setiap kartu dijepit langsung pada satu tali yang memanjang dari kiri depan
-  ke kanan belakang dalam perspektif, lalu berayun pada titik penjepitnya.
-  Ayunan mereda lalu berhenti; pengaturan reduced motion dihormati.
+- Tombol **← / →** di bawah carousel juga bisa memilih puisi. Perpindahan halus mereda
+  lalu berhenti sepenuhnya; pengaturan reduced motion dihormati.
 - Perpindahan kartu diiringi **rekaman asli hanger yang digeser**, diambil sebagai dua
   potongan pendek dan ringan. Sumber serta lisensi CC0 tercatat di `src/assets/audio/SOURCES.md`.
   Suara selalu aktif setelah browser menerima klik, sentuhan, atau tombol pertama.
@@ -53,7 +52,7 @@ Buka `http://localhost:4321`.
   gerakan wheel menempuh sekitar 2,25 kali jarak versi awal.
 - Hanya **maksimal sembilan kartu** yang dibuat di halaman. Slot dipakai ulang saat menjelajah,
   sehingga jumlah kartu yang dianimasikan tidak bertambah bersama koleksi.
-- Di ponsel, judul dan tumpukan kartu sudah diatur agar **muat dalam satu layar tanpa digulir**;
+- Di ponsel, judul dan carousel sudah diatur agar **muat dalam satu layar tanpa digulir**;
   kartu digeser dengan jari.
 - Untuk kembali ke pembuka, klik **BACK ←** di kanan atas atau buka `/?intro=1`.
 
@@ -151,10 +150,10 @@ src/
 ├─ components/            Header, Intro, Archive
 ├─ content/puisi/         isi puisi (.md)
 ├─ layouts/Base.astro     <head>, font, meta, skip intro
-├─ lib/                  urutan, jendela kartu, pegas, dan audio
-├─ scripts/gallery.ts    interaksi browser dan animasi jemuran
+├─ lib/                  urutan, jendela kartu, geometri, dan audio
+├─ scripts/gallery.ts    interaksi browser dan animasi carousel
 ├─ pages/
-│  ├─ index.astro         halaman utama + tumpukan kartu 3D
+│  ├─ index.astro         halaman utama + carousel kartu
 │  ├─ puisi/[id].astro    halaman detail per puisi
 │  └─ 404.astro
 ├─ styles/global.css      seluruh tampilan
@@ -168,8 +167,7 @@ Hal kecil yang mungkin ingin diubah:
 - Teks pembuka: `src/components/Intro.astro`
 - Copyright: paragraf `.copyright` langsung di setiap halaman, tanpa komponen footer
 - Goresan logo di kanan atas: `src/components/Header.astro` (satu garis SVG)
-- Warna, ukuran kartu, dan kedalaman tumpukan: bagian atas `src/styles/global.css` serta
-  perhitungan `render()` di `src/pages/index.astro`
+- Warna dan ukuran kartu: `src/styles/global.css`; posisi dan skala kartu: `src/lib/gallery.js`
 - Deskripsi situs dan meta: `src/layouts/Base.astro`
 
 ### Tipografi
@@ -181,8 +179,8 @@ Hal kecil yang mungkin ingin diubah:
 
 Ketiganya dimuat lokal lewat paket Fontsource, jadi tidak ada permintaan ke Google Fonts.
 
-Latar halaman memakai satu gradasi menyatu (`--paper-grad` di `src/styles/global.css`). Ukuran kartu di
-tumpukan mengikuti tinggi area arsip, jadi seluruh tumpukan selalu muat tanpa scroll di semua
+Latar halaman memakai satu gradasi menyatu (`--paper-grad` di `src/styles/global.css`). Ukuran kartu
+mengikuti tinggi area carousel, sehingga kartu dan kontrol muat tanpa scroll di semua
 ukuran layar.
 
 ### Tentang animasi pembuka

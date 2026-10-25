@@ -1,0 +1,7 @@
+# Centered archive carousel preview
+
+User request: replace the clothesline archive with horizontally sliding cards, a large active card in the center and smaller cards to either side. Increase the visibility of the background gradient. Initially previewed locally; after review and refinements, the user explicitly authorized committing and pushing this version.
+
+Design revised by user: retain the original two-column archive composition, poem title/number/excerpt on the left and carousel on the right. Portrait mobile keeps the left-aligned heading above the cards. Use the existing framed abstract artwork. Both neighboring cards overlap closely behind the active center card at smaller scale; side-card clicks select them, the active card opens its poem. Compact previous/next controls complement existing wheel, drag, touch and keyboard interaction. Keep the finite reusable card pool and analytic damped movement, but remove ropes, wooden posts, clips and hanging motion. Portrait phones keep the left-aligned heading above the centered card stack; short landscape screens can retain compact side-by-side text and carousel to preserve legible image size.
+
+Use a stronger warm ivory, peach, copper and muted sage gradient. Preserve the mobile root-background fix, intro, gold SERIES button without an icon and plain BACK navigation, all poems, series pages and reading sounds. No new dependencies or generated artwork. Integrate the approved preview into main and push after verification.

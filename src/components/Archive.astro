@@ -1,6 +1,5 @@
 ---
 import { getImage } from 'astro:assets';
-import woodenPost from '../assets/decor/wooden-post.webp';
 import type { Poem } from '../lib/poems';
 import { padIndex } from '../lib/poems';
 import { cardWindow } from '../lib/gallery.js';
@@ -22,35 +21,28 @@ const data = JSON.stringify(catalog).replace(/</g, '\\u003c');
 ---
 
 <section class="archive" aria-label="Arsip puisi">
-  <div class="stage" data-stage tabindex="0" role="region" aria-label="Arsip puisi. Gulir, seret, atau gunakan tombol panah untuk berpindah. Klik gambar paling depan untuk membaca.">
-    <svg class="stage__clothesline" data-clothesline aria-hidden="true" focusable="false">
-      <g class="clothesline__post" data-rope-post>
-        <ellipse class="post__shadow" data-post-shadow rx="27" ry="5" />
-        <image class="post__photo" data-post-face data-post-src={woodenPost.src} x="-18" y="-34" width="36" preserveAspectRatio="none" />
-      </g>
-      <path class="clothesline__rope" data-rope />
-      <path class="clothesline__binding" data-rope-binding d="M-11-4Q0-7 11-4M-11 1Q0-2 11 1M-11 6Q0 3 11 6M10 1q7 6 2 15" />
-    </svg>
+  <div class="stage" data-stage tabindex="0" role="region" aria-label="Arsip puisi. Gulir, seret, atau gunakan tombol panah untuk berpindah. Klik gambar di tengah untuk membaca.">
     <div class="stage__track" data-track>
       {initial.map(({slot, index}) => {
         const poem = catalog[index];
         return (
-          <div class="hang" data-hang data-slot={slot} data-poem-index={index} style={`--i:${Math.min(index, 6)}`}>
-            <div class="hang__swing" data-swing>
-              <a class="poem-card" href={poem.url} data-poem-card data-index={index} aria-label={`Baca puisi ${poem.title}`} draggable="false" tabindex={index === 0 ? 0 : -1}>
-                <span class="poem-card__clip" aria-hidden="true"></span>
+          <div class="slide" data-slide data-slot={slot} data-poem-index={index} style={`--i:${Math.min(index, 6)}`}>
+            <a class="poem-card" href={poem.url} data-poem-card data-index={index} aria-label={`Baca puisi ${poem.title}`} draggable="false" tabindex={index === 0 ? 0 : -1}>
                 <span class="poem-card__frame">
                   <span class="poem-card__photo">
-                    <img src={poem.src} srcset={poem.srcset} sizes="(max-width: 900px) 64vw, 390px" width="480" height="600" alt={poem.alt} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+                    <img src={poem.src} srcset={poem.srcset} sizes="(max-width: 900px) 64vw, 360px" width="480" height="600" alt={poem.alt} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
                     <span class="poem-card__shade" aria-hidden="true"></span>
                   </span>
                 </span>
-              </a>
-            </div>
+            </a>
           </div>
         );
       })}
     </div>
+    <nav class="carousel-controls" aria-label="Pilih puisi">
+      <button type="button" data-gallery-prev aria-label="Puisi sebelumnya"><span aria-hidden="true">←</span></button>
+      <button type="button" data-gallery-next aria-label="Puisi selanjutnya"><span aria-hidden="true">→</span></button>
+    </nav>
   </div>
   <script type="application/json" data-poems set:html={data} />
   <noscript>

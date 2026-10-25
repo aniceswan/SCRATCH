@@ -6,7 +6,7 @@ const slug='refraction';
 const seriesPath=`/series/${slug}/`;
 const readerPath=`${seriesPath}puisi/`;
 const errors=[];
-async function screenshot(page, options) {
+async function settle(page) {
  await page.evaluate(async()=>{
   await document.fonts.ready;
   for(let pass=0;pass<2;pass++) {
@@ -14,6 +14,9 @@ async function screenshot(page, options) {
    await Promise.all(document.getAnimations().filter(animation=>animation.effect?.getTiming().iterations!==Infinity).map(animation=>animation.finished.catch(()=>{})));
   }
  });
+}
+async function screenshot(page, options) {
+ await settle(page);
  await page.screenshot(options);
 }
 try {
@@ -66,10 +69,12 @@ try {
  assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),readerPath+'katalog-benda-yang-tak-jadi/');
  assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),readerPath+'grafit/');
  assert.equal(await page.getByRole('link',{name:'Kembali ke series refraction'}).getAttribute('href'),seriesPath);
+ await settle(page);
  await page.locator('[data-poem-nav="previous"]').click();
  await page.waitForURL(`**${readerPath}katalog-benda-yang-tak-jadi/`);
  assert.equal((await page.locator('.poem__number').innerText()).trim(),'40 / 40');
  assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),readerPath+'halaman-nol/');
+ await settle(page);
  await page.goto(base+'/puisi/halaman-nol/');
  assert.equal(await page.title(),'HALAMAN NOL | SCRATCH');
  assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/grafit/','direct poem URL retains archive navigation');

@@ -1,4 +1,4 @@
-import { cardWindow, stepSpring, wrapIndex, wheelTravel, followPosition, cardPose, clotheslineGeometry } from '../lib/gallery.js';
+import { cardWindow, wrapIndex, wheelTravel, followPosition, cardPose } from '../lib/gallery.js';
 import { clotheslineSound as sound } from '../lib/clothesline-sound';
 
 interface GalleryPoem { number: string; title: string; excerpt: string; url: string; alt: string; src: string; srcset: string; }
@@ -13,7 +13,7 @@ const main = document.querySelector<HTMLElement>('#arsip');
 const enterLink = document.querySelector<HTMLAnchorElement>('[data-enter]');
 const replayButton = document.querySelector<HTMLButtonElement>('[data-replay-intro]');
 
-const hangs = Array.from(document.querySelectorAll<HTMLElement>('[data-hang]'));
+const slides = Array.from(document.querySelectorAll<HTMLElement>('[data-slide]'));
 const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-poem-card]'));
 const featureTitle = document.querySelector<HTMLElement>('[data-feature-title]');
 const featureNumber = document.querySelector<HTMLElement>('[data-feature-number]');
@@ -22,7 +22,6 @@ const featureExcerpt = document.querySelector<HTMLElement>('[data-feature-excerp
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 let reduceMotion = motionPreference.matches;
 const root = document.documentElement;
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
 let pos = 0;
 let target = 0;
@@ -40,43 +39,17 @@ let leaving = false;
 let pageScrolls = false;
 let lastTime = 0;
 let travelDirection = 1;
-const springs = hangs.map(() => ({angle: 0, velocity: 0}));
-const swings = hangs.map(hang => hang.querySelector<HTMLElement>('[data-swing]')!);
 const images = cards.map(card => card.querySelector<HTMLImageElement>('img')!);
-const clothesline = document.querySelector<SVGSVGElement>('[data-clothesline]');
-const rope = document.querySelector<SVGPathElement>('[data-rope]');
-const post = document.querySelector<SVGGElement>('[data-rope-post]');
-const postFace = document.querySelector<SVGImageElement>('[data-post-face]');
-const postShadow = document.querySelector<SVGEllipseElement>('[data-post-shadow]');
-const ropeBinding = document.querySelector<SVGPathElement>('[data-rope-binding]');
 let dimensions = {width: 0, height: 0, cardWidth: 0, cardHeight: 0};
 
 function measureStage() {
-  if (!stage || !hangs.length) return;
-  dimensions = {width: stage.clientWidth, height: stage.clientHeight,
-    cardWidth: hangs[0].offsetWidth, cardHeight: hangs[0].offsetHeight};
-  clothesline?.setAttribute('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
-  const showPost = window.matchMedia('(min-width: 901px)').matches;
-  const geometry = clotheslineGeometry(dimensions, showPost, stage.getBoundingClientRect().left);
-  rope?.setAttribute('d', geometry.points.map((point, i) => `${i ? 'L' : 'M'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' '));
-  const mounting = `translate(${geometry.anchor.x.toFixed(2)} ${geometry.anchor.y.toFixed(2)})`;
-  const bottom = Math.max(40, dimensions.height - geometry.anchor.y - 10);
-  post?.setAttribute('transform', mounting);
-  ropeBinding?.setAttribute('transform', mounting);
-  const postWidth = Math.max(26, Math.min(48, (bottom + 34) * .087));
-  postFace?.setAttribute('height', String(bottom + 34));
-  postFace?.setAttribute('width', String(postWidth));
-  postFace?.setAttribute('x', String(-postWidth / 2));
-  if (showPost) postFace?.setAttribute('href', postFace.dataset.postSrc ?? '');
-  else postFace?.removeAttribute('href');
-  const half = postWidth / 2;
-  ropeBinding?.setAttribute('d', `M${-half - 1} -4Q0 -8 ${half + 1} -4 M${-half - 1} 1Q0 -3 ${half + 1} 1 M${-half - 1} 6Q0 2 ${half + 1} 6 M${half} 1q7 6 2 15`);
-  postShadow?.setAttribute('cy', String(bottom + 2));
+  if (!stage || !slides.length) return;
+  dimensions = {width: stage.clientWidth, height: Math.max(0, stage.clientHeight - 64),
+    cardWidth: slides[0].offsetWidth, cardHeight: slides[0].offsetHeight};
 }
 
 motionPreference.addEventListener('change', () => {
   reduceMotion = motionPreference.matches;
-  springs.forEach(spring => { spring.angle = 0; spring.velocity = 0; });
   start();
 });
 
@@ -120,19 +93,18 @@ function updateFeature(index: number) {
   }
 }
 
-function render(dt = 0, movement = 0) {
-  if (!stage || !catalog.length || !hangs.length) return false;
+function render() {
+  if (!stage || !catalog.length || !slides.length) return;
   if (!dimensions.width) measureStage();
   const active = wrapIndex(Math.round(pos), catalog.length);
-  let swinging = false;
 
   for (const entry of cardWindow(pos, catalog.length)) {
     const {slot, index, distance} = entry;
-    const hang = hangs[slot];
+    const slide = slides[slot];
     const card = cards[slot];
     const poem = catalog[index];
-    if (hang.dataset.poemIndex !== String(index)) {
-      hang.dataset.poemIndex = String(index);
+    if (slide.dataset.poemIndex !== String(index)) {
+      slide.dataset.poemIndex = String(index);
       card.dataset.index = String(index);
       card.href = poem.url;
       card.setAttribute('aria-label', `Baca puisi ${poem.title}`);
@@ -141,44 +113,32 @@ function render(dt = 0, movement = 0) {
       images[slot].src = poem.src;
     }
     const selected = index === active;
-    hang.classList.toggle('is-active', selected);
+    slide.classList.toggle('is-active', selected);
     card.classList.toggle('is-active', selected);
     card.tabIndex = selected ? 0 : -1;
     if (selected) card.setAttribute('aria-current', 'true');
     else card.removeAttribute('aria-current');
 
-    const behind = distance >= 0;
     const depth = Math.abs(distance);
-    const {x, y, z, rotateY} = cardPose(distance, dimensions);
-    const opacity = behind ? clamp((3.6 - distance) * 2, 0, 1) : clamp(1 + distance * 1.2, 0, 1);
-    hang.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${z.toFixed(2)}px) rotateY(${rotateY.toFixed(2)}deg)`;
-    hang.style.opacity = String(opacity);
-    hang.style.zIndex = String(distance < 0 ? 1300 + Math.round(depth * 10) : 1200 - Math.round(distance * 10));
-    hang.style.pointerEvents = depth < 0.45 ? '' : 'none';
-    hang.style.visibility = opacity > 0.001 && stage.classList.contains('is-ready') ? 'visible' : 'hidden';
-
-    if (!reduceMotion && dt) {
-      springs[slot] = stepSpring(springs[slot], dt, clamp(-movement * 70, -8, 8) / (1 + depth * 0.45));
-    } else if (reduceMotion) springs[slot] = {angle: 0, velocity: 0};
-    const angle = springs[slot].angle;
-    swings[slot].style.transform = `rotateZ(${angle.toFixed(3)}deg)`;
-    swinging ||= springs[slot].angle !== 0 || springs[slot].velocity !== 0;
-
-
+    const {x, y, scale, opacity, zIndex} = cardPose(distance, dimensions);
+    slide.dataset.absolute = String(entry.absolute);
+    slide.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) scale(${scale.toFixed(4)})`;
+    slide.style.opacity = String(opacity);
+    slide.style.zIndex = String(zIndex);
+    slide.style.pointerEvents = depth < 1.5 ? '' : 'none';
+    slide.style.visibility = opacity > 0.001 && stage.classList.contains('is-ready') ? 'visible' : 'hidden';
   }
   updateFeature(active);
-  return swinging;
 }
 
 function tick(now: number) {
   const dt = Math.min(Math.max((now - lastTime) / 1000, 1 / 120), 1 / 30);
   lastTime = now;
-  const previous = pos;
   const motion = reduceMotion ? {position: target, velocity: 0} : followPosition({position: pos, velocity: scrollVelocity}, target, dt);
   pos = motion.position;
   scrollVelocity = motion.velocity;
-  const swinging = render(dt, pos - previous);
-  if (pos === target && scrollVelocity === 0 && !swinging) {
+  render();
+  if (pos === target && scrollVelocity === 0) {
     running = false;
     return;
   }
@@ -284,7 +244,7 @@ if (root.classList.contains('intro-skip')) {
 enterLink?.addEventListener('click', enter);
 replayButton?.addEventListener('click', showIntro);
 
-// --- Arsip 3D ----------------------------------------------------------
+// --- Carousel ----------------------------------------------------------
 if (stage && cards.length > 0) {
   const updateScrollState = () => {
     pageScrolls = document.documentElement.scrollHeight > window.innerHeight + 4;
@@ -336,6 +296,7 @@ if (stage && cards.length > 0) {
 
   stage.addEventListener('pointerdown', (event) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
+    if (event.target instanceof Element && event.target.closest('button')) return;
     if (catalog.length < 2) return;
     void sound.unlock();
     window.clearTimeout(snapTimer);
@@ -352,8 +313,8 @@ if (stage && cards.length > 0) {
     pointerMoved = Math.max(pointerMoved, Math.abs(dx));
     if (pointerMoved < 4) return;
 
-    const cardWidth = hangs[0]?.offsetWidth || 360;
-    const nextTarget = pointerStartTarget - dx / (cardWidth * 0.62);
+    const cardWidth = slides[0]?.offsetWidth || 360;
+    const nextTarget = pointerStartTarget - dx / (cardWidth * 0.48);
     travelDirection = Math.sign(nextTarget - target) || travelDirection;
     target = nextTarget;
     start();
@@ -381,12 +342,35 @@ if (stage && cards.length > 0) {
   stage.addEventListener(
     'click',
     (event) => {
-      if (!suppressClick) return;
+      if (suppressClick) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('[data-poem-card]') : null;
+      if (!link || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey || event.button !== 0) return;
+      if (link.getAttribute('aria-current') === 'true') return;
+      const absolute = Number(link.closest<HTMLElement>('[data-slide]')?.dataset.absolute);
+      if (!Number.isFinite(absolute)) return;
       event.preventDefault();
       event.stopPropagation();
+      travelDirection = Math.sign(absolute - pos) || travelDirection;
+      target = absolute;
+      start();
     },
     true,
   );
+
+  for (const [selector, direction] of [['[data-gallery-prev]', -1], ['[data-gallery-next]', 1]] as const) {
+    document.querySelector<HTMLButtonElement>(selector)?.addEventListener('click', () => {
+      if (catalog.length < 2) return;
+      void sound.unlock();
+      window.clearTimeout(snapTimer);
+      travelDirection = direction;
+      target = Math.round(target) + direction;
+      start();
+    });
+  }
 
   const handleArrowKey = (event: KeyboardEvent) => {
     if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;

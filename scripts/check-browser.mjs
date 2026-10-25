@@ -22,49 +22,74 @@ const waitIndex=async i=>{await page.waitForFunction(i=>document.querySelector('
 await page.goto(base+'/#arsip');
 await page.waitForSelector('.stage.is-ready');
 assert.equal(await page.title(),'SCRATCH | Poetry');
-assert.equal(await page.locator('[data-hang]').count(),9);
+assert.equal(await page.locator('[data-slide]').count(),9);
 assert.ok((await page.locator('.brand__ink').boundingBox()).width<=42,'shorter ink logo');
-const depth=await page.locator('[data-rope]').evaluate(rope=>{
- const length=rope.getTotalLength(), near=rope.getPointAtLength(0), far=rope.getPointAtLength(length);
- return {near:{x:near.x,y:near.y},far:{x:far.x,y:far.y}};
-});
-assert.ok(depth.near.x<depth.far.x&&depth.near.y>depth.far.y,'rope recedes diagonally toward the right background');
-const continuity=await page.evaluate(()=>{
- const svg=document.querySelector('[data-clothesline]');
-  const track=document.querySelector('[data-track]');
- const rope=document.querySelector('[data-rope]'),anchor=document.querySelector('[data-rope-post]');
- const first=rope.getPointAtLength(0),mount=anchor.transform.baseVal.consolidate().matrix;
- return {foreground:Number(getComputedStyle(svg).zIndex)>Number(getComputedStyle(track).zIndex),
-  mounted:Math.hypot(first.x-mount.e,first.y-mount.f)<.1,
-  copyright:document.querySelector('.copyright')?.textContent,
-  footerCount:document.querySelectorAll('footer').length,
-  back:document.querySelector('[data-replay-intro]')?.textContent};
-});
-assert.ok(continuity.foreground,'cords draw over the card plane');
-assert.ok(continuity.mounted,'clothesline is tied to its wooden post');
-assert.ok((await page.locator('[data-post-face]').boundingBox()).height>100,'wooden post reaches toward the ground');
-assert.equal(await page.locator('[data-hang] .poem-card__clip').count(),9,'one clip connects each print directly to the rope');
-assert.match(continuity.copyright,/© 2026 scratch/);
-assert.equal(continuity.footerCount,0);
-assert.match(continuity.back,/BACK/);
-const titleCrossing=await page.evaluate(()=>{
- const title=document.querySelector('[data-feature-title]').getBoundingClientRect();
- const svg=document.querySelector('[data-clothesline]').getBoundingClientRect();
- return [...document.querySelectorAll('.clothesline__rope')].some(path=>{
-  const length=path.getTotalLength();
-  return Array.from({length:300},(_,i)=>path.getPointAtLength(length*i/299)).some(p=>{
-   const x=p.x+svg.x,y=p.y+svg.y;
-   return x>title.left&&x<title.right&&y>title.top&&y<title.bottom;
+async function checkCarousel(page) {
+ await page.evaluate(async()=>{
+  await document.fonts.ready;
+  await Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})));
+ });
+ const bounds=await page.evaluate(()=>{
+  const selected=document.querySelector('[data-poem-card][aria-current="true"]');
+  const active=selected.getBoundingClientRect();
+  const current=Number(selected.dataset.index);
+  const count=JSON.parse(document.querySelector('[data-poems]').textContent).length;
+  const left=document.querySelector(`[data-poem-card][data-index="${(current-1+count)%count}"]`).getBoundingClientRect();
+  const right=document.querySelector(`[data-poem-card][data-index="${(current+1)%count}"]`).getBoundingClientRect();
+  const stage=document.querySelector('[data-stage]').getBoundingClientRect();
+  const feature=document.querySelector('[data-feature]').getBoundingClientRect();
+  const controls=document.querySelector('.carousel-controls').getBoundingClientRect();
+  return {active,left,right,stage,feature,controls,width:innerWidth,height:innerHeight,
+   rope:document.querySelectorAll('[data-rope], [data-rope-post], .poem-card__clip').length};
+ });
+ assert.equal(bounds.rope,0,'carousel has no clothesline decoration');
+ assert.ok(bounds.active.width>bounds.left.width&&bounds.active.width>bounds.right.width,'center card is larger than both neighbors');
+ assert.ok(Math.abs(bounds.left.width-bounds.right.width)<2,'neighbor sizes are symmetric');
+ const center=bounds.active.x+bounds.active.width/2;
+ assert.ok(bounds.left.x+bounds.left.width/2<center&&bounds.right.x+bounds.right.width/2>center);
+ assert.ok(Math.abs(center-(bounds.stage.x+bounds.stage.width/2))<2,'active card sits at the horizontal center of its carousel');
+ const sideBySide=bounds.feature.right<=bounds.stage.left+1;
+ if(bounds.width>900) assert.ok(sideBySide,'desktop retains the heading on the left and carousel on the right');
+ if(sideBySide) assert.ok(bounds.feature.x<bounds.stage.x,'heading stays to the left');
+ assert.ok(bounds.left.x+bounds.left.width>bounds.active.x+bounds.active.width*.3,'left card overlaps closely');
+ assert.ok(bounds.right.x<bounds.active.x+bounds.active.width*.7,'right card overlaps closely');
+ assert.ok(bounds.left.x+bounds.left.width>bounds.active.x+bounds.active.width*.6,'left neighbor is tightly layered behind the center');
+ assert.ok(bounds.right.x<bounds.active.x+bounds.active.width*.4,'right neighbor is tightly layered behind the center');
+ const edges=await page.evaluate(()=>{
+  const stage=document.querySelector('[data-stage]').getBoundingClientRect();
+  return [...document.querySelectorAll('[data-slide]')].filter(el=>Number(getComputedStyle(el).opacity)>.01).map(el=>{
+   const box=el.getBoundingClientRect();
+   return box.left>=stage.left+8 && box.right<=stage.right-8;
   });
  });
-});
-assert.equal(titleCrossing,false,'continuous foreground cords leave the poem title readable');
-
-
+ assert.ok(edges.every(Boolean),'all visible cards clear the carousel boundaries');
+ assert.ok(bounds.active.y>=bounds.stage.y-1,'card stays below the poem heading');
+ assert.ok(bounds.active.y+bounds.active.height<bounds.controls.y,'controls do not cover the artwork');
+ assert.ok(bounds.controls.y+bounds.controls.height<=bounds.height,'controls remain inside the viewport');
+ return bounds;
+}
+await checkCarousel(page);
+assert.match(await page.locator('.copyright').innerText(),/© 2026 scratch/);
+assert.equal(await page.locator('footer').count(),0);
+assert.match(await page.locator('[data-replay-intro]').innerText(),/BACK/);
 
 assert.equal(await index(),'0');
 assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 40');
 assert.equal(await page.evaluate(()=>window.__createdContexts.length),0,'no audio on initial load');
+await page.locator('[data-gallery-next]').click(); await waitIndex(1);
+await page.waitForTimeout(1000);
+await page.locator('[data-gallery-prev]').click(); await waitIndex(0);
+await page.waitForTimeout(1000);
+const rightNeighbor=page.locator('[data-poem-card][data-index="1"]');
+const rightBounds=await rightNeighbor.boundingBox();
+await page.mouse.click(rightBounds.x+rightBounds.width*.98,rightBounds.y+rightBounds.height*.5); await waitIndex(1);
+assert.equal(new URL(page.url()).pathname,'/','clicking the right neighbor selects it without opening a poem');
+await page.waitForTimeout(1000);
+const leftNeighbor=page.locator('[data-poem-card][data-index="0"]');
+const leftBounds=await leftNeighbor.boundingBox();
+await page.mouse.click(leftBounds.x+leftBounds.width*.02,leftBounds.y+leftBounds.height*.5); await waitIndex(0);
+assert.equal(new URL(page.url()).pathname,'/','clicking the left neighbor selects it without opening a poem');
+
 await page.keyboard.press('ArrowLeft'); await waitIndex(39);
 assert.equal(await page.locator('[data-poem-card][aria-current="true"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
 await page.waitForFunction(()=>{const i=document.querySelector('[aria-current="true"] img');return i?.complete&&i.naturalWidth>0;});
@@ -74,10 +99,9 @@ await page.keyboard.press('ArrowRight');await waitIndex(1);
 assert.match(await page.locator('[data-feature-title]').getAttribute('aria-label'),/GRAFIT/);
 assert.ok(await page.evaluate(()=>window.__soundStarts)>0,'real Web Audio sources start after a gesture');
 assert.ok(await page.evaluate(()=>window.__soundDurations.every(duration=>duration>.25&&duration<.5)),'uses the real recorded hanger excerpts');
-assert.ok(await page.locator('[data-swing]').evaluateAll(nodes=>nodes.some(n=>Math.abs(Number(n.style.transform.match(/[-\d.]+/)?.[0]))>.001)),'cards swing during movement');
 for(let i=0;i<26;i++) await page.keyboard.press('ArrowRight');
 await waitIndex(27);
-assert.equal(await page.locator('[data-hang]').count(),9);
+assert.equal(await page.locator('[data-slide]').count(),9);
 assert.equal(await page.locator('[data-sound-toggle]').count(),0,'sound is always on, with no toggle');
 const sounds=await page.evaluate(()=>window.__soundStarts);
 await page.locator('[data-stage]').focus();
@@ -137,19 +161,11 @@ assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'
 assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/last-coordinates/');
 
 
-console.log('PASS desktop: bounded pool, wrapping, images, keyboard, drag, wheel, physical swing, stopped RAF, recorded hanger slides, poem link');
+console.log('PASS desktop: bounded pool, wrapping, images, keyboard, drag, wheel, centered slides, stopped RAF, recorded hanger slides, poem link');
 const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
 const phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));
 await phone.goto(base+'/#arsip');await phone.waitForSelector('.stage.is-ready');await phone.waitForTimeout(300);
-assert.ok(!(await phone.locator('[data-rope-post]').isVisible()),'no wooden post on mobile');
-assert.ok(!(await phone.locator('[data-rope-binding]').isVisible()),'no floating rope binding on mobile');
-const mobileRopeEdge=await phone.locator('[data-rope]').evaluate(path=>{
- const point=path.getPointAtLength(0),svg=path.ownerSVGElement.getBoundingClientRect();
- return {x:point.x+svg.x,loadedPost:document.querySelector('[data-post-face]').hasAttribute('href')};
-});
-assert.ok(Math.abs(mobileRopeEdge.x)<1,'mobile rope reaches the exact viewport boundary');
-assert.equal(mobileRopeEdge.loadedPost,false,'mobile does not load the desktop wood texture');
-
+await checkCarousel(phone);
 const layout=await phone.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:innerHeight,scrollHeight:document.documentElement.scrollHeight}));
 assert.ok(layout.scrollHeight<=layout.height+1,JSON.stringify(layout));assert.ok(layout.scrollWidth<=layout.width+1,JSON.stringify(layout));
 await phone.screenshot({path:'/tmp/scratch-mobile.png',fullPage:true});
@@ -203,13 +219,32 @@ console.log('PASS reading: opening sound, ARCHIVE, titled previous/next links, c
 const reduced=await browser.newContext({viewport:{width:844,height:390},reducedMotion:'reduce'});
 const quiet=await reduced.newPage();quiet.on('pageerror',e=>errors.push(e.message));
 await quiet.goto(base+'/#arsip');await quiet.waitForSelector('.stage.is-ready');await quiet.keyboard.press('ArrowRight');
-assert.ok(!(await quiet.locator('[data-rope-post]').isVisible()),'no post on mobile landscape');
-const landscapeEdge=await quiet.locator('[data-rope]').evaluate(path=>path.getPointAtLength(0).x+path.ownerSVGElement.getBoundingClientRect().x);
-assert.ok(Math.abs(landscapeEdge)<1,'landscape rope reaches the full viewport edge');
 await quiet.waitForFunction(()=>document.querySelector('[aria-current="true"]')?.getAttribute('data-index')==='1');
-assert.ok(await quiet.locator('[data-swing]').evaluateAll(nodes=>nodes.every(n=>getComputedStyle(n).transform==='none')));
+await checkCarousel(quiet);
 await quiet.screenshot({path:'/tmp/scratch-landscape.png',fullPage:true});
 console.log('PASS reduced motion and short landscape layout');
+for(const viewport of [{width:320,height:568},{width:1440,height:600},{width:320,height:480}]) {
+ const compact=await browser.newPage({viewport,reducedMotion:'reduce'});
+ await compact.goto(base+'/#arsip');await compact.waitForSelector('.stage.is-ready');
+ await checkCarousel(compact);
+ for(let index=0;index<40;index++) {
+  const heading=await compact.evaluate(()=>{
+   const feature=document.querySelector('[data-feature]').getBoundingClientRect();
+   return ['[data-feature-number]','[data-feature-title]','[data-feature-excerpt]'].map(selector=>{
+    const box=document.querySelector(selector).getBoundingClientRect();
+    return {selector,fits:box.top>=feature.top-.5&&box.bottom<=feature.bottom+.5&&box.left>=feature.left-.5&&box.right<=feature.right+.5};
+   });
+  });
+  assert.ok(heading.every(item=>item.fits),`heading fits ${viewport.width}×${viewport.height}, poem ${index+1}: ${JSON.stringify(heading)}`);
+  if(index<39) {
+   await compact.keyboard.press('ArrowRight');
+   await compact.waitForFunction(index=>document.querySelector('[aria-current="true"]')?.getAttribute('data-index')===String(index),index+1);
+  }
+ }
+ await compact.screenshot({path:`/tmp/scratch-carousel-compact-${viewport.width}x${viewport.height}.png`});
+ await compact.close();
+}
+console.log('PASS compact layouts: all forty headings fit small/short portrait and short desktop viewports');
 const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
 const plain=await nojs.newPage();await plain.goto(base+'/');
 assert.equal(await plain.locator('.nojs-list a').count(),40);assert.ok(await plain.locator('.nojs-list').isVisible());
