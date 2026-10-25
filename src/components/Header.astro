@@ -1,4 +1,6 @@
 ---
+import InkLogo from './InkLogo.astro';
+
 interface Props {
   home?: boolean;
 }
@@ -8,13 +10,7 @@ const { home = false } = Astro.props;
 
 <header class="topbar">
   <a class="brand" href={home ? '#arsip' : '/'} aria-label="scratch — arsip puisi">
-    <svg class="brand__ink" viewBox="0 0 54 26" fill="none" aria-hidden="true" focusable="false">
-      <path
-        class="brand__ink-line"
-        pathLength="1"
-        d="M3 15.5C10 7 17 20 26 13.5C35 7.5 42 19 50 11"
-      ></path>
-    </svg>
+    <InkLogo class="brand__ink" />
   </a>
 
   {

@@ -1,4 +1,6 @@
 ---
+import InkLogo from './InkLogo.astro';
+
 const letters = [...'scratch'];
 ---
 
@@ -24,18 +26,7 @@ const letters = [...'scratch'];
       </a>
     </div>
 
-    <svg class="intro__scratch" viewBox="0 0 1000 74" fill="none" aria-hidden="true">
-      <path
-        class="intro__scratch-line"
-        pathLength="1"
-        d="M8 46C132 39 228 43 338 47C451 51 548 55 656 48C762 41 866 35 992 40"
-      ></path>
-      <path
-        class="intro__scratch-line intro__scratch-line--thin"
-        pathLength="1"
-        d="M60 56C188 50 288 52 404 56C540 61 718 60 944 51"
-      ></path>
-    </svg>
+    <InkLogo class="intro__scratch" animated />
 
     <p class="intro__note">thought, regrets, and whatever remains</p>
   </div>

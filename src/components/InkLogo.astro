@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+  animated?: boolean;
+}
+
+const { class: className, animated = false } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 54 26" fill="none" aria-hidden="true" focusable="false">
+  <path
+    class:list={['brand__ink-line', { 'intro__scratch-line': animated }]}
+    pathLength="1"
+    d="M3 15.5C10 7 17 20 26 13.5C35 7.5 42 19 50 11"
+  ></path>
+</svg>
