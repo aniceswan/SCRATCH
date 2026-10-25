@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
 const base=process.env.BASE_URL ?? 'http://127.0.0.1:4321';
-const slug='arsip-cahaya-yang-salah-arah';
+const slug='refraction';
 const seriesPath=`/series/${slug}/`;
 const readerPath=`${seriesPath}puisi/`;
 const errors=[];
@@ -27,7 +27,7 @@ try {
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base+'/#arsip');
  const entry=page.getByRole('link',{name:'Buka series puisi'});
- assert.equal(await entry.count(),1,'archive has a treasure-inspired SERIES link');
+ assert.equal(await entry.count(),1,'archive has a SERIES link beside BACK');
  assert.equal(await entry.getAttribute('href'),'/series/');
  assert.ok(await page.locator('[data-replay-intro]').isVisible(),'BACK remains available');
  const entryBox=await entry.boundingBox();
@@ -35,8 +35,9 @@ try {
  await screenshot(page,{path:'/tmp/scratch-series-entry-desktop.png'});
  await entry.click();
  await page.waitForURL('**/series/');
+ assert.equal(await page.title(),'Series | SCRATCH');
  assert.equal(await page.locator('[data-series-card]').count(),1,'only the first series is published');
- assert.match(await page.locator('[data-series-title]').innerText(),/arsip cahaya yang salah arah/i);
+ assert.match(await page.locator('[data-series-title]').innerText(),/^refraction$/i);
  assert.match(await page.locator('[data-series-count]').innerText(),/^40 puisi$/i);
  assert.equal(await page.locator('[data-series-card] p').count(),1,'catalog card has only the count as supporting copy');
  const cover=page.locator('[data-series-card] img');
@@ -45,6 +46,7 @@ try {
  await screenshot(page,{path:'/tmp/scratch-series-catalog-desktop.png',fullPage:true});
  await page.locator('[data-series-card]').click();
  await page.waitForURL(`**${seriesPath}`);
+ assert.equal(await page.title(),'refraction | SCRATCH');
  const cards=page.locator('[data-series-poem]');
  assert.equal(await cards.count(),40);
  assert.equal((await cards.first().locator('[data-poem-number]').innerText()).trim(),'01');
@@ -63,12 +65,13 @@ try {
  assert.equal((await page.locator('.poem__number').innerText()).trim(),'01 / 40');
  assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),readerPath+'katalog-benda-yang-tak-jadi/');
  assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),readerPath+'grafit/');
- assert.equal(await page.getByRole('link',{name:'Kembali ke series Arsip Cahaya yang Salah Arah'}).getAttribute('href'),seriesPath);
+ assert.equal(await page.getByRole('link',{name:'Kembali ke series refraction'}).getAttribute('href'),seriesPath);
  await page.locator('[data-poem-nav="previous"]').click();
  await page.waitForURL(`**${readerPath}katalog-benda-yang-tak-jadi/`);
  assert.equal((await page.locator('.poem__number').innerText()).trim(),'40 / 40');
  assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),readerPath+'halaman-nol/');
  await page.goto(base+'/puisi/halaman-nol/');
+ assert.equal(await page.title(),'HALAMAN NOL | SCRATCH');
  assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/grafit/','direct poem URL retains archive navigation');
  console.log('PASS series: minimal catalog, all forty excerpts, desktop grid, contextual reader and archive URLs');
 
@@ -112,6 +115,12 @@ try {
  await nojs.locator('[data-poem-nav="next"]').click();
  await nojs.waitForURL(`**${readerPath}grafit/`);
  assert.equal((await nojs.locator('.poem__number').innerText()).trim(),'02 / 40');
+ await nojs.goto(base+'/series/arsip-cahaya-yang-salah-arah/');
+ await nojs.waitForURL(`**${seriesPath}`);
+ assert.equal(await nojs.title(),'refraction | SCRATCH');
+ await nojs.goto(base+'/series/arsip-cahaya-yang-salah-arah/puisi/grafit/');
+ await nojs.waitForURL(`**${readerPath}grafit/`);
+ assert.equal(await nojs.title(),'GRAFIT | SCRATCH');
  assert.deepEqual(errors,[]);
  console.log('PASS series: tablet, mobile, small phone, landscape, vertical scroll, deep links and no-JavaScript reading');
 } finally { await browser.close(); }

@@ -1,7 +1,7 @@
 ---
-title: "Arsip Cahaya yang Salah Arah"
+title: "refraction"
 order: 1
-cover: "../../assets/series/arsip-cahaya-yang-salah-arah.webp"
+cover: "../../assets/series/refraction.webp"
 coverAlt: "Bidang arang dan garis grafit pada kertas gading, dilintasi cahaya yang membelok"
 poems:
   - halaman-nol

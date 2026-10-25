@@ -1381,40 +1381,10 @@ main:focus {
   .feature__number, .poem__number { margin-bottom: 14px; font-size: 8px; }
 }
 
-/* A small brass chest opens the series catalog. */
+/* Archive navigation follows the same quiet type treatment. */
 .topbar__actions { display: flex; align-items: center; gap: clamp(20px, 3vw, 42px); }
-.series-entry {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 44px;
-  padding: 0 14px 0 10px;
-  border: 1px solid rgba(139, 103, 46, .35);
-  border-radius: 5px 13px 5px 5px;
-  background: linear-gradient(125deg, #f9eed4, #e6cea0 54%, #d8b87a);
-  color: #58411e;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), inset 0 -2px 0 rgba(110, 75, 23, .08), 0 5px 12px -9px rgba(75, 47, 12, .5);
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-decoration: none;
-  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
-}
-.series-entry__chest { width: 25px; height: 25px; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
-.series-entry__lid { fill: rgba(255, 251, 227, .45); transform-origin: 5px 15px; transition: transform .45s var(--ease); }
-.series-entry__lock { fill: #bd9854; }
-.series-entry__spark { opacity: .4; transition: opacity .35s ease; }
-.series-entry__arrow { font-size: 13px; letter-spacing: 0; opacity: .7; }
-.series-entry:hover, .series-entry:focus-visible { transform: translateY(-1px); box-shadow: inset 0 1px 0 #fff6df, 0 7px 16px -9px rgba(75, 47, 12, .5); }
-.series-entry:hover .series-entry__lid, .series-entry:focus-visible .series-entry__lid { transform: translateY(-2px) rotate(-8deg); }
-.series-entry:hover .series-entry__spark, .series-entry:focus-visible .series-entry__spark { opacity: 1; }
+.series-entry { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.series-entry::after { bottom: 9px; }
 @media (max-width: 640px) {
-  .topbar__actions { gap: 19px; }
-  .series-entry { gap: 7px; padding-inline: 9px 11px; font-size: 8px; }
-  .series-entry__chest { width: 22px; height: 22px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .series-entry, .series-entry__lid { transform: none !important; }
+  .topbar__actions { gap: 22px; }
 }

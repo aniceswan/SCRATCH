@@ -51,3 +51,5 @@
 - Independent final review of `1673030..e53d62c`: no actionable findings; reviewer independently ran four series unit tests and complete series browser suite, both passing.
 - Static link audit: 84 pages, 587 internal links, zero broken targets.
 - Integration: fast-forward onto main and push under the existing session authorization.
+
+- User follow-up: rename the series to `refraction`, use `Page | SCRATCH` tab titles, and replace the treasure button with a plain SERIES link. Existing series URLs redirect to their new counterparts. Verified 15/15 tests, Astro check without diagnostics, production build, and the complete series browser suite including no-JS legacy redirects.

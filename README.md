@@ -303,7 +303,7 @@ draft: false
 ```
 
 Cover pertama dibuat memakai built-in ImageGen; prompt ada di `scripts/series-art.json`.
-Semua 40 puisi saat ini masuk **Arsip Cahaya yang Salah Arah**. Teks dan gambar puisi
+Semua 40 puisi saat ini masuk **refraction**, di `/series/refraction/`. Teks dan gambar puisi
 menggunakan berkas yang sama dengan archive, tanpa salinan isi atau database.
 
 Uji alur series setelah build dan preview memakai `npm run test:series`, dengan variabel

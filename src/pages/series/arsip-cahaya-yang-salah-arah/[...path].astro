@@ -1,0 +1,18 @@
+---
+import { getSeries } from '../../../lib/series';
+
+// Preserve links published under the series' original name.
+export async function getStaticPaths() {
+  const entry = (await getSeries()).find(series => series.id === 'refraction');
+  if (!entry) return [];
+  return [
+    {params: {path: undefined}, props: {target: '/series/refraction/'}},
+    ...entry.poems.map(poem => ({
+      params: {path: `puisi/${poem.id}`},
+      props: {target: `/series/refraction/puisi/${poem.id}/`},
+    })),
+  ];
+}
+
+return Astro.redirect(Astro.props.target, 301);
+---

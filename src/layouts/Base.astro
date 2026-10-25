@@ -13,11 +13,11 @@ interface Props {
 
 const {
   title,
-  description = 'SCRATCH — arsip puisi pribadi. Kumpulan puisi dan gambar, disimpan pelan-pelan.',
+  description = 'SCRATCH. Arsip puisi pribadi. Kumpulan puisi dan gambar, disimpan pelan-pelan.',
   bodyClass = '',
 } = Astro.props;
 
-const pageTitle = title ? `${title} — SCRATCH` : 'SCRATCH | Poetry';
+const pageTitle = title ? `${title} | SCRATCH` : 'SCRATCH | Poetry';
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
 const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
 ---

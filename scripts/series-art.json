@@ -1,7 +1,8 @@
 [
   {
     "tool": "built-in image_gen",
-    "asset": "src/assets/series/arsip-cahaya-yang-salah-arah.webp",
+    "asset": "src/assets/series/refraction.webp",
+    "series": "refraction",
     "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-337fe436-11f2-4fa3-9a7e-671ada75affa.png",
     "prompt": "Use case: stylized-concept\nAsset type: one new portrait 4:5 cover artwork for a poetry series website, \"Arsip Cahaya yang Salah Arah\".\nPrimary request: Create an original abstract artwork that unifies forty poems about misdirected light, closeness, distance, and traces left on paper.\nInput images: Image 1 and Image 2 are style references only; do not alter or duplicate either existing illustration. Create an entirely new cover.\nStyle/medium: contemporary abstract mixed-media on warm ivory handmade paper, tactile charcoal dust, dry graphite strokes and restrained translucent paper collage. Follow the quiet material quality and minimalist visual language of the references.\nComposition: one off-center field of fragmented charcoal planes, with a narrow warm ivory beam entering and bending subtly in the wrong direction across the fragments. Fine disconnected graphite lines suggest paths and memory. Generous breathing room, balanced editorial composition, visually legible as a small book cover.\nColor palette: cream, bone, charcoal black, muted sand, a very restrained ochre reflection.\nMaterials/textures: fine fibrous paper, imperfect edges of charcoal marks, delicate grain and layered translucent surfaces.\nConstraints: flat artwork only, no book mockup, no literal people or scenery, no chest or treasure imagery in the cover, no lettering, no text, no border, no watermark. Distinct from every individual poem illustration. Portrait 4:5."
   }
