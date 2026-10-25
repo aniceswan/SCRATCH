@@ -35,8 +35,16 @@
 }
 
 html {
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: var(--paper-grad);
+  min-height: 100%;
   -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 901px) {
+  html {
+    background-attachment: fixed;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -48,9 +56,8 @@ html {
 body {
   margin: 0;
   min-width: 300px;
+  min-height: 100dvh;
   min-height: 100svh;
-  isolation: isolate;
-  background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -59,28 +66,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Keep the gradient in a composited viewport layer. The opaque canvas beneath
-   it also covers mobile overscroll and any delayed paint during a fast fling. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--paper-grad);
-  transform: translateZ(0);
-  pointer-events: none;
-}
-
 body::after {
   content: '';
   position: fixed;
-  inset: 0;
+  inset: -100px 0;
   z-index: 999;
   pointer-events: none;
-  opacity: 0.055;
+  opacity: 0.045;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
   background-size: 180px 180px;
-  mix-blend-mode: multiply;
 }
 
 ::selection {
@@ -712,12 +706,14 @@ main:focus {
    ========================================================= */
 
 .page-poem {
+  min-height: 100dvh;
   min-height: 100svh;
 }
 
 .poem-page {
   display: flex;
   flex-direction: column;
+  min-height: 100dvh;
   min-height: 100svh;
 }
 
