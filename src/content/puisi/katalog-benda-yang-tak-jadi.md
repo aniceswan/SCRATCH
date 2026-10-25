@@ -1,10 +1,10 @@
 ---
 title: "KATALOG BENDA YANG TAK JADI"
 date: "2026-10-25"
-order: 24
+order: 38
 lang: "id"
 image: "../../assets/puisi/katalog-benda-yang-tak-jadi.webp"
-imageAlt: "Buku inventaris terbuka di museum senja dengan lemari pajang kosong."
+imageAlt: "Komposisi visual abstrak untuk puisi KATALOG BENDA YANG TAK JADI"
 excerpt: "Nomor satu, sebuah sore yang tak pernah menemukan tanggal."
 draft: false
 ---

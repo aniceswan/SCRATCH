@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
-import { getPoems, formatDate, padIndex, type Poem } from '../../lib/poems';
+import { getPoems, padIndex, type Poem } from '../../lib/poems';
 
 export async function getStaticPaths() {
   const poems = await getPoems();
@@ -65,8 +65,6 @@ const titleWords = poem.data.title.split(/\s+/);
             </Fragment>
           ))}
         </h1>
-
-        <p class="poem__meta">{formatDate(poem.data.date, 'long')}</p>
 
         <div class="poem__body" lang={poem.data.lang}>
           <Content />

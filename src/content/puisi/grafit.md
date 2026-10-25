@@ -4,7 +4,7 @@ date: "2026-10-25"
 order: 1
 lang: "id"
 image: "../../assets/puisi/grafit.webp"
-imageAlt: "Pensil grafit patah dan serbuk hitam di bawah lampu meja malam."
+imageAlt: "Komposisi visual abstrak untuk puisi GRAFIT"
 excerpt: "Di bawah lampu yang mengundang serangga, kita merapikan bilangan yang tercerai."
 draft: false
 ---

@@ -1,10 +1,10 @@
 ---
 title: "PINTU SELATAN"
 date: "2026-10-25"
-order: 22
+order: 36
 lang: "id"
 image: "../../assets/puisi/pintu-selatan.webp"
-imageAlt: "Gerbang batu dan jalan kampus basah dinaungi pepohonan rimbun."
+imageAlt: "Komposisi visual abstrak untuk puisi PINTU SELATAN"
 excerpt: "Kelak, jika hujan turun di Ganesha, pohon-pohon akan tetap menerima"
 draft: false
 ---

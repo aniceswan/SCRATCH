@@ -4,7 +4,7 @@ date: "2026-10-25"
 order: 2
 lang: "id"
 image: "../../assets/puisi/kambium.webp"
-imageAlt: "Penampang batang pohon dengan lingkaran pertumbuhan dan lumut lembap."
+imageAlt: "Komposisi visual abstrak untuk puisi KAMBIUM"
 excerpt: "Tak ada gaduh ketika batang menebal. Hanya satu lingkaran tipis,"
 draft: false
 ---

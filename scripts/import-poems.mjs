@@ -12,7 +12,7 @@ export function parseManuscript(source) {
     if (order !== index + 1) throw new Error('Nomor puisi harus berurutan tanpa duplikasi');
     const next = headings[index + 1]?.index ?? text.length;
     const raw = text.slice(match.index + match[0].length, next);
-    const body = raw.split(/^(?:[IVX]+\. [^\n]+\n[─-]+|SELESAI\s*$|CATATAN REDAKSI)/m)[0].trim();
+    const body = raw.split(/^(?:={3,}|[─-]{3,}|[IVX]+\. [^\n]+|SELESAI\s*$|CATATAN (?:REDAKSI|EDITOR))/m)[0].trim();
     if (!body) throw new Error(`Puisi ${order} kosong`);
     const title = match[2].trim();
     const slug = title.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -25,7 +25,7 @@ export function parseManuscript(source) {
 async function main() {
   const sourcePath = process.argv[2] ?? 'content-source/arsip-cahaya-yang-salah-arah.txt';
   const poems = parseManuscript(await readFile(sourcePath, 'utf8'));
-  if (poems.length !== 24) throw new Error(`Expected 24 poems, found ${poems.length}`);
+  if (poems.length !== 38) throw new Error(`Expected 38 poems, found ${poems.length}`);
   const art = JSON.parse(await readFile('scripts/poetry-art.json', 'utf8'));
   for (const poem of poems) {
     if (!art.some(a => a.slug === poem.slug)) throw new Error(`Ilustrasi belum tersedia: ${poem.slug}`);
@@ -41,7 +41,7 @@ async function main() {
   for (const name of await readdir('src/assets/puisi')) {
     if (/\.(jpg|png|webp|jpeg)$/i.test(name) && !keep.has(name)) await unlink(path.join('src/assets/puisi', name));
   }
-  const english = new Set([3, 9, 13, 19, 23]);
+  const english = new Set([3, 8, 13, 17, 24, 31, 33, 37]);
   for (const poem of poems) {
     const image = art.find(a => a.slug === poem.slug);
     const excerpt = poem.body.split('\n').filter(Boolean).slice(0, 2).join(' ');

@@ -1,10 +1,10 @@
 ---
 title: "ALBEDO"
 date: "2026-10-25"
-order: 21
+order: 35
 lang: "id"
 image: "../../assets/puisi/albedo.webp"
-imageAlt: "Bulan hampir penuh di balik jendela dengan cahaya pucat di ambang."
+imageAlt: "Komposisi visual abstrak untuk puisi ALBEDO"
 excerpt: "Bulan tak menghasilkan terangnya sendiri. Ia hanya mengembalikan"
 draft: false
 ---

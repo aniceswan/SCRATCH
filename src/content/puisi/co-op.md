@@ -4,7 +4,7 @@ date: "2026-10-25"
 order: 3
 lang: "en"
 image: "../../assets/puisi/co-op.webp"
-imageAlt: "Dua pengendali permainan di depan televisi dengan cahaya biru."
+imageAlt: "Komposisi visual abstrak untuk puisi CO-OP"
 excerpt: "We entered a small, obedient universe, three lives, a map,"
 draft: false
 ---

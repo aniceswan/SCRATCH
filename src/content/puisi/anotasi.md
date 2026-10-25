@@ -1,10 +1,10 @@
 ---
 title: "ANOTASI"
 date: "2026-10-25"
-order: 7
+order: 5
 lang: "id"
 image: "../../assets/puisi/anotasi.webp"
-imageAlt: "Tepi buku menguning dengan bintang kecil, tanda kurung, dan pena."
+imageAlt: "Komposisi visual abstrak untuk puisi ANOTASI"
 excerpt: "Pada halaman sebelas, ada tanda kecil, sebuah bintang di samping kalimat biasa."
 draft: false
 ---

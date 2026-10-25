@@ -1,10 +1,10 @@
 ---
 title: "FASE LATEN"
 date: "2026-10-25"
-order: 17
+order: 19
 lang: "id"
 image: "../../assets/puisi/fase-laten.webp"
-imageAlt: "Panci enamel berisi air yang mulai bergelembung dan termometer kaca."
+imageAlt: "Komposisi visual abstrak untuk puisi FASE LATEN"
 excerpt: "Di panci tua, air memikul panas hingga permukaannya gemetar."
 draft: false
 ---

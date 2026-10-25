@@ -1,10 +1,10 @@
 ---
 title: "KONTUR"
 date: "2026-10-25"
-order: 4
+order: 7
 lang: "id"
 image: "../../assets/puisi/kontur.webp"
-imageAlt: "Peta kota terlipat dengan bidang kosong di dekat jendela berhujan."
+imageAlt: "Komposisi visual abstrak untuk puisi KONTUR"
 excerpt: "Bandung mula-mula hanyalah garis, tikungan yang kukenal dengan langkah,"
 draft: false
 ---

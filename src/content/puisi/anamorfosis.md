@@ -1,10 +1,10 @@
 ---
 title: "ANAMORFOSIS"
 date: "2026-10-25"
-order: 15
+order: 14
 lang: "id"
 image: "../../assets/puisi/anamorfosis.webp"
-imageAlt: "Lukisan bunga dan vas terlihat miring dari ambang sebuah galeri."
+imageAlt: "Komposisi visual abstrak untuk puisi ANAMORFOSIS"
 excerpt: "Dari pintu, lukisan itu tampak ganjil, sebatang bunga memanjang,"
 draft: false
 ---

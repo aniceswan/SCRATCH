@@ -4,14 +4,14 @@ import {readFile, readdir} from 'node:fs/promises';
 import sharp from 'sharp';
 import {parseManuscript} from '../scripts/import-poems.mjs';
 
-test('published collection contains the 24 source poems in manuscript order with matching artwork', async () => {
+test('published collection contains the 38 source poems in manuscript order with matching artwork', async () => {
   const source = await readFile(new URL('../content-source/arsip-cahaya-yang-salah-arah.txt', import.meta.url), 'utf8');
   const poems = parseManuscript(source);
-  assert.deepEqual(poems.map(p => p.title), ['GRAFIT', 'KAMBIUM', 'CO-OP', 'KONTUR', 'POSTULAT', 'SELA', 'ANOTASI', 'PARALAKS', 'BLUESHIFT', 'TANDA BACA', 'FOSFOR', 'LAGU TITIPAN', 'NEGATIVE SPACE', 'ENUMERASI', 'ANAMORFOSIS', 'HISTERESIS', 'FASE LATEN', 'INDEKS BIAS', 'UNSENT LETTER TO A SEASON', 'PALIMSEST', 'ALBEDO', 'PINTU SELATAN', 'LAST COORDINATES', 'KATALOG BENDA YANG TAK JADI']);
+  assert.deepEqual(poems.map(p => p.title), ['GRAFIT', 'KAMBIUM', 'CO-OP', 'POSTULAT', 'ANOTASI', 'TANDA BACA', 'KONTUR', 'BLUESHIFT', 'SELA', 'PARALAKS', 'FOSFOR', 'LAGU TITIPAN', 'NEGATIVE SPACE', 'ANAMORFOSIS', 'INDEKS BIAS', '09.06', 'THE COMPARATIVE', 'CUACA PALSU', 'FASE LATEN', 'AMBANG', 'KUCING YANG MENGANGKAT TANGAN', 'JALAN YANG BAIK', '01.23', 'THE LONGEST TIME', 'HEWAN KECIL DI ANTARA DUA LAYAR', 'SEMOGA DIPERMUDAH', 'TANGAN YANG BELUM PERGI', 'ENUMERASI', 'TAK TERPIKIR', 'DUA CARA MENUNDUK', 'READ RECEIPT', 'HISTERESIS', 'UNSENT LETTER TO A SEASON', 'PALIMSEST', 'ALBEDO', 'PINTU SELATAN', 'LAST COORDINATES', 'KATALOG BENDA YANG TAK JADI']);
   const content = new URL('../src/content/puisi/', import.meta.url);
   const images = new URL('../src/assets/puisi/', import.meta.url);
-  assert.equal((await readdir(content)).filter(n => n.endsWith('.md')).length, 24);
-  assert.equal((await readdir(images)).filter(n => /\.(webp|jpg|png)$/.test(n)).length, 24);
+  assert.equal((await readdir(content)).filter(n => n.endsWith('.md')).length, 38);
+  assert.equal((await readdir(images)).filter(n => /\.(webp|jpg|png)$/.test(n)).length, 38);
   for (const poem of poems) {
     const markdown = await readFile(new URL(`${poem.slug}.md`, content), 'utf8');
     const [, frontmatter, body] = markdown.split('---\n');

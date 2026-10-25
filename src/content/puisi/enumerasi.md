@@ -1,10 +1,10 @@
 ---
 title: "ENUMERASI"
 date: "2026-10-25"
-order: 14
+order: 28
 lang: "id"
 image: "../../assets/puisi/enumerasi.webp"
-imageAlt: "Uang logam menyentuh air sumur batu dan membentuk lingkaran riak."
+imageAlt: "Komposisi visual abstrak untuk puisi ENUMERASI"
 excerpt: "Mengapa pertama jatuh dari mulut seperti uang logam ke dasar sumur."
 draft: false
 ---

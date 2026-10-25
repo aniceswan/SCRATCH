@@ -4,7 +4,7 @@ date: "2026-10-25"
 order: 13
 lang: "en"
 image: "../../assets/puisi/negative-space.webp"
-imageAlt: "Bingkai foto dan kursi yang hanya tampak sebagian di ruang kosong."
+imageAlt: "Komposisi visual abstrak untuk puisi NEGATIVE SPACE"
 excerpt: "In the photograph, everything visible was ordinary,"
 draft: false
 ---

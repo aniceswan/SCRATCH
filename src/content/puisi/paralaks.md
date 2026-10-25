@@ -1,10 +1,10 @@
 ---
 title: "PARALAKS"
 date: "2026-10-25"
-order: 8
+order: 10
 lang: "id"
 image: "../../assets/puisi/paralaks.webp"
-imageAlt: "Dua jendela kayu menghadap pohon dan bulan dari sudut berbeda."
+imageAlt: "Komposisi visual abstrak untuk puisi PARALAKS"
 excerpt: "Dua jendela menghadap halaman yang sama. Dari sini, pohon menelan bulan;"
 draft: false
 ---

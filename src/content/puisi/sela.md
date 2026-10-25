@@ -1,10 +1,10 @@
 ---
 title: "SELA"
 date: "2026-10-25"
-order: 6
+order: 9
 lang: "id"
 image: "../../assets/puisi/sela.webp"
-imageAlt: "Buku terbuka, jam tua, dan kursi kosong di bawah lampu malam."
+imageAlt: "Komposisi visual abstrak untuk puisi SELA"
 excerpt: "Sebuah buku terbuka pada halaman ujian. Malam-malam menumpuk di bawah kelopak,"
 draft: false
 ---

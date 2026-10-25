@@ -1,10 +1,10 @@
 ---
 title: "BLUESHIFT"
 date: "2026-10-25"
-order: 9
+order: 8
 lang: "en"
 image: "../../assets/puisi/blueshift.webp"
-imageAlt: "Teleskop kecil di dekat jendela di bawah langit biru berbintang."
+imageAlt: "Komposisi visual abstrak untuk puisi BLUESHIFT"
 excerpt: "At first, the light grew bluer. A distant thing was coming closer;"
 draft: false
 ---

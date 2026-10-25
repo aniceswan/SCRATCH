@@ -4,7 +4,7 @@ date: "2026-10-25"
 order: 11
 lang: "id"
 image: "../../assets/puisi/fosfor.webp"
-imageAlt: "Ponsel gelap dengan sisa cahaya kehijauan di kamar malam."
+imageAlt: "Komposisi visual abstrak untuk puisi FOSFOR"
 excerpt: "Satu gulir. Lalu cahaya. Tak lebih lama dari tarikan napas"
 draft: false
 ---

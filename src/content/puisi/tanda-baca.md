@@ -1,10 +1,10 @@
 ---
 title: "TANDA BACA"
 date: "2026-10-25"
-order: 10
+order: 6
 lang: "id"
 image: "../../assets/puisi/tanda-baca.webp"
-imageAlt: "Kertas dengan titik dan koma yang tersebar di dekat mesin tik."
+imageAlt: "Komposisi visual abstrak untuk puisi TANDA BACA"
 excerpt: "Ada titik di akhir pengakuan. Ada koma sebelum kita tahu"
 draft: false
 ---

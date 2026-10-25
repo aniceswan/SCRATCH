@@ -1,10 +1,10 @@
 ---
 title: "INDEKS BIAS"
 date: "2026-10-25"
-order: 18
+order: 15
 lang: "id"
 image: "../../assets/puisi/indeks-bias.webp"
-imageAlt: "Pensil tampak membengkok pada batas air dalam gelas bening."
+imageAlt: "Komposisi visual abstrak untuk puisi INDEKS BIAS"
 excerpt: "Cahaya menyeberangi dua medium dan kehilangan kelurusannya."
 draft: false
 ---

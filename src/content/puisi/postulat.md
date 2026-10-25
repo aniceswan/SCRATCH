@@ -1,10 +1,10 @@
 ---
 title: "POSTULAT"
 date: "2026-10-25"
-order: 5
+order: 4
 lang: "id"
 image: "../../assets/puisi/postulat.webp"
-imageAlt: "Jangka dan penggaris di atas kertas dengan dua titik grafit."
+imageAlt: "Komposisi visual abstrak untuk puisi POSTULAT"
 excerpt: "Mula-mula kita menerima sesuatu tanpa meminta pembuktian."
 draft: false
 ---

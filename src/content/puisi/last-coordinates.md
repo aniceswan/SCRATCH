@@ -1,10 +1,10 @@
 ---
 title: "LAST COORDINATES"
 date: "2026-10-25"
-order: 23
+order: 37
 lang: "en"
 image: "../../assets/puisi/last-coordinates.webp"
-imageAlt: "Dua garis rute bertemu pada titik tinta di peta kota terlipat."
+imageAlt: "Komposisi visual abstrak untuk puisi LAST COORDINATES"
 excerpt: "I once drew two routes in the margin of a city map."
 draft: false
 ---

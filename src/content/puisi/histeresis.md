@@ -1,10 +1,10 @@
 ---
 title: "HISTERESIS"
 date: "2026-10-25"
-order: 16
+order: 32
 lang: "id"
 image: "../../assets/puisi/histeresis.webp"
-imageAlt: "Jarum kompas di atas besi tua dengan magnet jauh di belakangnya."
+imageAlt: "Komposisi visual abstrak untuk puisi HISTERESIS"
 excerpt: "Sepotong besi pernah didekatkan ke medan. Jarumnya bergerak. Urat-urat halusnya"
 draft: false
 ---

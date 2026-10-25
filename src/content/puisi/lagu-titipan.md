@@ -4,7 +4,7 @@ date: "2026-10-25"
 order: 12
 lang: "id"
 image: "../../assets/puisi/lagu-titipan.webp"
-imageAlt: "Radio tua di samping pintu setengah terbuka dengan cahaya di ambang."
+imageAlt: "Komposisi visual abstrak untuk puisi LAGU TITIPAN"
 excerpt: "Lagu itu tiba tanpa alamat, menumpang pada satu bingkai"
 draft: false
 ---

@@ -796,15 +796,6 @@ main:focus {
   animation-delay: calc(0.16s + var(--i) * 60ms);
 }
 
-.poem__meta {
-  margin-top: 22px;
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  color: var(--ink-soft);
-}
-
 .poem__body {
   max-width: 34rem;
   margin-top: clamp(42px, 6vh, 62px);
@@ -1177,11 +1168,6 @@ main:focus {
 
   .poem__title {
     font-size: clamp(2.5rem, 11.5vw, 3.5rem);
-  }
-
-  .poem__meta {
-    margin-top: 20px;
-    font-size: 8px;
   }
 
   .poem__body {

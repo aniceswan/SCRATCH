@@ -1,10 +1,10 @@
 ---
 title: "PALIMSEST"
 date: "2026-10-25"
-order: 20
+order: 34
 lang: "id"
 image: "../../assets/puisi/palimsest.webp"
-imageAlt: "Perkamen dengan bekas tekanan pena terlihat oleh cahaya lampu miring."
+imageAlt: "Komposisi visual abstrak untuk puisi PALIMSEST"
 excerpt: "Kukikis aksara dari perkamen, perlahan, agar lembaran tak terkoyak."
 draft: false
 ---

@@ -1,10 +1,10 @@
 ---
 title: "UNSENT LETTER TO A SEASON"
 date: "2026-10-25"
-order: 19
+order: 33
 lang: "en"
 image: "../../assets/puisi/unsent-letter-to-a-season.webp"
-imageAlt: "Amplop tanpa alamat di laci kayu dengan satu sudut terangkat."
+imageAlt: "Komposisi visual abstrak untuk puisi UNSENT LETTER TO A SEASON"
 excerpt: "I tried to give the season back its ordinary weather."
 draft: false
 ---
