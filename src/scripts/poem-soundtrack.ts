@@ -62,11 +62,14 @@ if (player && mount && button && status) {
         status.classList.add('sr-only');
       });
       embed.addListener('playback_update', event => {
+        const {isPaused, isBuffering, position, duration} = event.data;
+        // Spotify previews can finish without ever reporting isPaused: true.
+        const ended = duration > 0 && position >= duration;
         // Spotify can ignore a second toggle while the first command buffers.
         // Keep the control pending until the player reports a settled state.
-        button.disabled = event.data.isBuffering;
-        if (event.data.isBuffering) return;
-        const playing = !event.data.isPaused;
+        button.disabled = isBuffering && !ended;
+        if (isBuffering && !ended) return;
+        const playing = !isPaused && !ended;
         button.setAttribute('aria-pressed', String(playing));
         button.setAttribute('aria-label', `${playing ? 'Jeda' : 'Putar'} ${title}`);
         window.clearTimeout(pending);

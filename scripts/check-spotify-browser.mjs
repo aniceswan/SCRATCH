@@ -37,6 +37,14 @@ try {
   assert.equal(await control.getAttribute('aria-label'),'Putar cardigan oleh Taylor Swift');
   await control.focus();await page.keyboard.press('Enter');
   await page.waitForFunction(()=>document.querySelector('[data-soundtrack-play]')?.getAttribute('aria-pressed')==='true',null,{timeout:10000});
+  // Let the real preview finish naturally: Spotify can leave isPaused=false at its end.
+  await page.waitForFunction(()=>document.querySelector('[data-soundtrack-play]')?.getAttribute('aria-pressed')==='false',null,{timeout:45000});
+  assert.equal(await control.getAttribute('aria-label'),'Putar cardigan oleh Taylor Swift','natural completion restores the Play label');
+  assert.equal(await control.isEnabled(),true,'the finished track can be replayed');
+  assert.equal(await control.locator('.soundtrack-play__start').isVisible(),true,'the Play icon returns after completion');
+  assert.equal(await control.locator('.soundtrack-play__pause').isVisible(),false);
+  await control.click();
+  await page.waitForFunction(()=>document.querySelector('[data-soundtrack-play]')?.getAttribute('aria-pressed')==='true',null,{timeout:10000});
   await page.locator('[data-soundtrack]').scrollIntoViewIfNeeded();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'player stays within the viewport');
   await page.screenshot({path:`/tmp/scratch-spotify-bottom-${viewport.width}.png`});
@@ -50,7 +58,7 @@ try {
   assert.equal(await page.locator('[data-soundtrack]').count(),0,'other poems have no demo player');
   assert.equal(await page.locator('[data-soundtrack-play]').count(),0);
   assert.deepEqual(errors,[]);
-  console.log('PASS Spotify: real top Play/Pause, keyboard, bottom player, series and viewport:',viewport.width);
+  console.log('PASS Spotify: real Play/Pause, natural completion, replay, keyboard, bottom player, series and viewport:',viewport.width);
   await page.close();
  }
  const nojs=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
