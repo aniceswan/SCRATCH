@@ -540,6 +540,7 @@ main:focus {
   display: flex;
   align-items: center;
   gap: clamp(20px, 4vw, 64px);
+  margin-top: clamp(24px, 5vh, 56px);
 }
 
 .intro__title {
@@ -632,9 +633,9 @@ main:focus {
 .enter:focus-visible { outline: 2px solid var(--red); outline-offset: 13px; }
 
 .intro__scratch {
-  width: clamp(54px, 6.5vw, 90px);
+  width: clamp(220px, 24vw, 340px);
   height: auto;
-  margin-top: clamp(18px, 3vh, 28px);
+  margin-top: clamp(-76px, -7.5vh, -48px);
   margin-left: 2px;
   color: var(--ink);
   overflow: visible;
@@ -649,7 +650,7 @@ main:focus {
 }
 
 .intro__note {
-  margin-top: clamp(28px, 4.5vh, 46px);
+  margin-top: clamp(-8px, -1vh, 4px);
   font-family: var(--serif);
   font-size: clamp(1.08rem, 1.35vw, 1.42rem);
   font-style: italic;
@@ -1114,6 +1115,12 @@ main:focus {
     font-size: clamp(2.9rem, 15.4vw, 7rem);
   }
 
+  .intro__scratch {
+    width: clamp(140px, 42vw, 190px);
+    height: auto;
+    margin-top: clamp(-36px, -4.8vh, -22px);
+  }
+
   .enter {
     width: clamp(54px, 14vw, 64px);
   }
@@ -1124,7 +1131,7 @@ main:focus {
 
 
   .intro__note {
-    margin-top: 26px;
+    margin-top: 2px;
     font-size: 0.98rem;
   }
 
