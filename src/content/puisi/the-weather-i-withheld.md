@@ -6,6 +6,10 @@ lang: "en"
 image: "../../assets/puisi/the-weather-i-withheld.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi THE WEATHER I WITHHELD"
 excerpt: "I once believed the rain belonged to anyone who raised their hands."
+spotify:
+  trackId: "3zOYmiNOuyDL0ClxJcEJ0T"
+  title: "Stop The Wedding!"
+  artist: "Ashe"
 draft: false
 ---
 

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
+import PoemSoundtrack from './PoemSoundtrack.astro';
 import { padIndex, type Poem } from '../lib/poems';
 
 interface Props {
@@ -52,11 +53,15 @@ const titleWords = poem.data.title.split(/\s+/);
           ))}
         </h1>
 
+        {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="control" />}
+
         <div class="poem__body" lang={poem.data.lang}>
           <Content />
         </div>
 
         <div class="poem__end" aria-hidden="true">*</div>
+
+        {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="player" />}
 
         <nav class="poem-nav" aria-label="Baca puisi lainnya">
           <a class="poem-nav__link" data-poem-nav="previous" href={previous.url}>

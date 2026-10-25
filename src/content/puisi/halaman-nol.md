@@ -4,8 +4,12 @@ date: "2026-10-25"
 order: 1
 lang: "id"
 image: "../../assets/puisi/halaman-nol.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi HALAMAN NOL"
+imageAlt: "Jalur merah bata terputus di antara relief peta hijau sage dan lipatan kertas gading"
 excerpt: "Di penghujung kisah, kutemukan jalan yang kehilangan arah."
+spotify:
+  trackId: "4R2kfaDFhslZEMJqAFNpdd"
+  title: "cardigan"
+  artist: "Taylor Swift"
 draft: false
 ---
 

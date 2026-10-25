@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/ambang.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi AMBANG"
 excerpt: "Pernah kusapu halaman sebelum kau datang."
+spotify:
+  trackId: "2JcLhDcdmV8ZZ7aTvyIp6s"
+  title: "Before"
+  artist: "NIKI"
 draft: false
 ---
 

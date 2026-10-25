@@ -39,15 +39,15 @@ try {
  await entry.click();
  await page.waitForURL('**/series/');
  assert.equal(await page.title(),'Series | SCRATCH');
- assert.equal(await page.locator('[data-series-card]').count(),1,'only the first series is published');
- assert.match(await page.locator('[data-series-title]').innerText(),/^refraction$/i);
- assert.match(await page.locator('[data-series-count]').innerText(),/^40 puisi$/i);
- assert.equal(await page.locator('[data-series-card] p').count(),1,'catalog card has only the count as supporting copy');
- const cover=page.locator('[data-series-card] img');
+ assert.equal(await page.locator('[data-series-card]').count(),2,'refraction and recursion are published');
+ assert.match(await page.locator('[data-series-card][href="/series/refraction/"] [data-series-title]').innerText(),/^refraction$/i);
+ assert.match(await page.locator('[data-series-card][href="/series/refraction/"] [data-series-count]').innerText(),/^40 puisi$/i);
+ assert.equal(await page.locator('[data-series-card][href="/series/refraction/"] p').count(),1,'catalog card has only the count as supporting copy');
+ const cover=page.locator('[data-series-card][href="/series/refraction/"] img');
  await cover.evaluate(img=>img.decode());
- assert.match(await cover.getAttribute('alt'),/arang/i);
+ assert.match(await cover.getAttribute('alt'),/cahaya|prisma/i);
  await screenshot(page,{path:'/tmp/scratch-series-catalog-desktop.png',fullPage:true});
- await page.locator('[data-series-card]').click();
+ await page.locator('[data-series-card][href="/series/refraction/"]').click();
  await page.waitForURL(`**${seriesPath}`);
  assert.equal(await page.title(),'refraction | SCRATCH');
  const cards=page.locator('[data-series-poem]');
@@ -94,7 +94,7 @@ try {
   await phone.goto(base+'/series/');
   assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   if(viewport.width===390) await screenshot(phone,{path:'/tmp/scratch-series-catalog-mobile.png',fullPage:true});
-  await phone.locator('[data-series-card]').click();
+  await phone.locator('[data-series-card][href="/series/refraction/"]').click();
   await phone.waitForURL(`**${seriesPath}`);
   assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'grid has no horizontal overflow');
   if(viewport.width<=600) {
@@ -112,7 +112,7 @@ try {
  }
  const nojs=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
  await nojs.goto(base+'/series/');
- await nojs.locator('[data-series-card]').click();
+ await nojs.locator('[data-series-card][href="/series/refraction/"]').click();
  await nojs.waitForURL(`**${seriesPath}`);
  assert.equal(await nojs.locator('[data-series-poem]').count(),40);
  await nojs.locator('[data-series-poem]').first().click();

@@ -1,9 +1,21 @@
 [
   {
-    "tool": "built-in image_gen",
+    "slug": "refraction",
+    "kind": "series",
+    "title": "refraction",
+    "alt": "Pecahan cahaya hijau, biru, dan amber membelok melalui prisma kaca di ruang teal gelap",
+    "concept": "A striking abstract macro optical artwork on a dark petrol-teal ground. A single off-center translucent glass wedge bends a narrow white beam into separated emerald, cyan, pale amber and restrained magenta caustics. Refracted light appears displaced across crisp diagonal planes; softly iridescent edges, luminous colored shadows and deep clean negative space. Elegant tactile optical-glass photography, cinematic but abstract, cover-worthy and legible at thumbnail size. No literal room, no typography, no graphite, no charcoal, no beige handmade-paper collage, no spiral.",
     "asset": "src/assets/series/refraction.webp",
-    "series": "refraction",
-    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-337fe436-11f2-4fa3-9a7e-671ada75affa.png",
-    "prompt": "Use case: stylized-concept\nAsset type: one new portrait 4:5 cover artwork for a poetry series website, \"Arsip Cahaya yang Salah Arah\".\nPrimary request: Create an original abstract artwork that unifies forty poems about misdirected light, closeness, distance, and traces left on paper.\nInput images: Image 1 and Image 2 are style references only; do not alter or duplicate either existing illustration. Create an entirely new cover.\nStyle/medium: contemporary abstract mixed-media on warm ivory handmade paper, tactile charcoal dust, dry graphite strokes and restrained translucent paper collage. Follow the quiet material quality and minimalist visual language of the references.\nComposition: one off-center field of fragmented charcoal planes, with a narrow warm ivory beam entering and bending subtly in the wrong direction across the fragments. Fine disconnected graphite lines suggest paths and memory. Generous breathing room, balanced editorial composition, visually legible as a small book cover.\nColor palette: cream, bone, charcoal black, muted sand, a very restrained ochre reflection.\nMaterials/textures: fine fibrous paper, imperfect edges of charcoal marks, delicate grain and layered translucent surfaces.\nConstraints: flat artwork only, no book mockup, no literal people or scenery, no chest or treasure imagery in the cover, no lettering, no text, no border, no watermark. Distinct from every individual poem illustration. Portrait 4:5."
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poetry-series cover, titled refraction; no text is printed in the image.\nPrimary request: A striking abstract macro optical artwork on a dark petrol-teal ground. A single off-center translucent glass wedge bends a narrow white beam into separated emerald, cyan, pale amber and restrained magenta caustics. Refracted light appears displaced across crisp diagonal planes; softly iridescent edges, luminous colored shadows and deep clean negative space. Elegant tactile optical-glass photography, cinematic but abstract, cover-worthy and legible at thumbnail size. No literal room, no typography, no graphite, no charcoal, no beige handmade-paper collage, no spiral.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-a1aaf798-8f29-45e8-99a3-3d9bee2fca12.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 86,
+      "bytes": 99504
+    },
+    "series": "refraction"
   }
 ]

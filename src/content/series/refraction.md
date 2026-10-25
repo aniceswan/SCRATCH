@@ -2,7 +2,7 @@
 title: "refraction"
 order: 1
 cover: "../../assets/series/refraction.webp"
-coverAlt: "Bidang arang dan garis grafit pada kertas gading, dilintasi cahaya yang membelok"
+coverAlt: "Pecahan cahaya hijau, biru, dan amber membelok melalui prisma kaca di ruang teal gelap"
 poems:
   - halaman-nol
   - grafit

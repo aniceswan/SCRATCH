@@ -1,0 +1,163 @@
+[
+  {
+    "slug": "ruang-bising",
+    "kind": "poem",
+    "title": "Ruang Bising",
+    "alt": "Kolase bentuk tajam koral dan kuning yang berdesakan di atas bidang indigo",
+    "concept": "A restless abstract screenprint collage on a deep midnight-indigo ground. Sharp coral-red, acid-yellow and chalk-white paper fragments and uneven zigzags collide and overlap, with compressed rhythmic bars along one edge. One small quiet unprinted indigo rectangle at the upper-right offers refuge. Strong asymmetry, rough ink registration, tactile torn edges. A noisy, socially overwhelming world and a small chosen silence. High color contrast and angular composition; no charcoal wisps, no circles, no centered black smudge.",
+    "asset": "src/assets/puisi/ruang-bising.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poem illustration, titled Ruang Bising; no text is printed in the image.\nPrimary request: A restless abstract screenprint collage on a deep midnight-indigo ground. Sharp coral-red, acid-yellow and chalk-white paper fragments and uneven zigzags collide and overlap, with compressed rhythmic bars along one edge. One small quiet unprinted indigo rectangle at the upper-right offers refuge. Strong asymmetry, rough ink registration, tactile torn edges. A noisy, socially overwhelming world and a small chosen silence. High color contrast and angular composition; no charcoal wisps, no circles, no centered black smudge.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-15fe2e21-71ae-4580-ad39-74e3c106f559.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 66,
+      "bytes": 282706
+    }
+  },
+  {
+    "slug": "sebuah-nama",
+    "kind": "poem",
+    "title": "Sebuah Nama",
+    "alt": "Dua sapuan pigmen lembut merah muda dan safron yang nyaris bersentuhan di atas kertas pucat",
+    "concept": "An intimate minimal watercolor abstraction on pale blush cotton rag paper. Two tiny irregular pools of translucent saffron and dusty-rose pigment bloom toward each other near the lower third. A single delicate rust-colored thread curves from one to the other, stopping just short. Most of the image is quiet soft pink negative space; capillary pigment edges, pale diluted washes, a faint wet-paper halo. The first small chance of recognizing another person. Extremely restrained, light, tender and airy; no black charcoal, no dense collage, no central spiral.",
+    "asset": "src/assets/puisi/sebuah-nama.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poem illustration, titled Sebuah Nama; no text is printed in the image.\nPrimary request: An intimate minimal watercolor abstraction on pale blush cotton rag paper. Two tiny irregular pools of translucent saffron and dusty-rose pigment bloom toward each other near the lower third. A single delicate rust-colored thread curves from one to the other, stopping just short. Most of the image is quiet soft pink negative space; capillary pigment edges, pale diluted washes, a faint wet-paper halo. The first small chance of recognizing another person. Extremely restrained, light, tender and airy; no black charcoal, no dense collage, no central spiral.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-a0d33616-c844-4685-bec9-f20c87a35175.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 86,
+      "bytes": 106096
+    }
+  },
+  {
+    "slug": "hukum-newton",
+    "kind": "poem",
+    "title": "Hukum Newton",
+    "alt": "Jejak lingkaran putih dan tarikan garis tembaga pada cetakan sianotipe biru tua",
+    "concept": "An abstract handmade cyanotype photogram, rich Prussian-blue and saturated cyan with irregular chemical bloom and deep blue edges. Two displaced pale circular exposures of different sizes sit far apart; hair-thin copper-gold trajectories curve abruptly toward the smaller one near the right edge, as though gravity has relocated. A wide translucent diagonal plane is pulled off balance. Graphic, spare, chemically textured, striking blue and white with a tiny copper accent. No literal planets, no star field, no text, no equations, no ivory charcoal collage.",
+    "asset": "src/assets/puisi/hukum-newton.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poem illustration, titled Hukum Newton; no text is printed in the image.\nPrimary request: An abstract handmade cyanotype photogram, rich Prussian-blue and saturated cyan with irregular chemical bloom and deep blue edges. Two displaced pale circular exposures of different sizes sit far apart; hair-thin copper-gold trajectories curve abruptly toward the smaller one near the right edge, as though gravity has relocated. A wide translucent diagonal plane is pulled off balance. Graphic, spare, chemically textured, striking blue and white with a tiny copper accent. No literal planets, no star field, no text, no equations, no ivory charcoal collage.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-0ef6aa3b-07c8-4e9b-998f-13dcb0f61b5b.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 78,
+      "bytes": 233854
+    }
+  },
+  {
+    "slug": "pi",
+    "kind": "poem",
+    "title": "Pi",
+    "alt": "Dua jalur ultramarin dan merah bata berliku di atas relief kertas putih tanpa pernah bertemu",
+    "concept": "A luminous white-on-white embossed-paper abstract relief, photographed under soft raking light. Two continuous very thin sinuous ribbons, one ultramarine blue and one brick red, trace long incomplete elliptical paths that keep nearing each other and diverging without touching. The loops stretch vertically, off-center, with small crisp shadows in the raised paper. Quiet mathematical intimacy, an endless almost. Clean open white space, restrained two-color linework, sculptural paper texture. No charcoal, no black circular brushwork, no symbols or digits.",
+    "asset": "src/assets/puisi/pi.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poem illustration, titled Pi; no text is printed in the image.\nPrimary request: A luminous white-on-white embossed-paper abstract relief, photographed under soft raking light. Two continuous very thin sinuous ribbons, one ultramarine blue and one brick red, trace long incomplete elliptical paths that keep nearing each other and diverging without touching. The loops stretch vertically, off-center, with small crisp shadows in the raised paper. Quiet mathematical intimacy, an endless almost. Clean open white space, restrained two-color linework, sculptural paper texture. No charcoal, no black circular brushwork, no symbols or digits.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-57476c9a-3100-4cb3-b957-b9fe6c8ab746.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 86,
+      "bytes": 189220
+    }
+  },
+  {
+    "slug": "rotasi",
+    "kind": "poem",
+    "title": "Rotasi",
+    "alt": "Jejak cahaya amber dan magenta melengkung cepat melintasi bidang ungu gelap",
+    "concept": "A photographic light-painting abstraction with a deep aubergine-black background. Luminous amber, hot magenta and muted violet traces sweep in broad off-center orbital arcs, long-exposure motion trails that slow and fade into darkness toward the lower-left. One bright broken crescent crosses near the top, a second thinner trail drifts away tangentially. Rich blacks, radiant soft light, cinematic motion, no recognizable objects. Colorful energy and separation, completely unlike a drawing on paper. No charcoal texture, no collage, no lettering.",
+    "asset": "src/assets/puisi/rotasi.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poem illustration, titled Rotasi; no text is printed in the image.\nPrimary request: A photographic light-painting abstraction with a deep aubergine-black background. Luminous amber, hot magenta and muted violet traces sweep in broad off-center orbital arcs, long-exposure motion trails that slow and fade into darkness toward the lower-left. One bright broken crescent crosses near the top, a second thinner trail drifts away tangentially. Rich blacks, radiant soft light, cinematic motion, no recognizable objects. Colorful energy and separation, completely unlike a drawing on paper. No charcoal texture, no collage, no lettering.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-7a6487e8-1028-454b-b5e3-051cfd276ca8.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 86,
+      "bytes": 118328
+    }
+  },
+  {
+    "slug": "normal",
+    "kind": "poem",
+    "title": "Normal",
+    "alt": "Dua bidang biru kelabu dan oker seimbang bertemu pada celah putih yang sangat tipis",
+    "concept": "A minimalist abstract color-field artwork built from matte cut-felt and thick gouache surfaces. A broad slate-blue rectangular plane presses downward from the top, and a broad warm-ochre plane presses upward from the bottom; they meet at a razor-thin warm-white seam, nearly balanced but subtly offset. Huge calm geometric masses, tactile velvet fibers, one small dark-blue inset rectangle at an edge, no line drawings. Quiet equal action and reaction, tension held in balance. Architectural precision, graphic simplicity. No charcoal swirls, no expressive black marks, no spirals.",
+    "asset": "src/assets/puisi/normal.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poem illustration, titled Normal; no text is printed in the image.\nPrimary request: A minimalist abstract color-field artwork built from matte cut-felt and thick gouache surfaces. A broad slate-blue rectangular plane presses downward from the top, and a broad warm-ochre plane presses upward from the bottom; they meet at a razor-thin warm-white seam, nearly balanced but subtly offset. Huge calm geometric masses, tactile velvet fibers, one small dark-blue inset rectangle at an edge, no line drawings. Quiet equal action and reaction, tension held in balance. Architectural precision, graphic simplicity. No charcoal swirls, no expressive black marks, no spirals.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-b283ba30-a105-48d6-8b9f-f080f5e3a115.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 78,
+      "bytes": 234054
+    }
+  },
+  {
+    "slug": "refraction",
+    "kind": "series",
+    "title": "refraction",
+    "alt": "Pecahan cahaya hijau, biru, dan amber membelok melalui prisma kaca di ruang teal gelap",
+    "concept": "A striking abstract macro optical artwork on a dark petrol-teal ground. A single off-center translucent glass wedge bends a narrow white beam into separated emerald, cyan, pale amber and restrained magenta caustics. Refracted light appears displaced across crisp diagonal planes; softly iridescent edges, luminous colored shadows and deep clean negative space. Elegant tactile optical-glass photography, cinematic but abstract, cover-worthy and legible at thumbnail size. No literal room, no typography, no graphite, no charcoal, no beige handmade-paper collage, no spiral.",
+    "asset": "src/assets/series/refraction.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poetry-series cover, titled refraction; no text is printed in the image.\nPrimary request: A striking abstract macro optical artwork on a dark petrol-teal ground. A single off-center translucent glass wedge bends a narrow white beam into separated emerald, cyan, pale amber and restrained magenta caustics. Refracted light appears displaced across crisp diagonal planes; softly iridescent edges, luminous colored shadows and deep clean negative space. Elegant tactile optical-glass photography, cinematic but abstract, cover-worthy and legible at thumbnail size. No literal room, no typography, no graphite, no charcoal, no beige handmade-paper collage, no spiral.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-a1aaf798-8f29-45e8-99a3-3d9bee2fca12.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 86,
+      "bytes": 99504
+    }
+  },
+  {
+    "slug": "recursion",
+    "kind": "series",
+    "title": "recursion",
+    "alt": "Lapisan bingkai merah bata dan merah muda bersarang berulang menuju celah gading",
+    "concept": "An abstract sculptural cut-paper cover with warm terracotta, oxblood, dusty pink and pale ivory layers. A sequence of rectangular open frames repeats inside itself, each slightly offset and rotated, forming a deep stepped labyrinth toward a small ivory aperture above the center. Strong broad geometries and physical paper depth, softly lit from the left with precise cast shadows; the repeated structure suggests an unfinished return. Bold editorial art, tactile, warm and graphic, distinct at thumbnail size. No circular spiral, no wispy charcoal, no blue glass, no text or digits, no book mockup.",
+    "asset": "src/assets/series/recursion.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: one original abstract poetry-series cover, titled recursion; no text is printed in the image.\nPrimary request: An abstract sculptural cut-paper cover with warm terracotta, oxblood, dusty pink and pale ivory layers. A sequence of rectangular open frames repeats inside itself, each slightly offset and rotated, forming a deep stepped labyrinth toward a small ivory aperture above the center. Strong broad geometries and physical paper depth, softly lit from the left with precise cast shadows; the repeated structure suggests an unfinished return. Bold editorial art, tactile, warm and graphic, distinct at thumbnail size. No circular spiral, no wispy charcoal, no blue glass, no text or digits, no book mockup.\nComposition and format: portrait 4:5, a complete edge-to-edge artwork, sophisticated fine-art quality and intentional composition that remains clear in a small thumbnail. Preserve generous breathing room where requested. No physical frame, no watermark, no text, no letters, no numerals, no logos.\nCreative constraint: this artwork must follow its own specified medium, palette and structure. Do not default to monochrome charcoal on beige paper.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-d8ad764c-4465-4fcd-8b9e-9e926f427a26.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 86,
+      "bytes": 250194
+    }
+  },
+  {
+    "slug": "halaman-nol",
+    "kind": "poem",
+    "title": "Halaman Nol",
+    "alt": "Jalur merah bata terputus di antara relief peta hijau sage dan lipatan kertas gading",
+    "asset": "src/assets/puisi/halaman-nol.webp",
+    "prompt": "Use case: stylized-concept\nAsset type: a new abstract poem illustration for HALAMAN NOL in the SCRATCH poetry archive. Do not print any text in the image.\nPrimary request: A contemplative abstract map of paths that have lost their direction, giving way to the quiet possibility of a beginning. Build an asymmetrical tactile composition from broad layers of soft sage-green, muted moss and pale limestone gouache, thin meandering rust-red pathways that break off at irregular edges, and one clean ivory sheet-like fold opening toward the lower right. Delicate embossed topographic ridges and sparse copper-toned traces suggest a route once followed, now uncertain. The lower open area should feel unmarked, as though a page is about to turn.\nStyle and medium: sophisticated contemporary abstract printmaking with sculptural paper relief, matte pigment, subtle natural texture and raking soft light. Rich organic shapes, elegant negative space, no literal scenery, people, chairs, pencil or glass. The mood is reflective, tender and unresolved.\nPalette: sage, moss, limestone white, muted warm gray, a restrained rust-red path. Give this artwork a distinct identity from bright screenprint collage, blue cyanotype, pink watercolor, optical prism art and nested architectural frames.\nComposition: portrait 4:5, edge-to-edge flat artwork, clear focal path and recognizable silhouette at thumbnail size. Do not create a book mockup or an external frame.\nConstraints: no text, no letters, no numbers, no labels, no logos, no watermark, no monochrome charcoal smudge.",
+    "source": "/home/angsabaik/.codex/generated_images/01a16fec-4307-7622-840f-393d3aa659e6/exec-5aa368c9-3069-481f-a50b-b691c0f684c5.png",
+    "tool": "built-in image_gen",
+    "encoding": {
+      "format": "webp",
+      "width": 1200,
+      "height": 1500,
+      "quality": 74,
+      "bytes": 235772
+    }
+  }
+]

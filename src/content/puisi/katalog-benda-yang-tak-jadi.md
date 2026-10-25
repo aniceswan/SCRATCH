@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/katalog-benda-yang-tak-jadi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KATALOG BENDA YANG TAK JADI"
 excerpt: "Nomor satu, sebuah sore yang tak pernah menemukan tanggal."
+spotify:
+  trackId: "0x7PmByJWVXdeipevd6KZS"
+  title: "Take A Chance With Me"
+  artist: "NIKI"
 draft: false
 ---
 

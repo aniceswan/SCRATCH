@@ -74,7 +74,7 @@ assert.equal(await page.locator('footer').count(),0);
 assert.match(await page.locator('[data-replay-intro]').innerText(),/BACK/);
 
 assert.equal(await index(),'0');
-assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 40');
+assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 46');
 assert.equal(await page.evaluate(()=>window.__createdContexts.length),0,'no audio on initial load');
 await page.locator('[data-gallery-next]').click(); await waitIndex(1);
 await page.waitForTimeout(1000);
@@ -90,10 +90,10 @@ const leftBounds=await leftNeighbor.boundingBox();
 await page.mouse.click(leftBounds.x+leftBounds.width*.02,leftBounds.y+leftBounds.height*.5); await waitIndex(0);
 assert.equal(new URL(page.url()).pathname,'/','clicking the left neighbor selects it without opening a poem');
 
-await page.keyboard.press('ArrowLeft'); await waitIndex(39);
-assert.equal(await page.locator('[data-poem-card][aria-current="true"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
+await page.keyboard.press('ArrowLeft'); await waitIndex(45);
+assert.equal(await page.locator('[data-poem-card][aria-current="true"]').getAttribute('href'),'/puisi/normal/');
 await page.waitForFunction(()=>{const i=document.querySelector('[aria-current="true"] img');return i?.complete&&i.naturalWidth>0;});
-assert.match(await page.locator('[data-poem-card][aria-current="true"] img').evaluate(i=>i.currentSrc),/katalog-benda/);
+assert.match(await page.locator('[data-poem-card][aria-current="true"] img').evaluate(i=>i.currentSrc),/normal/);
 await page.keyboard.press('ArrowRight');await waitIndex(0);
 await page.keyboard.press('ArrowRight');await waitIndex(1);
 assert.match(await page.locator('[data-feature-title]').getAttribute('aria-label'),/GRAFIT/);
@@ -120,7 +120,7 @@ assert.equal(new URL(page.url()).pathname,'/','drag does not open a poem');
 const stage=await page.locator('[data-stage]').boundingBox();
 await page.mouse.move(stage.x+stage.width/2,stage.y+stage.height/2);await page.mouse.wheel(0,500);
 await waitIndex(4);
-assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'05 / 40');
+assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'05 / 46');
 await page.waitForTimeout(4500);
 const frames=await page.evaluate(()=>window.__rafCallbacks);await page.waitForTimeout(250);
 assert.equal(await page.evaluate(()=>window.__rafCallbacks),frames,'animation stops when settled');
@@ -142,7 +142,7 @@ await page.waitForURL('**/puisi/anotasi/');
 assert.match(await page.locator('h1').innerText(),/ANOTASI/i);
 
 await page.goto(base+'/puisi/indeks-bias/');
-assert.equal((await page.locator('.poem__number').innerText()).trim(),'16 / 40');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'16 / 46');
 await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));
 await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,240);});
 await page.waitForTimeout(150);
@@ -152,12 +152,12 @@ assert.equal(scrolledHeader.background,'rgba(0, 0, 0, 0)');
 assert.equal(scrolledHeader.blur,'none');
 await page.screenshot({path:'/tmp/scratch-poem-scrolled-desktop.png'});
 await page.goto(base+'/puisi/halaman-nol/');
-assert.equal((await page.locator('.poem__number').innerText()).trim(),'01 / 40');
-assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'01 / 46');
+assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/normal/');
 assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/grafit/');
 await page.goto(base+'/puisi/katalog-benda-yang-tak-jadi/');
-assert.equal((await page.locator('.poem__number').innerText()).trim(),'40 / 40');
-assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/halaman-nol/');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'40 / 46');
+assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/ruang-bising/');
 assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/last-coordinates/');
 
 
@@ -227,7 +227,7 @@ for(const viewport of [{width:320,height:568},{width:1440,height:600},{width:320
  const compact=await browser.newPage({viewport,reducedMotion:'reduce'});
  await compact.goto(base+'/#arsip');await compact.waitForSelector('.stage.is-ready');
  await checkCarousel(compact);
- for(let index=0;index<40;index++) {
+ for(let index=0;index<46;index++) {
   const heading=await compact.evaluate(()=>{
    const feature=document.querySelector('[data-feature]').getBoundingClientRect();
    return ['[data-feature-number]','[data-feature-title]','[data-feature-excerpt]'].map(selector=>{
@@ -236,7 +236,7 @@ for(const viewport of [{width:320,height:568},{width:1440,height:600},{width:320
    });
   });
   assert.ok(heading.every(item=>item.fits),`heading fits ${viewport.width}×${viewport.height}, poem ${index+1}: ${JSON.stringify(heading)}`);
-  if(index<39) {
+  if(index<45) {
    await compact.keyboard.press('ArrowRight');
    await compact.waitForFunction(index=>document.querySelector('[aria-current="true"]')?.getAttribute('data-index')===String(index),index+1);
   }
@@ -244,11 +244,11 @@ for(const viewport of [{width:320,height:568},{width:1440,height:600},{width:320
  await compact.screenshot({path:`/tmp/scratch-carousel-compact-${viewport.width}x${viewport.height}.png`});
  await compact.close();
 }
-console.log('PASS compact layouts: all forty headings fit small/short portrait and short desktop viewports');
+console.log('PASS compact layouts: all forty-six headings fit small/short portrait and short desktop viewports');
 const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
 const plain=await nojs.newPage();await plain.goto(base+'/');
-assert.equal(await plain.locator('.nojs-list a').count(),40);assert.ok(await plain.locator('.nojs-list').isVisible());
+assert.equal(await plain.locator('.nojs-list a').count(),46);assert.ok(await plain.locator('.nojs-list').isVisible());
 assert.ok(!(await plain.locator('[data-sound-toggle]').isVisible()));
-console.log('PASS no JavaScript: all 40 poems remain linked');
+console.log('PASS no JavaScript: all 46 poems remain linked');
 assert.deepEqual(errors,[],'no browser errors');
 await browser.close();

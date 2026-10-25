@@ -704,6 +704,9 @@ main:focus {
    ========================================================= */
 
 .page-poem {
+  --poem-article-top: clamp(54px, 10vh, 116px);
+  /* Number label: 9px × 1.5 line-height, then an 18px gap before the title. */
+  --poem-image-top: calc(var(--topbar-h) + var(--poem-article-top) + 31.5px);
   min-height: 100dvh;
   min-height: 100svh;
 }
@@ -741,17 +744,19 @@ main:focus {
 }
 
 .poem__visual {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  padding: clamp(24px, 4vh, 56px) var(--gutter);
+  position: fixed;
+  top: var(--poem-image-top);
+  left: 0;
+  width: 46%;
+  height: calc(100svh - var(--poem-image-top) - 32px);
+  padding: 0 var(--gutter);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .poem__figure {
-  width: min(100%, 500px, calc((100svh - 260px) * 0.82));
+  width: min(100%, 500px, calc((100svh - var(--poem-image-top) - 32px) * .8));
   margin: 0;
 }
 
@@ -770,12 +775,12 @@ main:focus {
   height: 100%;
   object-fit: cover;
   filter: saturate(0.9) contrast(0.98);
-  animation: poem-image-in 1.5s var(--ease-out) both;
 }
 
 .poem__article {
+  grid-column: 2;
   min-width: 0;
-  padding: clamp(54px, 10vh, 116px) clamp(30px, 6vw, 100px) clamp(76px, 12vh, 136px)
+  padding: var(--poem-article-top) clamp(30px, 6vw, 100px) clamp(76px, 12vh, 136px)
     clamp(40px, 5.5vw, 90px);
 }
 
@@ -1049,6 +1054,8 @@ main:focus {
   .poem__visual {
     position: relative;
     top: auto;
+    left: auto;
+    width: auto;
     height: auto;
     padding: 30px var(--gutter) 8px;
   }
@@ -1182,8 +1189,8 @@ main:focus {
     font-size: clamp(4rem, 17vw, 14rem);
   }
 
-  .poem__article {
-    padding-top: 54px;
+  .page-poem {
+    --poem-article-top: 54px;
   }
 }
 

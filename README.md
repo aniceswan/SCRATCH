@@ -39,7 +39,7 @@ Buka `http://localhost:4321`.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk menggeser carousel. Kartu aktif besar di tengah, dengan tetangga lebih kecil di kedua sisi.
-- Setiap puisi bernomor **01–40**; nomor terlihat di archive dan di atas judul halaman bacaan.
+- Setiap puisi bernomor **01–46**; nomor terlihat di archive dan di atas judul halaman bacaan.
 - **Klik gambar di tengah** untuk membuka puisinya, diiringi bunyi singkat. Klik kartu samping untuk membawanya ke tengah.
   Di bawah setiap puisi tersedia tautan **PUISI SEBELUMNYA / SELANJUTNYA** beserta judul,
   mengikuti urutan naskah dan berputar pada ujung koleksi. **ARCHIVE ↗** kembali ke galeri.
@@ -301,8 +301,26 @@ draft: false
 ```
 
 Cover pertama dibuat memakai built-in ImageGen; prompt ada di `scripts/series-art.json`.
-Semua 40 puisi saat ini masuk **refraction**, di `/series/refraction/`. Teks dan gambar puisi
+40 puisi awal masuk **refraction**, di `/series/refraction/`. Enam puisi baru dari
+`content-source/recursion.txt` masuk **recursion**, di `/series/recursion/`. Teks dan gambar puisi
 menggunakan berkas yang sama dengan archive, tanpa salinan isi atau database.
 
 Uji alur series setelah build dan preview memakai `npm run test:series`, dengan variabel
 `BASE_URL`, `CHROME_PATH`, dan `PLAYWRIGHT_MODULE` seperti uji browser archive.
+
+## Gambar halaman baca dan lagu
+
+Pada desktop, gambar puisi menggunakan posisi fixed sehingga tetap diam saat seluruh
+halaman digulir, termasuk sejak halaman pertama dibuka. Batas atas gambar sejajar dengan
+batas atas judul pada posisi awal; ukurannya mengikuti sisa tinggi viewport desktop. Pada mobile gambar tetap mengikuti
+alur halaman. Enam ilustrasi recursion dan dua cover series memakai medium, warna, serta komposisi
+yang berbeda. Semuanya dibuat dengan built-in ImageGen, WebP 1200×1500; prompt dan
+lokasi aset revisi ada di `scripts/poetry-art-refresh.json`, termasuk gambar Halaman Nol terbaru.
+
+Puisi dapat memiliki field opsional `spotify` berisi `trackId`, `title`, dan `artist`.
+Tombol Play/Pause di atas puisi mengontrol player Spotify resmi yang selalu tampil di bawah
+puisi melalui iFrame API, tanpa autoplay. Pemutaran penuh/cuplikannya ditentukan Spotify.
+Daftar delapan penempatan lagu yang sudah diverifikasi ada di `scripts/poem-soundtracks.json`.
+Jalankan `scripts/check-spotify-browser.mjs` untuk tes pemutaran nyata dan
+`scripts/check-recursion-browser.mjs` untuk series, fixed image, dan pilihan lagu, memakai
+variabel browser yang sama dengan suite archive.
