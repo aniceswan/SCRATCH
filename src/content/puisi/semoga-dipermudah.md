@@ -1,7 +1,7 @@
 ---
 title: "SEMOGA DIPERMUDAH"
 date: "2026-10-25"
-order: 27
+order: 28
 lang: "id"
 image: "../../assets/puisi/semoga-dipermudah.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi SEMOGA DIPERMUDAH"

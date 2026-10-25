@@ -357,6 +357,39 @@ const proceduralSvgs = {
     </svg>
   `,
 
+  'the-weather-i-withheld': `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#242c35"/><stop offset="35%" stop-color="#333e4b"/><stop offset="70%" stop-color="#727e8a"/><stop offset="100%" stop-color="#d4d9de"/>
+        </linearGradient>
+        <linearGradient id="cloudWash" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#141a21" stop-opacity=".8"/><stop offset="50%" stop-color="#2c3744" stop-opacity=".4"/><stop offset="100%" stop-color="#11161d" stop-opacity=".9"/>
+        </linearGradient>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="35"/></filter>
+        <filter id="blurLg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="70"/></filter>
+        ${vignette}
+      </defs>
+      <rect width="${W}" height="${H}" fill="url(#bg)"/>
+      <g opacity=".85">
+        <ellipse cx="600" cy="420" rx="480" ry="190" fill="url(#cloudWash)" filter="url(#blurLg)"/>
+        <path d="M 120 480 Q 420 320 620 440 T 1080 390 L 1080 200 L 120 200 Z" fill="#1b222a" opacity=".6" filter="url(#soft)"/>
+        <line x1="220" y1="520" x2="980" y2="520" stroke="#b0bac4" stroke-width="1.5" stroke-dasharray="6 8" opacity=".7"/>
+        <path d="M 260 520 C 380 680 820 680 940 520" fill="none" stroke="#e8edf2" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 320 520 C 420 640 780 640 880 520" fill="none" stroke="#cad4dd" stroke-width="1.5" opacity=".5"/>
+        <rect x="420" y="760" width="360" height="480" rx="6" fill="none" stroke="#2a333d" stroke-width="3.5"/>
+        <line x1="600" y1="760" x2="600" y2="1240" stroke="#2a333d" stroke-width="2" opacity=".6"/>
+        <line x1="420" y1="960" x2="780" y2="960" stroke="#2a333d" stroke-width="2" opacity=".6"/>
+        <path d="M 470 1080 C 510 1140 580 1150 600 1100" fill="none" stroke="#c4a56a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 730 1080 C 690 1140 620 1150 600 1100" fill="none" stroke="#c4a56a" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="600" cy="1100" r="4" fill="#c4a56a"/>
+        <line x1="140" y1="1350" x2="1060" y2="1350" stroke="#1c242c" stroke-width="2" opacity=".5"/>
+        <path d="M 220 1350 Q 280 1260 340 1350" fill="none" stroke="#7a8894" stroke-width="2" opacity=".7"/>
+      </g>
+      <rect width="${W}" height="${H}" fill="url(#vig)"/>
+    </svg>
+  `,
+
   'the-longest-time': `
     <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
       <defs>

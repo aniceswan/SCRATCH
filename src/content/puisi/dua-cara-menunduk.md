@@ -1,7 +1,7 @@
 ---
 title: "DUA CARA MENUNDUK"
 date: "2026-10-25"
-order: 31
+order: 32
 lang: "id"
 image: "../../assets/puisi/dua-cara-menunduk.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi DUA CARA MENUNDUK"

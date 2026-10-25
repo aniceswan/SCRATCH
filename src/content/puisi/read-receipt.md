@@ -1,7 +1,7 @@
 ---
 title: "READ RECEIPT"
 date: "2026-10-25"
-order: 32
+order: 33
 lang: "en"
 image: "../../assets/puisi/read-receipt.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi READ RECEIPT"

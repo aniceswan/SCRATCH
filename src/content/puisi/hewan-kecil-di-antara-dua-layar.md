@@ -1,7 +1,7 @@
 ---
 title: "HEWAN KECIL DI ANTARA DUA LAYAR"
 date: "2026-10-25"
-order: 26
+order: 27
 lang: "id"
 image: "../../assets/puisi/hewan-kecil-di-antara-dua-layar.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi HEWAN KECIL DI ANTARA DUA LAYAR"

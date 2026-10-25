@@ -1,7 +1,7 @@
 ---
 title: "PINTU SELATAN"
 date: "2026-10-25"
-order: 37
+order: 38
 lang: "id"
 image: "../../assets/puisi/pintu-selatan.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi PINTU SELATAN"

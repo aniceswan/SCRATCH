@@ -193,6 +193,14 @@
   },
   {
     "order": 25,
+    "slug": "the-weather-i-withheld",
+    "alt": "Komposisi visual abstrak untuk puisi THE WEATHER I WITHHELD",
+    "source": "procedural abstract fine-art",
+    "width": 1200,
+    "height": 1500
+  },
+  {
+    "order": 26,
     "slug": "the-longest-time",
     "alt": "Komposisi visual abstrak untuk puisi THE LONGEST TIME",
     "source": "procedural abstract fine-art",
@@ -200,7 +208,7 @@
     "height": 1500
   },
   {
-    "order": 26,
+    "order": 27,
     "slug": "hewan-kecil-di-antara-dua-layar",
     "alt": "Komposisi visual abstrak untuk puisi HEWAN KECIL DI ANTARA DUA LAYAR",
     "source": "built-in ImageGen (AI abstract)",
@@ -208,7 +216,7 @@
     "height": 1500
   },
   {
-    "order": 27,
+    "order": 28,
     "slug": "semoga-dipermudah",
     "alt": "Komposisi visual abstrak untuk puisi SEMOGA DIPERMUDAH",
     "source": "procedural abstract fine-art",
@@ -216,7 +224,7 @@
     "height": 1500
   },
   {
-    "order": 28,
+    "order": 29,
     "slug": "tangan-yang-belum-pergi",
     "alt": "Komposisi visual abstrak untuk puisi TANGAN YANG BELUM PERGI",
     "source": "procedural abstract fine-art",
@@ -224,7 +232,7 @@
     "height": 1500
   },
   {
-    "order": 29,
+    "order": 30,
     "slug": "enumerasi",
     "alt": "Komposisi visual abstrak untuk puisi ENUMERASI",
     "source": "procedural abstract fine-art",
@@ -232,7 +240,7 @@
     "height": 1500
   },
   {
-    "order": 30,
+    "order": 31,
     "slug": "tak-terpikir",
     "alt": "Komposisi visual abstrak untuk puisi TAK TERPIKIR",
     "source": "procedural abstract fine-art",
@@ -240,7 +248,7 @@
     "height": 1500
   },
   {
-    "order": 31,
+    "order": 32,
     "slug": "dua-cara-menunduk",
     "alt": "Komposisi visual abstrak untuk puisi DUA CARA MENUNDUK",
     "source": "procedural abstract fine-art",
@@ -248,7 +256,7 @@
     "height": 1500
   },
   {
-    "order": 32,
+    "order": 33,
     "slug": "read-receipt",
     "alt": "Komposisi visual abstrak untuk puisi READ RECEIPT",
     "source": "procedural abstract fine-art",
@@ -256,7 +264,7 @@
     "height": 1500
   },
   {
-    "order": 33,
+    "order": 34,
     "slug": "histeresis",
     "alt": "Komposisi visual abstrak untuk puisi HISTERESIS",
     "source": "built-in ImageGen (AI abstract)",
@@ -264,7 +272,7 @@
     "height": 1500
   },
   {
-    "order": 34,
+    "order": 35,
     "slug": "unsent-letter-to-a-season",
     "alt": "Komposisi visual abstrak untuk puisi UNSENT LETTER TO A SEASON",
     "source": "procedural abstract fine-art",
@@ -272,7 +280,7 @@
     "height": 1500
   },
   {
-    "order": 35,
+    "order": 36,
     "slug": "palimsest",
     "alt": "Komposisi visual abstrak untuk puisi PALIMSEST",
     "source": "procedural abstract fine-art",
@@ -280,7 +288,7 @@
     "height": 1500
   },
   {
-    "order": 36,
+    "order": 37,
     "slug": "albedo",
     "alt": "Komposisi visual abstrak untuk puisi ALBEDO",
     "source": "procedural abstract fine-art",
@@ -288,7 +296,7 @@
     "height": 1500
   },
   {
-    "order": 37,
+    "order": 38,
     "slug": "pintu-selatan",
     "alt": "Komposisi visual abstrak untuk puisi PINTU SELATAN",
     "source": "procedural abstract fine-art",
@@ -296,7 +304,7 @@
     "height": 1500
   },
   {
-    "order": 38,
+    "order": 39,
     "slug": "last-coordinates",
     "alt": "Komposisi visual abstrak untuk puisi LAST COORDINATES",
     "source": "procedural abstract fine-art",
@@ -304,7 +312,7 @@
     "height": 1500
   },
   {
-    "order": 39,
+    "order": 40,
     "slug": "katalog-benda-yang-tak-jadi",
     "alt": "Komposisi visual abstrak untuk puisi KATALOG BENDA YANG TAK JADI",
     "source": "procedural abstract fine-art",

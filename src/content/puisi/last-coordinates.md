@@ -1,7 +1,7 @@
 ---
 title: "LAST COORDINATES"
 date: "2026-10-25"
-order: 38
+order: 39
 lang: "en"
 image: "../../assets/puisi/last-coordinates.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi LAST COORDINATES"

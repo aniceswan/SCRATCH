@@ -1,7 +1,7 @@
 ---
 title: "KATALOG BENDA YANG TAK JADI"
 date: "2026-10-25"
-order: 39
+order: 40
 lang: "id"
 image: "../../assets/puisi/katalog-benda-yang-tak-jadi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KATALOG BENDA YANG TAK JADI"

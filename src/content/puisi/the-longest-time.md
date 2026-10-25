@@ -1,7 +1,7 @@
 ---
 title: "THE LONGEST TIME"
 date: "2026-10-25"
-order: 25
+order: 26
 lang: "en"
 image: "../../assets/puisi/the-longest-time.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi THE LONGEST TIME"

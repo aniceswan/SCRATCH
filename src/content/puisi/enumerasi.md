@@ -1,7 +1,7 @@
 ---
 title: "ENUMERASI"
 date: "2026-10-25"
-order: 29
+order: 30
 lang: "id"
 image: "../../assets/puisi/enumerasi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ENUMERASI"

@@ -63,9 +63,9 @@ assert.equal(titleCrossing,false,'continuous foreground cords leave the poem tit
 
 
 assert.equal(await index(),'0');
-assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 39');
+assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 40');
 assert.equal(await page.evaluate(()=>window.__createdContexts.length),0,'no audio on initial load');
-await page.keyboard.press('ArrowLeft'); await waitIndex(38);
+await page.keyboard.press('ArrowLeft'); await waitIndex(39);
 assert.equal(await page.locator('[data-poem-card][aria-current="true"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
 await page.waitForFunction(()=>{const i=document.querySelector('[aria-current="true"] img');return i?.complete&&i.naturalWidth>0;});
 assert.match(await page.locator('[data-poem-card][aria-current="true"] img').evaluate(i=>i.currentSrc),/katalog-benda/);
@@ -96,7 +96,7 @@ assert.equal(new URL(page.url()).pathname,'/','drag does not open a poem');
 const stage=await page.locator('[data-stage]').boundingBox();
 await page.mouse.move(stage.x+stage.width/2,stage.y+stage.height/2);await page.mouse.wheel(0,500);
 await waitIndex(4);
-assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'05 / 39');
+assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'05 / 40');
 await page.waitForTimeout(4500);
 const frames=await page.evaluate(()=>window.__rafCallbacks);await page.waitForTimeout(250);
 assert.equal(await page.evaluate(()=>window.__rafCallbacks),frames,'animation stops when settled');
@@ -118,7 +118,7 @@ await page.waitForURL('**/puisi/anotasi/');
 assert.match(await page.locator('h1').innerText(),/ANOTASI/i);
 
 await page.goto(base+'/puisi/indeks-bias/');
-assert.equal((await page.locator('.poem__number').innerText()).trim(),'16 / 39');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'16 / 40');
 await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));
 await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,240);});
 await page.waitForTimeout(150);
@@ -128,11 +128,11 @@ assert.equal(scrolledHeader.background,'rgba(0, 0, 0, 0)');
 assert.equal(scrolledHeader.blur,'none');
 await page.screenshot({path:'/tmp/scratch-poem-scrolled-desktop.png'});
 await page.goto(base+'/puisi/halaman-nol/');
-assert.equal((await page.locator('.poem__number').innerText()).trim(),'01 / 39');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'01 / 40');
 assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/katalog-benda-yang-tak-jadi/');
 assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/grafit/');
 await page.goto(base+'/puisi/katalog-benda-yang-tak-jadi/');
-assert.equal((await page.locator('.poem__number').innerText()).trim(),'39 / 39');
+assert.equal((await page.locator('.poem__number').innerText()).trim(),'40 / 40');
 assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/halaman-nol/');
 assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/last-coordinates/');
 
@@ -212,8 +212,8 @@ await quiet.screenshot({path:'/tmp/scratch-landscape.png',fullPage:true});
 console.log('PASS reduced motion and short landscape layout');
 const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
 const plain=await nojs.newPage();await plain.goto(base+'/');
-assert.equal(await plain.locator('.nojs-list a').count(),39);assert.ok(await plain.locator('.nojs-list').isVisible());
+assert.equal(await plain.locator('.nojs-list a').count(),40);assert.ok(await plain.locator('.nojs-list').isVisible());
 assert.ok(!(await plain.locator('[data-sound-toggle]').isVisible()));
-console.log('PASS no JavaScript: all 39 poems remain linked');
+console.log('PASS no JavaScript: all 40 poems remain linked');
 assert.deepEqual(errors,[],'no browser errors');
 await browser.close();
