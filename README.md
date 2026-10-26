@@ -32,6 +32,11 @@ Buka `http://localhost:4321`.
 
 ## Cara menjelajah
 
+- **Halaman utama** memakai latar kertas terang, judul Newsreader, dan pembuka satu layar
+  dengan empat ilustrasi puisi. Tagline berada di tengah bawah tulisan scratch.
+- **Versi tampilan** tetap bisa dibandingkan: `/classic/` menyimpan tampilan lama,
+  `/v2/` menyimpan alternatif editorial, dan `/v3/` menyimpan salinan desain utama.
+  Semua memakai konten puisi yang sama dan menjaga navigasi dalam versi masing-masing.
 - **SERIES ↗** di samping BACK membuka koleksi puisi, dengan cover abstrak, nama, dan jumlah puisi.
   Pilih series untuk melihat gambar, nomor, judul, dan cuplikan puisi dalam grid biasa:
   tiga kolom di desktop, dua di tablet, satu di ponsel. Tautan sebelumnya/selanjutnya

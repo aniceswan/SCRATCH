@@ -4,20 +4,22 @@ import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import { getSeries } from '../../lib/series';
 import '../../styles/series.css';
+import { getClassicEdition } from '../../lib/classic-preview';
 
 const entries = await getSeries();
+const {basePath, paper: paperEdition} = getClassicEdition(Astro.url.pathname);
 ---
 
 <Base title="Series" bodyClass="page-series">
   <div class="catalog-page">
     <Header />
-    <main class="catalog" id="main">
-      <header class="catalog__heading">
+    <main class:list={['catalog', {'catalog--series-index': paperEdition}]} id="main" aria-labelledby={paperEdition ? 'page-title' : undefined}>
+      {!paperEdition && <header class="catalog__heading">
         <h1 class="catalog__title">series<span aria-hidden="true">*</span></h1>
-      </header>
+      </header>}
       <div class="series-grid">
         {entries.map(entry => (
-          <a class="series-card" data-series-card href={`/series/${entry.id}/`}>
+          <a class="series-card" data-series-card href={`${basePath}/series/${entry.id}/`}>
             <div class="series-card__cover">
               <Image src={entry.data.cover} alt={entry.data.coverAlt} widths={[360, 640, 900]} sizes="(max-width: 600px) 90vw, (max-width: 1000px) 43vw, 360px" loading="eager" />
               <span class="series-card__open" aria-hidden="true">↗</span>

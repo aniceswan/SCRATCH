@@ -1,0 +1,12 @@
+---
+import PoemReader from '../../../../../components/PoemReader.astro';
+import { getSeries } from '../../../../../lib/series';
+import { readingProps } from '../../../../../lib/series-sequence.js';
+export async function getStaticPaths() {
+  return (await getSeries()).flatMap(entry => entry.poems.map((poem, index) => ({
+    params: {series: entry.id, id: poem.id},
+    props: {...readingProps(entry.poems, index, `/v3/series/${entry.id}/puisi/`), series: {title: entry.data.title, url: `/v3/series/${entry.id}/`}},
+  })));
+}
+---
+<PoemReader {...Astro.props} />

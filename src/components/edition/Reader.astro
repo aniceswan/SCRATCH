@@ -1,0 +1,36 @@
+---
+import {Image} from 'astro:assets';
+import {render} from 'astro:content';
+import Edition from '../../layouts/Edition.astro';
+import PoemSoundtrack from '../PoemSoundtrack.astro';
+import {formatDate, padIndex, type Poem} from '../../lib/poems';
+interface Props {poem: Poem; number: number; total: number; previous: {title: string; url: string}; next: {title: string; url: string}; series?: {title: string; url: string};}
+const {poem, number, total, previous, next, series} = Astro.props;
+const {Content} = await render(poem);
+---
+<Edition title={poem.data.title} description={poem.data.excerpt} reader>
+  <div class="edition-progress" aria-hidden="true"><span data-edition-progress></span></div>
+  <main class="edition-reader" id="main">
+    <aside class="reader-art"><figure><figcaption class="eyebrow">{padIndex(number)} / {padIndex(total)}<span>{series?.title ?? 'FROM THE ARCHIVE'}</span></figcaption><Image src={poem.data.image} alt={poem.data.imageAlt} widths={[460, 640, 900, 1200]} sizes="(max-width: 900px) 90vw, 40vw" loading="eager" decoding="async" /></figure></aside>
+    <article class="reader-article">
+      <div class="reader-meta eyebrow"><a href={series?.url ?? '/v2/archive/'}>← {series ? series.title : 'ARCHIVE'}</a><time datetime={poem.data.date.toISOString().slice(0,10)}>{formatDate(poem.data.date, 'short')}</time></div>
+      <h1>{poem.data.title}</h1>
+      {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="control" />}
+      <div class="reader-body" lang={poem.data.lang}><Content /></div>
+      <div class="reader-end" aria-hidden="true">*</div>
+      {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="player" />}
+      <nav class="reader-navigation" aria-label="Baca puisi lainnya"><a href={previous.url} data-poem-nav="previous"><span class="eyebrow">← PREVIOUS POEM</span><span class="reader-navigation__title">{previous.title}</span></a><a href={next.url} data-poem-nav="next"><span class="eyebrow">NEXT POEM ↗</span><span class="reader-navigation__title">{next.title}</span></a></nav>
+      <a class="reader-back text-link" href={series?.url ?? '/v2/archive/'}>Back to {series?.title ?? 'the archive'} <span aria-hidden="true">↗</span></a>
+    </article>
+  </main>
+  <script>
+    const progress = document.querySelector<HTMLElement>('[data-edition-progress]');
+    const update = () => {
+      const distance = document.documentElement.scrollHeight - innerHeight;
+      if (progress) progress.style.transform = `scaleX(${distance > 0 ? Math.min(1, scrollY / distance) : 0})`;
+    };
+    update();
+    addEventListener('scroll', update, {passive: true});
+    addEventListener('resize', update);
+  </script>
+</Edition>

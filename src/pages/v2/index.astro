@@ -1,0 +1,17 @@
+---
+import Edition from '../../layouts/Edition.astro';
+import InkLogo from '../../components/InkLogo.astro';
+---
+
+<Edition opening>
+  <main class="edition-opening" id="main">
+    <div class="opening__content">
+      <InkLogo class="opening__ink" />
+      <h1 class="opening__wordmark">scratch<span aria-hidden="true">*</span></h1>
+      <p class="opening__note">a collection of thoughts, regrets,<br /><em>and whatever remains.</em></p>
+      <a class="opening__enter" href="/v2/archive/" aria-label="Masuk ke archive puisi">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 24 24 8M9 8h15v15" /></svg>
+      </a>
+    </div>
+  </main>
+</Edition>

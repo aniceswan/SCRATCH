@@ -1,0 +1,47 @@
+---
+import '@fontsource-variable/dm-sans/wght.css';
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/newsreader/opsz-italic.css';
+import '../styles/edition/edition.css';
+import InkLogo from '../components/InkLogo.astro';
+
+interface Props { title?: string; description?: string; current?: 'archive' | 'series'; reader?: boolean; opening?: boolean; }
+const {title, description = 'A collection of thoughts, regrets, and whatever remains.', current, reader = false, opening = false} = Astro.props;
+const pageTitle = title ? `${title} | SCRATCH` : 'SCRATCH | Poetry';
+---
+
+<!doctype html>
+<html lang="id" class:list={{'edition-opening-root': opening}}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4f3ec" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body class:list={['edition', {'edition--reader': reader, 'edition--opening': opening}]}>
+    {!opening && <a class="skip-link" href="#main">Lewati ke konten</a>}
+    {!opening && <header class="edition-header">
+      <a class="edition-brand" href="/v2/" aria-label="SCRATCH, beranda">
+        <InkLogo class="edition-brand__ink" />
+        <span>scratch</span>
+      </a>
+      <nav class="edition-nav" aria-label="Navigasi utama">
+        <a href="/v2/archive/" aria-current={current === 'archive' ? 'page' : undefined}>Archive</a>
+        <a href="/v2/series/" aria-current={current === 'series' ? 'page' : undefined}>Series</a>
+      </nav>
+      <a class="header-read" href="/v2/puisi/halaman-nol/">Begin reading <span aria-hidden="true">↗</span></a>
+    </header>}
+    <slot />
+    <footer class:list={['edition-footer', {'edition-footer--reader': reader, 'edition-footer--opening': opening}]}>
+      {!opening && <a class="footer-brand" href="/v2/">scratch<span aria-hidden="true">*</span></a>}
+      <p>© 2026 scratch</p>
+      <a class="classic-link" href="/classic/">Classic edition <span aria-hidden="true">↗</span></a>
+    </footer>
+    <script>
+      import '../scripts/poem-links';
+    </script>
+  </body>
+</html>

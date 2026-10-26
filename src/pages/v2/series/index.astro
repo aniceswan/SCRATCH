@@ -1,0 +1,13 @@
+---
+import Edition from '../../../layouts/Edition.astro';
+import SeriesCard from '../../../components/edition/SeriesCard.astro';
+import {getSeries} from '../../../lib/series';
+import {padIndex} from '../../../lib/poems';
+const entries = await getSeries();
+---
+<Edition title="Series" current="series">
+  <main class="edition-catalog edition-series-index" id="main">
+    <header class="catalog-heading"><p class="eyebrow">READ IN COMPANY / {padIndex(entries.length)} COLLECTIONS</p><h1>the series<span>*</span></h1></header>
+    <div class="edition-series-grid">{entries.map((entry, index) => <SeriesCard entry={entry} index={index} eager />)}</div>
+  </main>
+</Edition>

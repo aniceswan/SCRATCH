@@ -1,0 +1,23 @@
+---
+import {Image} from 'astro:assets';
+import {padIndex, type Poem} from '../../lib/poems';
+interface Props {
+  poem: Poem;
+  number?: number;
+  seriesTitle?: string;
+  href?: string;
+  eager?: boolean;
+  searchable?: string;
+  seriesId?: string;
+}
+const {poem, number = poem.data.order, seriesTitle, href = `/v2/puisi/${poem.id}/`, eager = false, searchable, seriesId} = Astro.props;
+---
+<a class="edition-poem-card" href={href} data-poem-card data-edition-card data-search={searchable} data-series={seriesId}>
+  <div class="edition-poem-card__image">
+    <Image src={poem.data.image} alt={poem.data.imageAlt} widths={[360, 640, 900]} sizes="(max-width: 600px) 92vw, (max-width: 1000px) 44vw, 30vw" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    <span class="card-open" aria-hidden="true">↗</span>
+  </div>
+  <div class="edition-poem-card__meta"><span class="eyebrow">{padIndex(number)}</span><span class="eyebrow">{seriesTitle}</span></div>
+  <h2>{poem.data.title}</h2>
+  <p class="edition-poem-card__excerpt">{poem.data.excerpt}</p>
+</a>

@@ -1,0 +1,9 @@
+---
+import ClassicCollection from '../../../series/[series]/index.astro';
+import { getSeries, type PoetrySeries } from '../../../../lib/series';
+export async function getStaticPaths() {
+  return (await getSeries()).map(entry => ({params: {series: entry.id}, props: {entry}}));
+}
+interface Props {entry: PoetrySeries;}
+---
+<ClassicCollection entry={Astro.props.entry} />

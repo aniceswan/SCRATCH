@@ -1,10 +1,24 @@
 ---
 import InkLogo from './InkLogo.astro';
+import { Image } from 'astro:assets';
+import { getClassicEdition } from '../lib/classic-preview';
+import { getPoems } from '../lib/poems';
 
 const letters = [...'scratch'];
+const {paper: paperEdition} = getClassicEdition(Astro.url.pathname);
+const poems = paperEdition ? await getPoems() : [];
+const openingArt = ['halaman-nol', 'rotasi', 'ruang-bising', 'sebuah-nama'].flatMap(id => {
+  const poem = poems.find(entry => entry.id === id);
+  return poem ? [poem] : [];
+});
 ---
 
 <section class="intro" id="intro" data-intro aria-labelledby="intro-title">
+  {paperEdition && <div class="intro__artwork" aria-hidden="true">
+    {openingArt.map((poem, index) => <figure class={`intro__fragment intro__fragment--${index + 1}`}>
+      <Image src={poem.data.image} alt="" widths={[160, 240, 360]} sizes="(max-width: 640px) 24vw, 12vw" loading="eager" decoding="async" />
+    </figure>)}
+  </div>}
   <div class="intro__inner">
     <div class="intro__main">
       <h1 class="intro__title" id="intro-title" aria-label="scratch">
@@ -15,7 +29,7 @@ const letters = [...'scratch'];
             </span>
           ))
         }
-        <span class="intro__star" aria-hidden="true">*</span>
+        {!paperEdition && <span class="intro__star" aria-hidden="true">*</span>}
       </h1>
 
       <a class="enter" href="#arsip" id="enter" data-enter aria-label="Masuk ke arsip puisi">
@@ -26,7 +40,7 @@ const letters = [...'scratch'];
       </a>
     </div>
 
-    <InkLogo class="intro__scratch" animated />
+    {!paperEdition && <InkLogo class="intro__scratch" animated />}
 
     <p class="intro__note">a collection of thoughts, regrets, and whatever remains</p>
   </div>

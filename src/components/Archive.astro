@@ -3,15 +3,17 @@ import { getImage } from 'astro:assets';
 import type { Poem } from '../lib/poems';
 import { padIndex } from '../lib/poems';
 import { cardWindow } from '../lib/gallery.js';
+import { getClassicEdition } from '../lib/classic-preview';
 
 interface Props { poems: Poem[]; }
 const { poems } = Astro.props;
+const {basePath} = getClassicEdition(Astro.url.pathname);
 const catalog = await Promise.all(poems.map(async (poem, index) => {
   const variants = await Promise.all([320, 480, 640, 800].map(width => getImage({src: poem.data.image, width, format: 'webp', quality: 80})));
   return {
     number: padIndex(poem.data.order || index + 1),
     title: poem.data.title, excerpt: poem.data.excerpt,
-    url: `/puisi/${poem.id}/`, alt: poem.data.imageAlt,
+    url: `${basePath}/puisi/${poem.id}/`, alt: poem.data.imageAlt,
     src: variants[1].src,
     srcset: variants.map((image, index) => `${image.src} ${[320, 480, 640, 800][index]}w`).join(', '),
   };
@@ -47,7 +49,7 @@ const data = JSON.stringify(catalog).replace(/</g, '\\u003c');
   <script type="application/json" data-poems set:html={data} />
   <noscript>
     <ul class="nojs-list">
-      {poems.map((poem, index) => <li><a href={`/puisi/${poem.id}/`}><span>{padIndex(index + 1)}</span>{poem.data.title}</a></li>)}
+      {poems.map((poem, index) => <li><a href={`${basePath}/puisi/${poem.id}/`}><span>{padIndex(index + 1)}</span>{poem.data.title}</a></li>)}
     </ul>
   </noscript>
 </section>

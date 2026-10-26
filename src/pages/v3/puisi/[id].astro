@@ -1,0 +1,10 @@
+---
+import PoemReader from '../../../components/PoemReader.astro';
+import { getPoems } from '../../../lib/poems';
+import { readingProps } from '../../../lib/series-sequence.js';
+export async function getStaticPaths() {
+  const poems = await getPoems();
+  return poems.map((poem, index) => ({params: {id: poem.id}, props: {...readingProps(poems, index, '/v3/puisi/'), number: poem.data.order || index + 1}}));
+}
+---
+<PoemReader {...Astro.props} />

@@ -193,11 +193,13 @@ const readingLayout=await phone.evaluate(()=>({width:innerWidth,scrollWidth:docu
 assert.ok(readingLayout.scrollWidth<=readingLayout.width,'reading links stay within mobile viewport');
 await phone.screenshot({path:'/tmp/scratch-poem-links-mobile.png'});
 // If a mobile compositor drops the gradient during a fast fling, the page
-// canvas must still be warm paper rather than the browser's white default.
+// canvas must still be the approved paper color rather than the browser's white default.
 const withoutGradient=await phone.addStyleTag({content:'html, body, body::before { background-image: none !important; }'});
 const fallbackPixel=await sharp(await phone.screenshot()).extract({left:3,top:830,width:1,height:1}).removeAlpha().raw().toBuffer();
 await withoutGradient.evaluate(style=>style.remove());
-assert.ok(fallbackPixel[2]<235 && fallbackPixel[0]-fallbackPixel[2]>10,`mobile canvas keeps its paper undercoat when the gradient is unavailable: ${[...fallbackPixel]}`);
+const expectedPaper=[244,243,236];
+const matchesPaper=pixel=>expectedPaper.every((value,index)=>Math.abs(pixel[index]-value)<=4);
+assert.ok(matchesPaper(fallbackPixel),`mobile canvas keeps its paper undercoat when the gradient is unavailable: ${[...fallbackPixel]}`);
 await phone.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
 for(let swipe=0;swipe<3;swipe++) {
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:190,y:740}]});
@@ -208,11 +210,11 @@ for(let swipe=0;swipe<3;swipe++) {
  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
  await phone.waitForTimeout(100);
  const pixel=await sharp(await phone.screenshot()).extract({left:3,top:830,width:1,height:1}).removeAlpha().raw().toBuffer();
- assert.ok(pixel[2]<235 && pixel[0]-pixel[2]>10,`paper remains visible after fast mobile scroll ${swipe}: ${[...pixel]}`);
+ assert.ok(matchesPaper(pixel),`paper remains visible after fast mobile scroll ${swipe}: ${[...pixel]}`);
 }
 assert.ok(await phone.evaluate(()=>scrollY>0),'fast touch gestures actually scroll the poem');
 await phone.screenshot({path:'/tmp/scratch-poem-fast-scroll-mobile.png'});
-console.log('PASS mobile background: warm fallback canvas and repeated fast touch scrolling');
+console.log('PASS mobile background: approved paper canvas and repeated fast touch scrolling');
 
 console.log('PASS reading: opening sound, ARCHIVE, titled previous/next links, collection wrap, desktop/mobile scroll header');
 

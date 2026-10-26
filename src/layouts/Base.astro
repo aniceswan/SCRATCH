@@ -4,6 +4,8 @@ import '@fontsource-variable/dm-sans/wght.css';
 import '@fontsource-variable/newsreader/opsz.css';
 import '@fontsource-variable/newsreader/opsz-italic.css';
 import '../styles/global.css';
+import '../styles/classic-paper.css';
+import { getClassicEdition } from '../lib/classic-preview';
 
 interface Props {
   title?: string;
@@ -20,17 +22,19 @@ const {
 const pageTitle = title ? `${title} | SCRATCH` : 'SCRATCH | Poetry';
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
 const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
+const {basePath, paper: paperEdition, sessionKey} = getClassicEdition(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang="id" class:list={{'classic-paper': paperEdition}} data-intro-session-key={sessionKey}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#e8d7bf" />
+    <meta name="theme-color" content={paperEdition ? '#f4f3ec' : '#e8d7bf'} />
+    {basePath && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {canonical && <link rel="canonical" href={canonical} />}
 
@@ -47,7 +51,7 @@ const ogImage = Astro.site ? new URL('/og.jpg', Astro.site) : '/og.jpg';
       (() => {
         try {
           const forceIntro = new URLSearchParams(location.search).has('intro');
-          const entered = sessionStorage.getItem('scratch:entered') === '1';
+          const entered = sessionStorage.getItem(document.documentElement.dataset.introSessionKey ?? 'scratch:entered') === '1';
           if (!forceIntro && (entered || location.hash === '#arsip')) {
             document.documentElement.classList.add('intro-skip');
           }

@@ -1,0 +1,24 @@
+---
+import Edition from '../../../layouts/Edition.astro';
+import PoemCard from '../../../components/edition/PoemCard.astro';
+import {getPoems, padIndex} from '../../../lib/poems';
+import {getSeries} from '../../../lib/series';
+const [poems, series] = await Promise.all([getPoems(), getSeries()]);
+const membership = new Map(series.flatMap(entry => entry.poems.map(poem => [poem.id, entry] as const)));
+---
+<Edition title="Archive" current="archive">
+  <main class="edition-catalog" id="main">
+    <header class="catalog-heading"><p class="eyebrow">THE COMPLETE COLLECTION / {padIndex(poems.length)} POEMS</p><div class="catalog-heading__line"><h1>the archive<span>*</span></h1><a class="text-link" href={`/v2/puisi/${poems[0].id}/`} data-random-poem>Surprise me <span aria-hidden="true">↗</span></a></div><p class="catalog-intro">A place for every thought that found its way onto a page.</p></header>
+    <div class="archive-tools" data-edition-tools hidden>
+      <div class="archive-filters" role="group" aria-label="Filter series"><button type="button" data-filter="all" aria-pressed="true">All poems <span>{padIndex(poems.length)}</span></button>{series.map(entry => <button type="button" data-filter={entry.id} aria-pressed="false">{entry.data.title} <span>{padIndex(entry.poems.length)}</span></button>)}</div>
+      <label class="archive-search"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg><span class="sr-only">Cari puisi</span><input type="search" placeholder="Find a poem…" data-edition-search autocomplete="off" /></label>
+    </div>
+    <p class="archive-results eyebrow" data-edition-count aria-live="polite" aria-atomic="true">{padIndex(poems.length)} POEMS</p>
+    <div class="edition-poem-grid" data-edition-grid>{poems.map((poem, index) => {
+      const entry = membership.get(poem.id);
+      return <PoemCard poem={poem} seriesTitle={entry?.data.title} seriesId={entry?.id} searchable={`${poem.data.title} ${entry?.data.title ?? ''}`} eager={index < 3} />;
+    })}</div>
+    <div class="archive-empty" data-edition-empty hidden><span aria-hidden="true">*</span><h2>No pages found.</h2><p>Coba judul lain, atau kembali ke semua puisi.</p><button class="text-link" data-edition-reset type="button">Show all poems ↗</button></div>
+  </main>
+  <script>import '../../../scripts/edition/archive';</script>
+</Edition>

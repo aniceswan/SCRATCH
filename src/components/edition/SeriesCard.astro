@@ -1,0 +1,15 @@
+---
+import {Image} from 'astro:assets';
+import type {PoetrySeries} from '../../lib/series';
+import {padIndex} from '../../lib/poems';
+interface Props {entry: PoetrySeries; index: number; eager?: boolean;}
+const {entry, index, eager = false} = Astro.props;
+---
+<a class="edition-series-card" href={`/v2/series/${entry.id}/`} data-edition-series>
+  <div class="edition-series-card__cover">
+    <Image src={entry.data.cover} alt={entry.data.coverAlt} widths={[460, 640, 900]} sizes="(max-width: 600px) 90vw, 43vw" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    <span class="series-volume eyebrow">VOL. {padIndex(index + 1)}</span>
+    <span class="series-open" aria-hidden="true">↗</span>
+  </div>
+  <div class="edition-series-card__meta"><h2>{entry.data.title}</h2><span class="eyebrow">{padIndex(entry.poems.length)} poems</span></div>
+</a>

@@ -22,6 +22,7 @@ const featureExcerpt = document.querySelector<HTMLElement>('[data-feature-excerp
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 let reduceMotion = motionPreference.matches;
 const root = document.documentElement;
+const introSessionKey = root.dataset.introSessionKey ?? 'scratch:entered';
 
 let pos = 0;
 let target = 0;
@@ -180,7 +181,7 @@ function completeEntry(focus = true) {
   root.classList.remove('intro-skip');
   shell?.removeAttribute('inert');
   try {
-    sessionStorage.setItem('scratch:entered', '1');
+    sessionStorage.setItem(introSessionKey, '1');
   } catch {
     /* no-op */
   }
@@ -216,7 +217,7 @@ function enter(event?: Event) {
 function showIntro() {
   if (!intro) return;
   try {
-    sessionStorage.removeItem('scratch:entered');
+    sessionStorage.removeItem(introSessionKey);
   } catch {
     /* no-op */
   }
