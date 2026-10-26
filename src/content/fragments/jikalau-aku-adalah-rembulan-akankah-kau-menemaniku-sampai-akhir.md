@@ -6,9 +6,9 @@ image: "../../assets/fragments/rembulan.webp"
 imageAlt: "Rembulan gading di atas danau dan perbukitan biru dalam kolase kertas bertekstur, dengan setangkai bunga kecil di tepian"
 excerpt: "Setiap hari kau datang membawa kegembiraan yang kadang sukar kuutarakan."
 spotify:
-  trackId: "0KRBnZ1LIgkQNj80pECMRY"
-  title: "Coming Up Roses - Instrumental"
-  artist: "Piano Dreamers"
+  trackId: "0urpBLpcm6DOGzs86rcKd8"
+  title: "Untuk Perempuan Yang Sedang Di Pelukan"
+  artist: "Payung Teduh"
 draft: false
 ---
 

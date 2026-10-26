@@ -91,6 +91,9 @@ svg {
 img {
   max-width: 100%;
   height: auto;
+  /* Keep alt descriptions accessible without painting them over loading images. */
+  color: transparent;
+  font-size: 0;
 }
 
 a {
