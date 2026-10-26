@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 26
 lang: "en"
 image: "../../assets/puisi/the-longest-time.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi THE LONGEST TIME"
+imageAlt: "Bidang abstrak biru dengan gradasi cahaya lembut."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/gradient-blue-color-background-modern-minimalist-design-abstract_34010167.htm"
 excerpt: "I sent you a song with a wish sharpened"
 youtube:
   videoId: "zLSUp53y-HQ"

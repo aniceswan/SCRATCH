@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 11
 lang: "id"
 image: "../../assets/puisi/paralaks.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi PARALAKS"
+imageAlt: "Bayangan daun jatuh pada dinding bata bertekstur."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/old-brick-wall-with-leaf-shadows_10980193.htm"
 excerpt: "Dua jendela menghadap halaman yang sama. Dari sini, pohon menelan bulan;"
 youtube:
   videoId: "osdoLjUNFnA"

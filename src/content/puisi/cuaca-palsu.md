@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 19
 lang: "id"
 image: "../../assets/puisi/cuaca-palsu.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi CUACA PALSU"
+imageAlt: "Tetes hujan di depan latar pepohonan hijau."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/rain-outside-windows-villa_2441313.htm"
 excerpt: "Aku berkata, tak ada badai. Langit pun menurut,"
 youtube:
   videoId: "i8_w_m6HLJ0"

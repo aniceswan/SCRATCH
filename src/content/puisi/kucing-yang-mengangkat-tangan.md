@@ -4,7 +4,11 @@ date: "2026-10-25"
 order: 22
 lang: "id"
 image: "../../assets/puisi/kucing-yang-mengangkat-tangan.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi KUCING YANG MENGANGKAT TANGAN"
+imageAlt: "Seekor kucing mengangkat satu telapak di depan wajahnya."
+imageCredit:
+  provider: "Pexels"
+  source: "https://www.pexels.com/photo/cat-with-raised-paw-16482823/"
+  author: "maybe A"
 excerpt: "Seekor kucing mengacungkan jempol pada akhir percakapan yang panjang."
 youtube:
   videoId: "G-XICfi4j3Q"

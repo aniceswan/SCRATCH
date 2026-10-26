@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 31
 lang: "id"
 image: "../../assets/puisi/tak-terpikir.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi TAK TERPIKIR"
+imageAlt: "Pepohonan dan jalan kecil dengan warna musim gugur."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/vertical-shot-narrow-road-surrounded-by-beautiful-trees-with-colorful-leaves_10111040.htm"
 excerpt: "Kutanyakan arah kepada seseorang"
 youtube:
   videoId: "8SP7_4C4HaM"

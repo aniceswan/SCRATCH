@@ -3,6 +3,7 @@ import {Image} from 'astro:assets';
 import {render} from 'astro:content';
 import Edition from '../../layouts/Edition.astro';
 import YouTubeSoundtrack from '../YouTubeSoundtrack.astro';
+import ImageCredit from '../ImageCredit.astro';
 import {formatDate, padIndex, type Poem} from '../../lib/poems';
 interface Props {poem: Poem; number: number; total: number; previous: {title: string; url: string}; next: {title: string; url: string}; series?: {title: string; url: string};}
 const {poem, number, total, previous, next, series} = Astro.props;
@@ -19,6 +20,7 @@ const {Content} = await render(poem);
       <div class="reader-body" lang={poem.data.lang}><Content /></div>
       <div class="reader-end" aria-hidden="true">*</div>
       {poem.data.youtube && <YouTubeSoundtrack track={poem.data.youtube} placement="player" />}
+      <ImageCredit credit={poem.data.imageCredit} />
       <nav class="reader-navigation" aria-label="Baca puisi lainnya"><a href={previous.url} data-poem-nav="previous"><span class="eyebrow">← PREVIOUS POEM</span><span class="reader-navigation__title">{previous.title}</span></a><a href={next.url} data-poem-nav="next"><span class="eyebrow">NEXT POEM ↗</span><span class="reader-navigation__title">{next.title}</span></a></nav>
       <a class="reader-back text-link" href={series?.url ?? '/v2/archive/'}>Back to {series?.title ?? 'the archive'} <span aria-hidden="true">↗</span></a>
     </article>

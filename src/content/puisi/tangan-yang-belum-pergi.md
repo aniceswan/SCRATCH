@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 29
 lang: "id"
 image: "../../assets/puisi/tangan-yang-belum-pergi.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi TANGAN YANG BELUM PERGI"
+imageAlt: "Bayangan bunga dan tangan pada permukaan terang."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/shadow-hand-holding-tulips_7055925.htm"
 excerpt: "Aku berkata, kasihan. Kuberi jalan keluar"
 youtube:
   videoId: "HO1Yq7vxvvc"

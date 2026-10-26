@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 37
 lang: "id"
 image: "../../assets/puisi/albedo.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi ALBEDO"
+imageAlt: "Bulan kecil pada langit malam yang gelap."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/lonely-moon-dark-night-sky_1234117.htm"
 excerpt: "Bulan tak menghasilkan terangnya sendiri. Ia hanya mengembalikan"
 youtube:
   videoId: "5-rbSNzU_b8"

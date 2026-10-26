@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 38
 lang: "id"
 image: "../../assets/puisi/pintu-selatan.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi PINTU SELATAN"
+imageAlt: "Pohon dalam lanskap tiga dimensi yang dikelilingi air."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/3d-landscape-with-tree-sea_25641844.htm"
 excerpt: "Kelak, jika hujan turun di Ganesha, pohon-pohon akan tetap menerima"
 youtube:
   videoId: "aarvhv5ZHzQ"

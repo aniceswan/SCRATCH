@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 10
 lang: "id"
 image: "../../assets/puisi/sela.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi SELA"
+imageAlt: "Dapur terang dengan meja putih dan rak yang tertata."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/empty-modern-room-with-furniture_20521178.htm"
 excerpt: "Sebuah buku terbuka pada halaman ujian. Malam-malam menumpuk di bawah kelopak,"
 youtube:
   videoId: "05Z7GL9w1aQ"

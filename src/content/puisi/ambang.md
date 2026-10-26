@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 21
 lang: "id"
 image: "../../assets/puisi/ambang.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi AMBANG"
+imageAlt: "Pintu kayu pada dinding bata berwarna terang."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/japanese-house-entrance_27644244.htm"
 excerpt: "Pernah kusapu halaman sebelum kau datang."
 youtube:
   videoId: "05Z7GL9w1aQ"

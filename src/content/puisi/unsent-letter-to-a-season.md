@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 35
 lang: "en"
 image: "../../assets/puisi/unsent-letter-to-a-season.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi UNSENT LETTER TO A SEASON"
+imageAlt: "Lapisan cat air dengan sapuan warna lembut."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/hand-painted-watercolor-background_16983840.htm"
 excerpt: "I tried to give the season back its ordinary weather."
 youtube:
   videoId: "lY3g3h0iP3A"

@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 7
 lang: "id"
 image: "../../assets/puisi/tanda-baca.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi TANDA BACA"
+imageAlt: "Garis-garis bergelombang pada bidang gelap."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/gradient-black-background-with-wavy-lines_19852122.htm"
 excerpt: "Ada titik di akhir pengakuan. Ada koma sebelum kita tahu"
 youtube:
   videoId: "mxyucLe9YE4"

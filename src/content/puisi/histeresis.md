@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 34
 lang: "id"
 image: "../../assets/puisi/histeresis.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi HISTERESIS"
+imageAlt: "Jaringan garis geometris membentuk bidang tiga dimensi."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/abstract-mesh-background_1534336.htm"
 excerpt: "Sepotong besi pernah didekatkan ke medan. Jarumnya bergerak. Urat-urat halusnya"
 youtube:
   videoId: "iCKiEshXOC0"

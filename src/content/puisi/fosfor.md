@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 12
 lang: "id"
 image: "../../assets/puisi/fosfor.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi FOSFOR"
+imageAlt: "Titik-titik cahaya bokeh biru di dalam gelap."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/gradient-blue-background-with-bokeh-effect_6091952.htm"
 excerpt: "Satu gulir. Lalu cahaya. Tak lebih lama dari tarikan napas"
 youtube:
   videoId: "l08Zw-RY__Q"

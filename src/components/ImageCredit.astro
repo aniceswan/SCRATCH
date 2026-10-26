@@ -1,0 +1,19 @@
+---
+interface Props {
+  credit?: {provider: 'Freepik' | 'Pexels'; source: string; author?: string};
+}
+const {credit} = Astro.props;
+---
+{credit && <p class="image-credit" lang="en">
+  {credit.provider === 'Freepik' ? <>
+    Designed by <a href="https://www.magnific.com/" target="_blank" rel="noopener noreferrer">Magnific (Freepik)</a>
+    <span aria-hidden="true"> · </span><a href={credit.source} target="_blank" rel="noopener noreferrer">{credit.author ?? 'Image source'}</a>
+  </> : <>
+    Photo by <a href={credit.source} target="_blank" rel="noopener noreferrer">{credit.author ?? 'the photographer'}</a> on <a href="https://www.pexels.com/" target="_blank" rel="noopener noreferrer">Pexels</a>
+  </>}
+</p>}
+<style>
+.image-credit {margin-top: 24px; font-family: var(--sans, sans-serif); font-size: 10px; line-height: 1.7; letter-spacing: .015em; color: var(--ink-soft);}
+.image-credit a {color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px;}
+.image-credit a:hover {color: var(--red);}
+</style>

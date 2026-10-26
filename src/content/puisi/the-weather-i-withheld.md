@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 25
 lang: "en"
 image: "../../assets/puisi/the-weather-i-withheld.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi THE WEATHER I WITHHELD"
+imageAlt: "Sapuan cat air biru dan ungu menyerupai awan."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/abstract-texture-background-with-watercolor_17271818.htm"
 excerpt: "I once believed the rain belonged to anyone who raised their hands."
 youtube:
   videoId: "DLV8FpyxZPQ"

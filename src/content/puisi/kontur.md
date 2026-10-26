@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 8
 lang: "id"
 image: "../../assets/puisi/kontur.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi KONTUR"
+imageAlt: "Garis kontur topografi hijau di atas latar putih."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/topographic-map-background-green-white_9008885.htm"
 excerpt: "Bandung mula-mula hanyalah garis, tikungan yang kukenal dengan langkah,"
 youtube:
   videoId: "smxW5YVIU7g"

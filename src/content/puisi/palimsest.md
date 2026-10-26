@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 36
 lang: "id"
 image: "../../assets/puisi/palimsest.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi PALIMSEST"
+imageAlt: "Kertas putih berkerut dengan garis lipatan yang masih membekas."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/white-paper-texture_1012237.htm"
 excerpt: "Kukikis aksara dari perkamen, perlahan, agar lembaran tak terkoyak."
 youtube:
   videoId: "Ur_wAcYDnuA"

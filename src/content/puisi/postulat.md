@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 5
 lang: "id"
 image: "../../assets/puisi/postulat.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi POSTULAT"
+imageAlt: "Bidang-bidang poligon biru yang saling bertemu."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/geometric-shapes-background-with-abstract-design_5576332.htm"
 excerpt: "Mula-mula kita menerima sesuatu tanpa meminta pembuktian."
 youtube:
   videoId: "QI8VrXkffcg"

@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 32
 lang: "id"
 image: "../../assets/puisi/dua-cara-menunduk.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi DUA CARA MENUNDUK"
+imageAlt: "Bidang geometris hijau, merah muda, dan krem yang terpisah."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/flat-design-minimalist-background_35237779.htm"
 excerpt: "Kau menunduk lebih dahulu, membawa sesuatu"
 youtube:
   videoId: "tP4TTgt4nb0"

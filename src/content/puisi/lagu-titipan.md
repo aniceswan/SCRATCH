@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 13
 lang: "id"
 image: "../../assets/puisi/lagu-titipan.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi LAGU TITIPAN"
+imageAlt: "Piringan hitam, kamera analog, dan headphone pada bidang berwarna."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/close-up-vintage-music-concept_1313599.htm"
 excerpt: "Lagu itu tiba tanpa alamat, menumpang pada satu bingkai"
 youtube:
   videoId: "jUj5h_IdPJI"

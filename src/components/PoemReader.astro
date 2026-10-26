@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import YouTubeSoundtrack from './YouTubeSoundtrack.astro';
+import ImageCredit from './ImageCredit.astro';
 import { padIndex, type Poem } from '../lib/poems';
 import { getClassicEdition } from '../lib/classic-preview';
 
@@ -67,6 +68,8 @@ const {paper: paperEdition} = getClassicEdition(Astro.url.pathname);
           <div class="poem__end" aria-hidden="true">*</div>
 
           {poem.data.youtube && <YouTubeSoundtrack track={poem.data.youtube} placement="player" />}
+
+          <ImageCredit credit={poem.data.imageCredit} />
 
           <nav class="poem-nav" aria-label="Baca puisi lainnya">
             <a class="poem-nav__link" data-poem-nav="previous" href={previous.url}>

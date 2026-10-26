@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 33
 lang: "en"
 image: "../../assets/puisi/read-receipt.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi READ RECEIPT"
+imageAlt: "Pintu tua dengan tekstur kayu, cat, dan karat."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/rusty-door_25313406.htm"
 excerpt: "At the end, I gave you a quieter sentence."
 youtube:
   videoId: "aZGpXk8vYno"

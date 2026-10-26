@@ -4,7 +4,11 @@ date: "2026-10-25"
 order: 2
 lang: "id"
 image: "../../assets/puisi/grafit.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi GRAFIT"
+imageAlt: "Percikan hitam putih menyerupai serbuk grafit yang tertinggal."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/abstract-black-white-distressed-texture-background_24600869.htm"
+  author: "starline"
 excerpt: "Di bawah lampu yang mengundang serangga, kita merapikan bilangan yang tercerai."
 youtube:
   videoId: "a0OHkWX7B-E"

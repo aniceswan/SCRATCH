@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 40
 lang: "id"
 image: "../../assets/puisi/katalog-benda-yang-tak-jadi.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi KATALOG BENDA YANG TAK JADI"
+imageAlt: "Ruangan kosong dengan furnitur sederhana dan cahaya lembut."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/empty-modern-room-with-furniture_20521181.htm"
 excerpt: "Nomor satu, sebuah sore yang tak pernah menemukan tanggal."
 youtube:
   videoId: "iygXgP2nOF4"

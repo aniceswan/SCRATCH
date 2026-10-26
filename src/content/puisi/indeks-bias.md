@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 16
 lang: "id"
 image: "../../assets/puisi/indeks-bias.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi INDEKS BIAS"
+imageAlt: "Percikan air di dalam gelas bening pada latar gelap."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/closeup-shot-impressive-water-splash-glass-cup-black-background_17345960.htm"
 excerpt: "Cahaya menyeberangi dua medium dan kehilangan kelurusannya."
 youtube:
   videoId: "csczYxRJUtE"

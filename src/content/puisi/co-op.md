@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 4
 lang: "en"
 image: "../../assets/puisi/co-op.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi CO-OP"
+imageAlt: "Model tiga dimensi pegunungan kecil di atas latar biru."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/3d-isometric-terrain-mountainous-landscape_8797815.htm"
 excerpt: "We entered a small, obedient universe, three lives, a map,"
 youtube:
   videoId: "JJQLrogZLhU"

@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 18
 lang: "en"
 image: "../../assets/puisi/the-comparative.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi THE COMPARATIVE"
+imageAlt: "Susunan bentuk organik berwarna biru, kuning, dan merah muda."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/hand-drawn-abstract-organic-shapes-background_6671465.htm"
 excerpt: "You said you loved me more than someone else."
 youtube:
   videoId: "WkdQhfDRBKs"

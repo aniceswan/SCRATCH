@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 27
 lang: "id"
 image: "../../assets/puisi/hewan-kecil-di-antara-dua-layar.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi HEWAN KECIL DI ANTARA DUA LAYAR"
+imageAlt: "Jaringan titik cahaya biru membentuk lengkung bola."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/abstract-bigdata-science-background-sphere-grid-wave_8801009.htm"
 excerpt: "Dulu ada makhluk kecil hidup dari kebiasaan kita."
 youtube:
   videoId: "W-Khe7DInxo"

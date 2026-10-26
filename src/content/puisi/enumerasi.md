@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 30
 lang: "id"
 image: "../../assets/puisi/enumerasi.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi ENUMERASI"
+imageAlt: "Riak abstrak berwarna perak menyerupai logam cair."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/liquid-metal-mercury-silver-ripples-abstract-background_416799917.htm"
 excerpt: "Mengapa pertama jatuh dari mulut seperti uang logam ke dasar sumur."
 youtube:
   videoId: "_PsBoqNwYo4"

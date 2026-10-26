@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 23
 lang: "id"
 image: "../../assets/puisi/jalan-yang-baik.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi JALAN YANG BAIK"
+imageAlt: "Jalan setapak di antara pepohonan dalam hutan."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/vertical-shot-forest-trail-daytime_10584360.htm"
 excerpt: "Semoga kelak kau tiba di kota yang pernah kusebut"
 youtube:
   videoId: "l94X674K1iA"

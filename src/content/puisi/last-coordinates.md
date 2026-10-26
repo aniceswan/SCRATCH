@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 39
 lang: "en"
 image: "../../assets/puisi/last-coordinates.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi LAST COORDINATES"
+imageAlt: "Garis kontur hitam putih membentuk pola berkelok."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/black-topographic-contour-lines-map-seamless-pattern-white-background_68880053.htm"
 excerpt: "I once drew two routes in the margin of a city map."
 youtube:
   videoId: "GNQphbGu5xM"

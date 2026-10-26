@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 14
 lang: "en"
 image: "../../assets/puisi/negative-space.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi NEGATIVE SPACE"
+imageAlt: "Sudut ruang terang dengan bayangan lembut pada dinding."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/abstract-minimal-concept-objects-shadows_12230377.htm"
 excerpt: "In the photograph, everything visible was ordinary,"
 youtube:
   videoId: "bHoJRzaEJWk"

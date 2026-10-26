@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 6
 lang: "id"
 image: "../../assets/puisi/anotasi.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi ANOTASI"
+imageAlt: "Tekstur abstrak yang berlapis seperti jejak pada permukaan kertas."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/distressed-texture-background_3781752.htm"
 excerpt: "Pada halaman sebelas, ada tanda kecil, sebuah bintang di samping kalimat biasa."
 youtube:
   videoId: "pZ31pyTZdh0"

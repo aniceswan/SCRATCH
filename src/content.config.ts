@@ -19,6 +19,11 @@ const puisi = defineCollection({
       lang: z.enum(['id', 'en']).default('id'),
       image: image(),
       imageAlt: z.string(),
+      imageCredit: z.object({
+        provider: z.enum(['Freepik', 'Pexels']),
+        source: z.url(),
+        author: z.string().optional(),
+      }).optional(),
       excerpt: z.string().max(260),
       youtube: youtubeSoundtrack.optional(),
       draft: z.boolean().default(false),

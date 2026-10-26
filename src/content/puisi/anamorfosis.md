@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 15
 lang: "id"
 image: "../../assets/puisi/anamorfosis.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi ANAMORFOSIS"
+imageAlt: "Bola-bola reflektif memantulkan lanskap dan cahaya senja."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/objects-with-reflective-effect_37563424.htm"
 excerpt: "Dari pintu, lukisan itu tampak ganjil, sebatang bunga memanjang,"
 youtube:
   videoId: "KsZ6tROaVOQ"

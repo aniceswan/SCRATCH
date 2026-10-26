@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 28
 lang: "id"
 image: "../../assets/puisi/semoga-dipermudah.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi SEMOGA DIPERMUDAH"
+imageAlt: "Bunga kecil di dinding biru dengan bayangan cahaya."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-photo/dark-blue-wall-shadow-background-with-flower_15846548.htm"
 excerpt: "Sesudah seluruh perabotan dipindahkan oleh amarah,"
 youtube:
   videoId: "AIFnKqIeEdY"

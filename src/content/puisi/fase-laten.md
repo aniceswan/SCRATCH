@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 20
 lang: "id"
 image: "../../assets/puisi/fase-laten.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi FASE LATEN"
+imageAlt: "Lapisan warna biru membentuk tekstur cair yang bergerak."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/grunge-distressed-texture_373102724.htm"
 excerpt: "Di panci tua, air memikul panas hingga permukaannya gemetar."
 youtube:
   videoId: "YEbz2Qt3vec"

@@ -4,7 +4,10 @@ date: "2026-10-25"
 order: 9
 lang: "en"
 image: "../../assets/puisi/blueshift.webp"
-imageAlt: "Komposisi visual abstrak untuk puisi BLUESHIFT"
+imageAlt: "Kurva cahaya biru melintasi latar gelap."
+imageCredit:
+  provider: "Freepik"
+  source: "https://www.freepik.com/free-vector/abstract-blue-background-with-glowing-light-wave_4952396.htm"
 excerpt: "At first, the light grew bluer. A distant thing was coming closer;"
 youtube:
   videoId: "wXmsqoGrAic"
