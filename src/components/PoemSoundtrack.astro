@@ -1,4 +1,5 @@
 ---
+import SoundtrackControl from './SoundtrackControl.astro';
 interface Props {
   track: {trackId: string; title: string; artist: string};
   placement: 'control' | 'player';
@@ -9,13 +10,7 @@ const embed = `https://open.spotify.com/embed/track/${track.trackId}?utm_source=
 ---
 
 {placement === 'control' ? (
-  <div class="soundtrack-control">
-    <button class="soundtrack-play" type="button" data-soundtrack-play disabled aria-label={`Putar ${track.title} oleh ${track.artist}`} aria-pressed="false" aria-controls="poem-soundtrack" title={`${track.title} · ${track.artist}`}>
-      <svg class="soundtrack-play__start" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z" /></svg>
-      <svg class="soundtrack-play__pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm7 0h4v14h-4z" /></svg>
-    </button>
-    <span class="soundtrack-status sr-only" data-soundtrack-status role="status" aria-live="polite"></span>
-  </div>
+  <SoundtrackControl title={track.title} artist={track.artist} />
 ) : (
   <section class="soundtrack" id="poem-soundtrack" data-soundtrack data-track-id={track.trackId} data-track-title={`${track.title} oleh ${track.artist}`} aria-label={`Lagu pengiring: ${track.title} oleh ${track.artist}`}>
     <div class="soundtrack__mount" data-spotify-mount>
@@ -32,28 +27,6 @@ const embed = `https://open.spotify.com/embed/track/${track.trackId}?utm_source=
 </script>
 
 <style>
-  .soundtrack-control { display: flex; align-items: center; gap: 12px; margin-top: 28px; max-width: 34rem; }
-  .soundtrack-play {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 46px;
-    height: 46px;
-    padding: 0;
-    border: 1px solid rgba(89, 65, 36, .25);
-    border-radius: 50%;
-    background: rgba(255, 245, 223, .35);
-    color: #6f492e;
-    cursor: pointer;
-    transition: background .25s ease, opacity .25s ease;
-  }
-  .soundtrack-play:disabled { opacity: .45; cursor: wait; }
-  .soundtrack-play:hover:not(:disabled) { background: rgba(255, 245, 223, .7); }
-  .soundtrack-play svg { grid-area: 1 / 1; width: 20px; height: 20px; fill: currentColor; }
-  .soundtrack-play__pause { display: none; }
-  .soundtrack-play[aria-pressed="true"] .soundtrack-play__start { display: none; }
-  .soundtrack-play[aria-pressed="true"] .soundtrack-play__pause { display: block; }
-  .soundtrack-status:not(.sr-only) { font-size: 11px; line-height: 1.5; color: var(--ink-soft); }
   .soundtrack { max-width: 34rem; margin-top: 36px; scroll-margin-top: 24px; }
   .soundtrack__mount { min-height: 152px; border-radius: 12px; }
   .soundtrack__external {

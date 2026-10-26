@@ -11,7 +11,7 @@ window.onSpotifyIframeApiReady({createController(mount,options,created){
  listeners.ready();
 }});`;
 try{
- for(const path of ['/puisi/halaman-nol/','/fragments/jikalau-aku-adalah-rembulan-akankah-kau-menemaniku-sampai-akhir/','/v3/series/refraction/puisi/halaman-nol/']){
+ for(const path of ['/puisi/halaman-nol/','/v3/series/refraction/puisi/halaman-nol/']){
   const page=await browser.newPage({reducedMotion:'reduce'});
   await page.route('https://open.spotify.com/embed/iframe-api/v1',route=>route.fulfill({contentType:'application/javascript',body:fakeApi}));
   await page.goto(base+path);

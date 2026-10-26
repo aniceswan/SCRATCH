@@ -46,6 +46,12 @@ const fragments = defineCollection({
     image: image(),
     imageAlt: z.string(),
     excerpt: z.string().max(260),
+    youtube: z.object({
+      videoId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
+      title: z.string().min(1),
+      artist: z.string().min(1),
+      startSeconds: z.number().int().nonnegative().default(0),
+    }).optional(),
     spotify: z.object({
       trackId: z.string().regex(/^[A-Za-z0-9]{22}$/),
       title: z.string().min(1),

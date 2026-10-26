@@ -9,6 +9,11 @@ spotify:
   trackId: "0urpBLpcm6DOGzs86rcKd8"
   title: "Untuk Perempuan Yang Sedang Di Pelukan"
   artist: "Payung Teduh"
+youtube:
+  videoId: "3H2SpXpIwhY"
+  title: "Untuk Perempuan Yang Sedang Di Pelukan"
+  artist: "Payung Teduh"
+  startSeconds: 0
 draft: false
 ---
 
