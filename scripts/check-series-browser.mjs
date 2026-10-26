@@ -1,3 +1,4 @@
+import {openNavigation} from './browser-navigation.mjs';
 import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
@@ -95,6 +96,7 @@ try {
  for(const viewport of [{width:390,height:844},{width:320,height:640},{width:844,height:390}]) {
   const phone=await browser.newPage({viewport,isMobile:true,hasTouch:true});
   await phone.goto(base+'/#arsip');
+  await openNavigation(phone);
   assert.ok(await phone.getByRole('link',{name:'Buka poems'}).isVisible());
   assert.ok(await phone.locator('[data-replay-intro]').isVisible());
   assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'archive header does not cause horizontal overflow');

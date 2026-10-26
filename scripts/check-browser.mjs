@@ -1,3 +1,4 @@
+import {openNavigation} from './browser-navigation.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
@@ -177,6 +178,7 @@ for(let i=1;i<=10;i++) await cdp.send('Input.dispatchTouchEvent',{type:'touchMov
 await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
 await phone.waitForFunction(()=>document.querySelector('[aria-current="true"]')?.getAttribute('data-index')==='1');
 assert.equal(new URL(phone.url()).pathname,'/');
+await openNavigation(phone);
 await phone.locator('[data-replay-intro]').click();
 await phone.locator('[data-enter]').click();
 await phone.waitForFunction(()=>document.documentElement.classList.contains('has-entered'),null,{timeout:5000});

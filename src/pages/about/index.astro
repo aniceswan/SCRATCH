@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import '../../styles/about.css';
+---
+
+<Base title="About" description="Nabil, the author and developer behind scratch. Some stories remain untold. Others are written down to live forever." bodyClass="page-about">
+  <div class="about-page">
+    <Header />
+    <main class="about" id="main" aria-labelledby="page-title" lang="en">
+      <div class="about__author">
+        <p class="about__byline">Hi, I’m Nabil, the author and developer behind scratch.</p>
+      </div>
+      <p class="about__statement">Some stories remain untold.<br />Others are written down<br /><em>to live forever.</em></p>
+    </main>
+    <p class="copyright">© 2026 scratch</p>
+  </div>
+</Base>

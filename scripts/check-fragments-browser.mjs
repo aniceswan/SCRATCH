@@ -1,3 +1,4 @@
+import {openNavigation} from './browser-navigation.mjs';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
@@ -8,7 +9,8 @@ const title='Jikalau Aku Adalah Rembulan, Akankah Kau Menemaniku Sampai Akhir';
 const source=(await readFile(new URL('../content-source/fragments/rembulan.txt',import.meta.url),'utf8')).trim().split(/\n\n+/);
 async function settle(page){await page.evaluate(async()=>{await document.fonts.ready;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));await Promise.all(document.getAnimations().map(animation=>animation.finished.catch(()=>{})));});}
 async function headerFits(page){
- const boxes=await page.locator('.topbar .brand,.topbar__actions').evaluateAll(nodes=>nodes.map(node=>node.getBoundingClientRect().toJSON()));
+ const actions=await page.locator('[data-menu-toggle]').isVisible() ? '[data-menu-toggle]' : '.topbar__actions';
+ const boxes=await page.locator(`.topbar .brand,${actions}`).evaluateAll(nodes=>nodes.map(node=>node.getBoundingClientRect().toJSON()));
  assert.ok(boxes[0].right<=boxes[1].left+1,'brand and navigation do not overlap');
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
  for(const box of boxes)assert.ok(box.left>=0&&box.right<=await page.evaluate(()=>innerWidth),'header remains within the viewport');
@@ -18,6 +20,7 @@ try{
   const page=await browser.newPage({viewport,reducedMotion:'reduce',isMobile:viewport.width<600,hasTouch:viewport.width<600});
   const errors=[];page.on('pageerror',error=>{if(error.message!=='Transition was aborted because of invalid state. ViewTransition opt-in disabled')errors.push(error.message);});
   await page.goto(base+'/#arsip');await page.waitForSelector('.stage.is-ready');await settle(page);await headerFits(page);
+  await openNavigation(page);
   assert.ok(await page.getByRole('link',{name:'Buka poems'}).isVisible());
   assert.ok(await page.getByRole('link',{name:'Buka fragments'}).isVisible());
   assert.doesNotMatch(await page.locator('.topbar').innerText(),/series/i);
@@ -49,6 +52,7 @@ try{
   assert.ok(await page.evaluate(()=>scrollY>0),'the full fragment can be read by scrolling');
   assert.equal(await page.locator('html').evaluate(node=>getComputedStyle(node).backgroundColor),'rgb(244, 243, 236)','fast scroll retains the paper canvas');
   await page.locator('.fragment-reading-nav a').first().click();await page.waitForURL('**/fragments/');await settle(page);
+  await openNavigation(page);
   await page.getByRole('link',{name:'Buka poems'}).click();await page.waitForURL('**/series/');await settle(page);
   assert.equal(await page.title(),'Poems | SCRATCH');assert.equal(await page.locator('h1').textContent(),'poems');assert.equal(await page.locator('[data-series-card]').count(),2,'existing poem collections remain intact');
   assert.deepEqual(errors,[]);await page.close();console.log(`PASS fragments ${viewport.width}×${viewport.height}: navigation, 2-column 4:3 cards, exact prose, faint fixed background, return links`);
@@ -56,11 +60,13 @@ try{
  const alternate=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
  await alternate.goto(base+'/v3/fragments/');assert.equal(await alternate.locator('[data-fragment-card]').getAttribute('href'),`/v3/fragments/${slug}/`);
  await alternate.locator('[data-fragment-card]').click();await alternate.waitForURL(`**/v3/fragments/${slug}/`);
+ await openNavigation(alternate);
  assert.equal(await alternate.getByRole('link',{name:'Kembali ke fragments'}).getAttribute('href'),'/v3/fragments/');
  await alternate.goto(base+'/classic/#arsip');assert.ok(await alternate.getByRole('link',{name:'Buka series puisi'}).isVisible());assert.equal(await alternate.locator('.fragments-entry').count(),0,'the preserved classic design is unchanged');
  const nojs=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
  await nojs.goto(base+'/fragments/');await nojs.locator('[data-fragment-card]').click();await nojs.waitForURL(`**/fragments/${slug}/`);
  assert.deepEqual((await nojs.locator('.fragment-body p').allTextContents()).map(text=>text.trim()),source);
  assert.ok(await nojs.getByRole('link',{name:'Kembali ke fragments'}).isVisible());
+ assert.ok(await nojs.getByRole('link',{name:'Buka about'}).isVisible(),'menu links remain usable without JavaScript');
  console.log('PASS v3 scope, classic preservation and complete no-JavaScript reading');
 }finally{await browser.close();}

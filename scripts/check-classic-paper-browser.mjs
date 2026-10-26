@@ -1,3 +1,4 @@
+import {openNavigation} from './browser-navigation.mjs';
 import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
@@ -101,6 +102,7 @@ try{
  await session.goto(base+'/v3/');assert.ok(await session.locator('.intro').isVisible(),'original entry does not skip the experiment opening');
  await session.locator('[data-enter]').click();await session.waitForFunction(()=>document.documentElement.classList.contains('has-entered'));
  assert.deepEqual(await session.evaluate(()=>[sessionStorage.getItem('scratch:entered'),sessionStorage.getItem('scratch:paper:entered')]),['1','1']);
+ await openNavigation(session);
  await session.getByRole('button',{name:'Kembali ke pembuka'}).click();assert.equal(await session.locator('.intro').isVisible(),true);
  assert.deepEqual(await session.evaluate(()=>[sessionStorage.getItem('scratch:entered'),sessionStorage.getItem('scratch:paper:entered')]),['1',null]);
  await session.close();
