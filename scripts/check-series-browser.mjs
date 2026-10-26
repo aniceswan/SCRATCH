@@ -50,6 +50,7 @@ try {
  assert.match(await page.locator('[data-series-card][href="/series/refraction/"] [data-series-count]').innerText(),/^40 puisi$/i);
  assert.equal(await page.locator('[data-series-card][href="/series/refraction/"] p').count(),1,'catalog card has only the count as supporting copy');
  const cover=page.locator('[data-series-card][href="/series/refraction/"] img');
+ assert.deepEqual(await page.locator('.series-card__cover').first().evaluate(node=>{const style=getComputedStyle(node);return [style.padding,style.borderWidth,getComputedStyle(node,'::after').content];}),['0px','0px','none'],'collection artwork has no surrounding frame');
  await cover.evaluate(img=>img.decode());
  assert.match(await cover.getAttribute('alt'),/cahaya|prisma/i);
  await screenshot(page,{path:'/tmp/scratch-series-catalog-desktop.png',fullPage:true});
@@ -57,6 +58,7 @@ try {
  await page.waitForURL(`**${seriesPath}`);
  assert.equal(await page.title(),'refraction | SCRATCH');
  const cards=page.locator('[data-series-poem]');
+ assert.deepEqual(await cards.first().locator('.series-poem__image').evaluate(node=>{const style=getComputedStyle(node);return [style.padding,style.borderWidth];}),['0px','0px'],'poem artwork inside a collection also has no frame');
  assert.equal(await cards.count(),40);
  assert.equal((await cards.first().locator('[data-poem-number]').innerText()).trim(),'01');
  assert.match(await cards.first().innerText(),/halaman nol/i);
@@ -106,7 +108,8 @@ try {
   if(viewport.width<=600) {
    const first=await phone.locator('[data-series-poem]').nth(0).boundingBox();
    const second=await phone.locator('[data-series-poem]').nth(1).boundingBox();
-   assert.ok(second.y>first.y+first.height,'phone grid uses a single readable column');
+   const third=await phone.locator('[data-series-poem]').nth(2).boundingBox();
+   assert.ok(Math.abs(first.y-second.y)<1&&second.x>first.x&&third.y>=first.y+first.height,'phone grid uses two readable columns');
   }
   await phone.locator('[data-series-poem]').last().scrollIntoViewIfNeeded();
   assert.ok(await phone.evaluate(()=>scrollY>0),'all forty poems are reachable through vertical scroll');

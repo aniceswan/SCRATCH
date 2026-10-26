@@ -29,7 +29,7 @@ const {basePath, paper: paperEdition} = getClassicEdition(Astro.url.pathname);
         {entry.poems.map((poem, index) => (
           <a class="series-poem" data-series-poem href={`${basePath}/series/${entry.id}/puisi/${poem.id}/`}>
             <div class="series-poem__image">
-              <Image src={poem.data.image} alt={poem.data.imageAlt} widths={[360, 640, 900]} sizes="(max-width: 600px) 90vw, (max-width: 1000px) 43vw, 30vw" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
+              <Image src={poem.data.image} alt={poem.data.imageAlt} widths={[360, 640, 900]} sizes={paperEdition ? '(max-width: 1000px) 43vw, 30vw' : '(max-width: 600px) 90vw, (max-width: 1000px) 43vw, 30vw'} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
               <span class="series-poem__open" aria-hidden="true">↗</span>
             </div>
             <div class="series-poem__meta">

@@ -39,7 +39,8 @@ Buka `http://localhost:4321`.
   Semua memakai konten puisi yang sama dan menjaga navigasi dalam versi masing-masing.
 - **POEMS ↗** di samping BACK membuka koleksi puisi, dengan cover abstrak, nama, dan jumlah puisi.
   Pilih series untuk melihat gambar, nomor, judul, dan cuplikan puisi dalam grid biasa:
-  tiga kolom di desktop, dua di tablet, satu di ponsel. Tautan sebelumnya/selanjutnya
+  tiga kolom di desktop, dua di tablet dan ponsel. Cover series dan gambar puisi di dalamnya
+  tampil tanpa bingkai. Tautan sebelumnya/selanjutnya
   pada halaman baca mengikuti urutan series dan tetap berfungsi tanpa JavaScript.
 - **FRAGMENTS ↗** membuka tulisan lepas tanpa pengelompokan series. Kartu tersusun dua kolom
   dengan gambar horizontal 4:3. Saat tulisan dibuka, ilustrasinya menjadi latar samar.
@@ -320,9 +321,9 @@ Uji alur series setelah build dan preview memakai `npm run test:series`, dengan 
 
 ## Gambar halaman baca dan lagu
 
-Pada desktop, gambar puisi menggunakan posisi fixed sehingga tetap diam saat seluruh
-halaman digulir, termasuk sejak halaman pertama dibuka. Batas atas gambar sejajar dengan
-batas atas judul pada posisi awal; ukurannya mengikuti sisa tinggi viewport desktop. Pada mobile gambar tetap mengikuti
+Pada desktop, gambar puisi tetap diam selama pembacaan, lalu ikut bergulir setelah batas
+bawahnya mencapai baris terakhir puisi, sebelum pemutar lagu dan navigasi. Batas atas gambar sejajar dengan
+batas atas judul pada posisi awal; ukurannya mengikuti sisa tinggi viewport desktop dan panjang teks. Pada mobile gambar tetap mengikuti
 alur halaman. Enam ilustrasi recursion dan dua cover series memakai medium, warna, serta komposisi
 yang berbeda. Semuanya dibuat dengan built-in ImageGen, WebP 1200×1500; prompt dan
 lokasi aset revisi ada di `scripts/poetry-art-refresh.json`, termasuk gambar Halaman Nol terbaru.
@@ -330,7 +331,11 @@ lokasi aset revisi ada di `scripts/poetry-art-refresh.json`, termasuk gambar Hal
 Puisi dapat memiliki field opsional `spotify` berisi `trackId`, `title`, dan `artist`.
 Tombol Play/Pause di atas puisi mengontrol player Spotify resmi yang selalu tampil di bawah
 puisi melalui iFrame API, tanpa autoplay. Pemutaran penuh/cuplikannya ditentukan Spotify.
+Setelah diputar, lagu berulang dari awal setiap selesai sampai pengguna menekan Pause,
+baik lewat tombol di atas maupun pemutar Spotify. Perilaku ini juga berlaku pada fragments.
 Daftar delapan penempatan lagu yang sudah diverifikasi ada di `scripts/poem-soundtracks.json`.
 Jalankan `scripts/check-spotify-browser.mjs` untuk tes pemutaran nyata dan
-`scripts/check-recursion-browser.mjs` untuk series, fixed image, dan pilihan lagu, memakai
+`scripts/check-recursion-browser.mjs` untuk series, batas gambar di akhir teks, dan pilihan lagu, memakai
 variabel browser yang sama dengan suite archive.
+`scripts/check-soundtrack-repeat-browser.mjs` memeriksa akhir lagu berulang, Pause saat
+pergantian putaran atau buffering, kontrol player resmi, dan pemutaran yang diblokir.

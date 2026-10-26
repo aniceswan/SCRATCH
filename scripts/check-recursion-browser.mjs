@@ -4,27 +4,31 @@ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || u
 const base=process.env.BASE_URL??'http://127.0.0.1:4326';
 try{
  const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
- await page.goto(base+'/puisi/halaman-nol/');
- await page.locator('.poem__image img').evaluate(image=>image.decode());
- const initial=await page.locator('.poem__image').boundingBox();
- const title=await page.locator('.poem__title').boundingBox();
- assert.ok(Math.abs(initial.y-title.y)<1,'desktop image top aligns with the initial title top');
- for(const position of [240,800,99999,0]){
-  await page.evaluate(top=>scrollTo({top,behavior:'instant'}),position);
-  const current=await page.locator('.poem__image').boundingBox();
-  assert.ok(Math.abs(current.x-initial.x)<.5&&Math.abs(current.y-initial.y)<.5,`desktop image stays fixed at scroll ${position}: ${JSON.stringify({initial,current})}`);
+ async function checkImage() {
+  await page.evaluate(async()=>{await document.fonts.ready;scrollTo({top:0,behavior:'instant'});await new Promise(resolve=>requestAnimationFrame(resolve));});
+  await page.locator('.poem__image img').evaluate(image=>image.decode());
+  const initial=await page.locator('.poem__image').boundingBox();
+  const title=await page.locator('.poem__title').boundingBox();
+  const body=await page.locator('.poem__body').boundingBox();
+  assert.ok(Math.abs(initial.y-title.y)<1,'desktop image top aligns with the initial title top');
+  assert.ok(initial.y+initial.height<=await page.evaluate(()=>innerHeight)-24,'image fits the viewport');
+  assert.ok(initial.y+initial.height<=body.y+body.height+1,'even a short poem bounds its illustration');
+  const boundary=body.y+body.height-initial.y-initial.height;
+  for(const position of [0,Math.max(0,boundary-40),boundary+80,99999,0]){
+   await page.evaluate(top=>scrollTo({top,behavior:'instant'}),position);
+   const current=await page.locator('.poem__image').boundingBox();
+   const text=await page.locator('.poem__body').boundingBox();
+   const expected=Math.min(initial.y,text.y+text.height-current.height);
+   assert.ok(Math.abs(current.x-initial.x)<.5&&Math.abs(current.y-expected)<1,`image remains still until the final line, then follows it: ${JSON.stringify({position,expected,current})}`);
+  }
  }
- for(const viewport of [{width:1440,height:600},{width:1000,height:800}]) {
+ for(const viewport of [{width:1440,height:900},{width:1440,height:600},{width:1000,height:800}]){
   await page.setViewportSize(viewport);
-  await page.evaluate(async()=>{await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));scrollTo({top:0,behavior:'instant'});});
-  const image=await page.locator('.poem__image').boundingBox();const heading=await page.locator('.poem__title').boundingBox();
-  assert.ok(Math.abs(image.y-heading.y)<1,`image/title alignment at ${viewport.width}×${viewport.height}: ${JSON.stringify({image,heading,scroll:await page.evaluate(()=>scrollY)})}`);
-  assert.ok(image.y+image.height<=viewport.height-24,`aligned image remains inside ${JSON.stringify({viewport,image})}`);
-  await page.evaluate(()=>scrollTo({top:99999,behavior:'instant'}));
-  const scrolled=await page.locator('.poem__image').boundingBox();assert.ok(Math.abs(scrolled.y-image.y)<.5);
+  await page.goto(base+'/puisi/halaman-nol/');await checkImage();
+  await page.goto(base+'/series/recursion/puisi/normal/');await checkImage();
  }
  await page.setViewportSize({width:1440,height:900});
- console.log('PASS desktop image aligns with the initial title and remains fixed across desktop viewport sizes');
+ console.log('PASS desktop image: title alignment, viewport fit, sticky reading and final-line boundary at three viewport sizes');
  if(process.argv.includes('--image-only')) process.exit(0);
  await page.goto(base+'/series/');
  assert.equal(await page.locator('[data-series-card]').count(),2);

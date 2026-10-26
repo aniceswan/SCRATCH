@@ -59,7 +59,10 @@ try{
   const before=await page.locator('.poem__image').boundingBox();
   await page.evaluate(()=>scrollTo({top:500,behavior:'instant'}));
   const after=await page.locator('.poem__image').boundingBox();
-  if(viewport.width>900)assert.ok(Math.abs(before.y-after.y)<1,'desktop illustration remains fixed');
+  if(viewport.width>900){
+   const body=await page.locator('.poem__body').boundingBox();
+   assert.ok(Math.abs(after.y-Math.min(before.y,body.y+body.height-after.height))<1,'desktop illustration stops at the final poem line');
+  }
   else assert.ok(before.y-after.y>100,'mobile illustration remains in normal flow');
   await page.goto(base+'/v3/series/');await page.evaluate(()=>document.fonts.ready);await checkTheme(page,'.topbar .brand__name');
   assert.equal(await page.locator('h1').textContent(),'poems');

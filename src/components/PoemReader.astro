@@ -45,36 +45,40 @@ const {paper: paperEdition} = getClassicEdition(Astro.url.pathname);
       </aside>
 
       <article class="poem__article">
-        <p class="poem__number" aria-label={`Puisi ${number} dari ${total}`}>{padIndex(number)} / {padIndex(total)}</p>
-        <h1 class="poem__title">
-          {titleWords.map((word, wordIndex) => (
-            <Fragment>
-              <span class="word" style={`--i:${wordIndex}`}><span>{word}</span></span>
-              {wordIndex < titleWords.length - 1 ? ' ' : ''}
-            </Fragment>
-          ))}
-        </h1>
+        <div class="poem__text">
+          <p class="poem__number" aria-label={`Puisi ${number} dari ${total}`}>{padIndex(number)} / {padIndex(total)}</p>
+          <h1 class="poem__title">
+            {titleWords.map((word, wordIndex) => (
+              <Fragment>
+                <span class="word" style={`--i:${wordIndex}`}><span>{word}</span></span>
+                {wordIndex < titleWords.length - 1 ? ' ' : ''}
+              </Fragment>
+            ))}
+          </h1>
 
-        {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="control" />}
+          {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="control" />}
 
-        <div class="poem__body" lang={poem.data.lang}>
-          <Content />
+          <div class="poem__body" lang={poem.data.lang}>
+            <Content />
+          </div>
         </div>
 
-        <div class="poem__end" aria-hidden="true">*</div>
+        <div class="poem__after">
+          <div class="poem__end" aria-hidden="true">*</div>
 
-        {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="player" />}
+          {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="player" />}
 
-        <nav class="poem-nav" aria-label="Baca puisi lainnya">
-          <a class="poem-nav__link" data-poem-nav="previous" href={previous.url}>
-            <span class="poem-nav__label">← PUISI SEBELUMNYA</span>
-            <span class="poem-nav__title">{previous.title}</span>
-          </a>
-          <a class="poem-nav__link poem-nav__link--next" data-poem-nav="next" href={next.url}>
-            <span class="poem-nav__label">PUISI SELANJUTNYA →</span>
-            <span class="poem-nav__title">{next.title}</span>
-          </a>
-        </nav>
+          <nav class="poem-nav" aria-label="Baca puisi lainnya">
+            <a class="poem-nav__link" data-poem-nav="previous" href={previous.url}>
+              <span class="poem-nav__label">← PUISI SEBELUMNYA</span>
+              <span class="poem-nav__title">{previous.title}</span>
+            </a>
+            <a class="poem-nav__link poem-nav__link--next" data-poem-nav="next" href={next.url}>
+              <span class="poem-nav__label">PUISI SELANJUTNYA →</span>
+              <span class="poem-nav__title">{next.title}</span>
+            </a>
+          </nav>
+        </div>
       </article>
     </main>
 

@@ -38,7 +38,7 @@ try{
   assert.equal(await page.locator('.poem__visual').count(),0,'the illustration is the background rather than a separate column');
   const background=page.locator('.fragment-scene');
   assert.equal(await background.evaluate(node=>getComputedStyle(node).position),'fixed');
-  const opacity=await background.locator('img').evaluate(node=>Number(getComputedStyle(node).opacity));assert.ok(opacity>=.06&&opacity<=.15,'the image is deliberately faint');
+  const opacity=await background.locator('img').evaluate(node=>Number(getComputedStyle(node).opacity));assert.ok(opacity>=.15&&opacity<=.2,'the background illustration is visible while keeping prose legible');
   await background.locator('img').evaluate(node=>node.decode());
   await headerFits(page);
   await page.waitForTimeout(350);

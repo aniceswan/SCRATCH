@@ -1,6 +1,7 @@
 interface PlaybackData { isPaused: boolean; isBuffering: boolean; position: number; duration: number; }
 interface EmbedController {
-  togglePlay(): void;
+  resume(): void;
+  restart(): void;
   pause(): void;
   addListener(event: 'ready', listener: () => void): void;
   addListener(event: 'playback_update', listener: (event: {data: PlaybackData}) => void): void;
@@ -22,10 +23,30 @@ if (player && mount && button && status) {
   let controller: EmbedController | undefined;
   let pending = 0;
   let ready = false;
+  let wantsPlayback = false;
+  let restarting = false;
+  let pendingAction: 'play' | 'pause' | null = null;
+
+  const showPlayback = (playing: boolean) => {
+    button.setAttribute('aria-pressed', String(playing));
+    button.setAttribute('aria-label', `${playing ? 'Jeda' : 'Putar'} ${title}`);
+  };
 
   const reportFallback = (message: string) => {
     status.textContent = message;
     status.classList.remove('sr-only');
+  };
+  const waitForPlayback = () => {
+    window.clearTimeout(pending);
+    pending = window.setTimeout(() => {
+      if (pendingAction === 'play') {
+        wantsPlayback = false;
+        restarting = false;
+        pendingAction = null;
+        showPlayback(false);
+      }
+      reportFallback('Jika lagu belum terdengar, tekan Play pada pemutar Spotify di bagian bawah.');
+    }, 5000);
   };
   const loadingTimeout = window.setTimeout(() => {
     if (!ready) reportFallback('Pemutar belum siap. Gunakan tautan Spotify di bagian bawah.');
@@ -33,12 +54,13 @@ if (player && mount && button && status) {
 
   button.addEventListener('click', () => {
     if (!controller || !ready) return;
-    window.clearTimeout(pending);
-    controller.togglePlay();
+    wantsPlayback = !wantsPlayback;
+    restarting = false;
+    pendingAction = wantsPlayback ? 'play' : 'pause';
+    waitForPlayback();
+    if (wantsPlayback) controller.resume();
+    else controller.pause();
     // Keep the icon honest: only Spotify playback events change its play/pause state.
-    pending = window.setTimeout(() => {
-      reportFallback('Jika lagu belum terdengar, tekan Play pada pemutar Spotify di bagian bawah.');
-    }, 5000);
   });
 
   window.onSpotifyIframeApiReady = api => {
@@ -65,13 +87,24 @@ if (player && mount && button && status) {
         const {isPaused, isBuffering, position, duration} = event.data;
         // Spotify previews can finish without ever reporting isPaused: true.
         const ended = duration > 0 && position >= duration;
-        // Spotify can ignore a second toggle while the first command buffers.
-        // Keep the control pending until the player reports a settled state.
-        button.disabled = isBuffering && !ended;
+        if (ended && wantsPlayback) {
+          // Several end updates can arrive before the restart is acknowledged.
+          if (!restarting) {
+            restarting = true;
+            pendingAction = 'play';
+            waitForPlayback();
+            embed.restart();
+          }
+          return;
+        }
+        // A user's Pause takes precedence over late playing/end updates, while
+        // an idle update during a requested start must not cancel its repeat.
+        if (!ended && ((pendingAction === 'pause' && !isPaused) || (pendingAction === 'play' && isPaused))) return;
         if (isBuffering && !ended) return;
-        const playing = !isPaused && !ended;
-        button.setAttribute('aria-pressed', String(playing));
-        button.setAttribute('aria-label', `${playing ? 'Jeda' : 'Putar'} ${title}`);
+        wantsPlayback = !isPaused && !ended;
+        restarting = false;
+        pendingAction = null;
+        showPlayback(wantsPlayback);
         window.clearTimeout(pending);
         status.textContent = '';
         status.classList.add('sr-only');
