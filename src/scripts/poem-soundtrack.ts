@@ -28,7 +28,7 @@ if (player && mount && button && status) {
     status.classList.remove('sr-only');
   };
   const loadingTimeout = window.setTimeout(() => {
-    if (!ready) reportFallback('Pemutar belum siap. Gunakan tautan Spotify di bawah puisi.');
+    if (!ready) reportFallback('Pemutar belum siap. Gunakan tautan Spotify di bagian bawah.');
   }, 15000);
 
   button.addEventListener('click', () => {
@@ -37,7 +37,7 @@ if (player && mount && button && status) {
     controller.togglePlay();
     // Keep the icon honest: only Spotify playback events change its play/pause state.
     pending = window.setTimeout(() => {
-      reportFallback('Jika lagu belum terdengar, tekan Play pada pemutar Spotify di bawah puisi.');
+      reportFallback('Jika lagu belum terdengar, tekan Play pada pemutar Spotify di bagian bawah.');
     }, 5000);
   });
 
@@ -84,7 +84,7 @@ if (player && mount && button && status) {
   script.async = true;
   script.addEventListener('error', () => {
     window.clearTimeout(loadingTimeout);
-    reportFallback('Spotify tidak dapat dimuat. Gunakan tautan di bawah puisi.');
+    reportFallback('Spotify tidak dapat dimuat. Gunakan tautan di bagian bawah.');
   });
   document.body.append(script);
 }

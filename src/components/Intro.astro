@@ -16,7 +16,7 @@ const openingArt = ['halaman-nol', 'rotasi', 'ruang-bising', 'sebuah-nama'].flat
 <section class="intro" id="intro" data-intro aria-labelledby="intro-title">
   {paperEdition && <div class="intro__artwork" aria-hidden="true">
     {openingArt.map((poem, index) => <figure class={`intro__fragment intro__fragment--${index + 1}`}>
-      <Image src={poem.data.image} alt="" widths={[160, 240, 360]} sizes="(max-width: 640px) 24vw, 12vw" loading="eager" decoding="async" />
+      <Image src={poem.data.image} alt="" widths={[160, 240, 360, 480, 640]} sizes={index === 0 || index === 3 ? '(max-height: 560px) and (orientation: landscape) 12vw, (max-width: 640px) 30vw, 15vw' : '(max-width: 640px) 21vw, 10vw'} loading="eager" decoding="async" />
     </figure>)}
   </div>}
   <div class="intro__inner">

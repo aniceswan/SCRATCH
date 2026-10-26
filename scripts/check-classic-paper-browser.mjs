@@ -53,7 +53,7 @@ try{
   assert.equal(await active(page).getAttribute('href'),'/v3/puisi/grafit/');
   await active(page).click();await page.waitForURL('**/v3/puisi/grafit/');await page.evaluate(()=>document.fonts.ready);
   await checkTheme(page,'.poem__title');
-  assert.equal(await page.locator('.topbar__link').getAttribute('href'),'/v3/');
+  assert.equal(await page.locator('.topbar__actions > .topbar__link').last().getAttribute('href'),'/v3/');
   assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/v3/puisi/halaman-nol/');
   assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/v3/puisi/kambium/');
   const before=await page.locator('.poem__image').boundingBox();
@@ -62,7 +62,7 @@ try{
   if(viewport.width>900)assert.ok(Math.abs(before.y-after.y)<1,'desktop illustration remains fixed');
   else assert.ok(before.y-after.y>100,'mobile illustration remains in normal flow');
   await page.goto(base+'/v3/series/');await page.evaluate(()=>document.fonts.ready);await checkTheme(page,'.topbar .brand__name');
-  assert.equal(await page.locator('h1').textContent(),'series');
+  assert.equal(await page.locator('h1').textContent(),'poems');
   assert.equal(await page.locator('.catalog__heading').count(),0,'series title appears beside the logo instead of above the covers');
   assert.equal(await page.locator('[data-series-card]').count(),2);
   await page.locator('[data-series-card][href$="/recursion/"]').click();await page.waitForURL('**/v3/series/recursion/');
@@ -71,7 +71,7 @@ try{
   assert.equal(await page.locator('.catalog__back').getAttribute('href'),'/v3/series/');
   await page.locator('[data-series-poem][href$="/pi/"]').click();await page.waitForURL('**/v3/series/recursion/puisi/pi/');
   await checkTheme(page,'.poem__title');
-  assert.equal(await page.locator('.topbar__link').getAttribute('href'),'/v3/series/recursion/');
+  assert.equal(await page.locator('.topbar__actions > .topbar__link').last().getAttribute('href'),'/v3/series/recursion/');
   assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/v3/series/recursion/puisi/rotasi/');
   assert.match(await page.locator('.poem__number').textContent(),/04 \/ 06/);
   await page.locator('[data-soundtrack] iframe').waitFor({timeout:20000});

@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 interface Props { entry: PoetrySeries; }
 const { entry } = Astro.props;
-const {basePath} = getClassicEdition(Astro.url.pathname);
+const {basePath, paper: paperEdition} = getClassicEdition(Astro.url.pathname);
 ---
 
 <Base title={entry.data.title} bodyClass="page-series">
@@ -21,7 +21,7 @@ const {basePath} = getClassicEdition(Astro.url.pathname);
     <Header />
     <main class="catalog" id="main">
       <header class="catalog__heading catalog__heading--collection">
-        <a class="catalog__back" href={`${basePath}/series/`}>← SERIES</a>
+        <a class="catalog__back" href={`${basePath}/series/`}>← {paperEdition ? 'POEMS' : 'SERIES'}</a>
         <h1 class="catalog__title catalog__title--collection">{entry.data.title}</h1>
         <p class="catalog__count">{entry.poems.length} puisi</p>
       </header>

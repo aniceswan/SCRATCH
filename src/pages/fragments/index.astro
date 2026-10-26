@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import { getFragments } from '../../lib/fragments';
+import { getClassicEdition } from '../../lib/classic-preview';
+import '../../styles/series.css';
+import '../../styles/fragments.css';
+
+const entries = await getFragments();
+const {basePath} = getClassicEdition(Astro.url.pathname);
+---
+
+<Base title="Fragments" bodyClass="page-fragments">
+  <div class="catalog-page">
+    <Header />
+    <main class="catalog fragment-catalog" id="main" aria-labelledby="page-title">
+      <div class="fragment-grid">
+        {entries.map((entry, index) => <a class="fragment-card" data-fragment-card href={`${basePath}/fragments/${entry.id}/`} aria-label={`Baca fragment ${entry.data.title}`}>
+          <div class="fragment-card__image">
+            <Image src={entry.data.image} alt={entry.data.imageAlt} widths={[360, 640, 960, 1440]} sizes="(max-width: 640px) 43vw, 44vw" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+            <span class="fragment-card__open" aria-hidden="true">↗</span>
+          </div>
+          <h2>{entry.data.title}</h2>
+          <p class="fragment-card__excerpt">{entry.data.excerpt}</p>
+        </a>)}
+      </div>
+      {entries.length === 0 && <p class="fragment-empty">Belum ada fragments.</p>}
+    </main>
+    <p class="copyright">© 2026 scratch</p>
+  </div>
+</Base>

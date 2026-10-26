@@ -10,7 +10,7 @@ const entries = await getSeries();
 const {basePath, paper: paperEdition} = getClassicEdition(Astro.url.pathname);
 ---
 
-<Base title="Series" bodyClass="page-series">
+<Base title={paperEdition ? 'Poems' : 'Series'} bodyClass="page-series">
   <div class="catalog-page">
     <Header />
     <main class:list={['catalog', {'catalog--series-index': paperEdition}]} id="main" aria-labelledby={paperEdition ? 'page-title' : undefined}>

@@ -2,7 +2,7 @@
 :root.classic-paper {
   --paper: #f4f3ec;
   --paper-light: #faf9f4;
-  --paper-grad: linear-gradient(#f4f3ec, #f4f3ec);
+  --paper-grad: radial-gradient(ellipse at 88% 12%, rgba(106,155,217,.26), transparent 64%), linear-gradient(140deg, #f3f3ed 0%, #dce7f3 48%, #bfd3ed 100%);
   --ink: #252923;
   --ink-soft: #686c62;
   --line: rgba(37, 41, 35, .22);
@@ -20,10 +20,11 @@
 .classic-paper .intro__artwork {position: absolute; inset: 0; pointer-events: none; user-select: none;}
 .classic-paper .intro__fragment {position: absolute; width: min(12vw, 19svh); margin: 0; box-shadow: 0 14px 30px -12px rgba(37,41,35,.28);}
 .classic-paper .intro__fragment img {display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;}
-.classic-paper .intro__fragment--1 {top: 7%; left: 6%; transform: rotate(-11deg);}
+.classic-paper .intro__fragment--1 {top: 2%; left: 6%; transform: rotate(-11deg);}
 .classic-paper .intro__fragment--2 {top: 7%; right: 7%; width: min(10vw, 17svh); transform: rotate(9deg);}
 .classic-paper .intro__fragment--3 {bottom: 7%; left: 13%; width: min(10vw, 17svh); transform: rotate(7deg);}
-.classic-paper .intro__fragment--4 {bottom: 6%; right: 10%; transform: rotate(-8deg);}
+.classic-paper .intro__fragment--4 {bottom: 6%; right: 7%; transform: rotate(-8deg);}
+.classic-paper .intro__fragment--1, .classic-paper .intro__fragment--4 {width: min(15vw, 23svh);}
 .classic-paper .brand {gap: 12px;}
 .classic-paper .brand__name {font-family: var(--display); font-size: clamp(25px, 2.4vw, 32px); font-weight: 400; line-height: 1; letter-spacing: -.045em;}
 .classic-paper .poem-card__frame {padding: 0; border: 0; background: transparent;}
@@ -47,8 +48,17 @@
 .classic-paper .series-card__open,
 .classic-paper .series-poem__open {background: var(--paper); color: var(--ink);}
 .classic-paper .catalog--series-index {padding-top: clamp(32px, 5vh, 56px);}
+.classic-paper .topbar__actions {gap: clamp(12px, 2vw, 28px);}
+.classic-paper .topbar__link, .classic-paper .intro-replay {min-height: 44px; display: inline-flex; align-items: center;}
+.classic-paper .section-switch {gap: 6px;}
 
 @media (max-width: 640px) {
+  .classic-paper .topbar {gap: 10px;}
+  .classic-paper .topbar__actions {gap: 8px;}
+  .classic-paper .brand {gap: 7px;}
+  .classic-paper .brand__ink {width: 28px;}
+  .classic-paper .brand__name {font-size: 24px;}
+  .classic-paper .series-entry, .classic-paper .fragments-entry {padding-inline: 9px; gap: 5px;}
   .classic-paper .intro__inner {column-gap: 16px;}
   .classic-paper .intro__title {font-size: clamp(66px, 20vw, 110px);}
   .classic-paper .intro__note {inline-size: min(30ch, calc(100vw - var(--gutter)*2 - 86px)); margin-top: 10px; font-size: clamp(13px, 3.8vw, 16px);}
@@ -57,6 +67,11 @@
   .classic-paper .intro__fragment--2 {top: 12%; right: 7%; width: min(21vw, 16svh);}
   .classic-paper .intro__fragment--3 {bottom: 8%; left: 8%; width: min(21vw, 16svh);}
   .classic-paper .intro__fragment--4 {bottom: 10%; right: 9%;}
+  .classic-paper .intro__fragment--1, .classic-paper .intro__fragment--4 {width: min(30vw, 23svh);}
+}
+@media (max-width: 360px) {
+  .classic-paper .brand__name {font-size: 22px;}
+  .classic-paper .topbar__link, .classic-paper .intro-replay {font-size: 7px; letter-spacing: .12em;}
 }
 @media (max-height: 480px) and (orientation: portrait) {
   .classic-paper .intro__fragment {width: min(22vw, 16svh);}
@@ -64,6 +79,7 @@
   .classic-paper .intro__fragment--2 {top: 7%;}
   .classic-paper .intro__fragment--3 {bottom: 7%;}
   .classic-paper .intro__fragment--4 {bottom: 6%;}
+  .classic-paper .intro__fragment--1, .classic-paper .intro__fragment--4 {width: min(27vw, 20svh);}
 }
 @media (max-height: 560px) and (orientation: landscape) {
   .classic-paper .intro__fragment {width: min(9vw, 19svh);}
@@ -71,6 +87,8 @@
   .classic-paper .intro__fragment--2 {top: 6%; right: 5%;}
   .classic-paper .intro__fragment--3 {bottom: 7%; left: 4%;}
   .classic-paper .intro__fragment--4 {bottom: 7%; right: 7%;}
+  .classic-paper .intro__fragment--1, .classic-paper .intro__fragment--4 {width: min(12vw, 22svh);}
+  .classic-paper .intro__fragment--1 {left: 1.5%;}
 }
 @media (prefers-reduced-motion: no-preference) {
   .classic-paper .intro__artwork {animation: intro-art-arrive 1.3s var(--ease-out) .12s both;}

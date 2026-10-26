@@ -136,7 +136,7 @@ assert.match(await page.locator('[data-poem-nav="previous"]').innerText(),/CO-OP
 assert.match(await page.locator('[data-poem-nav="next"]').innerText(),/ANOTASI/i);
 assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),'/puisi/co-op/');
 assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/puisi/anotasi/');
-assert.match(await page.locator('.topbar__link').innerText(),/ARCHIVE/);
+assert.match(await page.locator('.topbar__actions > .topbar__link').last().innerText(),/ARCHIVE/);
 await page.locator('[data-poem-nav="next"]').click();
 await page.waitForURL('**/puisi/anotasi/');
 assert.match(await page.locator('h1').innerText(),/ANOTASI/i);
@@ -199,6 +199,7 @@ const fallbackPixel=await sharp(await phone.screenshot()).extract({left:3,top:83
 await withoutGradient.evaluate(style=>style.remove());
 const expectedPaper=[244,243,236];
 const matchesPaper=pixel=>expectedPaper.every((value,index)=>Math.abs(pixel[index]-value)<=4);
+const matchesPaperGradient=pixel=>pixel[0]>=180&&pixel[0]<251&&pixel[1]>=200&&pixel[1]<251&&pixel[2]>=220&&pixel[2]<251;
 assert.ok(matchesPaper(fallbackPixel),`mobile canvas keeps its paper undercoat when the gradient is unavailable: ${[...fallbackPixel]}`);
 await phone.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
 for(let swipe=0;swipe<3;swipe++) {
@@ -210,7 +211,7 @@ for(let swipe=0;swipe<3;swipe++) {
  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
  await phone.waitForTimeout(100);
  const pixel=await sharp(await phone.screenshot()).extract({left:3,top:830,width:1,height:1}).removeAlpha().raw().toBuffer();
- assert.ok(matchesPaper(pixel),`paper remains visible after fast mobile scroll ${swipe}: ${[...pixel]}`);
+ assert.ok(matchesPaperGradient(pixel),`paper gradient remains visible after fast mobile scroll ${swipe}: ${[...pixel]}`);
 }
 assert.ok(await phone.evaluate(()=>scrollY>0),'fast touch gestures actually scroll the poem');
 await phone.screenshot({path:'/tmp/scratch-poem-fast-scroll-mobile.png'});

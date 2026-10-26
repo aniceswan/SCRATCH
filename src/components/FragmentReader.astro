@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import PoemSoundtrack from './PoemSoundtrack.astro';
+import { getClassicEdition } from '../lib/classic-preview';
+import type { Fragment } from '../lib/fragments';
+import '../styles/fragments.css';
+
+interface Props { fragment: Fragment; }
+const {fragment} = Astro.props;
+const {Content} = await render(fragment);
+const {basePath} = getClassicEdition(Astro.url.pathname);
+---
+
+<Base title={fragment.data.title} description={fragment.data.excerpt} bodyClass="page-fragment">
+  <div class="fragment-scene" aria-hidden="true">
+    <Image src={fragment.data.image} alt="" widths={[640, 960, 1440]} sizes="100vw" loading="eager" decoding="async" fetchpriority="high" />
+  </div>
+  <div class="fragment-page" id="top">
+    <Header backLink={{url: `${basePath}/fragments/`, label: 'FRAGMENTS', ariaLabel: 'Kembali ke fragments'}} />
+    <main class="fragment-reader" id="main">
+      <article aria-labelledby="fragment-title">
+        <h1 id="fragment-title">{fragment.data.title}</h1>
+        {fragment.data.spotify && <PoemSoundtrack track={fragment.data.spotify} placement="control" />}
+        <div class="fragment-body" lang={fragment.data.lang}><Content /></div>
+        {fragment.data.spotify && <PoemSoundtrack track={fragment.data.spotify} placement="player" />}
+        <nav class="fragment-reading-nav" aria-label="Navigasi fragment">
+          <a href={`${basePath}/fragments/`}>← ALL FRAGMENTS</a>
+          <a href="#top" aria-label="Kembali ke atas">↑</a>
+        </nav>
+      </article>
+    </main>
+    <p class="copyright">© 2026 scratch</p>
+  </div>
+</Base>

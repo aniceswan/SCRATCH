@@ -1,0 +1,9 @@
+---
+import FragmentReader from '../../components/FragmentReader.astro';
+import { getFragments } from '../../lib/fragments';
+
+export async function getStaticPaths() {
+  return (await getFragments()).map(fragment => ({params: {id: fragment.id}, props: {fragment}}));
+}
+---
+<FragmentReader {...Astro.props} />

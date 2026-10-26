@@ -37,10 +37,12 @@ Buka `http://localhost:4321`.
 - **Versi tampilan** tetap bisa dibandingkan: `/classic/` menyimpan tampilan lama,
   `/v2/` menyimpan alternatif editorial, dan `/v3/` menyimpan salinan desain utama.
   Semua memakai konten puisi yang sama dan menjaga navigasi dalam versi masing-masing.
-- **SERIES ↗** di samping BACK membuka koleksi puisi, dengan cover abstrak, nama, dan jumlah puisi.
+- **POEMS ↗** di samping BACK membuka koleksi puisi, dengan cover abstrak, nama, dan jumlah puisi.
   Pilih series untuk melihat gambar, nomor, judul, dan cuplikan puisi dalam grid biasa:
   tiga kolom di desktop, dua di tablet, satu di ponsel. Tautan sebelumnya/selanjutnya
   pada halaman baca mengikuti urutan series dan tetap berfungsi tanpa JavaScript.
+- **FRAGMENTS ↗** membuka tulisan lepas tanpa pengelompokan series. Kartu tersusun dua kolom
+  dengan gambar horizontal 4:3. Saat tulisan dibuka, ilustrasinya menjadi latar samar.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - **Lagu pengiring** tersedia pada seluruh 46 puisi. Tombol Play di dekat judul mengontrol
   pemutar Spotify di bawah puisi. Kurasi tambahan mengisi 38 puisi; delapan pilihan lagu

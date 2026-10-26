@@ -2,7 +2,7 @@ import { clotheslineSound as sound } from '../lib/clothesline-sound';
 
 let navigating = false;
 const poemLink = (target: EventTarget | null) => target instanceof Element
-  ? target.closest<HTMLAnchorElement>('a[data-poem-card], a[data-poem-nav], a[data-series-poem]') : null;
+  ? target.closest<HTMLAnchorElement>('a[data-poem-card], a[data-poem-nav], a[data-series-poem], a[data-fragment-card]') : null;
 
 // Start loading at the gesture so the recording is ready by the subsequent click.
 document.addEventListener('pointerdown', event => {

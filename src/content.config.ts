@@ -37,4 +37,22 @@ const series = defineCollection({
   }),
 });
 
-export const collections = { puisi, series };
+const fragments = defineCollection({
+  loader: glob({ base: './src/content/fragments', pattern: '**/*.md' }),
+  schema: ({ image }) => z.object({
+    title: z.string().min(1).max(180),
+    order: z.number().int().nonnegative().default(0),
+    lang: z.enum(['id', 'en']).default('id'),
+    image: image(),
+    imageAlt: z.string(),
+    excerpt: z.string().max(260),
+    spotify: z.object({
+      trackId: z.string().regex(/^[A-Za-z0-9]{22}$/),
+      title: z.string().min(1),
+      artist: z.string().min(1),
+    }).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { puisi, series, fragments };

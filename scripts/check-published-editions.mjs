@@ -29,11 +29,11 @@ try{
    assert.equal(await page.locator('.brand__name').count(),paper?1:0);
    await page.keyboard.press('ArrowRight');await page.waitForFunction(()=>document.querySelector('[aria-current="true"]')?.getAttribute('data-index')==='1');
    await page.locator('[data-poem-card][aria-current="true"]').click();await page.waitForURL(`**${prefix}/puisi/grafit/`);await settle(page);
-   assert.equal(await page.locator('.topbar__link').getAttribute('href'),`${prefix}/`);
+   assert.equal(await page.locator('.topbar__actions > .topbar__link').last().getAttribute('href'),`${prefix}/`);
    assert.equal(await page.locator('[data-poem-nav="previous"]').getAttribute('href'),`${prefix}/puisi/halaman-nol/`);
    assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),`${prefix}/puisi/kambium/`);
    await page.goto(`${base}${prefix}/series/`);await settle(page);
-   assert.equal(await page.locator('h1').textContent(),paper?'series':'series*');
+   assert.equal(await page.locator('h1').textContent(),paper?'poems':'series*');
    assert.equal(await page.locator('.catalog__heading').count(),paper?0:1);
    assert.equal(await page.locator('[data-series-card]').count(),2);
    await page.locator(`[data-series-card][href="${prefix}/series/recursion/"]`).click();await page.waitForURL(`**${prefix}/series/recursion/`);await settle(page);

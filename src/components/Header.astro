@@ -12,29 +12,36 @@ const {basePath, paper: paperEdition} = getClassicEdition(Astro.url.pathname);
 const currentPath = Astro.url.pathname.replace(/\/+$/, '');
 const paperSeries = paperEdition && (currentPath === `${basePath}/series` || currentPath.startsWith(`${basePath}/series/`));
 const paperSeriesIndex = paperSeries && currentPath === `${basePath}/series`;
+const paperFragments = paperEdition && (currentPath === `${basePath}/fragments` || currentPath.startsWith(`${basePath}/fragments/`));
+const paperFragmentsIndex = paperFragments && currentPath === `${basePath}/fragments`;
+const sectionLabel = paperFragments ? 'fragments' : paperSeries ? 'poems' : null;
 ---
 
 <header class="topbar">
-  <a class="brand" href={home ? '#arsip' : `${basePath}/`} aria-label={paperSeries ? 'series | scratch' : 'scratch | archive'}>
+  <a class="brand" href={home ? '#arsip' : `${basePath}/`} aria-label={sectionLabel ? `${sectionLabel} | scratch` : 'scratch | archive'}>
     <InkLogo class="brand__ink" />
-    {paperSeriesIndex ? <h1 class="brand__name" id="page-title">series</h1> : paperSeries ? <span class="brand__name">series</span> : home && paperEdition && <span class="brand__name">scratch</span>}
+    {paperSeriesIndex || paperFragmentsIndex ? <h1 class="brand__name" id="page-title">{sectionLabel}</h1> : sectionLabel ? <span class="brand__name">{sectionLabel}</span> : home && paperEdition && <span class="brand__name">scratch</span>}
   </a>
 
   <nav class="topbar__actions" aria-label="Navigasi utama">
     {
       home ? (
         <>
-          <a class="topbar__link series-entry" href={`${basePath}/series/`} aria-label="Buka series puisi">
-            SERIES <span aria-hidden="true">↗</span>
+          <a class="topbar__link series-entry" href={`${basePath}/series/`} aria-label={paperEdition ? 'Buka poems' : 'Buka series puisi'}>
+            {paperEdition ? 'POEMS' : 'SERIES'} <span aria-hidden="true">↗</span>
           </a>
+          {paperEdition && <a class="topbar__link fragments-entry" href={`${basePath}/fragments/`} aria-label="Buka fragments">FRAGMENTS <span aria-hidden="true">↗</span></a>}
           <button class="intro-replay" type="button" data-replay-intro aria-label="Kembali ke pembuka">
             BACK <span aria-hidden="true">←</span>
           </button>
         </>
       ) : (
-        <a class="topbar__link" href={backLink?.url ?? `${basePath}/`} aria-label={backLink?.ariaLabel}>
-          {backLink?.label ?? 'ARCHIVE'} <span aria-hidden="true">↗</span>
-        </a>
+        <>
+          {paperEdition && <a class="topbar__link section-switch" href={paperFragments ? `${basePath}/series/` : `${basePath}/fragments/`} aria-label={paperFragments ? 'Buka poems' : 'Buka fragments'}>{paperFragments ? 'POEMS' : 'FRAGMENTS'} <span aria-hidden="true">↗</span></a>}
+          <a class="topbar__link" href={backLink?.url ?? `${basePath}/`} aria-label={backLink?.ariaLabel}>
+            {backLink?.label ?? 'ARCHIVE'} <span aria-hidden="true">↗</span>
+          </a>
+        </>
       )
     }
   </nav>

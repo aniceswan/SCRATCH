@@ -1,0 +1,18 @@
+[
+  {
+    "asset": "src/assets/fragments/rembulan.webp",
+    "generator": "built-in image_gen",
+    "sourceImage": "exec-643c5afe-9544-458b-9c4b-6addcc03f3cf.png",
+    "sourceDimensions": [
+      1448,
+      1086
+    ],
+    "outputDimensions": [
+      1440,
+      1080
+    ],
+    "format": "webp",
+    "quality": 82,
+    "prompt": "Use case: editorial-illustration. Asset type: a landscape 4:3 cover artwork for SCRATCH, a restrained literary art journal, also used as a very faint full-page background behind Indonesian prose. Generate a new original image at 1536 x 1152, landscape 4:3 composition. Subject: a quiet loyal moon above layered earth, water and small growing things, evoking companionship that lasts through darkness and eventually yields to morning. Style: sophisticated abstract mixed-media print on tactile handmade paper, soft collagraph and cut-paper forms, uneven ink edges, delicate visible fibers and grain, painterly organic geometry; not photographic and not a literal detailed landscape. Composition: one pale ivory moon disc placed in the upper right third, generous calm midnight-teal and dusty-indigo negative space across the center, a few broad sage and slate-blue hills along the lower third, a subtle broken moon reflection in still water, one tiny warm ivory wildflower suggested by sparse organic marks at the lower left. A thin muted warm dawn edge hints at farewell. Restrained palette of ink blue, desaturated petrol teal, sage, gray lilac and moonlit cream; rich enough as a standalone cover but gentle and contemplative. Keep all important shapes inside a generous 12 percent safe margin. No lettering, no title, no words, no logos, no typography, no frame, no border, no people, no faces, no collage of separate panels."
+  }
+]
