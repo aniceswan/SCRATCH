@@ -1,3 +1,4 @@
+import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
@@ -55,10 +56,11 @@ try{
  assert.equal((await page.locator('[data-feature-number]').innerText()).trim(),'01 / 46');
  const catalog=await page.locator('[data-poems]').evaluate(el=>JSON.parse(el.textContent));
  assert.equal(catalog.length,46);assert.equal(catalog[40].url,'/puisi/ruang-bising/');assert.equal(catalog[45].url,'/puisi/normal/');
+ const manifest=JSON.parse(await readFile(new URL('./poem-soundtracks.json',import.meta.url),'utf8'));
  const selected=[['halaman-nol','4R2kfaDFhslZEMJqAFNpdd'],['kontur','2AwUbBYWlFX2VjP4wTiUI2'],['ambang','2JcLhDcdmV8ZZ7aTvyIp6s'],['the-weather-i-withheld','3zOYmiNOuyDL0ClxJcEJ0T'],['the-longest-time','4R2kfaDFhslZEMJqAFNpdd'],['katalog-benda-yang-tak-jadi','0x7PmByJWVXdeipevd6KZS'],['sebuah-nama','1fDFHXcykq4iw8Gg7s5hG9'],['pi','5Htq8DDDN0Xce9MwqzAzui']];
  for(const [slug,id] of selected){
   await page.goto(base+`/puisi/${slug}/`,{waitUntil:'domcontentloaded'});
-  assert.equal(await page.locator('[data-soundtrack]').getAttribute('data-track-id'),id,slug);
+  assert.equal(await page.locator('[data-youtube-soundtrack]').getAttribute('data-video-id'),manifest.find(track=>track.trackId===id).youtube.videoId,slug);
   assert.equal(await page.locator('[data-soundtrack-play]').count(),1,slug);
  }
  for(const viewport of [{width:390,height:844},{width:320,height:640}]){
@@ -71,13 +73,13 @@ try{
   await phone.evaluate(()=>scrollTo({top:300,behavior:'instant'}));
   const after=await phone.locator('.poem__image').boundingBox();
   assert.ok(before.y-after.y>250,'mobile image scrolls naturally rather than fixed');
-  assert.equal(await phone.locator('[data-soundtrack]').getAttribute('data-track-id'),'1fDFHXcykq4iw8Gg7s5hG9');
+  assert.equal(await phone.locator('[data-youtube-soundtrack]').getAttribute('data-video-id'),manifest.find(track=>track.trackId==='1fDFHXcykq4iw8Gg7s5hG9').youtube.videoId);
   await phone.close();
  }
  const plain=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
  await plain.goto(base+'/series/recursion/');await plain.locator('[data-series-poem]').nth(3).click();
  await plain.waitForURL('**/series/recursion/puisi/pi/');
  assert.equal((await plain.locator('.poem__number').innerText()).trim(),'04 / 06');
- assert.equal(await plain.locator('[data-soundtrack] iframe').count(),1);
+ assert.equal(await plain.locator('[data-youtube-frame]').count(),1);
  console.log('PASS recursion: two series, six artworks, 46 archive poems, ordered wrap, eight soundtrack assignments, mobile scroll and no-JS');
 }finally{await browser.close();}

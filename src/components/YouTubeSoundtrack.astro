@@ -9,8 +9,8 @@ const url = `https://www.youtube.com/watch?v=${track.videoId}&t=${track.startSec
 const embed = `https://www.youtube.com/embed/${track.videoId}?enablejsapi=1&playsinline=1&autoplay=0&rel=0&start=${track.startSeconds}`;
 ---
 
-{placement === 'control' ? <SoundtrackControl title={track.title} artist={track.artist} controls="fragment-youtube" /> : (
-  <section class="youtube-soundtrack" id="fragment-youtube" data-youtube-soundtrack data-video-id={track.videoId} data-track-title={`${track.title} oleh ${track.artist}`} data-start-seconds={track.startSeconds} aria-label={`Lagu pengiring: ${track.title} oleh ${track.artist}`}>
+{placement === 'control' ? <SoundtrackControl title={track.title} artist={track.artist} controls="youtube-soundtrack" /> : (
+  <section class="youtube-soundtrack" id="youtube-soundtrack" data-youtube-soundtrack data-video-id={track.videoId} data-track-title={`${track.title} oleh ${track.artist}`} data-start-seconds={track.startSeconds} aria-label={`Lagu pengiring: ${track.title} oleh ${track.artist}`}>
     <div class="youtube-soundtrack__frame">
       <iframe data-youtube-frame src={embed} title={`YouTube: ${track.title} oleh ${track.artist}`} width="560" height="315" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>

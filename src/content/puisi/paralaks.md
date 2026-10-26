@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/paralaks.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi PARALAKS"
 excerpt: "Dua jendela menghadap halaman yang sama. Dari sini, pohon menelan bulan;"
-spotify:
-  trackId: "5S4aYQAJOwJMAamANWlICO"
+youtube:
+  videoId: "osdoLjUNFnA"
   title: "exile (feat. Bon Iver)"
   artist: "Taylor Swift, Bon Iver"
+  startSeconds: 0
 draft: false
 ---
 

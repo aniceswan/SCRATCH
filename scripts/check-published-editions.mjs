@@ -48,7 +48,7 @@ try{
  const nojs=await browser.newPage({viewport:{width:390,height:844},javaScriptEnabled:false});
  for(const prefix of ['', '/classic']){
   await nojs.goto(`${base}${prefix}/`);assert.equal(await nojs.locator('.nojs-list a').count(),46);assert.equal(await nojs.locator('.nojs-list a').first().getAttribute('href'),`${prefix}/puisi/halaman-nol/`);
-  await nojs.goto(`${base}${prefix}/series/recursion/puisi/pi/`);assert.equal(await nojs.locator('[data-poem-nav="next"]').getAttribute('href'),`${prefix}/series/recursion/puisi/rotasi/`);assert.equal(await nojs.locator('[data-soundtrack] iframe').count(),1);
+  await nojs.goto(`${base}${prefix}/series/recursion/puisi/pi/`);assert.equal(await nojs.locator('[data-poem-nav="next"]').getAttribute('href'),`${prefix}/series/recursion/puisi/rotasi/`);assert.equal(await nojs.locator('[data-youtube-frame]').count(),1);
  }
- console.log('PASS main and original editions keep no-JavaScript reading and Spotify embeds');
+ console.log('PASS main and original editions keep no-JavaScript reading and YouTube embeds');
 }finally{await browser.close();}

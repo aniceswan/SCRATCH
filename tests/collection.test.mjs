@@ -53,9 +53,10 @@ test('the original eight soundtrack selections remain unchanged', async () => {
     ['sebuah-nama','1fDFHXcykq4iw8Gg7s5hG9','About You','The 1975'],
     ['pi','5Htq8DDDN0Xce9MwqzAzui','La La Lost You','88rising, NIKI'],
   ];
+  const manifest=JSON.parse(await readFile(new URL('../scripts/poem-soundtracks.json',import.meta.url),'utf8'));
   for(const [slug,id,title,artist]of expected) {
     const markdown=await readFile(new URL(`../src/content/puisi/${slug}.md`,import.meta.url),'utf8');
-    assert.ok(markdown.includes(`trackId: "${id}"`),slug);
+    assert.equal(manifest.find(track=>track.poems.includes(slug))?.trackId,id,slug);
     assert.ok(markdown.includes(`  title: "${title}"`),slug);
     assert.ok(markdown.includes(`  artist: "${artist}"`),slug);
   }

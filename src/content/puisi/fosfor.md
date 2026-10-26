@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/fosfor.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi FOSFOR"
 excerpt: "Satu gulir. Lalu cahaya. Tak lebih lama dari tarikan napas"
-spotify:
-  trackId: "3QaPy1KgI7nu9FJEQUgn6h"
+youtube:
+  videoId: "l08Zw-RY__Q"
   title: "WILDFLOWER"
   artist: "Billie Eilish"
+  startSeconds: 0
 draft: false
 ---
 

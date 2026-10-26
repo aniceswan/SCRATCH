@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/tangan-yang-belum-pergi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi TANGAN YANG BELUM PERGI"
 excerpt: "Aku berkata, kasihan. Kuberi jalan keluar"
-spotify:
-  trackId: "07roY7nanmTcgo8V8edIkH"
+youtube:
+  videoId: "HO1Yq7vxvvc"
   title: "care"
   artist: "Crying City"
+  startSeconds: 0
 draft: false
 ---
 

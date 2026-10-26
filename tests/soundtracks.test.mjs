@@ -10,25 +10,28 @@ async function poems(){
  return Promise.all((await readdir(folder)).filter(name=>name.endsWith('.md')).map(async name=>{
   const text=await readFile(new URL(name,folder),'utf8');
   const title=JSON.parse(text.match(/^title: (.+)$/m)[1]);
-  const match=text.match(/^spotify:\n  trackId: (.+)\n  title: (.+)\n  artist: (.+)$/m);
-  return {slug:name.slice(0,-3),title,track:match?{trackId:JSON.parse(match[1]),title:JSON.parse(match[2]),artist:JSON.parse(match[3])}:null};
+  assert.doesNotMatch(text,/^spotify:/m,'Spotify is no longer configured for readers');
+  const match=text.match(/^youtube:\n  videoId: (.+)\n  title: (.+)\n  artist: (.+)$/m);
+  return {slug:name.slice(0,-3),title,track:match?{videoId:JSON.parse(match[1]),title:JSON.parse(match[2]),artist:JSON.parse(match[3])}:null};
  }));
 }
 
-test('all 46 poems have one verified soundtrack matching the manifest',async()=>{
+test('all 46 poems retain their curated soundtrack through matching YouTube metadata',async()=>{
  const [entries,manifest]=await Promise.all([poems(),readFile(new URL('../scripts/poem-soundtracks.json',import.meta.url),'utf8').then(JSON.parse)]);
  assert.equal(entries.length,46);assert.equal(manifest.length,43);
  const assignments=new Map();
  for(const record of manifest){
   assert.match(record.trackId,/^[A-Za-z0-9]{22}$/);
   assert.equal(record.source,`https://open.spotify.com/track/${record.trackId}`);
+  assert.match(record.youtube.videoId,/^[A-Za-z0-9_-]{11}$/);
+  assert.equal(record.youtube.source,`https://www.youtube.com/watch?v=${record.youtube.videoId}`);
   for(const slug of record.poems){assert.ok(!assignments.has(slug),`${slug} has a unique assignment`);assignments.set(slug,record);}
  }
  assert.equal(assignments.size,46);
  for(const entry of entries){
   assert.ok(entry.track,entry.slug);
   const expected=assignments.get(entry.slug);assert.ok(expected,entry.slug);
-  assert.deepEqual(entry.track,{trackId:expected.trackId,title:expected.title,artist:expected.artist},entry.slug);
+  assert.deepEqual(entry.track,{videoId:expected.youtube.videoId,title:expected.title,artist:expected.artist},entry.slug);
  }
 });
 

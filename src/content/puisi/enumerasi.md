@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/enumerasi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ENUMERASI"
 excerpt: "Mengapa pertama jatuh dari mulut seperti uang logam ke dasar sumur."
-spotify:
-  trackId: "18WFFUIsewmA8g31KAeo3e"
+youtube:
+  videoId: "_PsBoqNwYo4"
   title: "The Prophecy"
   artist: "Taylor Swift"
+  startSeconds: 0
 draft: false
 ---
 

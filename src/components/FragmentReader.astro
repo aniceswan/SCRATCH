@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
-import PoemSoundtrack from './PoemSoundtrack.astro';
 import YouTubeSoundtrack from './YouTubeSoundtrack.astro';
 import { getClassicEdition } from '../lib/classic-preview';
 import type { Fragment } from '../lib/fragments';
@@ -24,9 +23,9 @@ const {basePath} = getClassicEdition(Astro.url.pathname);
     <main class="fragment-reader" id="main">
       <article aria-labelledby="fragment-title">
         <h1 id="fragment-title">{fragment.data.title}</h1>
-        {fragment.data.youtube ? <YouTubeSoundtrack track={fragment.data.youtube} placement="control" /> : fragment.data.spotify && <PoemSoundtrack track={fragment.data.spotify} placement="control" />}
+        {fragment.data.youtube && <YouTubeSoundtrack track={fragment.data.youtube} placement="control" />}
         <div class="fragment-body" lang={fragment.data.lang}><Content /></div>
-        {fragment.data.youtube ? <YouTubeSoundtrack track={fragment.data.youtube} placement="player" /> : fragment.data.spotify && <PoemSoundtrack track={fragment.data.spotify} placement="player" />}
+        {fragment.data.youtube && <YouTubeSoundtrack track={fragment.data.youtube} placement="player" />}
         <nav class="fragment-reading-nav" aria-label="Navigasi fragment">
           <a href={`${basePath}/fragments/`}>← ALL FRAGMENTS</a>
           <a href="#top" aria-label="Kembali ke atas">↑</a>

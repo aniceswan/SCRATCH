@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/sebuah-nama.webp"
 imageAlt: "Dua sapuan pigmen lembut merah muda dan safron yang nyaris bersentuhan di atas kertas pucat"
 excerpt: "Malam merapat pada suara gunting dan sisa kertas. Menyusun jebakan logika untuk riuh esok hari."
-spotify:
-  trackId: "1fDFHXcykq4iw8Gg7s5hG9"
+youtube:
+  videoId: "wXmsqoGrAic"
   title: "About You"
   artist: "The 1975"
+  startSeconds: 0
 draft: false
 ---
 

@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/palimsest.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi PALIMSEST"
 excerpt: "Kukikis aksara dari perkamen, perlahan, agar lembaran tak terkoyak."
-spotify:
-  trackId: "1BwXCMe8F4goPwResZJPHb"
+youtube:
+  videoId: "Ur_wAcYDnuA"
   title: "right where you left me - bonus track"
   artist: "Taylor Swift"
+  startSeconds: 0
 draft: false
 ---
 

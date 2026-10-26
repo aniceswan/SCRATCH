@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
-import PoemSoundtrack from './PoemSoundtrack.astro';
+import YouTubeSoundtrack from './YouTubeSoundtrack.astro';
 import { padIndex, type Poem } from '../lib/poems';
 import { getClassicEdition } from '../lib/classic-preview';
 
@@ -56,7 +56,7 @@ const {paper: paperEdition} = getClassicEdition(Astro.url.pathname);
             ))}
           </h1>
 
-          {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="control" />}
+          {poem.data.youtube && <YouTubeSoundtrack track={poem.data.youtube} placement="control" />}
 
           <div class="poem__body" lang={poem.data.lang}>
             <Content />
@@ -66,7 +66,7 @@ const {paper: paperEdition} = getClassicEdition(Astro.url.pathname);
         <div class="poem__after">
           <div class="poem__end" aria-hidden="true">*</div>
 
-          {poem.data.spotify && <PoemSoundtrack track={poem.data.spotify} placement="player" />}
+          {poem.data.youtube && <YouTubeSoundtrack track={poem.data.youtube} placement="player" />}
 
           <nav class="poem-nav" aria-label="Baca puisi lainnya">
             <a class="poem-nav__link" data-poem-nav="previous" href={previous.url}>

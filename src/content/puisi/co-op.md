@@ -6,10 +6,11 @@ lang: "en"
 image: "../../assets/puisi/co-op.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi CO-OP"
 excerpt: "We entered a small, obedient universe, three lives, a map,"
-spotify:
-  trackId: "1op42npC4mpl0SwoNoNEq4"
+youtube:
+  videoId: "JJQLrogZLhU"
   title: "there for the night"
   artist: "asumuh, Crying City"
+  startSeconds: 0
 draft: false
 ---
 

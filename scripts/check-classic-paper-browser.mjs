@@ -78,8 +78,8 @@ try{
   assert.equal(await page.locator('.topbar__actions > .topbar__link').last().getAttribute('href'),'/v3/series/recursion/');
   assert.equal(await page.locator('[data-poem-nav="next"]').getAttribute('href'),'/v3/series/recursion/puisi/rotasi/');
   assert.match(await page.locator('.poem__number').textContent(),/04 \/ 06/);
-  await page.locator('[data-soundtrack] iframe').waitFor({timeout:20000});
-  assert.equal(await page.locator('[data-soundtrack] iframe').count(),1);
+  await page.locator('[data-youtube-frame]').waitFor({timeout:20000});
+  assert.equal(await page.locator('[data-youtube-frame]').count(),1);
   assert.deepEqual(errors,[]);
   if(skippedTransitions.length) console.log(`NOTE Chrome skipped ${skippedTransitions.length} native transition(s) during automated navigation`);
   await page.close();console.log(`PASS classic paper ${viewport.width}×${viewport.height}: palette, fonts, original opening/carousel, reader and series navigation`);
@@ -108,6 +108,6 @@ try{
  await session.close();
  const nojs=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
  await nojs.goto(base+'/v3/');assert.equal(await nojs.locator('.nojs-list a').count(),46);assert.equal(await nojs.locator('.nojs-list a').first().getAttribute('href'),'/v3/puisi/halaman-nol/');
- await nojs.goto(base+'/v3/puisi/pi/');assert.equal(await nojs.locator('[data-soundtrack] iframe').count(),1);assert.equal(await nojs.locator('[data-poem-nav="next"]').getAttribute('href'),'/v3/puisi/rotasi/');
+ await nojs.goto(base+'/v3/puisi/pi/');assert.equal(await nojs.locator('[data-youtube-frame]').count(),1);assert.equal(await nojs.locator('[data-poem-nav="next"]').getAttribute('href'),'/v3/puisi/rotasi/');
  console.log('PASS independent intro sessions and no-JavaScript navigation');
 } finally{await browser.close();}

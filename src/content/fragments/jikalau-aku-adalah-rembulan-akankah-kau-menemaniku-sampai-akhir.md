@@ -5,10 +5,6 @@ lang: "id"
 image: "../../assets/fragments/rembulan.webp"
 imageAlt: "Rembulan gading di atas danau dan perbukitan biru dalam kolase kertas bertekstur, dengan setangkai bunga kecil di tepian"
 excerpt: "Setiap hari kau datang membawa kegembiraan yang kadang sukar kuutarakan."
-spotify:
-  trackId: "0urpBLpcm6DOGzs86rcKd8"
-  title: "Untuk Perempuan Yang Sedang Di Pelukan"
-  artist: "Payung Teduh"
 youtube:
   videoId: "3H2SpXpIwhY"
   title: "Untuk Perempuan Yang Sedang Di Pelukan"

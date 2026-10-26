@@ -10,7 +10,7 @@ Status: ditunda. Catatan ini tidak menerapkan perubahan performa.
 
 ## Preferensi pengguna
 
-- **Spotify tetap langsung dimuat saat halaman baca dibuka.** Jangan menundanya sampai tombol Play ditekan atau pemutar mendekati layar; pengguna ingin lagu sudah siap ketika Play ditekan.
+- **Pemutar YouTube tetap langsung dimuat saat halaman baca dibuka.** Jangan menundanya sampai tombol Play ditekan atau pemutar mendekati layar; pengguna ingin lagu sudah siap ketika Play ditekan.
 - **Animasi dan audio tetap seperti sekarang.** Optimasi aktivitas animasi/audio saat halaman diam atau tab tersembunyi tidak diminta.
 
-Pengulangan lagu sampai pengguna menekan Pause merupakan perilaku yang sudah disetujui dan perlu dipertahankan.
+Pemutar sekarang menggunakan YouTube untuk seluruh puisi dan fragments. Lagu dimulai dari awal dan berhenti setelah selesai, tanpa looping. Video dimuat langsung dari YouTube, tanpa Functions atau proxy Vercel.

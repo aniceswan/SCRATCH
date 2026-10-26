@@ -141,7 +141,7 @@ h1, h2, p, figure {margin: 0;}
 .edition .soundtrack-play {color: var(--ed-blue); background: transparent; border-color: var(--ed-line);}
 .edition .soundtrack-play:hover:not(:disabled) {background: var(--ed-lime);}
 .edition .soundtrack {margin-top: 15px;}
-.edition .soundtrack__external {font-size: 10px; letter-spacing: .02em;}
+.edition .youtube-soundtrack__external {font-size: 10px; letter-spacing: .02em;}
 .reader-navigation {display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px; border-top: 1px solid var(--ed-line); padding-top: 27px; margin-top: 65px;}
 .reader-navigation > a {display: flex; flex-direction: column; gap: 18px; align-items: start;}
 .reader-navigation > a:last-child {text-align: right; align-items: end;}

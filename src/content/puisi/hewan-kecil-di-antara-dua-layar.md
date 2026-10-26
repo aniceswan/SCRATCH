@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/hewan-kecil-di-antara-dua-layar.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi HEWAN KECIL DI ANTARA DUA LAYAR"
 excerpt: "Dulu ada makhluk kecil hidup dari kebiasaan kita."
-spotify:
-  trackId: "6Uwi2Qk3H7fM4b4W4ExrAp"
+youtube:
+  videoId: "W-Khe7DInxo"
   title: "Scott Street"
   artist: "Phoebe Bridgers"
+  startSeconds: 0
 draft: false
 ---
 

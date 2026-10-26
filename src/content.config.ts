@@ -2,6 +2,13 @@ import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const youtubeSoundtrack = z.object({
+  videoId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
+  title: z.string().min(1),
+  artist: z.string().min(1),
+  startSeconds: z.number().int().nonnegative().default(0),
+});
+
 const puisi = defineCollection({
   loader: glob({ base: './src/content/puisi', pattern: '**/*.md' }),
   schema: ({ image }) =>
@@ -13,11 +20,7 @@ const puisi = defineCollection({
       image: image(),
       imageAlt: z.string(),
       excerpt: z.string().max(260),
-      spotify: z.object({
-        trackId: z.string().regex(/^[A-Za-z0-9]{22}$/),
-        title: z.string().min(1),
-        artist: z.string().min(1),
-      }).optional(),
+      youtube: youtubeSoundtrack.optional(),
       draft: z.boolean().default(false),
     }),
 });
@@ -46,17 +49,7 @@ const fragments = defineCollection({
     image: image(),
     imageAlt: z.string(),
     excerpt: z.string().max(260),
-    youtube: z.object({
-      videoId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
-      title: z.string().min(1),
-      artist: z.string().min(1),
-      startSeconds: z.number().int().nonnegative().default(0),
-    }).optional(),
-    spotify: z.object({
-      trackId: z.string().regex(/^[A-Za-z0-9]{22}$/),
-      title: z.string().min(1),
-      artist: z.string().min(1),
-    }).optional(),
+    youtube: youtubeSoundtrack.optional(),
     draft: z.boolean().default(false),
   }),
 });

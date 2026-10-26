@@ -46,7 +46,7 @@ Buka `http://localhost:4321`.
   dengan gambar horizontal 4:3. Saat tulisan dibuka, ilustrasinya menjadi latar samar.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
 - **Lagu pengiring** tersedia pada seluruh 46 puisi. Tombol Play di dekat judul mengontrol
-  pemutar Spotify di bawah puisi. Kurasi tambahan mengisi 38 puisi; delapan pilihan lagu
+  pemutar YouTube di bawah puisi. Kurasi tambahan mengisi 38 puisi; delapan pilihan lagu
   yang sudah ada tetap dipertahankan. Sumber kurasi ada di `content-source/playlist-puisi.txt`.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk menggeser carousel. Kartu aktif besar di tengah, dengan tetangga lebih kecil di kedua sisi.
@@ -328,14 +328,27 @@ alur halaman. Enam ilustrasi recursion dan dua cover series memakai medium, warn
 yang berbeda. Semuanya dibuat dengan built-in ImageGen, WebP 1200×1500; prompt dan
 lokasi aset revisi ada di `scripts/poetry-art-refresh.json`, termasuk gambar Halaman Nol terbaru.
 
-Puisi dapat memiliki field opsional `spotify` berisi `trackId`, `title`, dan `artist`.
-Tombol Play/Pause di atas puisi mengontrol player Spotify resmi yang selalu tampil di bawah
-puisi melalui iFrame API, tanpa autoplay. Pemutaran penuh/cuplikannya ditentukan Spotify.
-Setelah diputar, lagu berulang dari awal setiap selesai sampai pengguna menekan Pause,
-baik lewat tombol di atas maupun pemutar Spotify. Perilaku ini juga berlaku pada fragments.
-Daftar delapan penempatan lagu yang sudah diverifikasi ada di `scripts/poem-soundtracks.json`.
-Jalankan `scripts/check-spotify-browser.mjs` untuk tes pemutaran nyata dan
-`scripts/check-recursion-browser.mjs` untuk series, batas gambar di akhir teks, dan pilihan lagu, memakai
-variabel browser yang sama dengan suite archive.
-`scripts/check-soundtrack-repeat-browser.mjs` memeriksa akhir lagu berulang, Pause saat
-pergantian putaran atau buffering, kontrol player resmi, dan pemutaran yang diblokir.
+Puisi dan fragments dapat memiliki field opsional `youtube` berisi `videoId`, `title`,
+`artist`, dan `startSeconds` (default 0). Tombol Play/Pause di atas mengontrol satu
+player YouTube yang terlihat di bawah teks melalui IFrame API. Player langsung dimuat
+saat halaman baca dibuka, tanpa autoplay. Lagu diputar dari awal sampai selesai lalu
+berhenti; ikon kembali ke Play dan klik berikutnya memulai ulang dari awal. Pemutar
+menjeda ketika halaman disembunyikan. Tidak ada looping, batas 30 detik, proxy streaming,
+atau audio/video yang dihosting di Vercel.
+
+`scripts/poem-soundtracks.json` menyimpan 43 lagu untuk 46 puisi, termasuk referensi
+Spotify sebelumnya untuk menjaga kurasi dan sumber video YouTube yang dipilih. Metadata
+Spotify hanya menjadi catatan kurasi; halaman tidak memuat player atau SDK Spotify.
+Pembatasan embed bisa berbeda per video dan wilayah. Jika YouTube menolak pemutaran,
+pesan yang bisa dibaca dan tautan langsung “Buka di YouTube” tetap tersedia. Iframe dan
+tautan tersebut juga bisa dipakai tanpa JavaScript.
+
+Jalankan `scripts/check-youtube-browser.mjs` untuk memeriksa kontrol Play/Pause, akhir
+lagu tanpa looping, replay, penanganan error, semua edisi dan akses tanpa JavaScript.
+`scripts/check-recursion-browser.mjs` memeriksa series, batas gambar di akhir teks, dan
+pilihan lagu, memakai variabel browser yang sama dengan suite archive.
+
+Untuk verifikasi pemutaran nyata semua lagu, jalankan `scripts/check-youtube-live-browser.mjs`
+setelah build. Suite ini menampilkan build lokal di browser pengujian dengan origin HTTPS SCRATCH
+(tanpa deployment atau perubahan pada server publik), karena hasil YouTube dapat berbeda pada
+alamat HTTP loopback. `PUBLIC_ORIGIN` dapat diisi domain HTTPS milik deployment yang diuji.

@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/anotasi.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ANOTASI"
 excerpt: "Pada halaman sebelas, ada tanda kecil, sebuah bintang di samping kalimat biasa."
-spotify:
-  trackId: "6ilc4vQcwMPlvAHFfsTGng"
+youtube:
+  videoId: "pZ31pyTZdh0"
   title: "Sweet"
   artist: "Cigarettes After Sex"
+  startSeconds: 0
 draft: false
 ---
 

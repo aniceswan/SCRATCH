@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/normal.webp"
 imageAlt: "Dua bidang biru kelabu dan oker seimbang bertemu pada celah putih yang sangat tipis"
 excerpt: "Bekerja dalam keseimbangan Dua permukaan saling bersinggungan"
-spotify:
-  trackId: "7KokYm8cMIXCsGVmUvKtqf"
+youtube:
+  videoId: "rg18Kf4en2o"
   title: "Karma"
   artist: "Taylor Swift"
+  startSeconds: 0
 draft: false
 ---
 

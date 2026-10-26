@@ -6,10 +6,11 @@ lang: "en"
 image: "../../assets/puisi/the-longest-time.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi THE LONGEST TIME"
 excerpt: "I sent you a song with a wish sharpened"
-spotify:
-  trackId: "4R2kfaDFhslZEMJqAFNpdd"
+youtube:
+  videoId: "zLSUp53y-HQ"
   title: "cardigan"
   artist: "Taylor Swift"
+  startSeconds: 0
 draft: false
 ---
 

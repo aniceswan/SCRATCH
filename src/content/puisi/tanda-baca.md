@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/tanda-baca.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi TANDA BACA"
 excerpt: "Ada titik di akhir pengakuan. Ada koma sebelum kita tahu"
-spotify:
-  trackId: "7ipqVwkp2MhZv0Ojzqy1NV"
+youtube:
+  videoId: "mxyucLe9YE4"
   title: "lowkey"
   artist: "NIKI"
+  startSeconds: 0
 draft: false
 ---
 

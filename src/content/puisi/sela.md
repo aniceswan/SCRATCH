@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/sela.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi SELA"
 excerpt: "Sebuah buku terbuka pada halaman ujian. Malam-malam menumpuk di bawah kelopak,"
-spotify:
-  trackId: "2JcLhDcdmV8ZZ7aTvyIp6s"
+youtube:
+  videoId: "05Z7GL9w1aQ"
   title: "Before"
   artist: "NIKI"
+  startSeconds: 0
 draft: false
 ---
 

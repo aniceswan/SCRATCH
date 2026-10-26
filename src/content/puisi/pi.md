@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/pi.webp"
 imageAlt: "Dua jalur ultramarin dan merah bata berliku di atas relief kertas putih tanpa pernah bertemu"
 excerpt: "Haha, lucu ya Berjalan, pada garis lengkung tak berujung"
-spotify:
-  trackId: "5Htq8DDDN0Xce9MwqzAzui"
+youtube:
+  videoId: "ul79W8qVpP0"
   title: "La La Lost You"
   artist: "88rising, NIKI"
+  startSeconds: 0
 draft: false
 ---
 

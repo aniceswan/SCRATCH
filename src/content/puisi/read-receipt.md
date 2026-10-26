@@ -6,10 +6,11 @@ lang: "en"
 image: "../../assets/puisi/read-receipt.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi READ RECEIPT"
 excerpt: "At the end, I gave you a quieter sentence."
-spotify:
-  trackId: "31pEV5lPJi7btskZoUr2yu"
+youtube:
+  videoId: "aZGpXk8vYno"
   title: "I Almost Do"
   artist: "Taylor Swift"
+  startSeconds: 0
 draft: false
 ---
 

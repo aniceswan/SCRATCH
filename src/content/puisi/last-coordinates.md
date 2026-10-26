@@ -6,10 +6,11 @@ lang: "en"
 image: "../../assets/puisi/last-coordinates.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi LAST COORDINATES"
 excerpt: "I once drew two routes in the margin of a city map."
-spotify:
-  trackId: "2uOEendbLHR18khIbwooJ1"
+youtube:
+  videoId: "GNQphbGu5xM"
   title: "The Apartment We Won't Share"
   artist: "NIKI"
+  startSeconds: 0
 draft: false
 ---
 

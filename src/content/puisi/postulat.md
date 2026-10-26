@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/postulat.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi POSTULAT"
 excerpt: "Mula-mula kita menerima sesuatu tanpa meminta pembuktian."
-spotify:
-  trackId: "3W7KHojYGgYaoX9ogKO9hU"
+youtube:
+  videoId: "QI8VrXkffcg"
   title: "Nothing's Gonna Hurt You Baby"
   artist: "Cigarettes After Sex"
+  startSeconds: 0
 draft: false
 ---
 

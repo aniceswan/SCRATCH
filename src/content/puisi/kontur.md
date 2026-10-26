@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/kontur.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KONTUR"
 excerpt: "Bandung mula-mula hanyalah garis, tikungan yang kukenal dengan langkah,"
-spotify:
-  trackId: "2AwUbBYWlFX2VjP4wTiUI2"
+youtube:
+  videoId: "smxW5YVIU7g"
   title: "Dan Bandung (feat. Danilla)"
   artist: "The Panasdalam Bank, Danilla"
+  startSeconds: 0
 draft: false
 ---
 

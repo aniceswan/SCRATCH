@@ -91,7 +91,7 @@ try {
   const control=page.locator('[data-soundtrack-play]');
   await page.waitForFunction(() => document.querySelector('[data-soundtrack-play]')?.disabled===false,null,{timeout:25000});
   assert.equal(await control.getAttribute('aria-pressed'),'false');
-  assert.equal(await page.locator('[data-soundtrack] iframe').count(),1,'the official soundtrack player remains below the poem');
+  assert.equal(await page.locator('[data-youtube-frame]').count(),1,'the visible YouTube player remains below the poem');
   if ([1440,390].includes(viewport.width) && viewport.height!==600) {
    await control.click();
    await page.waitForFunction(() => document.querySelector('[data-soundtrack-play]')?.getAttribute('aria-pressed')==='true',null,{timeout:15000});
@@ -123,7 +123,7 @@ try {
  await nojs.locator('.opening__enter').click(); await nojs.waitForURL('**/v2/archive/');
  assert.equal(await visibleCards(nojs).count(),46,'the single-screen opening also enters the archive without JavaScript');
  await nojs.goto(base+'/v2/archive/'); assert.equal(await visibleCards(nojs).count(),46); assert.equal(await nojs.locator('[data-edition-tools]').isVisible(),false);
- await nojs.goto(base+'/v2/puisi/pi/'); assert.equal(await nojs.locator('[data-soundtrack] iframe').count(),1); assert.ok(await nojs.locator('[data-poem-nav="next"]').isVisible());
+ await nojs.goto(base+'/v2/puisi/pi/'); assert.equal(await nojs.locator('[data-youtube-frame]').count(),1); assert.ok(await nojs.locator('[data-poem-nav="next"]').isVisible());
  const old=await browser.newPage({viewport:{width:1440,height:900}});
  await old.goto(base+'/classic/?intro=1');
  assert.ok(await old.locator('.intro').isVisible());

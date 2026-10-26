@@ -6,10 +6,11 @@ lang: "id"
 image: "../../assets/puisi/kucing-yang-mengangkat-tangan.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KUCING YANG MENGANGKAT TANGAN"
 excerpt: "Seekor kucing mengacungkan jempol pada akhir percakapan yang panjang."
-spotify:
-  trackId: "0jrewxzOGoCyEpax1AV9B2"
+youtube:
+  videoId: "G-XICfi4j3Q"
   title: "Cool About It"
   artist: "boygenius"
+  startSeconds: 0
 draft: false
 ---
 
