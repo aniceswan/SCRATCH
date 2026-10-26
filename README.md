@@ -42,6 +42,9 @@ Buka `http://localhost:4321`.
   tiga kolom di desktop, dua di tablet, satu di ponsel. Tautan sebelumnya/selanjutnya
   pada halaman baca mengikuti urutan series dan tetap berfungsi tanpa JavaScript.
 - **Pembuka** tampil sekali per sesi. Klik tombol panah di samping judul untuk masuk.
+- **Lagu pengiring** tersedia pada seluruh 46 puisi. Tombol Play di dekat judul mengontrol
+  pemutar Spotify di bawah puisi. Kurasi tambahan mengisi 38 puisi; delapan pilihan lagu
+  yang sudah ada tetap dipertahankan. Sumber kurasi ada di `content-source/playlist-puisi.txt`.
 - Di halaman arsip, **gulir** di atas kartu, **seret** ke samping, atau gunakan **tombol panah**
   kiri/kanan untuk menggeser carousel. Kartu aktif besar di tengah, dengan tetangga lebih kecil di kedua sisi.
 - Setiap puisi bernomor **01–46**; nomor terlihat di archive dan di atas judul halaman bacaan.

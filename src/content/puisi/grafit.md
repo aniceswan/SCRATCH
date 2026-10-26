@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/grafit.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi GRAFIT"
 excerpt: "Di bawah lampu yang mengundang serangga, kita merapikan bilangan yang tercerai."
+spotify:
+  trackId: "68HocO7fx9z0MgDU0ZPHro"
+  title: "Every Summertime"
+  artist: "NIKI"
 draft: false
 ---
 

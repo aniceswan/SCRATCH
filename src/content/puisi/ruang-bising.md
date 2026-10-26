@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/ruang-bising.webp"
 imageAlt: "Kolase bentuk tajam koral dan kuning yang berdesakan di atas bidang indigo"
 excerpt: "Bising. Langkahku terpaksa berpindah, meninggalkan tempat di mana doa-doa dilangitkan, terdampar di ruang bising yang enggan mengeja namaku. Di antara seragam putih abu ini, aku hanyalah ganjil yang tak genap."
+spotify:
+  trackId: "4Bz72Fo4teXVMvDUi8xuw7"
+  title: "Split"
+  artist: "88rising, NIKI"
 draft: false
 ---
 

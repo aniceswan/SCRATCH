@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/lagu-titipan.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi LAGU TITIPAN"
 excerpt: "Lagu itu tiba tanpa alamat, menumpang pada satu bingkai"
+spotify:
+  trackId: "6WypApj7S2Nxbk7Cz545N3"
+  title: "Somebody Else"
+  artist: "The 1975"
 draft: false
 ---
 

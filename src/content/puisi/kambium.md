@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/kambium.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi KAMBIUM"
 excerpt: "Tak ada gaduh ketika batang menebal. Hanya satu lingkaran tipis,"
+spotify:
+  trackId: "4P1oat6HF9CN4NJKhTYjPU"
+  title: "better (with you)"
+  artist: "Crying City"
 draft: false
 ---
 

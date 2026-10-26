@@ -55,8 +55,15 @@ try {
   await page.locator('[data-soundtrack] iframe').waitFor({timeout:20000});
   assert.equal(await page.locator('[data-soundtrack-play]').count(),1,'series reader shares the same top control and bottom player');
   await page.goto(base+'/puisi/grafit/');
-  assert.equal(await page.locator('[data-soundtrack]').count(),0,'other poems have no demo player');
-  assert.equal(await page.locator('[data-soundtrack-play]').count(),0);
+  await page.locator('[data-soundtrack] iframe').waitFor({timeout:20000});
+  assert.equal(await page.locator('[data-soundtrack]').getAttribute('data-track-id'),'68HocO7fx9z0MgDU0ZPHro','new curation is available alongside preserved selections');
+  assert.equal(await page.locator('[data-soundtrack-play]').count(),1);
+  await page.waitForFunction(()=>document.querySelector('[data-soundtrack-play]')?.disabled===false,null,{timeout:20000});
+  await page.locator('[data-soundtrack-play]').click();
+  await page.waitForFunction(()=>document.querySelector('[data-soundtrack-play]')?.getAttribute('aria-pressed')==='true',null,{timeout:15000});
+  assert.equal(await page.locator('[data-soundtrack-play]').getAttribute('aria-label'),'Jeda Every Summertime oleh NIKI');
+  await page.locator('[data-soundtrack-play]').click();
+  await page.waitForFunction(()=>document.querySelector('[data-soundtrack-play]')?.getAttribute('aria-pressed')==='false',null,{timeout:10000});
   assert.deepEqual(errors,[]);
   console.log('PASS Spotify: real Play/Pause, natural completion, replay, keyboard, bottom player, series and viewport:',viewport.width);
   await page.close();

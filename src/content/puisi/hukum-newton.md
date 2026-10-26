@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/hukum-newton.webp"
 imageAlt: "Jejak lingkaran putih dan tarikan garis tembaga pada cetakan sianotipe biru tua"
 excerpt: "Di bawah terik dan riuh lapangan, kebetulan yang lucu itu mengambil peran."
+spotify:
+  trackId: "5E02BgqYNN9VzafXrYP6Np"
+  title: "Heavenly"
+  artist: "Cigarettes After Sex"
 draft: false
 ---
 

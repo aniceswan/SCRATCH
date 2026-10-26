@@ -6,6 +6,10 @@ lang: "en"
 image: "../../assets/puisi/unsent-letter-to-a-season.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi UNSENT LETTER TO A SEASON"
 excerpt: "I tried to give the season back its ordinary weather."
+spotify:
+  trackId: "6NLlqXNuBqsEq1wyaapTdT"
+  title: "Don't Let Me Go"
+  artist: "Cigarettes After Sex"
 draft: false
 ---
 

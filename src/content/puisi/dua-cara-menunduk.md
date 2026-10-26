@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/dua-cara-menunduk.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi DUA CARA MENUNDUK"
 excerpt: "Kau menunduk lebih dahulu, membawa sesuatu"
+spotify:
+  trackId: "7FDAG4nHExiYsHq6q7cmEn"
+  title: "happiness"
+  artist: "Taylor Swift"
 draft: false
 ---
 

@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/semoga-dipermudah.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi SEMOGA DIPERMUDAH"
 excerpt: "Sesudah seluruh perabotan dipindahkan oleh amarah,"
+spotify:
+  trackId: "3RJxSWIqAuu3rCBttc6f5j"
+  title: "closure"
+  artist: "Taylor Swift"
 draft: false
 ---
 

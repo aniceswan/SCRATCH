@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/jalan-yang-baik.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi JALAN YANG BAIK"
 excerpt: "Semoga kelak kau tiba di kota yang pernah kusebut"
+spotify:
+  trackId: "0bht8SpPHXiUMApKcua4Mz"
+  title: "Take Care"
+  artist: "NIKI"
 draft: false
 ---
 

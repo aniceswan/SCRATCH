@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/histeresis.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi HISTERESIS"
 excerpt: "Sepotong besi pernah didekatkan ke medan. Jarumnya bergerak. Urat-urat halusnya"
+spotify:
+  trackId: "0As7CSF4jzNXN6Fzgs7Dmk"
+  title: "unlearning you"
+  artist: "Crying City"
 draft: false
 ---
 

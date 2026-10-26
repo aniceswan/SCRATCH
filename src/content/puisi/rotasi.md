@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/rotasi.webp"
 imageAlt: "Jejak cahaya amber dan magenta melengkung cepat melintasi bidang ungu gelap"
 excerpt: "Dulu kita bagai akselerasi Ntah radial, bergerak menuju inti"
+spotify:
+  trackId: "6cpa32VdG5US2mYGNBbF9I"
+  title: "‘tis the damn season"
+  artist: "Taylor Swift"
 draft: false
 ---
 

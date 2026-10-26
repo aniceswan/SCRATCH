@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/anamorfosis.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ANAMORFOSIS"
 excerpt: "Dari pintu, lukisan itu tampak ganjil, sebatang bunga memanjang,"
+spotify:
+  trackId: "4pfrrhvplbJZAIsfosGWQP"
+  title: "the 1"
+  artist: "Taylor Swift"
 draft: false
 ---
 

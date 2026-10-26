@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/pintu-selatan.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi PINTU SELATAN"
 excerpt: "Kelak, jika hujan turun di Ganesha, pohon-pohon akan tetap menerima"
+spotify:
+  trackId: "68FHdrL6dbruEBrfLjR52a"
+  title: "Paths"
+  artist: "NIKI"
 draft: false
 ---
 

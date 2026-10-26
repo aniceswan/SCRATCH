@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/albedo.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi ALBEDO"
 excerpt: "Bulan tak menghasilkan terangnya sendiri. Ia hanya mengembalikan"
+spotify:
+  trackId: "0yuAWlxq59xT3agQ965OxE"
+  title: "Sunsetz"
+  artist: "Cigarettes After Sex"
 draft: false
 ---
 

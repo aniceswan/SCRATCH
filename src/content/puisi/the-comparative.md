@@ -6,6 +6,10 @@ lang: "en"
 image: "../../assets/puisi/the-comparative.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi THE COMPARATIVE"
 excerpt: "You said you loved me more than someone else."
+spotify:
+  trackId: "6TGd66r0nlPaYm3KIoI7ET"
+  title: "THE GREATEST"
+  artist: "Billie Eilish"
 draft: false
 ---
 

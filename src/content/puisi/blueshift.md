@@ -6,6 +6,10 @@ lang: "en"
 image: "../../assets/puisi/blueshift.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi BLUESHIFT"
 excerpt: "At first, the light grew bluer. A distant thing was coming closer;"
+spotify:
+  trackId: "1fDFHXcykq4iw8Gg7s5hG9"
+  title: "About You"
+  artist: "The 1975"
 draft: false
 ---
 

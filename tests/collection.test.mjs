@@ -42,7 +42,7 @@ test('recursion contains six complete source poems with separate numbered series
   assert.deepEqual([cover.width,cover.height,cover.format],[1200,1500,'webp']);
 });
 
-test('requested soundtrack selections are attached to exactly eight poems', async () => {
+test('the original eight soundtrack selections remain unchanged', async () => {
   const expected=[
     ['halaman-nol','4R2kfaDFhslZEMJqAFNpdd','cardigan','Taylor Swift'],
     ['kontur','2AwUbBYWlFX2VjP4wTiUI2','Dan Bandung (feat. Danilla)','The Panasdalam Bank, Danilla'],
@@ -53,13 +53,6 @@ test('requested soundtrack selections are attached to exactly eight poems', asyn
     ['sebuah-nama','1fDFHXcykq4iw8Gg7s5hG9','About You','The 1975'],
     ['pi','5Htq8DDDN0Xce9MwqzAzui','La La Lost You','88rising, NIKI'],
   ];
-  const files=(await readdir(new URL('../src/content/puisi/',import.meta.url))).filter(n=>n.endsWith('.md'));
-  let count=0;
-  for(const file of files) {
-    const markdown=await readFile(new URL(`../src/content/puisi/${file}`,import.meta.url),'utf8');
-    if(/^spotify:$/m.test(markdown)) count++;
-  }
-  assert.equal(count,8);
   for(const [slug,id,title,artist]of expected) {
     const markdown=await readFile(new URL(`../src/content/puisi/${slug}.md`,import.meta.url),'utf8');
     assert.ok(markdown.includes(`trackId: "${id}"`),slug);

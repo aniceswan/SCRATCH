@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/cuaca-palsu.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi CUACA PALSU"
 excerpt: "Aku berkata, tak ada badai. Langit pun menurut,"
+spotify:
+  trackId: "2fPvQfGQEZOKtJ9qXeL4x8"
+  title: "I Can Do It With a Broken Heart"
+  artist: "Taylor Swift"
 draft: false
 ---
 

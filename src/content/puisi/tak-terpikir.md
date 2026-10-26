@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/tak-terpikir.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi TAK TERPIKIR"
 excerpt: "Kutanyakan arah kepada seseorang"
+spotify:
+  trackId: "01ewZY96RGYxWL2JKVTKBX"
+  title: "Nothing Can"
+  artist: "NIKI"
 draft: false
 ---
 

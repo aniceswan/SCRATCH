@@ -6,6 +6,10 @@ lang: "en"
 image: "../../assets/puisi/negative-space.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi NEGATIVE SPACE"
 excerpt: "In the photograph, everything visible was ordinary,"
+spotify:
+  trackId: "5SwdrJLtyFyC926bXw5PCz"
+  title: "Did You Like Her In The Morning?"
+  artist: "NIKI"
 draft: false
 ---
 

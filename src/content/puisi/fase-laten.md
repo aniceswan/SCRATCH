@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/fase-laten.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi FASE LATEN"
 excerpt: "Di panci tua, air memikul panas hingga permukaannya gemetar."
+spotify:
+  trackId: "5EXB9AnUbrmmiskXr7lIkO"
+  title: "Happier Than Ever"
+  artist: "Billie Eilish"
 draft: false
 ---
 

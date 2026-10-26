@@ -6,6 +6,10 @@ lang: "id"
 image: "../../assets/puisi/indeks-bias.webp"
 imageAlt: "Komposisi visual abstrak untuk puisi INDEKS BIAS"
 excerpt: "Cahaya menyeberangi dua medium dan kehilangan kelurusannya."
+spotify:
+  trackId: "16mMuyjOfIXMuk94CkDSI6"
+  title: "Hard To Love"
+  artist: "Crying City"
 draft: false
 ---
 
