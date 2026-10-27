@@ -1,0 +1,60 @@
+---
+import { getClassicEdition } from '../lib/classic-preview';
+const {basePath} = getClassicEdition(Astro.url.pathname);
+---
+
+<button class="search-toggle" type="button" data-search-open aria-label="Cari judul" aria-haspopup="dialog" aria-controls="site-search" hidden>
+  <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75" /><path d="m16 16 4.5 4.5" /></svg>
+</button>
+
+<dialog class="search-dialog" id="site-search" data-search-dialog data-base-path={basePath} aria-labelledby="search-heading">
+  <div class="search-panel">
+    <div class="search-heading">
+      <h2 id="search-heading">SEARCH</h2>
+      <button class="search-close" type="button" data-search-close aria-label="Tutup pencarian"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+    </div>
+    <label class="sr-only" for="search-query">Search titles</label>
+    <input class="search-input" id="search-query" data-search-input type="search" placeholder="Search titles…" autocomplete="off" spellcheck="false" aria-describedby="search-status" aria-controls="search-results" autofocus />
+    <p class="search-status" id="search-status" data-search-status role="status" aria-live="polite">Find a poem, fragment, or series.</p>
+    <ul class="search-results" id="search-results" data-search-results aria-label="Hasil pencarian"></ul>
+  </div>
+</dialog>
+
+<script>
+  import '../scripts/search';
+</script>
+
+<style>
+  .search-toggle {flex: none; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; transition: color .2s;}
+  .search-toggle:not([hidden]) {display: grid;}
+  .search-toggle:hover {color: var(--red);}
+  .search-dialog {position: fixed; inset: 0; width: min(640px, calc(100vw - 40px)); max-width: none; max-height: calc(100dvh - min(14vh, 120px) - 24px); margin: min(14vh, 120px) auto auto; padding: 0; overflow: hidden; border: 1px solid var(--line-soft); border-radius: 16px; color: var(--ink); background: radial-gradient(ellipse at top right, rgba(173,195,228,.25), transparent 65%), var(--paper); box-shadow: 0 24px 100px -30px rgba(37,41,35,.35);}
+  .search-dialog::backdrop {background: rgba(37,41,35,.22); backdrop-filter: blur(7px);}
+  .search-dialog[open] {animation: search-arrive .22s var(--ease-out);}
+  .search-panel {display: flex; flex-direction: column; max-height: inherit; padding: 16px 24px 24px;}
+  .search-heading {display: flex; align-items: center; justify-content: space-between; gap: 16px;}
+  .search-heading h2 {font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: .18em; color: var(--ink-soft);}
+  .search-close {display: grid; place-items: center; flex: none; width: 44px; height: 44px; margin-right: -10px; padding: 0; border: 0; background: none; color: var(--ink-soft); cursor: pointer;}
+  .search-close:hover {color: var(--red);}
+  .search-input {display: block; flex: none; width: 100%; min-width: 0; min-height: 58px; margin-top: 2px; padding: 8px 0 12px; border: 0; border-bottom: 1px solid var(--line-soft); border-radius: 0; background: transparent; color: var(--ink); font-family: var(--serif); font-size: clamp(26px, 4vw, 34px); line-height: 1.25; letter-spacing: -.02em;}
+  .search-input::placeholder {color: var(--ink-soft); opacity: .65;}
+  .search-input:focus {outline: none; border-bottom-color: var(--red);}
+  .search-status {flex: none; margin: 17px 0 8px; font-family: var(--sans); font-size: 11px; line-height: 1.6; color: var(--ink-soft);}
+  .search-results {min-height: 0; margin: 0; padding: 0; overflow-y: auto; overscroll-behavior: contain; list-style: none; scrollbar-width: thin;}
+  .search-results:empty {display: none;}
+  .search-results :global(a) {display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 62px; padding: 14px 10px; border-radius: 6px; color: var(--ink); text-decoration: none;}
+  .search-results :global(a:hover), .search-results :global(a:focus-visible) {background: rgba(133,169,220,.13); outline-offset: -2px;}
+  .search-results :global(.search-results__title) {min-width: 0; font-family: var(--serif); font-size: 23px; line-height: 1.25; letter-spacing: -.015em; overflow-wrap: anywhere;}
+  .search-results :global(.search-results__kind) {flex: none; font-family: var(--sans); font-size: 9px; line-height: 1.5; letter-spacing: .08em; color: var(--ink-soft); text-transform: uppercase;}
+  @keyframes search-arrive {from {opacity: 0; transform: translateY(-8px);} to {opacity: 1; transform: none;}}
+  @media (max-width: 640px) {
+    .search-dialog {width: calc(100vw - 28px); max-height: calc(100dvh - 32px); margin-top: 16px; border-radius: 12px;}
+    .search-panel {padding: 12px 18px 18px;}
+    .search-results :global(a) {gap: 12px; padding-inline: 6px;}
+    .search-results :global(.search-results__title) {font-size: 21px;}
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .search-dialog[open] {animation: none;}
+    .search-toggle {transition: none;}
+  }
+</style>

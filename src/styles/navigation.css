@@ -1,4 +1,6 @@
 .navigation-toggle {display: none;}
+.topbar__tools {display: flex; align-items: center; gap: clamp(16px, 2vw, 28px);}
+html:has([data-search-dialog][open]) {overflow: hidden;}
 .classic-paper .topbar__actions {gap: clamp(20px, 2.7vw, 38px);}
 .classic-paper .topbar__actions .topbar__link {padding: 4px 0; gap: 6px; border: 0; border-radius: 0; background: none; color: var(--ink); box-shadow: none; transform: none;}
 .classic-paper .topbar__actions .topbar__link::after {display: block;}
@@ -6,6 +8,7 @@
 .classic-paper .topbar__actions .topbar__link[aria-current] {color: var(--red);}
 
 @media (max-width: 640px) {
+  .topbar__tools {gap: 4px;}
   .navigation-toggle {position: relative; display: block; flex: none; width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; -webkit-tap-highlight-color: transparent;}
   .navigation-toggle span {position: absolute; top: calc(50% - .75px); left: 11px; width: 22px; height: 1.5px; border-radius: 1px; background: currentColor; transition: transform .22s var(--ease);}
   .navigation-toggle span:first-child {transform: translateY(-3.5px);}

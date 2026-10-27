@@ -1,5 +1,6 @@
 ---
 import InkLogo from './InkLogo.astro';
+import Search from './Search.astro';
 import { getClassicEdition } from '../lib/classic-preview';
 import '../styles/navigation.css';
 
@@ -25,6 +26,8 @@ const sectionLabel = paperAbout ? 'about' : paperFragments ? 'fragments' : paper
     {paperSeriesIndex || paperFragmentsIndex || paperAbout ? <h1 class="brand__name" id="page-title">{sectionLabel}</h1> : sectionLabel ? <span class="brand__name">{sectionLabel}</span> : home && paperEdition && <span class="brand__name">scratch</span>}
   </a>
 
+  <div class="topbar__tools">
+  {paperEdition && <Search />}
   {paperEdition && <button class="navigation-toggle" type="button" data-menu-toggle aria-label="Buka menu" aria-expanded="false" aria-controls="site-navigation">
     <span></span><span></span>
   </button>}
@@ -42,6 +45,7 @@ const sectionLabel = paperAbout ? 'about' : paperFragments ? 'fragments' : paper
       <a class="topbar__link" href={backLink?.url ?? `${basePath}/`} aria-label={backLink?.ariaLabel}>{backLink?.label ?? 'ARCHIVE'} <span aria-hidden="true">↗</span></a>
     </>}
   </nav>
+  </div>
 </header>
 
 <script>
@@ -53,6 +57,7 @@ const sectionLabel = paperAbout ? 'about' : paperFragments ? 'fragments' : paper
     @media (max-width: 640px) {
       .topbar--paper {height: auto; min-height: var(--topbar-h); flex-wrap: wrap; padding-block: 10px;}
       .topbar--paper .navigation-toggle {display: none;}
+      .topbar--paper .topbar__tools {width: 100%;}
       .topbar--paper .topbar__actions {position: static; width: 100%; max-height: none; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; visibility: visible; opacity: 1; pointer-events: auto; transform: none; border: 0; background: none; box-shadow: none; backdrop-filter: none;}
       .topbar--paper .topbar__actions > * {width: auto;}
     }

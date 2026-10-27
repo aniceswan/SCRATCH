@@ -14,6 +14,7 @@ if (header && toggle && navigation) {
     if (restoreFocus) toggle.focus({preventScroll: true});
   };
   toggle.addEventListener('click', () => setOpen(!open));
+  header.querySelector('[data-search-open]')?.addEventListener('click', () => setOpen(false));
   document.addEventListener('pointerdown', event => {
     if (open && event.target instanceof Node && !header.contains(event.target)) setOpen(false);
   });
