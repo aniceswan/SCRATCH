@@ -73,4 +73,61 @@ try{
   assert.equal(await plain.locator('iframe[src*="spotify"]').count(),0);
  }
  console.log('PASS all editions retain no-JavaScript frame, manuscript and external link');
+ const multiApi=`
+ window.__players={};
+ window.YT={Player:class {
+  constructor(frame,options){this.options=options;this.time=0;this.calls=[];const id=frame.closest('[data-youtube-soundtrack]').id;window.__players[id]=this;queueMicrotask(()=>options.events.onReady({target:this}));}
+  state(data,time=this.time){this.time=time;this.options.events.onStateChange({target:this,data});}
+  loadVideoById(options){this.time=options.startSeconds;this.calls.push(['load',options.videoId,options.startSeconds]);}
+  playVideo(){this.calls.push(['play']);}
+  pauseVideo(){this.calls.push(['pause']);this.state(2);}
+  getCurrentTime(){return this.time;}
+ }};window.onYouTubeIframeAPIReady();`;
+ const bamboo='patahnya-bambu-tali-oleh-angin-yang-dikenalnya';
+ const bambooSource=(await readFile(new URL(`../src/content/fragments/${bamboo}.md`,import.meta.url),'utf8')).split('---\n')[2].trim().split(/\n\n+/);
+ const dedication='dan lagu ini kupersembahkan untuk angin, gigi seri, pelangi, hitam, dan burung yang pergi meninggalkan ranting yang patah';
+ for(const width of [1440,390,320]) {
+  const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
+  let apiRequests=0;const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  await page.route('https://www.youtube.com/iframe_api',r=>{apiRequests++;return r.fulfill({contentType:'application/javascript',body:multiApi});});
+  await page.route('https://www.youtube.com/embed/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html>'}));
+  await page.goto(base+`/fragments/${bamboo}/`);
+  await page.waitForFunction(()=>Object.keys(window.__players??{}).length===2&&!document.querySelector('[data-soundtrack-play]').disabled);
+  assert.equal(apiRequests,1,'both players share one IFrame API load');
+  assert.deepEqual(await page.locator('.fragment-body p').allTextContents(),bambooSource);
+  assert.equal(bambooSource.length,37);
+  assert.equal(await page.locator('.fragment-dedication').textContent(),dedication);
+  const primary='youtube-soundtrack',extra='fragment-additional-soundtrack';
+  const calls=id=>page.evaluate(id=>window.__players[id].calls,id);
+  const loads=async id=>(await calls(id)).filter(call=>call[0]==='load').length;
+  const state=(id,code,time=0)=>page.evaluate(({id,code,time})=>window.__players[id].state(code,time),{id,code,time});
+  const button=page.locator('[data-soundtrack-play]');
+  assert.equal(await button.count(),1,'the top button controls only the instrumental');
+  assert.equal(await page.locator(`#${primary}`).getAttribute('data-loop'),'true');
+  assert.equal(await page.locator(`#${extra}`).getAttribute('data-loop'),null);
+  await button.click();await state(primary,1);await state(primary,0,240);
+  assert.equal(await loads(primary),2,'instrumental restarts after completion');
+  assert.equal(await button.getAttribute('aria-pressed'),'true');
+  await state(primary,2);await state(primary,1);await state(primary,0,240);
+  assert.equal(await loads(primary),3,'a transient pause during restart does not cancel looping');
+  await state(primary,1);await button.click();await state(primary,0,240);
+  assert.equal(await loads(primary),3,'Pause cancels the loop');
+  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  await button.click();await state(primary,1);await state(extra,1);
+  assert.equal((await calls(primary)).at(-1)[0],'pause','starting the lyric video pauses the instrumental');
+  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  await button.click();await state(primary,1);
+  assert.equal((await calls(extra)).at(-1)[0],'pause','resuming the instrumental pauses the lyric video');
+  await state(extra,1);await state(extra,0,240);
+  assert.equal(await loads(extra),0,'the lyric video stops naturally and never restarts itself');
+  const positions=await page.evaluate(()=>{
+   const bottom=selector=>document.querySelector(selector).getBoundingClientRect().bottom;
+   const top=selector=>document.querySelector(selector).getBoundingClientRect().top;
+   return [bottom('.fragment-body')<top('#youtube-soundtrack'),bottom('#youtube-soundtrack')<top('.fragment-dedication'),bottom('.fragment-dedication')<top('#fragment-additional-soundtrack'),bottom('#fragment-additional-soundtrack')<top('.fragment-reading-nav')];
+  });
+  assert.ok(positions.every(Boolean),'prose, instrumental, dedication, lyric video and navigation remain in order');
+  const ids=await page.locator('[id]').evaluateAll(nodes=>nodes.map(node=>node.id));assert.equal(new Set(ids).size,ids.length,'player IDs remain unique');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);
+  await page.close();console.log(`PASS bamboo fragment ${width}: complete prose, scoped looping, Pause, exclusive playback, dedication and lyric video`);
+ }
 }finally{await browser.close();}

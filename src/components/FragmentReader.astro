@@ -26,6 +26,8 @@ const {basePath} = getClassicEdition(Astro.url.pathname);
         {fragment.data.youtube && <YouTubeSoundtrack track={fragment.data.youtube} placement="control" />}
         <div class="fragment-body" lang={fragment.data.lang}><Content /></div>
         {fragment.data.youtube && <YouTubeSoundtrack track={fragment.data.youtube} placement="player" />}
+        {fragment.data.dedication && <p class="fragment-dedication">{fragment.data.dedication}</p>}
+        {fragment.data.additionalYoutube && <YouTubeSoundtrack track={fragment.data.additionalYoutube} placement="player" id="fragment-additional-soundtrack" loading="lazy" />}
         <nav class="fragment-reading-nav" aria-label="Navigasi fragment">
           <a href={`${basePath}/fragments/`}>← ALL FRAGMENTS</a>
           <a href="#top" aria-label="Kembali ke atas">↑</a>

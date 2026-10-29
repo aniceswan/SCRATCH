@@ -7,6 +7,7 @@ const youtubeSoundtrack = z.object({
   title: z.string().min(1),
   artist: z.string().min(1),
   startSeconds: z.number().int().nonnegative().default(0),
+  loop: z.boolean().default(false),
 });
 
 const puisi = defineCollection({
@@ -55,6 +56,8 @@ const fragments = defineCollection({
     imageAlt: z.string(),
     excerpt: z.string().max(260),
     youtube: youtubeSoundtrack.optional(),
+    dedication: z.string().max(500).optional(),
+    additionalYoutube: youtubeSoundtrack.optional(),
     draft: z.boolean().default(false),
   }),
 });

@@ -20,15 +20,18 @@ declare global {
   }
 }
 
-const section = document.querySelector<HTMLElement>('[data-youtube-soundtrack]');
-const frame = section?.querySelector<HTMLIFrameElement>('[data-youtube-frame]');
-const button = document.querySelector<HTMLButtonElement>('[data-soundtrack-play]');
-const status = document.querySelector<HTMLElement>('[data-soundtrack-status]');
+const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-youtube-soundtrack]'));
+const pauseOthers = new Map<HTMLElement, () => void>();
 
-if (section && frame && button && status) {
+function setupSoundtrack(section: HTMLElement) {
+  const frame = section.querySelector<HTMLIFrameElement>('[data-youtube-frame]');
+  if (!frame) return null;
+  const button = document.querySelector<HTMLButtonElement>(`[data-soundtrack-play][aria-controls="${CSS.escape(section.id)}"]`);
+  const status = button?.closest('.soundtrack-control')?.querySelector<HTMLElement>('[data-soundtrack-status]');
   const videoId = section.dataset.videoId!;
   const title = section.dataset.trackTitle ?? 'lagu pengiring';
   const start = Math.max(0, Number(section.dataset.startSeconds) || 0);
+  const loop = section.dataset.loop === 'true';
   let controller: YouTubePlayer | undefined;
   let ready = false;
   let failed = false;
@@ -39,10 +42,11 @@ if (section && frame && button && status) {
   let pendingTimer = 0;
 
   const showPlayback = (playing: boolean) => {
-    button.setAttribute('aria-pressed', String(playing));
-    button.setAttribute('aria-label', `${playing ? 'Jeda' : 'Putar'} ${title}`);
+    button?.setAttribute('aria-pressed', String(playing));
+    button?.setAttribute('aria-label', `${playing ? 'Jeda' : 'Putar'} ${title}`);
   };
   const report = (message: string) => {
+    if (!status) return;
     status.textContent = message;
     status.classList.toggle('sr-only', !message);
   };
@@ -70,11 +74,12 @@ if (section && frame && button && status) {
     clearTimers();
     controller?.pauseVideo();
   };
-  const loadingTimer = window.setTimeout(() => {
+  pauseOthers.set(section, () => {if (wantsPlayback) pause();});
+  const loadingTimer = button ? window.setTimeout(() => {
     if (!ready && !failed) report('Pemutar YouTube belum siap. Gunakan tautan YouTube di bawah.');
-  }, 15000);
+  }, 15000) : 0;
 
-  button.addEventListener('click', () => {
+  button?.addEventListener('click', () => {
     if (!ready || failed || !controller) return;
     if (wantsPlayback) {pause(); return;}
     wantsPlayback = true;
@@ -92,13 +97,16 @@ if (section && frame && button && status) {
           controller = event.target;
           ready = true;
           window.clearTimeout(loadingTimer);
-          button.disabled = failed;
+          if (button) button.disabled = failed;
           if (!failed) report('');
         },
         onStateChange(event) {
           if (failed) return;
           if (event.data === 1) {
             if (pendingAction === 'pause' || document.hidden) {event.target.pauseVideo(); return;}
+            for (const [other, pauseOther] of pauseOthers) {
+              if (other !== section) pauseOther();
+            }
             wantsPlayback = true;
             prepared = true;
             restarting = false;
@@ -108,7 +116,6 @@ if (section && frame && button && status) {
             report('');
           } else if (event.data === 2) {
             // Starting a video can briefly report Paused before Playing.
-            // A top-button Pause clears this pending start immediately.
             if (restarting && wantsPlayback && pendingAction === 'play') return;
             wantsPlayback = false;
             restarting = false;
@@ -117,6 +124,11 @@ if (section && frame && button && status) {
             showPlayback(false);
             report('');
           } else if (event.data === 0) {
+            if (loop && wantsPlayback && !document.hidden) {
+              restarting = false;
+              loadVideo();
+              return;
+            }
             wantsPlayback = false;
             restarting = false;
             prepared = false;
@@ -131,7 +143,7 @@ if (section && frame && button && status) {
           wantsPlayback = false;
           clearTimers();
           window.clearTimeout(loadingTimer);
-          button.disabled = true;
+          if (button) button.disabled = true;
           showPlayback(false);
           report(event.data === 101 || event.data === 150
             ? 'Video ini tidak mengizinkan pemutaran di website. Gunakan tautan YouTube di bawah.'
@@ -148,21 +160,28 @@ if (section && frame && button && status) {
       },
     });
   };
-  if (window.YT?.Player) initialize();
+  const reportApiFailure = () => {
+    window.clearTimeout(loadingTimer);
+    report('YouTube tidak dapat dimuat. Gunakan tautan YouTube di bawah.');
+  };
+  document.addEventListener('visibilitychange', () => {if (document.hidden) pause();});
+  window.addEventListener('pagehide', pause);
+  return {initialize, reportApiFailure};
+}
+
+const soundtracks = sections.map(setupSoundtrack).filter(soundtrack => soundtrack !== null);
+if (soundtracks.length) {
+  const initializeAll = () => soundtracks.forEach(soundtrack => soundtrack.initialize());
+  if (window.YT?.Player) initializeAll();
   else {
     const previous = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {previous?.(); initialize();};
+    window.onYouTubeIframeAPIReady = () => {previous?.(); initializeAll();};
     const script = document.createElement('script');
     script.src = 'https://www.youtube.com/iframe_api';
     script.async = true;
-    script.addEventListener('error', () => {
-      window.clearTimeout(loadingTimer);
-      report('YouTube tidak dapat dimuat. Gunakan tautan YouTube di bawah.');
-    });
+    script.addEventListener('error', () => soundtracks.forEach(soundtrack => soundtrack.reportApiFailure()));
     document.body.append(script);
   }
-  document.addEventListener('visibilitychange', () => {if (document.hidden) pause();});
-  window.addEventListener('pagehide', pause);
 }
 
 export {};

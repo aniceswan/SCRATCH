@@ -18,6 +18,7 @@
 .fragment-body {margin-top: clamp(36px, 6vh, 62px); font-family: var(--serif); font-size: clamp(1.12rem, 1.25vw, 1.3rem); font-weight: 400; line-height: 1.82; color: var(--ink); overflow-wrap: break-word;}
 .fragment-body p {margin: 0 0 1.45em;}
 .fragment-body p:last-child {margin-bottom: 0;}
+.fragment-dedication {max-width: 34rem; margin-top: 26px; font-family: var(--serif); font-size: clamp(1.08rem, 1.25vw, 1.3rem); font-style: italic; line-height: 1.65; color: var(--ink-soft);}
 .fragment-reading-nav {display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: clamp(45px, 8vh, 80px);}
 .fragment-reading-nav a {display: inline-flex; align-items: center; min-height: 44px; font-family: var(--sans); font-size: 9px; letter-spacing: .12em; color: var(--ink-soft); text-decoration: none;}
 .fragment-reading-nav a:hover {color: var(--red);}
