@@ -6,9 +6,9 @@ image: "../../assets/fragments/patahnya-bambu-tali-oleh-angin-yang-dikenalnya.we
 imageAlt: "Kolase kertas bambu yang patah di tepi danau saat senja, dengan dedaunan terbawa angin dan seekor burung yang menjauh."
 excerpt: "Bukan karena ia tak pernah belajar melentur. Bukan pula karena ia tak mengenal angin. Justru sebaliknya."
 youtube:
-  videoId: "RB5UW58S9W4"
-  title: "Untuk Perempuan Yang Sedang Di Pelukan (Piano Instrumental)"
-  artist: "Payung Teduh · piano oleh Andre Panggabean"
+  videoId: "OAV2bgL7PDg"
+  title: "Untuk Perempuan Yang Sedang Di Pelukan (Karaoke)"
+  artist: "Payung Teduh · aransemen GMusic"
   startSeconds: 0
   loop: true
 dedication: "dan lagu ini kupersembahkan untuk angin, gigi seri, pelangi, hitam, dan burung yang pergi meninggalkan ranting yang patah"
